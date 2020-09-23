@@ -1,0 +1,19 @@
+{
+  "name": "@wmde/query-builder",
+  "version": "1.0.0",
+  "description": "A simple query builder for Wikidata SPARQL queries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'TODO'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wmde/query-builder.git"
+  },
+  "author": "The Wikidata team",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://phabricator.wikimedia.org/tag/wikidata_query_builder/"
+  },
+  "homepage": "https://github.com/wmde/query-builder#readme"
+}
