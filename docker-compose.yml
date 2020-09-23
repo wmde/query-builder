@@ -9,3 +9,10 @@ services:
             - '~/.npm:/.npm'
             - './:/app'
         working_dir: /app
+
+    dev:
+        extends:
+            service: node
+        command: 'npm run serve'
+        ports:
+            - '${PORT}:${PORT}'

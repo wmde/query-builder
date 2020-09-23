@@ -17,3 +17,20 @@ docker-compose build --build-arg UID=$(id -u) --build-arg GID=$(id -g) node
 ```sh
 docker-compose run --rm node npm
 ```
+
+### Installation
+
+```sh
+# Set up and modify the environment variables according to your preferences
+cp .env.example .env
+
+# install npm dependencies
+docker-compose run --rm node npm i
+```
+
+
+### Starting the development server
+
+```sh
+docker-compose up dev
+```
