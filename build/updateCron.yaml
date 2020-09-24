@@ -1,0 +1,31 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: updater
+  labels:
+    name: querybuilder.update
+    # The toolforge=tool label will cause $HOME and other paths to be mounted from Toolforge
+    toolforge: tool
+spec:
+  schedule: "28 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            toolforge: tool
+        spec:
+          containers:
+          - name: update
+            workingDir: /data/project/query-builder-test
+            image:  docker-registry.tools.wmflabs.org/toolforge-node10-sssd-web:latest
+            args:
+            - /bin/sh
+            - -c
+            - /data/project/query-builder-test/query-builder/build/updater.sh
+            env:
+            - name: HOME
+              value: /data/project/query-builder-test
+          restartPolicy: OnFailure
+
