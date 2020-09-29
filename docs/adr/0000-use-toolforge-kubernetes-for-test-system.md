@@ -8,7 +8,7 @@ accepted
 
 ## Context
 
-This project is new and its exact technological future is unknown, for example, we still don't know if this will have to be nodejs app in future and it will be only client-side app being built from npm modules and served as static assets using Apache, Nginx, etc.
+This project is new and its exact technological future is unknown. For example, we still don't know if this will have to be a nodejs app in the future, or if it will be only a client-side app served as static assets using Apache, Nginx, etc.
 
 We also need a publicly accessible test setup to have its features tested by UX and PM once they land on the main branch. We also need a development environment, need a CI environment and so on. Each environment has its own unique requirements, for production we are not sure we would use pipeline as a node app or it will be part of the standard WDQS GUI assets.
 
