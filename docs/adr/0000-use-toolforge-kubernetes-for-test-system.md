@@ -21,7 +21,7 @@ We are going to have the test setup in Toolforge, served as static assets but bu
 
 ## Consequences
 
-This while taking advantage of modern technologies like kubernetes jobs (instead of Gridengine jobs) is fairly simple and straightforward, especially compared to having a dedicated VM and serving these as either a nodejs app or using Apache/Nginx. This can also be used in a similar manner for other simple client-side apps we will develop.
+This, while taking advantage of modern technologies like kubernetes jobs (instead of Gridengine jobs), is fairly simple and straightforward, especially compared to having a dedicated VM and serving these as either a nodejs app or using Apache/Nginx. This can also be used in a similar manner for other simple client-side apps we will develop.
 
 It means at most, it would take an hour for a patch to be actually visible in the test system and it can be modified to be faster or slower depending on the need.
 
