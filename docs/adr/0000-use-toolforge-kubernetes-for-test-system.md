@@ -17,7 +17,7 @@ Toolforge seems like a good setup for small projects due to its baked-in support
 
 ## Decision
 
-We are going to have the test setup in Toolforge, served as static assets but built using Kubernetes cronjob that builds these assets using node10 docker container in Toolforge automatically and copies them to the public endpoint. You can see the exact configuration and steps in [PR#9](https://github.com/wmde/query-builder/pull/9).
+We are going to have the test setup in Toolforge, served as static assets but built using a Kubernetes cronjob that builds these assets using the node10 docker image in Toolforge automatically and copies them to the public endpoint. You can see the exact configuration and steps in [PR#9](https://github.com/wmde/query-builder/pull/9).
 
 ## Consequences
 
