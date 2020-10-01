@@ -2,8 +2,8 @@ import { shallowMount } from '@vue/test-utils';
 import QueryBuilder from '@/components/QueryBuilder.vue';
 
 describe( 'QueryBuilder.vue', () => {
-	it( 'renders props.msg when passed', () => {
+	it( 'has a heading', () => {
 		const wrapper = shallowMount( QueryBuilder, {} );
-		expect( wrapper.text() ).toMatch( '' );
+		expect( wrapper.find( 'h1' ).text() ).toBe( 'Simple Query Builder' );
 	} );
 } );

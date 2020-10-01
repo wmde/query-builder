@@ -21,9 +21,6 @@ export default Vue.extend( {
 @import '~@wmde/wikit-tokens/dist/variables';
 
 .querybuilder {
-	position: relative;
-	width: 1024px;
-	height: 349px;
 	padding: 40px;  // $dimension-spacing-xlarge
 }
 
@@ -32,8 +29,6 @@ export default Vue.extend( {
 	font-weight: $font-weight-style-h1;
 	font-size: $font-size-style-h1;
 	line-height: $font-line-height-style-heading;
-	display: flex;
-	align-items: center;
 
 	color: $font-color-base;
 }
