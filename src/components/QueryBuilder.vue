@@ -5,7 +5,7 @@
 			Short explanatory text that also manages expectations. Short explanatory text that also
 			manages expectations.
 		</p>
-		<h4 class="querybuilder__find-title">Find all items...</h4>
+		<h2 class="querybuilder__find-title">Find all items...</h2>
 	</div>
 </template>
 
