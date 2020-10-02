@@ -18,7 +18,6 @@
     "@wmde/wikit-tokens": "1.0.1",
     "@wmde/wikit-vue-components": "1.0.1",
     "core-js": "^3.6.5",
-    "npm": "^6.14.8",
     "vue": "^2.6.11",
     "vuex": "^3.4.0"
   },
