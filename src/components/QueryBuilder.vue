@@ -18,8 +18,6 @@ export default Vue.extend( {
 </script>
 
 <style scoped lang="scss">
-@import '~@wmde/wikit-tokens/dist/variables';
-
 .querybuilder {
 	padding: 40px;  // $dimension-spacing-xlarge
 }
