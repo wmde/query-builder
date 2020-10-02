@@ -28,9 +28,9 @@ spec:
             - name: HOME
               value: /data/project/query-builder-test
             resources:
-              - requests:
-                - memory: 1Gi
-              - limits:
-                - memory: 2Gi
+              requests:
+                memory: 1Gi
+              limits:
+                memory: 2Gi
           restartPolicy: OnFailure
 
