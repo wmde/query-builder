@@ -1,9 +1,9 @@
 #!/bin/bash
-cd query-builder
+cd /data/project/query-builder-test/query-builder
+git reset --hard origin/master
 git pull
-rm -rf node_modules
-npm install -g npm@6.14.8
-npm install
-npm run build
+./node_modules/.bin/npm install npm@6.14.8
+./node_modules/.bin/npm update
+./node_modules/.bin/npm run build
 rm -rf public_html/*
 cp -R dist/* ../public_html/
