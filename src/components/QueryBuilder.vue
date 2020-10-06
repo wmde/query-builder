@@ -16,16 +16,23 @@
 				label="Value"
 				placeholder="Enter a value" />
 		</div>
+		<div class="querybuilder__run">
+			<Button type="primaryProgressive">Run query</Button>
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import TextInput from '@wmde/wikit-vue-components/src/components/TextInput.vue';
+import Button from '@wmde/wikit-vue-components/src/components/Button.vue';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
-	components: { TextInput }
+	components: {
+		Button,
+		TextInput
+	}
 } );
 </script>
 
@@ -69,5 +76,9 @@ export default Vue.extend( {
 
 .querybuilder__rule__value {
 	margin-inline-start: $dimension-layout-xsmall;
+}
+
+.querybuilder__run {
+	margin-block-start: $dimension-layout-medium;
 }
 </style>
