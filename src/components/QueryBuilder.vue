@@ -10,10 +10,14 @@
 			<TextInput
 				class="querybuilder__rule__property"
 				label="Property"
+				:value="propertyLabel"
 				placeholder="Enter a property" />
 			<TextInput
 				class="querybuilder__rule__value"
 				label="Value"
+				ref="value"
+				:value="textInputValue"
+				@input="updateInputTextValue"
 				placeholder="Enter a value" />
 		</div>
 		<div class="querybuilder__run">
@@ -26,9 +30,21 @@
 import Vue from 'vue';
 import TextInput from '@wmde/wikit-vue-components/src/components/TextInput.vue';
 import Button from '@wmde/wikit-vue-components/src/components/Button.vue';
+import { mapState } from 'vuex';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
+	methods: {
+		updateInputTextValue( value: string ): void{
+			this.$store.dispatch( 'updateValue', value );
+		}
+	},
+	computed: {
+		...mapState( {
+			propertyLabel: 'property',
+			textInputValue: 'value'
+		} )
+	},
 	components: {
 		Button,
 		TextInput
