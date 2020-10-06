@@ -6,20 +6,32 @@
 			manages expectations.
 		</p>
 		<h2 class="querybuilder__find-title">Find all items...</h2>
+		<div class="querybuilder__rule">
+			<TextInput
+				class="querybuilder__rule__property"
+				label="Property"
+				placeholder="Enter a property" />
+			<TextInput
+				class="querybuilder__rule__value"
+				label="Value"
+				placeholder="Enter a value" />
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import TextInput from '@wmde/wikit-vue-components/src/components/TextInput.vue';
 
 export default Vue.extend( {
-	name: 'QueryBuilder'
+	name: 'QueryBuilder',
+	components: { TextInput }
 } );
 </script>
 
 <style scoped lang="scss">
 .querybuilder {
-	padding: 40px;  // $dimension-spacing-xlarge
+	padding: $dimension-spacing-xlarge;
 }
 
 .querybuilder__heading {
@@ -27,7 +39,6 @@ export default Vue.extend( {
 	font-weight: $font-weight-style-h1;
 	font-size: $font-size-style-h1;
 	line-height: $font-line-height-style-heading;
-
 	color: $font-color-base;
 }
 
@@ -47,5 +58,15 @@ export default Vue.extend( {
 	line-height: $font-line-height-style-heading;
 	color: $font-color-base;
 	margin-top: $dimension-static-size-500;
+}
+
+.querybuilder__rule {
+	display: flex;
+	margin-top: $dimension-layout-medium;
+	padding: $dimension-layout-xsmall $dimension-layout-medium;
+}
+
+.querybuilder__rule__value {
+	margin-left: $dimension-layout-xsmall;
 }
 </style>
