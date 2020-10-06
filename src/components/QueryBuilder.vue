@@ -52,7 +52,7 @@ export default Vue.extend( {
 }
 
 .querybuilder__find-title {
-	font-family: $font-family-style-heading-serif;
+	font-family: $font-family-style-heading-sans;
 	font-weight: $font-weight-style-h4;
 	font-size: $font-size-style-h4;
 	line-height: $font-line-height-style-heading;
