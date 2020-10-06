@@ -31,7 +31,8 @@ export default Vue.extend( {
 
 <style scoped lang="scss">
 .querybuilder {
-	padding: $dimension-spacing-xlarge;
+	padding-block: $dimension-spacing-xlarge;
+	padding-inline: $dimension-spacing-xlarge;
 }
 
 .querybuilder__heading {
@@ -48,7 +49,6 @@ export default Vue.extend( {
 	font-size: $font-size-style-description;
 	line-height: $font-line-height-style-description;
 	color: $font-color-base;
-
 }
 
 .querybuilder__find-title {
@@ -57,16 +57,17 @@ export default Vue.extend( {
 	font-size: $font-size-style-h4;
 	line-height: $font-line-height-style-heading;
 	color: $font-color-base;
-	margin-top: $dimension-static-size-500;
+	margin-block-start: $dimension-static-size-500;
 }
 
 .querybuilder__rule {
 	display: flex;
-	margin-top: $dimension-layout-medium;
-	padding: $dimension-layout-xsmall $dimension-layout-medium;
+	margin-block-start: $dimension-layout-medium;
+	padding-block: $dimension-layout-xsmall;
+	padding-inline: $dimension-layout-medium;
 }
 
 .querybuilder__rule__value {
-	margin-left: $dimension-layout-xsmall;
+	margin-inline-start: $dimension-layout-xsmall;
 }
 </style>
