@@ -21,6 +21,7 @@
     "ress": "^3.0.0",
     "vue": "^2.6.11",
     "vuex": "^3.4.0",
+    "sparqljs": "^3.0.3",
     "@wmde/wikit-vue-components": "1.1.0",
     "@wmde/wikit-tokens": "1.1.0"
   },
