@@ -1,6 +1,7 @@
 // Interface that encapsulates behavior of SparqlGenerator in sparqljs
 import SparqlGenerator from '@/sparql/SparqlGenerator';
 import allNamespaces from '@/sparql/RdfNamespaces';
+import QueryObject from '@/sparql/QueryObject';
 
 class QueryBuilderSparqlGenerator {
 	private sparqlGenerator: SparqlGenerator;
@@ -9,7 +10,7 @@ class QueryBuilderSparqlGenerator {
 		this.sparqlGenerator = sparqlGenerator;
 	}
 
-	public getString( query: object ): string {
+	public getString( query: QueryObject | {} ): string {
 		let queryString: string = this.sparqlGenerator.stringify( query );
 		for ( const [ prefix, iri ] of Object.entries( allNamespaces ) ) {
 			queryString = queryString.replace( `PREFIX ${prefix}: <${iri}>\n`, '' );
