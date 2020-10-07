@@ -5,7 +5,7 @@ describe( 'mutations', () => {
 
 	it( 'setValue', () => {
 		const expectedValue = 'whatever';
-		const state: RootState = { value: 'foo', property: '' };
+		const state: RootState = { value: 'foo', property: { id: 'P123', label: 'abc' } };
 
 		mutations.setValue( state, expectedValue );
 

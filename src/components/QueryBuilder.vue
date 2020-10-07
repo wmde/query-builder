@@ -10,7 +10,7 @@
 			<TextInput
 				class="querybuilder__rule__property"
 				label="Property"
-				:value="propertyLabel"
+				:value="property.label"
 				placeholder="Enter a property" />
 			<TextInput
 				class="querybuilder__rule__value"
@@ -21,7 +21,7 @@
 				placeholder="Enter a value" />
 		</div>
 		<div class="querybuilder__run">
-			<Button type="primaryProgressive">Run query</Button>
+			<Button @click.native="runQuery" type="primaryProgressive">Run query</Button>
 		</div>
 	</div>
 </template>
@@ -31,17 +31,23 @@ import Vue from 'vue';
 import TextInput from '@wmde/wikit-vue-components/src/components/TextInput.vue';
 import Button from '@wmde/wikit-vue-components/src/components/Button.vue';
 import { mapState } from 'vuex';
+import buildQuery from '@/sparql/buildQuery';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
 	methods: {
-		updateInputTextValue( value: string ): void{
+		updateInputTextValue( value: string ): void {
 			this.$store.dispatch( 'updateValue', value );
+		},
+		runQuery(): void {
+			console.log( buildQuery(
+				this.$store.getters.query
+			) );
 		}
 	},
 	computed: {
 		...mapState( {
-			propertyLabel: 'property',
+			property: 'property',
 			textInputValue: 'value'
 		} )
 	},
