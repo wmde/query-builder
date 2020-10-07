@@ -1,4 +1,4 @@
-export type RootState = {
-	property: string | null;
-	value: string | null;
-};
+import QueryRepresentation from '@/sparql/QueryRepresentation';
+
+export interface RootState extends QueryRepresentation {
+}

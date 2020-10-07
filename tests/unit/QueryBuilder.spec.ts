@@ -25,7 +25,7 @@ describe( 'QueryBuilder.vue', () => {
 	it( 'renders the Property label in the property textfield', () => {
 		const propertyLabel = 'postal code';
 		const wrapper = shallowMount( QueryBuilder, {
-			store: newStore( { property: propertyLabel } ),
+			store: newStore( { property: { label: propertyLabel } } ),
 			localVue
 		} );
 
