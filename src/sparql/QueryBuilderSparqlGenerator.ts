@@ -1,6 +1,6 @@
 // Interface that encapsulates behavior of SparqlGenerator in sparqljs
 import SparqlGenerator from '@/sparql/SparqlGenerator';
-import allNamespaces from '@/sparql/RdfNamespaces';
+import allNamespaces from '@/sparql/rdfNamespaces';
 
 class QueryBuilderSparqlGenerator {
 	private sparqlGenerator: SparqlGenerator;
