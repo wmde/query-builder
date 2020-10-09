@@ -31,7 +31,7 @@ export interface SparqlParser {
 }
 
 export interface SparqlGenerator {
-	stringify( query: SparqlQuery ): string;
+	stringify(query: SelectQuery | {}): string;
 	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 	createGenerator(): any;
 }

@@ -1,11 +1,15 @@
 import QueryBuilderSparqlGenerator from '@/sparql/QueryBuilderSparqlGenerator';
-import SparqlGenerator from '@/sparql/SparqlGenerator';
-import Sparqljs from '@/sparql/Sparqljs';
+import {
+	Generator as SparqlGenerator,
+	Parser as SparqlParser,
+	SelectQuery,
+} from "@/@types/sparqljs";
+
 
 describe( 'QueryBuilderSparqlGenerator', () => {
 
 	it( 'generates empty string', () => {
-		const sparqlGenerator: SparqlGenerator = require( 'sparqljs' ).Generator();
+		const sparqlGenerator = new SparqlGenerator();
 		const queryBuilderSparqlGenerator = new QueryBuilderSparqlGenerator(
 			sparqlGenerator
 		);
@@ -18,14 +22,13 @@ describe( 'QueryBuilderSparqlGenerator', () => {
 		const prefixes = {
 			wdt: 'http://www.wikidata.org/prop/direct/'
 		};
-		const sparqlGenerator: SparqlGenerator = require( 'sparqljs' ).Generator( prefixes );
+		const sparqlGenerator = new SparqlGenerator();
 		const queryBuilderSparqlGenerator = new QueryBuilderSparqlGenerator(
 			sparqlGenerator
 		);
 		const queryString = 'select ?city where {\n' +
             '  ?city wdt:P281 "XXXX" .\n' +
             '}';
-		const SparqlParser = require( 'sparqljs' ).Parser;
 		const parser = new SparqlParser( {
 			prefixes: prefixes
 		} );
@@ -38,7 +41,7 @@ describe( 'QueryBuilderSparqlGenerator', () => {
 		const prefixes = {
 			wdt: 'http://www.wikidata.org/prop/direct/'
 		};
-		const queryObject: Sparqljs.SelectQuery = {
+		const queryObject: SelectQuery = {
 			queryType: 'SELECT',
 			variables: [
 				{
@@ -70,7 +73,7 @@ describe( 'QueryBuilderSparqlGenerator', () => {
 			type: 'query',
 			prefixes: prefixes
 		};
-		const sparqlGenerator: SparqlGenerator = require( 'sparqljs' ).Generator( prefixes );
+		const sparqlGenerator = new SparqlGenerator( { prefixes: prefixes } );
 		const queryBuilderSparqlGenerator = new QueryBuilderSparqlGenerator(
 			sparqlGenerator
 		);
