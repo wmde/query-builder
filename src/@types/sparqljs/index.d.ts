@@ -1,331 +1,337 @@
-// Type definitions for sparqljs 3.1
-// Project: https://github.com/RubenVerborgh/SPARQL.js
-// Definitions by: Alexey Morozov <https://github.com/AlexeyMz>
-//                 Ruben Taelman <https://github.com/rubensworks>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.1
-// Copied from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/sparqljs/index.d.ts
-import * as RdfJs from 'rdf-js';
+declare module 'sparqljs' {
 
-export const Parser: new ( options?: ParserOptions ) => SparqlParser;
+	// Type definitions for sparqljs 3.1
+	// Project: https://github.com/RubenVerborgh/SPARQL.js
+	// Definitions by: Alexey Morozov <https://github.com/AlexeyMz>
+	//                 Ruben Taelman <https://github.com/rubensworks>
+	// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
+	// TypeScript Version: 2.1
+	// Copied from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/sparqljs/index.d.ts
+	import * as RdfJs from 'rdf-js';
 
-export interface ParserOptions {
-	prefixes?: { [prefix: string]: string };
-	baseIRI?: string;
-	factory?: RdfJs.DataFactory;
-	sparqlStar?: boolean;
-}
+	export const Parser: new ( options?: ParserOptions ) => SparqlParser;
 
-export const Generator: new ( options?: GeneratorOptions ) => SparqlGenerator;
+	export interface ParserOptions {
+		prefixes?: { [ prefix: string ]: string };
+		baseIRI?: string;
+		factory?: RdfJs.DataFactory;
+		sparqlStar?: boolean;
+	}
 
-export interface GeneratorOptions {
-	allPrefixes?: boolean;
-	prefixes?: { [prefix: string]: string };
-	indent?: string;
-	newline?: string;
-	sparqlStar?: boolean;
-}
+	export const Generator: new ( options?: GeneratorOptions ) => SparqlGenerator;
 
-export interface SparqlParser {
-	parse( query: string ): SparqlQuery;
-}
+	export interface GeneratorOptions {
+		allPrefixes?: boolean;
+		prefixes?: { [ prefix: string ]: string };
+		indent?: string;
+		newline?: string;
+		sparqlStar?: boolean;
+	}
 
-export interface SparqlGenerator {
-	stringify(query: SelectQuery | {}): string;
-	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-	createGenerator(): any;
-}
+	export interface SparqlParser {
+		parse( query: string ): SparqlQuery;
+	}
 
-export interface Wildcard {
-	readonly termType: 'Wildcard';
-	readonly value: '*';
-}
+	export interface SparqlGenerator {
+		stringify( query: SelectQuery | {} ): string;
 
-export type Term = VariableTerm | IriTerm | LiteralTerm | BlankTerm | QuadTerm;
+		/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+		createGenerator(): any;
+	}
 
-export interface VariableTerm {
-	termType: 'Variable';
-	value: string;
-}
+	export interface Wildcard {
+		readonly termType: 'Wildcard';
+		readonly value: '*';
+	}
 
-export interface IriTerm<Iri extends string = string> {
-	termType: 'NamedNode';
-	value: Iri;
-}
+	export type Term = VariableTerm | IriTerm | LiteralTerm | BlankTerm | QuadTerm;
 
-export interface LiteralTerm {
-	termType: 'Literal';
-	value: string;
-	language?: string;
-	datatype?: RdfJs.NamedNode;
-}
+	export interface VariableTerm {
+		termType: 'Variable';
+		value: string;
+	}
 
-export interface BlankTerm {
-	termType: 'BlankNode';
-	value: string;
-}
+	export interface IriTerm<Iri extends string = string> {
+		termType: 'NamedNode';
+		value: Iri;
+	}
 
-export interface QuadTerm extends RdfJs.BaseQuad {
-	/* eslint-disable @typescript-eslint/camelcase */
-	subject: RdfJs.Quad_Subject;
-	predicate: RdfJs.Quad_Predicate;
-	object: RdfJs.Quad_Object;
-	graph: RdfJs.Quad_Graph;
-	/* eslint-disable:enable */
-}
+	export interface LiteralTerm {
+		termType: 'Literal';
+		value: string;
+		language?: string;
+		datatype?: RdfJs.NamedNode;
+	}
 
-export type SparqlQuery = Query | Update;
+	export interface BlankTerm {
+		termType: 'BlankNode';
+		value: string;
+	}
 
-export type Query = SelectQuery | ConstructQuery | AskQuery | DescribeQuery;
+	export interface QuadTerm extends RdfJs.BaseQuad {
+		/* eslint-disable @typescript-eslint/camelcase */
+		subject: RdfJs.Quad_Subject;
+		predicate: RdfJs.Quad_Predicate;
+		object: RdfJs.Quad_Object;
+		graph: RdfJs.Quad_Graph;
+		/* eslint-disable:enable */
+	}
 
-export interface BaseQuery {
-	type: 'query';
-	base?: string;
-	prefixes: { [prefix: string]: string };
-	where?: Pattern[];
-	values?: ValuePatternRow[];
-}
+	export type SparqlQuery = Query | Update;
 
-export interface SelectQuery extends BaseQuery {
-	queryType: 'SELECT';
-	variables: Variable[] | [Wildcard];
-	distinct?: boolean;
-	from?: {
-		default: IriTerm[];
-		named: IriTerm[];
-	};
-	reduced?: boolean;
-	group?: Grouping[];
-	having?: Expression[];
-	order?: Ordering[];
-	limit?: number;
-	offset?: number;
-}
+	export type Query = SelectQuery | ConstructQuery | AskQuery | DescribeQuery;
 
-export interface Grouping {
-	expression: Expression;
-}
+	export interface BaseQuery {
+		type: 'query';
+		base?: string;
+		prefixes: { [ prefix: string ]: string };
+		where?: Pattern[];
+		values?: ValuePatternRow[];
+	}
 
-export interface Ordering {
-	expression: Expression;
-	descending?: boolean;
-}
+	export interface SelectQuery extends BaseQuery {
+		queryType: 'SELECT';
+		variables: Variable[] | [ Wildcard ];
+		distinct?: boolean;
+		from?: {
+			default: IriTerm[];
+			named: IriTerm[];
+		};
+		reduced?: boolean;
+		group?: Grouping[];
+		having?: Expression[];
+		order?: Ordering[];
+		limit?: number;
+		offset?: number;
+	}
 
-export interface ConstructQuery extends BaseQuery {
-	queryType: 'CONSTRUCT';
-	template?: Triple[];
-}
+	export interface Grouping {
+		expression: Expression;
+	}
 
-export interface AskQuery extends BaseQuery {
-	queryType: 'ASK';
-}
+	export interface Ordering {
+		expression: Expression;
+		descending?: boolean;
+	}
 
-export interface DescribeQuery extends BaseQuery {
-	queryType: 'DESCRIBE';
-	variables: Variable[] | [Wildcard];
-}
+	export interface ConstructQuery extends BaseQuery {
+		queryType: 'CONSTRUCT';
+		template?: Triple[];
+	}
 
-export interface Update {
-	type: 'update';
-	prefixes: { [prefix: string]: string };
-	updates: UpdateOperation[];
-}
+	export interface AskQuery extends BaseQuery {
+		queryType: 'ASK';
+	}
 
-export type UpdateOperation = InsertDeleteOperation | ManagementOperation;
+	export interface DescribeQuery extends BaseQuery {
+		queryType: 'DESCRIBE';
+		variables: Variable[] | [ Wildcard ];
+	}
 
-export interface InsertDeleteOperation {
-	updateType: 'insert' | 'delete' | 'deletewhere' | 'insertdelete';
-	graph?: IriTerm;
-	insert?: Quads[];
-	delete?: Quads[];
-	where?: Pattern[];
-}
+	export interface Update {
+		type: 'update';
+		prefixes: { [ prefix: string ]: string };
+		updates: UpdateOperation[];
+	}
 
-export type Quads = BgpPattern | GraphQuads;
+	export type UpdateOperation = InsertDeleteOperation | ManagementOperation;
 
-export type ManagementOperation =
-	| CopyMoveAddOperation
-	| LoadOperation
-	| CreateOperation
-	| ClearDropOperation;
+	export interface InsertDeleteOperation {
+		updateType: 'insert' | 'delete' | 'deletewhere' | 'insertdelete';
+		graph?: IriTerm;
+		insert?: Quads[];
+		delete?: Quads[];
+		where?: Pattern[];
+	}
 
-export interface CopyMoveAddOperation {
-	type: 'copy' | 'move' | 'add';
-	silent: boolean;
-	source: GraphOrDefault;
-	destination: GraphOrDefault;
-}
+	export type Quads = BgpPattern | GraphQuads;
 
-export interface LoadOperation {
-	type: 'load';
-	silent: boolean;
-	source: IriTerm;
-	destination: IriTerm | false;
-}
+	export type ManagementOperation =
+		| CopyMoveAddOperation
+		| LoadOperation
+		| CreateOperation
+		| ClearDropOperation;
 
-export interface CreateOperation {
-	type: 'create';
-	silent: boolean;
-	graph: IriTerm;
-}
+	export interface CopyMoveAddOperation {
+		type: 'copy' | 'move' | 'add';
+		silent: boolean;
+		source: GraphOrDefault;
+		destination: GraphOrDefault;
+	}
 
-export interface ClearDropOperation {
-	type: 'clear' | 'drop';
-	silent: boolean;
-	graph: GraphReference;
-}
+	export interface LoadOperation {
+		type: 'load';
+		silent: boolean;
+		source: IriTerm;
+		destination: IriTerm | false;
+	}
 
-export interface GraphOrDefault {
-	type: 'graph';
-	name?: IriTerm;
-	default?: boolean;
-}
+	export interface CreateOperation {
+		type: 'create';
+		silent: boolean;
+		graph: IriTerm;
+	}
 
-export interface GraphReference extends GraphOrDefault {
-	named?: boolean;
-	all?: boolean;
-}
+	export interface ClearDropOperation {
+		type: 'clear' | 'drop';
+		silent: boolean;
+		graph: GraphReference;
+	}
 
-/**
- * Examples: '?var', '*',
- *   SELECT (?a as ?b) ... ==> { expression: '?a', variable: '?b' }
- */
-export type Variable = VariableExpression | VariableTerm;
+	export interface GraphOrDefault {
+		type: 'graph';
+		name?: IriTerm;
+		default?: boolean;
+	}
 
-export interface VariableExpression {
-	expression: Expression;
-	variable: VariableTerm;
-}
+	export interface GraphReference extends GraphOrDefault {
+		named?: boolean;
+		all?: boolean;
+	}
 
-export type Pattern =
-	| BgpPattern
-	| BlockPattern
-	| FilterPattern
-	| BindPattern
-	| ValuesPattern
-	| SelectQuery;
+	/**
+	 * Examples: '?var', '*',
+	 *   SELECT (?a as ?b) ... ==> { expression: '?a', variable: '?b' }
+	 */
+	export type Variable = VariableExpression | VariableTerm;
 
-/**
- * Basic Graph Pattern
- */
-export interface BgpPattern {
-	type: 'bgp';
-	triples: Triple[];
-}
+	export interface VariableExpression {
+		expression: Expression;
+		variable: VariableTerm;
+	}
 
-export interface GraphQuads {
-	type: 'graph';
-	name: IriTerm;
-	triples: Triple[];
-}
+	export type Pattern =
+		| BgpPattern
+		| BlockPattern
+		| FilterPattern
+		| BindPattern
+		| ValuesPattern
+		| SelectQuery;
 
-export type BlockPattern =
-	| OptionalPattern
-	| UnionPattern
-	| GroupPattern
-	| GraphPattern
-	| MinusPattern
-	| ServicePattern;
+	/**
+	 * Basic Graph Pattern
+	 */
+	export interface BgpPattern {
+		type: 'bgp';
+		triples: Triple[];
+	}
 
-export interface OptionalPattern {
-	type: 'optional';
-	patterns: Pattern[];
-}
+	export interface GraphQuads {
+		type: 'graph';
+		name: IriTerm;
+		triples: Triple[];
+	}
 
-export interface UnionPattern {
-	type: 'union';
-	patterns: Pattern[];
-}
+	export type BlockPattern =
+		| OptionalPattern
+		| UnionPattern
+		| GroupPattern
+		| GraphPattern
+		| MinusPattern
+		| ServicePattern;
 
-export interface GroupPattern {
-	type: 'group';
-	patterns: Pattern[];
-}
+	export interface OptionalPattern {
+		type: 'optional';
+		patterns: Pattern[];
+	}
 
-export interface GraphPattern {
-	type: 'graph';
-	name: IriTerm;
-	patterns: Pattern[];
-}
+	export interface UnionPattern {
+		type: 'union';
+		patterns: Pattern[];
+	}
 
-export interface MinusPattern {
-	type: 'minus';
-	patterns: Pattern[];
-}
+	export interface GroupPattern {
+		type: 'group';
+		patterns: Pattern[];
+	}
 
-export interface ServicePattern {
-	type: 'service';
-	name: IriTerm;
-	silent: boolean;
-	patterns: Pattern[];
-}
+	export interface GraphPattern {
+		type: 'graph';
+		name: IriTerm;
+		patterns: Pattern[];
+	}
 
-export interface FilterPattern {
-	type: 'filter';
-	expression: Expression;
-}
+	export interface MinusPattern {
+		type: 'minus';
+		patterns: Pattern[];
+	}
 
-export interface BindPattern {
-	type: 'bind';
-	expression: Expression;
-	variable: VariableTerm;
-}
+	export interface ServicePattern {
+		type: 'service';
+		name: IriTerm;
+		silent: boolean;
+		patterns: Pattern[];
+	}
 
-export interface ValuesPattern {
-	type: 'values';
-	values: ValuePatternRow[];
-}
+	export interface FilterPattern {
+		type: 'filter';
+		expression: Expression;
+	}
 
-export interface ValuePatternRow {
-	[variable: string]: IriTerm | BlankTerm | LiteralTerm | undefined;
-}
+	export interface BindPattern {
+		type: 'bind';
+		expression: Expression;
+		variable: VariableTerm;
+	}
 
-export interface Triple {
-	subject: IriTerm | BlankTerm | VariableTerm | QuadTerm;
-	predicate: IriTerm | VariableTerm | PropertyPath;
-	object: Term;
-}
+	export interface ValuesPattern {
+		type: 'values';
+		values: ValuePatternRow[];
+	}
 
-export interface PropertyPath {
-	type: 'path';
-	pathType: '|' | '/' | '^' | '+' | '*' | '!';
-	items: ( IriTerm | PropertyPath )[];
-}
+	export interface ValuePatternRow {
+		[ variable: string ]: IriTerm | BlankTerm | LiteralTerm | undefined;
+	}
 
-export type Expression =
-	| OperationExpression
-	| FunctionCallExpression
-	| AggregateExpression
-	| BgpPattern
-	| GraphPattern
-	| GroupPattern
-	| Tuple
-	| Term;
+	export interface Triple {
+		subject: IriTerm | BlankTerm | VariableTerm | QuadTerm;
+		predicate: IriTerm | VariableTerm | PropertyPath;
+		object: Term;
+	}
 
-// allow Expression circularly reference itself
-// tslint:disable-next-line no-empty-interface
-export interface Tuple extends Array<Expression> {}
+	export interface PropertyPath {
+		type: 'path';
+		pathType: '|' | '/' | '^' | '+' | '*' | '!';
+		items: ( IriTerm | PropertyPath )[];
+	}
 
-export interface BaseExpression {
-	type: string;
-	distinct?: boolean;
-}
+	export type Expression =
+		| OperationExpression
+		| FunctionCallExpression
+		| AggregateExpression
+		| BgpPattern
+		| GraphPattern
+		| GroupPattern
+		| Tuple
+		| Term;
 
-export interface OperationExpression extends BaseExpression {
-	type: 'operation';
-	operator: string;
-	args: Expression[];
-}
+	// allow Expression circularly reference itself
+	// tslint:disable-next-line no-empty-interface
+	export interface Tuple extends Array<Expression> {
+	}
 
-export interface FunctionCallExpression extends BaseExpression {
-	type: 'functionCall';
-	function: string;
-	args: Expression[];
-}
+	export interface BaseExpression {
+		type: string;
+		distinct?: boolean;
+	}
 
-export interface AggregateExpression extends BaseExpression {
-	type: 'aggregate';
-	expression: Expression;
-	aggregation: string;
-	separator?: string;
+	export interface OperationExpression extends BaseExpression {
+		type: 'operation';
+		operator: string;
+		args: Expression[];
+	}
+
+	export interface FunctionCallExpression extends BaseExpression {
+		type: 'functionCall';
+		function: string;
+		args: Expression[];
+	}
+
+	export interface AggregateExpression extends BaseExpression {
+		type: 'aggregate';
+		expression: Expression;
+		aggregation: string;
+		separator?: string;
+	}
+
 }

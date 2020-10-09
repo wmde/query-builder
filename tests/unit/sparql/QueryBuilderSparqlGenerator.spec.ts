@@ -2,21 +2,10 @@ import QueryBuilderSparqlGenerator from '@/sparql/QueryBuilderSparqlGenerator';
 import {
 	Generator as SparqlGenerator,
 	Parser as SparqlParser,
-	SelectQuery,
-} from "@/@types/sparqljs";
-
+	SelectQuery
+} from 'sparqljs';
 
 describe( 'QueryBuilderSparqlGenerator', () => {
-
-	it( 'generates empty string', () => {
-		const sparqlGenerator = new SparqlGenerator();
-		const queryBuilderSparqlGenerator = new QueryBuilderSparqlGenerator(
-			sparqlGenerator
-		);
-		const queryObject = {};
-
-		expect( queryBuilderSparqlGenerator.getString( queryObject ) ).toBe( '' );
-	} );
 
 	it( 'generates simple query', () => {
 		const prefixes = {
@@ -32,7 +21,7 @@ describe( 'QueryBuilderSparqlGenerator', () => {
 		const parser = new SparqlParser( {
 			prefixes: prefixes
 		} );
-		const queryObject = parser.parse( queryString );
+		const queryObject = parser.parse( queryString ) as SelectQuery;
 
 		expect( queryBuilderSparqlGenerator.getString( queryObject ) ).toBe( 'SELECT ?city WHERE { ?city wdt:P281 "XXXX". }' );
 	} );

@@ -1,12 +1,10 @@
 import QueryRepresentation from './QueryRepresentation';
 import QueryBuilderSparqlGenerator from '@/sparql/QueryBuilderSparqlGenerator';
 import rdfNamespaces from '@/sparql/rdfNamespaces';
-
-// TODO add .d.ts file and import as a normal module
-const sparqlJsGenerator = require( 'sparqljs' ).Generator();
+import { Generator as SparqlGenerator, SelectQuery } from 'sparqljs';
 
 export default function buildQuery( query: QueryRepresentation ): string {
-	const queryObject = {
+	const queryObject: SelectQuery = {
 		queryType: 'SELECT',
 		variables: [
 			{
@@ -38,7 +36,7 @@ export default function buildQuery( query: QueryRepresentation ): string {
 		type: 'query',
 		prefixes: rdfNamespaces
 	};
-	const queryBuilderSparqlGenerator = new QueryBuilderSparqlGenerator( sparqlJsGenerator );
+	const queryBuilderSparqlGenerator = new QueryBuilderSparqlGenerator( new SparqlGenerator() );
 
 	return queryBuilderSparqlGenerator.getString( queryObject );
 }
