@@ -1,6 +1,6 @@
 import QueryBuilderSparqlGenerator from '@/sparql/QueryBuilderSparqlGenerator';
 import SparqlGenerator from '@/sparql/SparqlGenerator';
-import QueryObject from '@/sparql/QueryObject';
+import Sparqljs from '@/sparql/Sparqljs';
 
 describe( 'QueryBuilderSparqlGenerator', () => {
 
@@ -38,7 +38,7 @@ describe( 'QueryBuilderSparqlGenerator', () => {
 		const prefixes = {
 			wdt: 'http://www.wikidata.org/prop/direct/'
 		};
-		const queryObject: QueryObject = {
+		const queryObject: Sparqljs.SelectQuery = {
 			queryType: 'SELECT',
 			variables: [
 				{
