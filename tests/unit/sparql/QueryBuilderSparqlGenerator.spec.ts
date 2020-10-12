@@ -1,34 +1,27 @@
 import QueryBuilderSparqlGenerator from '@/sparql/QueryBuilderSparqlGenerator';
-import SparqlGenerator from '@/sparql/SparqlGenerator';
+import {
+	Generator as SparqlGenerator,
+	Parser as SparqlParser,
+	SelectQuery
+} from 'sparqljs';
 
 describe( 'QueryBuilderSparqlGenerator', () => {
-
-	it( 'generates empty string', () => {
-		const sparqlGenerator: SparqlGenerator = require( 'sparqljs' ).Generator();
-		const queryBuilderSparqlGenerator = new QueryBuilderSparqlGenerator(
-			sparqlGenerator
-		);
-		const queryObject = {};
-
-		expect( queryBuilderSparqlGenerator.getString( queryObject ) ).toBe( '' );
-	} );
 
 	it( 'generates simple query', () => {
 		const prefixes = {
 			wdt: 'http://www.wikidata.org/prop/direct/'
 		};
-		const sparqlGenerator: SparqlGenerator = require( 'sparqljs' ).Generator( prefixes );
+		const sparqlGenerator = new SparqlGenerator();
 		const queryBuilderSparqlGenerator = new QueryBuilderSparqlGenerator(
 			sparqlGenerator
 		);
 		const queryString = 'select ?city where {\n' +
             '  ?city wdt:P281 "XXXX" .\n' +
             '}';
-		const SparqlParser = require( 'sparqljs' ).Parser;
 		const parser = new SparqlParser( {
 			prefixes: prefixes
 		} );
-		const queryObject = parser.parse( queryString );
+		const queryObject = parser.parse( queryString ) as SelectQuery;
 
 		expect( queryBuilderSparqlGenerator.getString( queryObject ) ).toBe( 'SELECT ?city WHERE { ?city wdt:P281 "XXXX". }' );
 	} );
@@ -37,7 +30,7 @@ describe( 'QueryBuilderSparqlGenerator', () => {
 		const prefixes = {
 			wdt: 'http://www.wikidata.org/prop/direct/'
 		};
-		const queryObject = {
+		const queryObject: SelectQuery = {
 			queryType: 'SELECT',
 			variables: [
 				{
@@ -69,7 +62,7 @@ describe( 'QueryBuilderSparqlGenerator', () => {
 			type: 'query',
 			prefixes: prefixes
 		};
-		const sparqlGenerator: SparqlGenerator = require( 'sparqljs' ).Generator( prefixes );
+		const sparqlGenerator = new SparqlGenerator( { prefixes: prefixes } );
 		const queryBuilderSparqlGenerator = new QueryBuilderSparqlGenerator(
 			sparqlGenerator
 		);
