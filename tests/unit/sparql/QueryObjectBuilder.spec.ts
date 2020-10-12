@@ -1,4 +1,4 @@
-import allNamespaces from '@/sparql/RdfNamespaces';
+import allNamespaces from '@/sparql/rdfNamespaces';
 import QueryObjectBuilder from '@/sparql/QueryObjectBuilder';
 
 describe( 'QueryObjectBuilder', () => {
@@ -39,7 +39,10 @@ describe( 'QueryObjectBuilder', () => {
 		};
 
 		const actual = builder.buildFromQueryRepresentation( {
-			property: 'P281',
+			property: {
+				id: 'P281',
+				label: 'Postal Code'
+			},
 			value: 'XXXX'
 		} );
 

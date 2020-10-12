@@ -1,8 +1,9 @@
-import allNamespaces from '@/sparql/RdfNamespaces';
+import rdfNamespaces from '@/sparql/rdfNamespaces';
+import QueryRepresentation from '@/sparql/QueryRepresentation';
+import { SelectQuery } from 'sparqljs';
 
 export default class QueryObjectBuilder {
-	// TODO: Change the type once #27 is merged
-	private queryObject: any;
+	private queryObject: SelectQuery;
 
 	public constructor() {
 		this.queryObject = {
@@ -10,18 +11,19 @@ export default class QueryObjectBuilder {
 			variables: [],
 			where: [],
 			type: 'query',
-			prefixes: allNamespaces
+			prefixes: rdfNamespaces
 		};
 	}
 
-	public buildFromQueryRepresentation( queryRepresentation: any ) {
-		this.queryObject.variables.push(
+	public buildFromQueryRepresentation( queryRepresentation: QueryRepresentation ): SelectQuery {
+
+		this.queryObject.variables = [
 			{
 				termType: 'Variable',
 				value: 'item'
 			}
-		);
-		this.queryObject.where.push(
+		];
+		this.queryObject.where = [
 			{
 				type: 'bgp',
 				triples: [
@@ -32,7 +34,7 @@ export default class QueryObjectBuilder {
 						},
 						predicate: {
 							termType: 'NamedNode',
-							value: 'http://www.wikidata.org/prop/direct/' + queryRepresentation.property
+							value: rdfNamespaces.wdt + queryRepresentation.property.id
 						},
 						object: {
 							termType: 'Literal',
@@ -41,7 +43,7 @@ export default class QueryObjectBuilder {
 					}
 				]
 			}
-		);
+		];
 
 		return this.queryObject;
 	}
