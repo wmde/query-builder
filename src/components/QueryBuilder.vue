@@ -25,6 +25,21 @@
 				<Button @click.native="runQuery" type="primaryProgressive">Run query</Button>
 			</div>
 		</div>
+		<div class="querybuilder__result">
+			<div v-if="encodedQuery.length === 0" class="querybuilder__result__description">
+				Results will be displayed here
+			</div>
+
+			<!-- TODO use global config variables instead of hardcoding the url-->
+			<iframe
+				v-else
+				:src="'https://query.wikidata.org/embed.html#' + encodedQuery"
+				:key="iframeRenderKey"
+				class="querybuilder__result__iframe"
+				referrerpolicy="origin"
+				sandbox="allow-scripts allow-same-origin">
+			</iframe>
+		</div>
 	</div>
 </template>
 
@@ -37,14 +52,21 @@ import buildQuery from '@/sparql/buildQuery';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
+	data() {
+		return {
+			encodedQuery: '',
+			iframeRenderKey: 0
+		};
+	},
 	methods: {
 		updateInputTextValue( value: string ): void {
 			this.$store.dispatch( 'updateValue', value );
 		},
 		runQuery(): void {
-			console.log( buildQuery(
-				this.$store.getters.query
-			) );
+			this.encodedQuery = encodeURI( buildQuery( this.$store.getters.query ) );
+
+			// force the iframe to rerender https://stackoverflow.com/a/48755228
+			this.iframeRenderKey = Math.random();
 		}
 	},
 	computed: {
@@ -104,5 +126,25 @@ export default Vue.extend( {
 
 .querybuilder__run {
 	margin-block-start: $dimension-layout-medium;
+}
+
+.querybuilder__result {
+	margin-block-start: $dimension-layout-small;
+}
+
+.querybuilder__result__description {
+	padding-block: $dimension-spacing-xxlarge;
+	font-size: $font-size-style-description;
+	font-family: $font-family-style-description;
+	color: $font-color-subtle;
+	font-weight: $font-weight-style-description;
+	line-height: $font-line-height-style-description;
+	text-align: center;
+}
+
+.querybuilder__result__iframe {
+	width: $dimension-width-full;
+	border: none;
+	height: 95vh;
 }
 </style>
