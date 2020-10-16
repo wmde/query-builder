@@ -2,7 +2,7 @@ import allNamespaces from '@/sparql/rdfNamespaces';
 import QueryObjectBuilder from '@/sparql/QueryObjectBuilder';
 
 describe( 'QueryObjectBuilder', () => {
-	it( 'einfach', () => {
+	it( 'simple', () => {
 		const prefixes = allNamespaces;
 		const builder = new QueryObjectBuilder();
 		const expected = {
