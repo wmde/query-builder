@@ -1,27 +1,29 @@
 <template>
-	<div class="querybuilder">
+	<div class="querybuilder" role="main">
 		<h1 class="querybuilder__heading">Simple Query Builder</h1>
 		<p class="querybuilder__description">
 			Short explanatory text that also manages expectations. Short explanatory text that also
 			manages expectations.
 		</p>
-		<h2 class="querybuilder__find-title">Find all items...</h2>
-		<div class="querybuilder__rule">
-			<TextInput
-				class="querybuilder__rule__property"
-				label="Property"
-				:value="property.label"
-				placeholder="Enter a property" />
-			<TextInput
-				class="querybuilder__rule__value"
-				label="Value"
-				ref="value"
-				:value="textInputValue"
-				@input="updateInputTextValue"
-				placeholder="Enter a value" />
-		</div>
-		<div class="querybuilder__run">
-			<Button @click.native="runQuery" type="primaryProgressive">Run query</Button>
+		<div role="form">
+			<h2 class="querybuilder__find-title">Find all items...</h2>
+			<div class="querybuilder__rule">
+				<TextInput
+						class="querybuilder__rule__property"
+						label="Property"
+						:value="property.label"
+						placeholder="Enter a property" />
+				<TextInput
+						class="querybuilder__rule__value"
+						label="Value"
+						ref="value"
+						:value="textInputValue"
+						@input="updateInputTextValue"
+						placeholder="Enter a value" />
+			</div>
+			<div class="querybuilder__run">
+				<Button @click.native="runQuery" type="primaryProgressive">Run query</Button>
+			</div>
 		</div>
 	</div>
 </template>
