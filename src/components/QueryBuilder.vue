@@ -1,6 +1,6 @@
 <template>
 	<div class="querybuilder" role="main">
-		<h1 class="querybuilder__heading" role="heading" aria-level="1">Simple Query Builder</h1>
+		<h1 class="querybuilder__heading">Simple Query Builder</h1>
 		<p class="querybuilder__description">
 			Short explanatory text that also manages expectations. Short explanatory text that also
 			manages expectations.
