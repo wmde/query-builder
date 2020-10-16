@@ -1,12 +1,10 @@
 <template>
 	<div class="querybuilder" role="main">
-		<div role="heading" aria-level="1">
-			<h1 class="querybuilder__heading">Simple Query Builder</h1>
-			<p class="querybuilder__description">
-				Short explanatory text that also manages expectations. Short explanatory text that also
-				manages expectations.
-			</p>
-		</div>
+		<h1 class="querybuilder__heading" role="heading" aria-level="1">Simple Query Builder</h1>
+		<p class="querybuilder__description">
+			Short explanatory text that also manages expectations. Short explanatory text that also
+			manages expectations.
+		</p>
 		<div role="form">
 			<h2 class="querybuilder__find-title">Find all items...</h2>
 			<div class="querybuilder__rule">
