@@ -1,6 +1,7 @@
 import { TextInput } from '@wmde/wikit-vue-components';
 import Vuex, { Store } from 'vuex';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import QueryBuilder from '@/components/QueryBuilder.vue';
 import PropertyLookup from '@/components/PropertyLookup.vue';
 import Vue from 'vue';
@@ -16,7 +17,6 @@ Vue.use( i18n, {
 	messages,
 	wikilinks: true,
 } );
-
 function newStore( getters = {} ): Store<any> {
 	return new Vuex.Store( {
 		getters: {
@@ -110,5 +110,31 @@ describe( 'QueryBuilder.vue', () => {
 			message: 'Value Warning Message!',
 		} );
 
+	} );
+
+	it( 'should not have obvious accessibility issues', async () => {
+		const property = { label: 'postal code', id: 'P123' };
+		const wrapper = mount( QueryBuilder, {
+			store: new Vuex.Store( {
+				state: {
+					property: property,
+					value: '',
+					errors: [],
+				},
+			} ),
+			localVue,
+			propsData: {
+				encodedQuery: '',
+				iframeRenderKey: 0,
+				fieldErrors: {
+					property: null,
+					value: null,
+				},
+			},
+		} );
+		const results = await axe( wrapper.element );
+
+		expect.extend( toHaveNoViolations );
+		expect( results ).toHaveNoViolations();
 	} );
 } );
