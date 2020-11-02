@@ -12,7 +12,7 @@ export default Vue.extend( {
 	name: 'App',
 	components: {
 		QueryBuilder
-	},
+	}
 } );
 </script>
 
