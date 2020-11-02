@@ -12,4 +12,13 @@ describe( 'mutations', () => {
 		expect( state.value ).toBe( expectedValue );
 	} );
 
+	it( 'setProperty', () => {
+		const expectedProperty = { id: 'P123', label: 'abc' };
+		const state: RootState = { value: 'foo', property: { id: 'P123', label: 'abc' } };
+
+		mutations.setProperty( state, expectedProperty );
+
+		expect( state.property ).toBe( expectedProperty );
+	} );
+
 } );

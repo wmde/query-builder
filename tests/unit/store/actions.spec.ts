@@ -11,4 +11,16 @@ describe( 'actions', () => {
 		expect( context.commit ).toHaveBeenCalledWith( 'setValue', value );
 	} );
 
+	it( 'updateProperty', () => {
+		const context = { commit: jest.fn() };
+		const property = {
+			id: 'P666',
+			label: 'Property label'
+		};
+
+		actions.updateProperty( context as any, property );
+
+		expect( context.commit ).toHaveBeenCalledWith( 'setProperty', property );
+	} );
+
 } );
