@@ -1,7 +1,6 @@
+import Property from '@/data-model/Property';
+
 export default interface QueryRepresentation {
-	property: {
-		label: string;
-		id: string;
-	};
+	property: Property;
 	value: string;
 }

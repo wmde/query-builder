@@ -5,5 +5,5 @@ import SearchResult from './SearchResult';
  * The language will be defined in the constructor as will be further options
  */
 export default interface SearchEntityRepository {
-    searchProperties( searchString: string, limit?: number, offset?: number ): Promise<Array<SearchResult>>;
+	searchProperties( searchString: string, limit?: number, offset?: number ): Promise<SearchResult[]>;
 }
