@@ -1,10 +1,13 @@
-import actions from '@/store/actions';
+import createActions from '@/store/actions';
 
 describe( 'actions', () => {
 
 	it( 'updateValue', () => {
 		const context = { commit: jest.fn() };
 		const value = 'whatever';
+		const actions = createActions(
+			{ searchProperties: jest.fn() }
+		);
 
 		actions.updateValue( context as any, value );
 
@@ -17,6 +20,9 @@ describe( 'actions', () => {
 			id: 'P666',
 			label: 'Property label'
 		};
+		const actions = createActions(
+			{ searchProperties: jest.fn() }
+		);
 
 		actions.updateProperty( context as any, property );
 
