@@ -2,8 +2,9 @@
 	<div class="querybuilder" role="main">
 		<h1 class="querybuilder__heading">Simple Query Builder</h1>
 		<p class="querybuilder__description">
-			Short explanatory text that also manages expectations. Short explanatory text that also
-			manages expectations.
+			Welcome to the test system of the Simple Query Builder. Please note that this is a work in progress,
+			not all features are included, and it can sometimes be broken.
+			<a href="https://www.wikidata.org/wiki/Wikidata_talk:Improve_the_workflows_for_queries_and_lists/Simple_query_Builder">Feedback is welcome here.</a>
 		</p>
 		<div role="form">
 			<h2 class="querybuilder__find-title">Find all items...</h2>
