@@ -75,6 +75,7 @@ export default Vue.extend( {
 </script>
 
 <style scoped lang="scss">
+<!-- TODO replace with link component once available-->
 a {
 	font-family: $font-family-style-link;
 	font-style: $font-size-style-link;
