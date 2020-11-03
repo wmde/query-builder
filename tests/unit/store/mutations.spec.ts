@@ -10,6 +10,7 @@ describe( 'mutations', () => {
 				valueData: { value: 'foo' },
 				propertyData: { id: 'P123', label: 'abc' },
 			},
+			errors: [],
 		};
 
 		mutations.setValue( state, expectedValue );
@@ -24,6 +25,7 @@ describe( 'mutations', () => {
 				valueData: { value: 'foo' },
 				propertyData: { id: 'P123', label: 'abc' },
 			},
+			errors: [],
 		};
 
 		mutations.setProperty( state, expectedProperty );

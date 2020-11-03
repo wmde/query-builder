@@ -22,6 +22,7 @@ export function createStore( services: QueryBuilderServices ): Store<RootState> 
 					value: '',
 				},
 			},
+			errors: [],
 		},
 		actions: createActions(
 			services.get( 'searchEntityRepository' ),

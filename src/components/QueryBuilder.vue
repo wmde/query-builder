@@ -39,6 +39,7 @@ import Button from '@wmde/wikit-vue-components/src/components/Button.vue';
 import QueryResult from '@/components/QueryResult.vue';
 import buildQuery from '@/sparql/buildQuery';
 import Property from '@/data-model/Property';
+import { mapState } from 'vuex';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -49,7 +50,30 @@ export default Vue.extend( {
 		};
 	},
 	methods: {
+		validate(): boolean {
+			if ( !this.selectedItem && !this.textInputValue ) {
+				this.errors.push( {
+					// eslint-disable-next-line max-len
+					message: 'Looks like the Query Builder was empty, please enter a valid query first, then try running it again',
+					type: 'notice',
+				} );
+				return false;
+			}
+
+			if ( !this.property || !this.textInputValue ) {
+				this.errors.push( {
+					message: 'One or more fields are empty. Please complete the query or select a fitting field type.',
+					type: 'error',
+				} );
+				return false;
+			}
+			return true;
+		},
 		runQuery(): void {
+			const isValid = this.validate();
+			if ( !isValid ) {
+				return;
+			}
 			this.encodedQuery = encodeURI( buildQuery( this.$store.getters.query ) );
 
 			// force the iframe to rerender https://stackoverflow.com/a/48755228
@@ -64,6 +88,9 @@ export default Vue.extend( {
 			get(): string { return this.$store.getters.value; },
 			set( value: string ): void { this.$store.dispatch( 'updateValue', value ); },
 		},
+		...mapState( {
+			errors: 'errors',
+		} ),
 	},
 	components: {
 		Button,

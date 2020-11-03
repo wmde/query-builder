@@ -6,6 +6,7 @@ function newStore( state = {} ): Store<any> {
 	return new Vuex.Store( {
 		state: {
 			property: 'potato',
+			errors: [],
 			...state,
 		},
 	} );
@@ -22,6 +23,7 @@ describe( 'QueryResult.vue', () => {
 			propsData: {
 				encodedQuery: '',
 				iframeRenderKey: 0,
+				errors: [],
 			},
 		} );
 		expect( wrapper.find( 'div' ).text() ).toBe( 'Results will be displayed here' );
