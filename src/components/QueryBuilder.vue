@@ -75,6 +75,19 @@ export default Vue.extend( {
 </script>
 
 <style scoped lang="scss">
+a {
+	font-family: $font-family-style-link;
+	font-style: $font-size-style-link;
+	font-weight: $font-weight-style-link;
+	font-size: $font-size-style-link;
+	line-height: $font-line-height-style-link;
+	color: $font-color-link-default;
+
+	&:visited {
+		color: $font-color-link-visited;
+	}
+}
+
 .querybuilder {
 	padding-block: $dimension-spacing-xlarge;
 	padding-inline: $dimension-spacing-xlarge;
