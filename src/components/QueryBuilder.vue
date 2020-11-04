@@ -51,6 +51,8 @@ export default Vue.extend( {
 	},
 	methods: {
 		validate(): boolean {
+			this.errors = [];
+			this.$store.dispatch( 'setErrors', [] );
 			if ( !this.selectedItem && !this.textInputValue ) {
 				this.errors.push( {
 					// eslint-disable-next-line max-len
