@@ -1,7 +1,9 @@
 <template>
 	<div class="querybuilder__result">
 		<div v-if="errors.length !== 0" class="querybuilder__result__errors">
-			<div v-for="(error, index) in errors" class="error.type" :key="index">{{error.message}}</div>
+			<div v-for="(error, index) in errors" :class="error.type" :key="index">
+				{{error.message}}
+			</div>
 		</div>
 		<div v-else-if="encodedQuery.length === 0" class="querybuilder__result__description">
 			Results will be displayed here

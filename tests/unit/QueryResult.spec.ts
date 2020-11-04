@@ -1,5 +1,5 @@
 import Vuex, { Store } from 'vuex';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
 import QueryResult from '@/components/QueryResult.vue';
 
 function newStore( state = {} ): Store<any> {
@@ -27,6 +27,29 @@ describe( 'QueryResult.vue', () => {
 			},
 		} );
 		expect( wrapper.find( 'div' ).text() ).toBe( 'Results will be displayed here' );
+		expect( wrapper.findAll( 'iframe' ) ).toHaveLength( 0 );
+	} );
+
+	it( 'Show errors', () => {
+		const store = newStore(
+			{
+				errors: [
+					{
+						message: 'Something happened',
+						type: 'notice',
+					},
+				],
+			},
+		);
+		const wrapper = mount( QueryResult, {
+			store: store,
+			localVue,
+			propsData: {
+				encodedQuery: '',
+				iframeRenderKey: 0,
+			},
+		} );
+		expect( wrapper.find( 'div div' ).text() ).toBe( 'Something happened' );
 		expect( wrapper.findAll( 'iframe' ) ).toHaveLength( 0 );
 	} );
 } );
