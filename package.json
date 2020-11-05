@@ -10,10 +10,11 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "test:lint": "vue-cli-service lint",
+    "test:lint": "vue-cli-service lint --no-fix --max-warning 0",
     "test": "npm-run-all test:*",
     "test:lintcss": "stylelint '**/*.vue'",
-    "fix:css": "stylelint '**/*.vue' --fix"
+    "fix:css": "stylelint '**/*.vue' --fix",
+    "fix:ts": "vue-cli-service lint"
   },
   "main": "index.js",
   "dependencies": {
