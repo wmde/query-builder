@@ -13,21 +13,21 @@ describe( 'FetchSearchEntityRepository', () => {
 		const testSearchTerm = '"><script>alert(\'XXS!\');</script>';
 		const expectedResult = [ { foo: 'bar' } ];
 
-		window.fetch = jest.fn().mockImplementation(() => Promise.resolve( {
+		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
 			ok: true,
-				json: async () => ( { search: expectedResult } ),
+			json: async () => ( { search: expectedResult } )
 		} ) );
 
 		const actualResult = await repo.searchProperties( testSearchTerm );
 
 		const escapedSearch = '%22%3E%3Cscript%3Ealert%28%27XXS%21%27%29%3B%3C%2Fscript%3E';
 		const expectedUrl = `${testEndpoint}?action=wbsearchentities&search=${escapedSearch}&language=${testLang}&type=property&format=json&formatversion=2&errorformat=plaintext&origin=*`;
-		expect( window.fetch ).toHaveBeenCalledTimes(1);
+		expect( window.fetch ).toHaveBeenCalledTimes( 1 );
 		expect( window.fetch ).toHaveBeenCalledWith( expectedUrl );
 		expect( actualResult ).toBe( expectedResult );
 	} );
 
-	it( 'searches for properties with provided limit and offset', async() => {
+	it( 'searches for properties with provided limit and offset', async () => {
 		const testLang = 'eo';
 		const testEndpoint = 'https://example.com/w/api.php';
 		const repo = new FetchSearchEntityRepository(
@@ -35,9 +35,9 @@ describe( 'FetchSearchEntityRepository', () => {
 			testEndpoint
 		);
 		const testSearch = 'instance';
-		window.fetch = jest.fn().mockImplementation(() => Promise.resolve( {
+		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
 			ok: true,
-			json: async () => ( { search:  [ { foo: 'bar' } ] } ),
+			json: async () => ( { search: [ { foo: 'bar' } ] } )
 		} ) );
 		const limit = 12;
 		const offset = 24;
@@ -45,7 +45,7 @@ describe( 'FetchSearchEntityRepository', () => {
 		await repo.searchProperties( testSearch, limit, offset );
 
 		const expectedUrl = `${testEndpoint}?action=wbsearchentities&search=${testSearch}&language=${testLang}&type=property&format=json&formatversion=2&errorformat=plaintext&origin=*&limit=${limit}&offset=${offset}`;
-		expect( window.fetch ).toHaveBeenCalledTimes(1);
+		expect( window.fetch ).toHaveBeenCalledTimes( 1 );
 		expect( window.fetch ).toHaveBeenCalledWith( expectedUrl );
 	} );
 
@@ -54,13 +54,13 @@ describe( 'FetchSearchEntityRepository', () => {
 			'eo',
 			'https://example.com/w/api.php'
 		);
-		window.fetch = jest.fn().mockImplementation(() => Promise.resolve( {
+		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
 			ok: false,
 			status: 500,
-			statusText: 'Server Error',
+			statusText: 'Server Error'
 		} ) );
 
-		const expectedError = new TechnicalProblem( '500: Server Error');
+		const expectedError = new TechnicalProblem( '500: Server Error' );
 
 		expect( repo.searchProperties( 'instance' ) ).rejects.toThrow( expectedError );
 	} );
@@ -70,9 +70,9 @@ describe( 'FetchSearchEntityRepository', () => {
 			'eo',
 			'https://example.com/w/api.php'
 		);
-		window.fetch = jest.fn().mockImplementation(() => Promise.reject() );
+		window.fetch = jest.fn().mockImplementation( () => Promise.reject() );
 
-		const expectedError = new TechnicalProblem( 'Network error');
+		const expectedError = new TechnicalProblem( 'Network error' );
 
 		expect( repo.searchProperties( 'instance' ) ).rejects.toThrow( expectedError );
 	} );
