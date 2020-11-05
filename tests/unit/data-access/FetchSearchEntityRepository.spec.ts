@@ -8,14 +8,14 @@ describe( 'FetchSearchEntityRepository', () => {
 		const testEndpoint = 'https://example.com/w/api.php';
 		const repo = new FetchSearchEntityRepository(
 			testLang,
-			testEndpoint
+			testEndpoint,
 		);
 		const testSearchTerm = '"><script>alert(\'XXS!\');</script>';
 		const expectedResult = [ { foo: 'bar' } ];
 
 		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
 			ok: true,
-			json: async () => ( { search: expectedResult } )
+			json: async () => ( { search: expectedResult } ),
 		} ) );
 
 		const actualResult = await repo.searchProperties( testSearchTerm );
@@ -32,12 +32,12 @@ describe( 'FetchSearchEntityRepository', () => {
 		const testEndpoint = 'https://example.com/w/api.php';
 		const repo = new FetchSearchEntityRepository(
 			testLang,
-			testEndpoint
+			testEndpoint,
 		);
 		const testSearch = 'instance';
 		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
 			ok: true,
-			json: async () => ( { search: [ { foo: 'bar' } ] } )
+			json: async () => ( { search: [ { foo: 'bar' } ] } ),
 		} ) );
 		const limit = 12;
 		const offset = 24;
@@ -52,12 +52,12 @@ describe( 'FetchSearchEntityRepository', () => {
 	it( 'throws an error if there is a server side problem', () => {
 		const repo = new FetchSearchEntityRepository(
 			'eo',
-			'https://example.com/w/api.php'
+			'https://example.com/w/api.php',
 		);
 		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
 			ok: false,
 			status: 500,
-			statusText: 'Server Error'
+			statusText: 'Server Error',
 		} ) );
 
 		const expectedError = new TechnicalProblem( '500: Server Error' );
@@ -68,7 +68,7 @@ describe( 'FetchSearchEntityRepository', () => {
 	it( 'throws an error if there is a network problem', () => {
 		const repo = new FetchSearchEntityRepository(
 			'eo',
-			'https://example.com/w/api.php'
+			'https://example.com/w/api.php',
 		);
 		window.fetch = jest.fn().mockImplementation( () => Promise.reject() );
 

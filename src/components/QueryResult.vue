@@ -24,23 +24,23 @@ export default Vue.extend( {
 	name: 'QueryResult',
 	props: {
 		encodedQuery: {
-			type: String
+			type: String,
 		},
 		iframeRenderKey: {
-			type: Number
-		}
+			type: Number,
+		},
 	},
 	methods: {
 		updateInputTextValue( value: string ): void {
 			this.$store.dispatch( 'updateValue', value );
-		}
+		},
 	},
 	computed: {
 		...mapState( {
 			property: 'property',
-			textInputValue: 'value'
-		} )
-	}
+			textInputValue: 'value',
+		} ),
+	},
 } );
 </script>
 

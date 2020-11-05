@@ -1,7 +1,7 @@
 module.exports = {
 	root: true,
 	env: {
-		node: true
+		node: true,
 	},
 	extends: [
 		'plugin:vue/essential',
@@ -9,33 +9,42 @@ module.exports = {
 		'@vue/typescript/recommended',
 		'wikimedia',
 		'wikimedia/language/es2019',
-		'@wmde/wikimedia-typescript'
+		'@wmde/wikimedia-typescript',
 	],
 	parser: 'vue-eslint-parser',
 	parserOptions: {
-		ecmaVersion: 2020
+		ecmaVersion: 2020,
 	},
 	rules: {
 		'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-		'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+		'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+
+		// diverging from Wikimedia rule set
+		'comma-dangle': [ 'error', {
+			arrays: 'always-multiline',
+			objects: 'always-multiline',
+			imports: 'always-multiline',
+			exports: 'always-multiline',
+			functions: 'always-multiline',
+		} ],
 	},
 	overrides: [
 		{
 			files: [ '**/__tests__/*.{j,t}s?(x)', '**/tests/unit/**/*.spec.{j,t}s?(x)' ],
 			env: {
-				jest: true
-			}
+				jest: true,
+			},
 		},
 		{
 			files: [ '*.js' ],
 			extends: [
-				'wikimedia/node'
+				'wikimedia/node',
 			],
 			rules: {
 				'@typescript-eslint/explicit-function-return-type': 'off',
 				'@typescript-eslint/explicit-member-accessibility': 'off',
-				'@typescript-eslint/no-var-requires': 'off'
-			}
-		}
-	]
+				'@typescript-eslint/no-var-requires': 'off',
+			},
+		},
+	],
 };

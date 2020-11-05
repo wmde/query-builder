@@ -1,7 +1,7 @@
 import allNamespaces from '@/sparql/rdfNamespaces';
 import {
 	SelectQuery,
-	SparqlGenerator
+	SparqlGenerator,
 } from 'sparqljs';
 
 class QueryBuilderSparqlGenerator {

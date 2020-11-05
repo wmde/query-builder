@@ -32,5 +32,5 @@ export default {
 	bd: 'http://www.bigdata.com/rdf#',
 	bds: 'http://www.bigdata.com/rdf/search#',
 	gas: 'http://www.bigdata.com/rdf/gas#',
-	hint: 'http://www.bigdata.com/queryHints#'
+	hint: 'http://www.bigdata.com/queryHints#',
 };

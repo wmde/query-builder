@@ -7,8 +7,8 @@ function newStore( state = {} ): Store<any> {
 	return new Vuex.Store( {
 		state: {
 			property: 'potato',
-			...state
-		}
+			...state,
+		},
 	} );
 }
 
@@ -26,7 +26,7 @@ describe( 'QueryBuilder.vue', () => {
 		const propertyLabel = 'postal code';
 		const wrapper = shallowMount( QueryBuilder, {
 			store: newStore( { property: { label: propertyLabel } } ),
-			localVue
+			localVue,
 		} );
 
 		expect( wrapper.findComponent( TextInput ).props( 'value' ) ).toBe( propertyLabel );
@@ -37,7 +37,7 @@ describe( 'QueryBuilder.vue', () => {
 		store.dispatch = jest.fn();
 		const wrapper = shallowMount( QueryBuilder, {
 			store,
-			localVue
+			localVue,
 		} );
 		const userInput = 'potato';
 

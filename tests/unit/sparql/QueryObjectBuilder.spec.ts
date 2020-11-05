@@ -10,8 +10,8 @@ describe( 'QueryObjectBuilder', () => {
 			variables: [
 				{
 					termType: 'Variable',
-					value: 'item'
-				}
+					value: 'item',
+				},
 			],
 			where: [
 				{
@@ -20,30 +20,30 @@ describe( 'QueryObjectBuilder', () => {
 						{
 							subject: {
 								termType: 'Variable',
-								value: 'item'
+								value: 'item',
 							},
 							predicate: {
 								termType: 'NamedNode',
-								value: 'http://www.wikidata.org/prop/direct/P281'
+								value: 'http://www.wikidata.org/prop/direct/P281',
 							},
 							object: {
 								termType: 'Literal',
-								value: 'XXXX'
-							}
-						}
-					]
-				}
+								value: 'XXXX',
+							},
+						},
+					],
+				},
 			],
 			type: 'query',
-			prefixes: prefixes
+			prefixes: prefixes,
 		};
 
 		const actual = builder.buildFromQueryRepresentation( {
 			property: {
 				id: 'P281',
-				label: 'Postal Code'
+				label: 'Postal Code',
 			},
-			value: 'XXXX'
+			value: 'XXXX',
 		} );
 
 		expect( actual ).toStrictEqual( expected );

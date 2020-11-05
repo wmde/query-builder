@@ -10,5 +10,5 @@ export default ( _searchEntityRepository: SearchEntityRepository ) => ( {
 	},
 	updateProperty( context: ActionContext<RootState, RootState>, property: Property ): void {
 		context.commit( 'setProperty', property );
-	}
+	},
 } );
