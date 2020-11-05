@@ -34,11 +34,11 @@ export default class QueryObjectBuilder {
 						},
 						predicate: {
 							termType: 'NamedNode',
-							value: rdfNamespaces.wdt + queryRepresentation.property.id,
+							value: rdfNamespaces.wdt + queryRepresentation.condition.propertyId,
 						},
 						object: {
 							termType: 'Literal',
-							value: queryRepresentation.value,
+							value: queryRepresentation.condition.value,
 						},
 					},
 				],

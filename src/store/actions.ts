@@ -1,5 +1,5 @@
 import { ActionContext } from 'vuex';
-import { RootState } from './RootState';
+import RootState from './RootState';
 import Property from '@/data-model/Property';
 import SearchEntityRepository from '@/data-access/SearchEntityRepository';
 

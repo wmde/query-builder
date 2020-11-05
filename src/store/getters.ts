@@ -1,12 +1,20 @@
-import { RootState } from './RootState';
+import RootState from './RootState';
 import QueryRepresentation from '@/sparql/QueryRepresentation';
 import Property from '@/data-model/Property';
 
 export default {
-	query( { property, value }: RootState ): QueryRepresentation {
-		return { property, value };
+	query( rootState: RootState ): QueryRepresentation {
+		return {
+			condition: {
+				propertyId: rootState.conditionRow.propertyData.id,
+				value: rootState.conditionRow.valueData.value,
+			},
+		};
 	},
-	getProperty( rootState: RootState ): Property {
-		return rootState.property;
+	property( rootState: RootState ): Property {
+		return rootState.conditionRow.propertyData;
+	},
+	value( rootState: RootState ): string {
+		return rootState.conditionRow.valueData.value;
 	},
 };

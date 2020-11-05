@@ -1,4 +1,13 @@
-import QueryRepresentation from '@/sparql/QueryRepresentation';
+export default interface RootState {
+	conditionRow: ConditionRow;
+}
 
-export interface RootState extends QueryRepresentation {
+export interface ConditionRow {
+	propertyData: {
+		id: string;
+		label: string;
+	};
+	valueData: {
+		value: string;
+	};
 }

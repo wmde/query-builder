@@ -12,14 +12,13 @@
 				<TextInput
 					class="querybuilder__rule__property"
 					label="Property"
-					:value="property.label"
+					:value="selectedItem.label"
 					placeholder="Enter a property" />
 				<TextInput
 					class="querybuilder__rule__value"
 					label="Value"
 					ref="value"
-					:value="textInputValue"
-					@input="updateInputTextValue"
+					v-model="textInputValue"
 					placeholder="Enter a value" />
 			</div>
 			<div class="querybuilder__run">
@@ -37,9 +36,9 @@
 import Vue from 'vue';
 import TextInput from '@wmde/wikit-vue-components/src/components/TextInput.vue';
 import Button from '@wmde/wikit-vue-components/src/components/Button.vue';
-import { mapState } from 'vuex';
 import QueryResult from '@/components/QueryResult.vue';
 import buildQuery from '@/sparql/buildQuery';
+import Property from '@/data-model/Property';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -50,9 +49,6 @@ export default Vue.extend( {
 		};
 	},
 	methods: {
-		updateInputTextValue( value: string ): void {
-			this.$store.dispatch( 'updateValue', value );
-		},
 		runQuery(): void {
 			this.encodedQuery = encodeURI( buildQuery( this.$store.getters.query ) );
 
@@ -61,10 +57,13 @@ export default Vue.extend( {
 		},
 	},
 	computed: {
-		...mapState( {
-			property: 'property',
-			textInputValue: 'value',
-		} ),
+		selectedItem: {
+			get(): Property { return this.$store.getters.property; },
+		},
+		textInputValue: {
+			get(): string { return this.$store.getters.value; },
+			set( value: string ): void { this.$store.dispatch( 'updateValue', value ); },
+		},
 	},
 	components: {
 		Button,

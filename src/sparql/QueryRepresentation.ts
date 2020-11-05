@@ -1,6 +1,8 @@
-import Property from '@/data-model/Property';
+export type Condition = {
+	propertyId: string;
+	value: string;
+};
 
 export default interface QueryRepresentation {
-	property: Property;
-	value: string;
+	condition: Condition;
 }
