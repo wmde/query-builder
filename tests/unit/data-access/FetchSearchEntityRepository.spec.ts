@@ -21,7 +21,18 @@ describe( 'FetchSearchEntityRepository', () => {
 		const actualResult = await repo.searchProperties( testSearchTerm );
 
 		const escapedSearch = '%22%3E%3Cscript%3Ealert%28%27XXS%21%27%29%3B%3C%2Fscript%3E';
-		const expectedUrl = `${testEndpoint}?action=wbsearchentities&search=${escapedSearch}&language=${testLang}&type=property&format=json&formatversion=2&errorformat=plaintext&origin=*`;
+		const expectedParams = {
+			action: 'wbsearchentities',
+			search: escapedSearch,
+			language: testLang,
+			type: 'property',
+			format: 'json',
+			formatversion: 2,
+			errorformat: 'plaintext',
+			origin: '*',
+		};
+		const expectedQuery = Object.entries( expectedParams ).map( ( entry ) => entry.join( '=' ) ).join( '&' );
+		const expectedUrl = `${testEndpoint}?${expectedQuery}`;
 		expect( window.fetch ).toHaveBeenCalledTimes( 1 );
 		expect( window.fetch ).toHaveBeenCalledWith( expectedUrl );
 		expect( actualResult ).toBe( expectedResult );
@@ -44,7 +55,20 @@ describe( 'FetchSearchEntityRepository', () => {
 
 		await repo.searchProperties( testSearch, limit, offset );
 
-		const expectedUrl = `${testEndpoint}?action=wbsearchentities&search=${testSearch}&language=${testLang}&type=property&format=json&formatversion=2&errorformat=plaintext&origin=*&limit=${limit}&offset=${offset}`;
+		const expectedParams = {
+			action: 'wbsearchentities',
+			search: testSearch,
+			language: testLang,
+			type: 'property',
+			format: 'json',
+			formatversion: 2,
+			errorformat: 'plaintext',
+			origin: '*',
+			limit,
+			offset,
+		};
+		const expectedQuery = Object.entries( expectedParams ).map( ( entry ) => entry.join( '=' ) ).join( '&' );
+		const expectedUrl = `${testEndpoint}?${expectedQuery}`;
 		expect( window.fetch ).toHaveBeenCalledTimes( 1 );
 		expect( window.fetch ).toHaveBeenCalledWith( expectedUrl );
 	} );

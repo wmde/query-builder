@@ -23,7 +23,8 @@ describe( 'QueryBuilderSparqlGenerator', () => {
 		} );
 		const queryObject = parser.parse( queryString ) as SelectQuery;
 
-		expect( queryBuilderSparqlGenerator.getString( queryObject ) ).toBe( 'SELECT ?city WHERE { ?city wdt:P281 "XXXX". }' );
+		expect( queryBuilderSparqlGenerator.getString( queryObject ) )
+			.toBe( 'SELECT ?city WHERE { ?city wdt:P281 "XXXX". }' );
 	} );
 
 	it( 'generates simple query from object', () => {
@@ -67,7 +68,8 @@ describe( 'QueryBuilderSparqlGenerator', () => {
 			sparqlGenerator,
 		);
 
-		expect( queryBuilderSparqlGenerator.getString( queryObject ) ).toBe( 'SELECT ?city WHERE { ?city wdt:P281 "XXXX". }' );
+		expect( queryBuilderSparqlGenerator.getString( queryObject ) )
+			.toBe( 'SELECT ?city WHERE { ?city wdt:P281 "XXXX". }' );
 	} );
 
 } );
