@@ -20,6 +20,7 @@ module.exports = {
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
 
 		// diverging from Wikimedia rule set
+		'max-len': [ 'error', 120 ],
 		'comma-dangle': [ 'error', {
 			arrays: 'always-multiline',
 			objects: 'always-multiline',
