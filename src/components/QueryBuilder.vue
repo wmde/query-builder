@@ -46,7 +46,7 @@ export default Vue.extend( {
 	data() {
 		return {
 			encodedQuery: '',
-			iframeRenderKey: 0
+			iframeRenderKey: 0,
 		};
 	},
 	methods: {
@@ -58,19 +58,19 @@ export default Vue.extend( {
 
 			// force the iframe to rerender https://stackoverflow.com/a/48755228
 			this.iframeRenderKey = Math.random();
-		}
+		},
 	},
 	computed: {
 		...mapState( {
 			property: 'property',
-			textInputValue: 'value'
-		} )
+			textInputValue: 'value',
+		} ),
 	},
 	components: {
 		Button,
 		TextInput,
-		QueryResult
-	}
+		QueryResult,
+	},
 } );
 </script>
 

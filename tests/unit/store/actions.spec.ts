@@ -6,7 +6,7 @@ describe( 'actions', () => {
 		const context = { commit: jest.fn() };
 		const value = 'whatever';
 		const actions = createActions(
-			{ searchProperties: jest.fn() }
+			{ searchProperties: jest.fn() },
 		);
 
 		actions.updateValue( context as any, value );
@@ -18,10 +18,10 @@ describe( 'actions', () => {
 		const context = { commit: jest.fn() };
 		const property = {
 			id: 'P666',
-			label: 'Property label'
+			label: 'Property label',
 		};
 		const actions = createActions(
-			{ searchProperties: jest.fn() }
+			{ searchProperties: jest.fn() },
 		);
 
 		actions.updateProperty( context as any, property );

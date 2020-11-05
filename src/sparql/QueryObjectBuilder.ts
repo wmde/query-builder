@@ -11,7 +11,7 @@ export default class QueryObjectBuilder {
 			variables: [],
 			where: [],
 			type: 'query',
-			prefixes: rdfNamespaces
+			prefixes: rdfNamespaces,
 		};
 	}
 
@@ -20,8 +20,8 @@ export default class QueryObjectBuilder {
 		this.queryObject.variables = [
 			{
 				termType: 'Variable',
-				value: 'item'
-			}
+				value: 'item',
+			},
 		];
 		this.queryObject.where = [
 			{
@@ -30,19 +30,19 @@ export default class QueryObjectBuilder {
 					{
 						subject: {
 							termType: 'Variable',
-							value: 'item'
+							value: 'item',
 						},
 						predicate: {
 							termType: 'NamedNode',
-							value: rdfNamespaces.wdt + queryRepresentation.property.id
+							value: rdfNamespaces.wdt + queryRepresentation.property.id,
 						},
 						object: {
 							termType: 'Literal',
-							value: queryRepresentation.value
-						}
-					}
-				]
-			}
+							value: queryRepresentation.value,
+						},
+					},
+				],
+			},
 		];
 
 		return this.queryObject;

@@ -15,16 +15,16 @@ export function createStore( services: QueryBuilderServices ): Store<RootState> 
 		state: {
 			property: {
 				label: 'postal code',
-				id: 'P281'
+				id: 'P281',
 			},
-			value: ''
+			value: '',
 		},
 		actions: createActions(
-			services.get( 'searchEntityRepository' )
+			services.get( 'searchEntityRepository' ),
 		),
 		mutations,
 		getters,
-		modules: {}
+		modules: {},
 	} );
 
 }

@@ -8,5 +8,5 @@ export default {
 	},
 	getProperty( rootState: RootState ): Property {
 		return rootState.property;
-	}
+	},
 };

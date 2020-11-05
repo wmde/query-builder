@@ -7,5 +7,5 @@ export default {
 	},
 	setProperty( state: RootState, property: Property ): void {
 		state.property = property;
-	}
+	},
 };

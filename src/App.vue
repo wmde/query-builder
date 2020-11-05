@@ -11,8 +11,8 @@ import QueryBuilder from '@/components/QueryBuilder.vue';
 export default Vue.extend( {
 	name: 'App',
 	components: {
-		QueryBuilder
-	}
+		QueryBuilder,
+	},
 } );
 </script>
 

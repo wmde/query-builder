@@ -21,7 +21,7 @@ export default class FetchSearchEntityRepository implements SearchEntityReposito
 			format: 'json',
 			formatversion: '2',
 			errorformat: 'plaintext',
-			origin: '*'
+			origin: '*',
 		};
 		if ( limit ) {
 			params.limit = `${limit}`;

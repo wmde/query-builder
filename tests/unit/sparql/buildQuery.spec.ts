@@ -7,7 +7,7 @@ describe( 'buildQuery', () => {
 		const value = 'blah';
 		expect( buildQuery( {
 			property,
-			value
+			value,
 		} ) ).toEqual( `SELECT ?item WHERE { ?item wdt:${property.id} "${value}". }` );
 	} );
 
