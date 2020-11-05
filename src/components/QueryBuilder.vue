@@ -10,25 +10,25 @@
 			<h2 class="querybuilder__find-title">Find all items...</h2>
 			<div class="querybuilder__rule">
 				<TextInput
-						class="querybuilder__rule__property"
-						label="Property"
-						:value="property.label"
-						placeholder="Enter a property" />
+					class="querybuilder__rule__property"
+					label="Property"
+					:value="property.label"
+					placeholder="Enter a property" />
 				<TextInput
-						class="querybuilder__rule__value"
-						label="Value"
-						ref="value"
-						:value="textInputValue"
-						@input="updateInputTextValue"
-						placeholder="Enter a value" />
+					class="querybuilder__rule__value"
+					label="Value"
+					ref="value"
+					:value="textInputValue"
+					@input="updateInputTextValue"
+					placeholder="Enter a value" />
 			</div>
 			<div class="querybuilder__run">
 				<Button @click.native="runQuery" type="primaryProgressive">Run query</Button>
 			</div>
 		</div>
 		<QueryResult
-				:encodedQuery="encodedQuery"
-				:iframeRenderKey="iframeRenderKey"
+			:encodedQuery="encodedQuery"
+			:iframeRenderKey="iframeRenderKey"
 		/>
 	</div>
 </template>
