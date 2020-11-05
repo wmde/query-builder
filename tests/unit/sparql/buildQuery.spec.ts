@@ -3,12 +3,12 @@ import buildQuery from '@/sparql/buildQuery';
 describe( 'buildQuery', () => {
 
 	it( 'builds a query from a property and a string value', () => {
-		const property = { label: 'potato', id: 'P666' };
+		const propertyId = 'P666';
 		const value = 'blah';
-		expect( buildQuery( {
-			property,
+		expect( buildQuery( { condition: {
+			propertyId,
 			value,
-		} ) ).toEqual( `SELECT ?item WHERE { ?item wdt:${property.id} "${value}". }` );
+		} } ) ).toEqual( `SELECT ?item WHERE { ?item wdt:${propertyId} "${value}". }` );
 	} );
 
 } );

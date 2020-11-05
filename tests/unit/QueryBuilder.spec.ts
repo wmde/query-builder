@@ -3,11 +3,13 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import QueryBuilder from '@/components/QueryBuilder.vue';
 import TextInput from '@wmde/wikit-vue-components/src/components/TextInput.vue';
 
-function newStore( state = {} ): Store<any> {
+function newStore( getters = {} ): Store<any> {
 	return new Vuex.Store( {
-		state: {
-			property: 'potato',
-			...state,
+		getters: {
+			property: jest.fn().mockReturnValue( {
+				label: 'potato',
+			} ),
+			...getters,
 		},
 	} );
 }
@@ -25,7 +27,11 @@ describe( 'QueryBuilder.vue', () => {
 	it( 'renders the Property label in the property textfield', () => {
 		const propertyLabel = 'postal code';
 		const wrapper = shallowMount( QueryBuilder, {
-			store: newStore( { property: { label: propertyLabel } } ),
+			store: newStore( {
+				property: jest.fn().mockReturnValue( {
+					label: propertyLabel,
+				} ),
+			} ),
 			localVue,
 		} );
 
