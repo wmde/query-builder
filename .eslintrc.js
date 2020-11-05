@@ -28,6 +28,8 @@ module.exports = {
 			exports: 'always-multiline',
 			functions: 'always-multiline',
 		} ],
+
+		'vue/html-indent': [ 'error', 'tab' ],
 	},
 	overrides: [
 		{

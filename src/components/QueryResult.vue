@@ -6,12 +6,12 @@
 
 		<!-- TODO use global config variables instead of hardcoding the url-->
 		<iframe
-				v-else
-				:src="'https://query.wikidata.org/embed.html#' + encodedQuery"
-				:key="iframeRenderKey"
-				class="querybuilder__result__iframe"
-				referrerpolicy="origin"
-				sandbox="allow-scripts allow-same-origin allow-popups">
+			v-else
+			:src="'https://query.wikidata.org/embed.html#' + encodedQuery"
+			:key="iframeRenderKey"
+			class="querybuilder__result__iframe"
+			referrerpolicy="origin"
+			sandbox="allow-scripts allow-same-origin allow-popups">
 		</iframe>
 	</div>
 </template>
