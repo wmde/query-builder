@@ -8,13 +8,10 @@ module.exports = {
 		'eslint:recommended',
 		'@vue/typescript/recommended',
 		'wikimedia',
-		'wikimedia/language/es2019',
+		'wikimedia/language/es2020',
 		'@wmde/wikimedia-typescript',
 	],
 	parser: 'vue-eslint-parser',
-	parserOptions: {
-		ecmaVersion: 2020,
-	},
 	rules: {
 		'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
