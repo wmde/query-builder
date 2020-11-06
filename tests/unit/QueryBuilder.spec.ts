@@ -1,7 +1,7 @@
 import Vuex, { Store } from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import QueryBuilder from '@/components/QueryBuilder.vue';
-import TextInput from '@wmde/wikit-vue-components/src/components/TextInput.vue';
+import { TextInput } from '@wmde/wikit-vue-components';
 
 function newStore( getters = {} ): Store<any> {
 	return new Vuex.Store( {
