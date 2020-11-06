@@ -18,4 +18,5 @@ export default Vue.extend( {
 
 <style lang="scss">
 @import '~ress';
+@import '~@wmde/wikit-vue-components/dist/wikit-vue-components.css';
 </style>

@@ -34,8 +34,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import TextInput from '@wmde/wikit-vue-components/src/components/TextInput.vue';
-import Button from '@wmde/wikit-vue-components/src/components/Button.vue';
+import { TextInput } from '@wmde/wikit-vue-components';
+import { Button } from '@wmde/wikit-vue-components';
 import QueryResult from '@/components/QueryResult.vue';
 import buildQuery from '@/sparql/buildQuery';
 import Property from '@/data-model/Property';
