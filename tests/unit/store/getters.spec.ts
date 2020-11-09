@@ -10,6 +10,7 @@ describe( 'getters', () => {
 					valueData: { value: 'foo' },
 					propertyData: { id: 'P123', label: 'abc' },
 				},
+				errors: [],
 			};
 
 			const expectedValue: QueryRepresentation = {
