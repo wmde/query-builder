@@ -1,6 +1,7 @@
 import RootState from './RootState';
 import QueryRepresentation from '@/sparql/QueryRepresentation';
 import Property from '@/data-model/Property';
+import Error from '@/data-model/Error';
 
 export default {
 	query( rootState: RootState ): QueryRepresentation {
@@ -16,5 +17,8 @@ export default {
 	},
 	value( rootState: RootState ): string {
 		return rootState.conditionRow.valueData.value;
+	},
+	getErrors( rootState: RootState ): Error[] {
+		return rootState.errors;
 	},
 };
