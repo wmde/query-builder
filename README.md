@@ -29,3 +29,9 @@ docker-compose run --rm node npm
 ```sh
 docker-compose up dev
 ```
+
+### Running browser tests
+
+#### To run browser tests locally:
+
+Run: `QB_URL=localhost:8080 npm run e2e`
