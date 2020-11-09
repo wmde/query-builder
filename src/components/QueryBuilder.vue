@@ -9,12 +9,10 @@
 		<div role="form">
 			<h2 class="querybuilder__find-title">Find all items...</h2>
 			<div class="querybuilder__rule">
-				<TextInput
-					class="querybuilder__rule__property"
-					label="Property"
-					:value="selectedItem.label"
+				<PropertyLookup
+					v-model="selectedItem"
 					:error="fieldErrors.property"
-					placeholder="Enter a property" />
+				/>
 				<TextInput
 					class="querybuilder__rule__value"
 					label="Value"
@@ -36,13 +34,15 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { TextInput } from '@wmde/wikit-vue-components';
-import { Button } from '@wmde/wikit-vue-components';
-import QueryResult from '@/components/QueryResult.vue';
-import buildQuery from '@/sparql/buildQuery';
-import Property from '@/data-model/Property';
 import { mapState } from 'vuex';
+import { Button, TextInput } from '@wmde/wikit-vue-components';
+
+import PropertyLookup from '@/components/PropertyLookup.vue';
+import QueryResult from '@/components/QueryResult.vue';
+import SearchResult from '@/data-access/SearchResult';
+import Property from '@/data-model/Property';
 import Error from '@/data-model/Error';
+import buildQuery from '@/sparql/buildQuery';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -104,6 +104,9 @@ export default Vue.extend( {
 	computed: {
 		selectedItem: {
 			get(): Property { return this.$store.getters.property; },
+			set( selectedItem: SearchResult ): void {
+				this.$store.dispatch( 'updateProperty', selectedItem );
+			},
 		},
 		textInputValue: {
 			get(): string { return this.$store.getters.value; },
@@ -117,6 +120,7 @@ export default Vue.extend( {
 		Button,
 		TextInput,
 		QueryResult,
+		PropertyLookup,
 	},
 } );
 </script>

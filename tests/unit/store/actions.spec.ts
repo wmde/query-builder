@@ -29,4 +29,20 @@ describe( 'actions', () => {
 		expect( context.commit ).toHaveBeenCalledWith( 'setProperty', property );
 	} );
 
+	describe( 'searchProperties', () => {
+		it( 'calls the repo and resolves with the result', async () => {
+			const expectedResult = [ { label: 'postal code', id: 'P123' } ];
+			const searchProperties = jest.fn().mockResolvedValue( expectedResult );
+			const actions = createActions(
+				{ searchProperties },
+			);
+			const searchString = 'postal';
+
+			const actualResult = await actions.searchProperties( {} as any, searchString );
+
+			expect( searchProperties ).toHaveBeenCalledWith( searchString, 12 );
+			expect( actualResult ).toBe( expectedResult );
+		} );
+	} );
+
 } );
