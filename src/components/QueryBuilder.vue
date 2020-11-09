@@ -62,7 +62,7 @@ export default Vue.extend( {
 				return false;
 			}
 
-			if ( !this.property || !this.textInputValue ) {
+			if ( !this.selectedItem || !this.textInputValue ) {
 				this.errors.push( {
 					message: 'One or more fields are empty. Please complete the query or select a fitting field type.',
 					type: 'error',
