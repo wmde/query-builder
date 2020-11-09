@@ -19,7 +19,7 @@ describe( 'mutations', () => {
 	} );
 
 	it( 'setProperty', () => {
-		const expectedProperty = { id: 'P123', label: 'abc' };
+		const expectedProperty = { id: 'P456', label: 'def' };
 		const state: RootState = {
 			conditionRow: {
 				valueData: { value: 'foo' },
