@@ -15,8 +15,8 @@ export function createStore( services: QueryBuilderServices ): Store<RootState> 
 		state: {
 			conditionRow: {
 				propertyData: {
-					label: 'postal code',
-					id: 'P281',
+					label: '',
+					id: '',
 				},
 				valueData: {
 					value: '',
