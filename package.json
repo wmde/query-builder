@@ -7,6 +7,7 @@
     "name": "The Wikidata team"
   },
   "scripts": {
+    "e2e": "vue-cli-service test:e2e",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
