@@ -1,9 +1,10 @@
 <template>
 	<div class="querybuilder__result">
 		<div v-if="errors.length !== 0" class="querybuilder__result__errors">
-			<div v-for="(error, index) in errors" :class="error.type" :key="index">
-				{{ $i18n(error.message) }}
-			</div>
+			<Message
+					v-for="(error, index) in errors" :type="error.type" :key="index">
+				<span>{{$i18n(error.message)}}</span>
+			</Message>
 		</div>
 		<div v-else-if="encodedQuery.length === 0" class="querybuilder__result__description">
 			{{ $i18n('query-builder-result-placeholder')}}
@@ -23,6 +24,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { mapState } from 'vuex';
+import Message from '@wmde/wikit-vue-components/src/components/Message.vue';
 
 export default Vue.extend( {
 	name: 'QueryResult',
@@ -46,10 +48,13 @@ export default Vue.extend( {
 			errors: 'errors',
 		} ),
 	},
+	components: {
+		Message,
+	},
 } );
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 	.querybuilder__result {
 		margin-block-start: $dimension-layout-small;
 	}
@@ -68,5 +73,18 @@ export default Vue.extend( {
 		width: $dimension-width-full;
 		border: none;
 		height: 95vh;
+	}
+
+	// TODO: Replace once the message scss values are released
+	.querybuilder__result .wikit-Message {
+		&__icon {
+			margin-inline-end: 0.5em;
+			margin-block-start: 0.125em;
+		}
+
+		&__content {
+			margin-block: 1em;
+			margin-inline: 1.5em;
+		}
 	}
 </style>
