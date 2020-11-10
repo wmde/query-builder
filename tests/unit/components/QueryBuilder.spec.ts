@@ -52,4 +52,37 @@ describe( 'QueryBuilder.vue', () => {
 
 		expect( store.dispatch ).toHaveBeenCalledWith( 'updateValue', userInput );
 	} );
+
+	it( 'Get field errors', () => {
+		const wrapper = shallowMount( QueryBuilder, {
+			store: newStore(),
+			localVue,
+			data() {
+				return {
+					encodedQuery: '',
+					iframeRenderKey: 0,
+					fieldErrors: {
+						property: {
+							type: 'error',
+							message: 'Property Error Message!',
+						},
+						value: {
+							type: 'warning',
+							message: 'Value Warning Message!',
+						},
+					},
+				};
+			},
+		} );
+
+		expect( wrapper.findAllComponents( TextInput ).at( 0 ).props( 'error' ) ).toStrictEqual( {
+			type: 'error',
+			message: 'Property Error Message!',
+		} );
+		expect( wrapper.findAllComponents( TextInput ).at( 1 ).props( 'error' ) ).toStrictEqual( {
+			type: 'warning',
+			message: 'Value Warning Message!',
+		} );
+
+	} );
 } );
