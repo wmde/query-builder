@@ -13,12 +13,14 @@
 					class="querybuilder__rule__property"
 					label="Property"
 					:value="selectedItem.label"
+					:error="fieldErrors.property"
 					placeholder="Enter a property" />
 				<TextInput
 					class="querybuilder__rule__value"
 					label="Value"
 					ref="value"
 					v-model="textInputValue"
+					:error="fieldErrors.value"
 					placeholder="Enter a value" />
 			</div>
 			<div class="querybuilder__run">
@@ -40,6 +42,7 @@ import QueryResult from '@/components/QueryResult.vue';
 import buildQuery from '@/sparql/buildQuery';
 import Property from '@/data-model/Property';
 import { mapState } from 'vuex';
+import Error from '@/data-model/Error';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -47,6 +50,10 @@ export default Vue.extend( {
 		return {
 			encodedQuery: '',
 			iframeRenderKey: 0,
+			fieldErrors: {
+				property: null as null | Error,
+				value: null as null | Error,
+			},
 		};
 	},
 	methods: {
@@ -63,6 +70,18 @@ export default Vue.extend( {
 			}
 
 			if ( !this.selectedItem || !this.textInputValue ) {
+				if ( !this.selectedItem ) {
+					this.fieldErrors.property = {
+						message: 'Please select a property',
+						type: 'error',
+					};
+				}
+				if ( !this.textInputValue ) {
+					this.fieldErrors.value = {
+						message: 'Please enter a value',
+						type: 'error',
+					};
+				}
 				this.errors.push( {
 					message: 'One or more fields are empty. Please complete the query or select a fitting field type.',
 					type: 'error',
