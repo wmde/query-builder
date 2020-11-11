@@ -22,7 +22,10 @@
 					placeholder="Enter a value" />
 			</div>
 			<div class="querybuilder__run">
-				<Button @click.native="runQuery" type="primaryProgressive">Run query</Button>
+				<Button
+					@click.native="runQuery"
+					type="primaryProgressive"
+					v-i18n="{msg: 'query-builder-run-query'}" />
 			</div>
 		</div>
 		<QueryResult
