@@ -8,6 +8,7 @@
   },
   "scripts": {
     "e2e": "vue-cli-service test:e2e",
+    "e2e:saucelabs": "env DATE=\"$(date)\" nightwatch --config nightwatch.conf.js --env sauceChrome,sauceFirefox,sauceEdge,sauceSafari",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
@@ -16,7 +17,7 @@
     "test:lintcss": "stylelint '**/*.vue'",
     "fix:css": "stylelint '**/*.vue' --fix",
     "fix:ts": "vue-cli-service lint",
-    "netlify": "npx netlify deploy --dir=dist"
+    "netlify": "npx netlify deploy --dir=dist --json"
   },
   "main": "index.js",
   "dependencies": {

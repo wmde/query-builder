@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/camelcase */
+const build = `Nightwatch build-${process.env.DATE}`;
 
+/* eslint-disable @typescript-eslint/camelcase */
 module.exports = {
 	src_folders: [ 'tests/e2e/specs' ],
 	page_objects_path: '',
@@ -25,6 +26,64 @@ module.exports = {
 					args: [ 'headless', 'no-sandbox', 'disable-gpu' ],
 					w3c: false,
 				},
+			},
+		},
+
+		sauceLabs: {
+			launch_url: `${process.env.DEPLOY_URL}`,
+			isLocal: false,
+			selenium_host: 'ondemand.saucelabs.com',
+			selenium_port: 80,
+			username: process.env.SAUCE_USERNAME,
+			access_key: process.env.SAUCE_ACCESS_KEY,
+			desiredCapabilities: {
+				build,
+				screenResolution: '1600x1200',
+				seleniumVersion: '3.141.59',
+			},
+		},
+		sauceChrome: {
+			extends: 'sauceLabs',
+			desiredCapabilities: {
+				browserName: 'googlechrome',
+				platform: 'Windows 10',
+				version: 'latest',
+			},
+		},
+
+		sauceFirefox: {
+			extends: 'sauceLabs',
+			desiredCapabilities: {
+				browserName: 'firefox',
+				platform: 'Windows 10',
+				version: 'latest',
+			},
+		},
+
+		sauceIE: {
+			extends: 'sauceLabs',
+			desiredCapabilities: {
+				browserName: 'internet explorer',
+				platform: 'Windows 10',
+				version: 'latest',
+			},
+		},
+
+		sauceEdge: {
+			extends: 'sauceLabs',
+			desiredCapabilities: {
+				browserName: 'MicrosoftEdge',
+				platform: 'Windows 10',
+				version: 'latest',
+			},
+		},
+
+		sauceSafari: {
+			extends: 'sauceLabs',
+			desiredCapabilities: {
+				browserName: 'safari',
+				platform: 'macOS 10.15',
+				version: 'latest',
 			},
 		},
 	},
