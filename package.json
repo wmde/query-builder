@@ -15,7 +15,8 @@
     "test": "npm-run-all test:*",
     "test:lintcss": "stylelint '**/*.vue'",
     "fix:css": "stylelint '**/*.vue' --fix",
-    "fix:ts": "vue-cli-service lint"
+    "fix:ts": "vue-cli-service lint",
+    "netlify": "npx netlify deploy --dir=dist"
   },
   "main": "index.js",
   "dependencies": {
@@ -47,6 +48,7 @@
     "eslint-config-wikimedia": "^0.17.0",
     "eslint-plugin-vue": "^6.2.2",
     "geckodriver": "^1.20.0",
+    "netlify-cli": "^2.68.4",
     "npm-run-all": "^4.1.5",
     "postcss-dir-pseudo-class": "^5.0.0",
     "postcss-logical": "^4.0.2",
