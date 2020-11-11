@@ -60,7 +60,7 @@ export default Vue.extend( {
 		validate(): boolean {
 			this.errors = [];
 			this.$store.dispatch( 'setErrors', [] );
-			if ( !this.selectedProperty.id && !this.textInputValue ) {
+			if ( !this.selectedProperty && !this.textInputValue ) {
 				this.errors.push( {
 					// eslint-disable-next-line max-len
 					message: 'Looks like the Query Builder was empty, please enter a valid query first, then try running it again',
@@ -69,8 +69,8 @@ export default Vue.extend( {
 				return false;
 			}
 
-			if ( !this.selectedProperty.id || !this.textInputValue ) {
-				if ( !this.selectedProperty.id ) {
+			if ( !this.selectedProperty || !this.textInputValue ) {
+				if ( !this.selectedProperty ) {
 					this.fieldErrors.property = {
 						message: 'Please select a property',
 						type: 'error',
@@ -103,7 +103,9 @@ export default Vue.extend( {
 	},
 	computed: {
 		selectedProperty: {
-			get(): Property { return this.$store.getters.property; },
+			get(): Property | null {
+				return this.$store.getters.property;
+			},
 			set( selectedProperty: SearchResult ): void {
 				this.$store.dispatch( 'updateProperty', selectedProperty );
 			},

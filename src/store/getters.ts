@@ -12,7 +12,10 @@ export default {
 			},
 		};
 	},
-	property( rootState: RootState ): Property {
+	property( rootState: RootState ): Property | null {
+		if ( !rootState.conditionRow.propertyData.id ) {
+			return null;
+		}
 		return rootState.conditionRow.propertyData;
 	},
 	value( rootState: RootState ): string {
