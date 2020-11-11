@@ -10,7 +10,7 @@
 			<h2 class="querybuilder__find-title">Find all items...</h2>
 			<div class="querybuilder__rule">
 				<PropertyLookup
-					v-model="selectedItem"
+					v-model="selectedProperty"
 					:error="fieldErrors.property"
 				/>
 				<TextInput
@@ -60,7 +60,7 @@ export default Vue.extend( {
 		validate(): boolean {
 			this.errors = [];
 			this.$store.dispatch( 'setErrors', [] );
-			if ( !this.selectedItem && !this.textInputValue ) {
+			if ( !this.selectedProperty.id && !this.textInputValue ) {
 				this.errors.push( {
 					// eslint-disable-next-line max-len
 					message: 'Looks like the Query Builder was empty, please enter a valid query first, then try running it again',
@@ -69,8 +69,8 @@ export default Vue.extend( {
 				return false;
 			}
 
-			if ( !this.selectedItem || !this.textInputValue ) {
-				if ( !this.selectedItem ) {
+			if ( !this.selectedProperty.id || !this.textInputValue ) {
+				if ( !this.selectedProperty.id ) {
 					this.fieldErrors.property = {
 						message: 'Please select a property',
 						type: 'error',
@@ -102,10 +102,10 @@ export default Vue.extend( {
 		},
 	},
 	computed: {
-		selectedItem: {
+		selectedProperty: {
 			get(): Property { return this.$store.getters.property; },
-			set( selectedItem: SearchResult ): void {
-				this.$store.dispatch( 'updateProperty', selectedItem );
+			set( selectedProperty: SearchResult ): void {
+				this.$store.dispatch( 'updateProperty', selectedProperty );
 			},
 		},
 		textInputValue: {
