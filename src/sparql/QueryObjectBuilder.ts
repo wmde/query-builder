@@ -32,10 +32,17 @@ export default class QueryObjectBuilder {
 							termType: 'Variable',
 							value: 'item',
 						},
-						predicate: {
-							termType: 'NamedNode',
-							value: rdfNamespaces.wdt + queryRepresentation.condition.propertyId,
-						},
+						predicate: { type: 'path',
+							pathType: '/',
+							items: [ {
+								termType: 'NamedNode',
+								value: rdfNamespaces.p + queryRepresentation.condition.propertyId,
+							},
+							{
+								termType: 'NamedNode',
+								value: rdfNamespaces.ps + queryRepresentation.condition.propertyId,
+							},
+							] },
 						object: {
 							termType: 'Literal',
 							value: queryRepresentation.condition.value,
