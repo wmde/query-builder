@@ -8,7 +8,7 @@ describe( 'buildQuery', () => {
 		expect( buildQuery( { condition: {
 			propertyId,
 			value,
-		} } ) ).toEqual( `SELECT ?item WHERE { ?item wdt:${propertyId} "${value}". }` );
+		} } ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }` );
 	} );
 
 } );

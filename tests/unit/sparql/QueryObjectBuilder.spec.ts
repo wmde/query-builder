@@ -22,10 +22,17 @@ describe( 'QueryObjectBuilder', () => {
 								termType: 'Variable',
 								value: 'item',
 							},
-							predicate: {
-								termType: 'NamedNode',
-								value: 'http://www.wikidata.org/prop/direct/P281',
-							},
+							predicate: { type: 'path',
+								pathType: '/',
+								items: [ {
+									termType: 'NamedNode',
+									value: 'http://www.wikidata.org/prop/P281',
+								},
+								{
+									termType: 'NamedNode',
+									value: 'http://www.wikidata.org/prop/statement/P281',
+								},
+								] },
 							object: {
 								termType: 'Literal',
 								value: 'XXXX',
