@@ -34,4 +34,5 @@ docker-compose up dev
 
 #### To run browser tests locally:
 
-Run: `QB_URL=localhost:8080 npm run e2e`
+Run: `QB_URL=localhost:8080 docker-compose -f docker-compose.yml -f docker-compose.browsertests.yml up browsertests`
+

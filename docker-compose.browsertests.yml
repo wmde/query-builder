@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+    browsertests:
+        extends:
+            service: node
+        command: 'npm run e2e -- --config nightwatch.conf.js --env docker'
+        depends_on:
+            - selenium
+            - dev
+
+    selenium:
+        image: selenium/standalone-chrome
+        shm_size: '2gb'
+        depends_on:
+            - dev
+
