@@ -43,7 +43,7 @@ import SearchResult from '@/data-access/SearchResult';
 import Property from '@/data-model/Property';
 import Error from '@/data-model/Error';
 import buildQuery from '@/sparql/buildQuery';
-import Validator, { ValidationResult } from '@/form/Validator';
+import Validator from '@/form/Validator';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -58,7 +58,7 @@ export default Vue.extend( {
 		};
 	},
 	methods: {
-		validate(): ValidationResult {
+		validate(): void {
 			const formValues = {
 				property: this.selectedProperty,
 				value: this.textInputValue,
@@ -68,11 +68,10 @@ export default Vue.extend( {
 			this.errors = validationResult.formErrors;
 			this.$store.dispatch( 'setErrors', validationResult.formErrors );
 			this.fieldErrors = validationResult.fieldErrors;
-			return validationResult;
 		},
 		runQuery(): void {
-			const validationResult = this.validate();
-			if ( validationResult.formErrors.length ) {
+			this.validate();
+			if ( this.errors.length ) {
 				return;
 			}
 			this.encodedQuery = encodeURI( buildQuery( this.$store.getters.query ) );
