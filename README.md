@@ -1,6 +1,10 @@
 # query-builder
 🔍️ A simple query builder for Wikidata SPARQL queries
 
+## Test system
+
+You can test this query builder in https://query-builder-test.toolforge.org
+
 ## Development
 
 The following examples use `docker` and `docker-compose` to ease creating a level playing field for development but they are not essential to this project.
