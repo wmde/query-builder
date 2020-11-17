@@ -6,7 +6,7 @@
 		:menu-items="searchResults"
 		:search-input.sync="search"
 		placeholder="Enter a property"
-		label="Property"
+		label="خاصیت"
 	>
 		<template v-slot:no-results>
 			No match was found

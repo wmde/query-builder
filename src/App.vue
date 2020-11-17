@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div id="app" lang="fa" dir="rtl">
 		<QueryBuilder/>
 	</div>
 </template>

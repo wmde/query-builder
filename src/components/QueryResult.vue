@@ -6,7 +6,7 @@
 			</div>
 		</div>
 		<div v-else-if="encodedQuery.length === 0" class="querybuilder__result__description">
-			Results will be displayed here
+			نتایج در اینجا نمایش داده می‌شود
 		</div>
 		<!-- TODO use global config variables instead of hardcoding the url-->
 		<iframe

@@ -1,13 +1,12 @@
 <template>
 	<div class="querybuilder" role="main">
-		<h1 class="querybuilder__heading">Simple Query Builder</h1>
+		<h1 class="querybuilder__heading">سازنده کوئری ساده</h1>
 		<p class="querybuilder__description">
-			Welcome to the test system of the Simple Query Builder. Please note that this is a work in progress,
-			not all features are included, and it can sometimes be broken.
-			<a href="https://w.wiki/kG$">Feedback is welcome here.</a>
+			به سامانه تست سازنده کوئری خوش‌آمدید. توجه کنید که این یک پروژه در حال پیشرفت است و خیلی چیزها هنوز کار نمی‌کند.
+			<a href="https://w.wiki/kG$">بازخورد مزید امتنان خواهد بود</a>
 		</p>
 		<div role="form">
-			<h2 class="querybuilder__find-title">Find all items...</h2>
+			<h2 class="querybuilder__find-title">یافتن همه آیتم‌هایی که...</h2>
 			<div class="querybuilder__rule">
 				<PropertyLookup
 					v-model="selectedProperty"
@@ -15,14 +14,14 @@
 				/>
 				<TextInput
 					class="querybuilder__rule__value"
-					label="Value"
+					label="مقدار"
 					ref="value"
 					v-model="textInputValue"
 					:error="fieldErrors.value"
-					placeholder="Enter a value" />
+					placeholder="یک مقدار وارد کنید" />
 			</div>
 			<div class="querybuilder__run">
-				<Button @click.native="runQuery" type="primaryProgressive">Run query</Button>
+				<Button @click.native="runQuery" type="primaryProgressive">راندن کوئری</Button>
 			</div>
 		</div>
 		<QueryResult
@@ -63,7 +62,7 @@ export default Vue.extend( {
 			if ( !this.selectedProperty && !this.textInputValue ) {
 				this.errors.push( {
 					// eslint-disable-next-line max-len
-					message: 'Looks like the Query Builder was empty, please enter a valid query first, then try running it again',
+					message: 'کوئری شما خالی است. لطفا نحو دیگری انجام دهید',
 					type: 'notice',
 				} );
 				return false;
@@ -72,18 +71,18 @@ export default Vue.extend( {
 			if ( !this.selectedProperty || !this.textInputValue ) {
 				if ( !this.selectedProperty ) {
 					this.fieldErrors.property = {
-						message: 'Please select a property',
+						message: 'لطفا یک خاصیت انتخاب کنید',
 						type: 'error',
 					};
 				}
 				if ( !this.textInputValue ) {
 					this.fieldErrors.value = {
-						message: 'Please enter a value',
+						message: 'لطفا یک مقدار وارد کنید',
 						type: 'error',
 					};
 				}
 				this.errors.push( {
-					message: 'One or more fields are empty. Please complete the query or select a fitting field type.',
+					message: 'بخشی از ورودی کامل نیست. لطفا آن را کامل کنید',
 					type: 'error',
 				} );
 				return false;

@@ -20,6 +20,7 @@ export default class FetchSearchEntityRepository implements SearchEntityReposito
 			type: 'property',
 			format: 'json',
 			formatversion: '2',
+			uselang: 'fa',
 			errorformat: 'plaintext',
 			origin: '*',
 		};
