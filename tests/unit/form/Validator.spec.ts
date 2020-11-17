@@ -2,7 +2,7 @@ import FormValues from '@/form/FormValues';
 import Validator, { ValidationResult } from '@/form/Validator';
 
 describe( 'validator', () => {
-	it( 'full form', () => {
+	it( 'returns no errors with a complete form', () => {
 		const formValues: FormValues = {
 			property: {
 				id: 'P31',
