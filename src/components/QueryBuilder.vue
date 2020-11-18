@@ -46,6 +46,7 @@ import SearchResult from '@/data-access/SearchResult';
 import Property from '@/data-model/Property';
 import Error from '@/data-model/Error';
 import buildQuery from '@/sparql/buildQuery';
+import Validator from '@/form/Validator';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -60,42 +61,20 @@ export default Vue.extend( {
 		};
 	},
 	methods: {
-		validate(): boolean {
-			this.errors = [];
-			this.$store.dispatch( 'setErrors', [] );
-			if ( !this.selectedProperty && !this.textInputValue ) {
-				this.errors.push( {
-					// eslint-disable-next-line max-len
-					message: 'Looks like the Query Builder was empty, please enter a valid query first, then try running it again',
-					type: 'notice',
-				} );
-				return false;
-			}
-
-			if ( !this.selectedProperty || !this.textInputValue ) {
-				if ( !this.selectedProperty ) {
-					this.fieldErrors.property = {
-						message: 'Please select a property',
-						type: 'error',
-					};
-				}
-				if ( !this.textInputValue ) {
-					this.fieldErrors.value = {
-						message: 'Please enter a value',
-						type: 'error',
-					};
-				}
-				this.errors.push( {
-					message: 'One or more fields are empty. Please complete the query or select a fitting field type.',
-					type: 'error',
-				} );
-				return false;
-			}
-			return true;
+		validate(): void {
+			const formValues = {
+				property: this.selectedProperty,
+				value: this.textInputValue,
+			};
+			const validator = new Validator( formValues );
+			const validationResult = validator.validate();
+			this.errors = validationResult.formErrors;
+			this.$store.dispatch( 'setErrors', validationResult.formErrors );
+			this.fieldErrors = validationResult.fieldErrors;
 		},
 		runQuery(): void {
-			const isValid = this.validate();
-			if ( !isValid ) {
+			this.validate();
+			if ( this.errors.length ) {
 				return;
 			}
 			this.encodedQuery = encodeURI( buildQuery( this.$store.getters.query ) );
