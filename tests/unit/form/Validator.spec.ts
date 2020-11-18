@@ -24,7 +24,7 @@ describe( 'validator', () => {
 		expect( validator.validate() ).toStrictEqual( expectedResult );
 	} );
 
-	it( 'property missing', () => {
+	it( 'returns one error with a property missing', () => {
 		const formValues: FormValues = {
 			property: null,
 			value: 'Q5',
@@ -47,7 +47,7 @@ describe( 'validator', () => {
 
 	} );
 
-	it( 'value missing', () => {
+	it( 'returns one error with a value missing', () => {
 		const formValues: FormValues = {
 			property: {
 				id: 'P31',
@@ -72,7 +72,7 @@ describe( 'validator', () => {
 		expect( validationResult.fieldErrors.value ).toHaveProperty( 'type' );
 	} );
 
-	it( 'empty form', () => {
+	it( 'returns notice when the form is empty', () => {
 		const formValues: FormValues = {
 			property: null,
 			value: null,
