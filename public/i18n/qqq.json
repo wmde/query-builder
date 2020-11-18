@@ -1,3 +1,16 @@
 {
-  "query-builder-run-query": "Text on the button that runs the query"
+  "query-builder-heading": "Title of the page",
+  "query-builder-description": "A short description on what query builder is",
+  "query-builder-find-all-items": "header for part of the form finding all items",
+  "query-builder-run-query": "Text on the button that runs the query",
+  "query-builder-input-value": "Text of value of the property in the form",
+  "query-builder-input-enter-value": "Placeholder of the value input",
+  "query-builder-property-lookup-enter-property": "Label of the property input",
+  "query-builder-property-lookup-property": "Placeholder of the property input",
+  "query-builder-property-lookup-no-match-found": "Error when no properties match",
+  "query-builder-result-placeholder": "Placeholder of query builder result",
+  "query-builder-result-error-empty-form": "Error message when the form is empty",
+  "query-builder-result-error-incomplete-form": "Error message when the form is incomplete",
+  "query-builder-result-error-missing-property": "Error when property is missing",
+  "query-builder-result-error-missing-value": "Error when value is missing"
 }

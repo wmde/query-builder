@@ -23,8 +23,7 @@ export default class Validator {
 
 		if ( !this.formValues.property && !this.formValues.value ) {
 			validationResult.formErrors.push( {
-				// eslint-disable-next-line max-len
-				message: 'Looks like the Query Builder was empty, please enter a valid query first, then try running it again',
+				message: 'query-builder-result-error-empty-form',
 				type: 'notice',
 			} );
 			return validationResult;
@@ -33,18 +32,18 @@ export default class Validator {
 		if ( !this.formValues.property || !this.formValues.value ) {
 			if ( !this.formValues.property ) {
 				validationResult.fieldErrors.property = {
-					message: 'Please select a property',
+					message: 'query-builder-result-error-missing-property',
 					type: 'error',
 				};
 			}
 			if ( !this.formValues.value ) {
 				validationResult.fieldErrors.value = {
-					message: 'Please enter a value',
+					message: 'query-builder-result-error-missing-value',
 					type: 'error',
 				};
 			}
 			validationResult.formErrors.push( {
-				message: 'One or more fields are empty. Please complete the query or select a fitting field type.',
+				message: 'query-builder-result-error-incomplete-form',
 				type: 'error',
 			} );
 		}

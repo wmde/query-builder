@@ -2,15 +2,16 @@
 	<Lookup
 		:value="value"
 		@input="$emit( 'input', $event )"
-		:error="error"
+		:error="error ? {message: $i18n(error.message), type: error.type} : null"
 		:menu-items="searchResults"
 		:search-input.sync="search"
-		placeholder="Enter a property"
-		label="Property"
+		:placeholder="$i18n('query-builder-property-lookup-enter-property')"
+		:label="$i18n('query-builder-property-lookup-property')"
 	>
-		<template v-slot:no-results>
-			No match was found
-		</template>
+		<template
+			v-slot:no-results
+			v-i18n="{msg: 'query-builder-property-lookup-no-match-found'}"
+		/>
 	</Lookup>
 </template>
 

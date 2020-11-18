@@ -3,6 +3,19 @@ import Vuex, { Store } from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import QueryBuilder from '@/components/QueryBuilder.vue';
 import PropertyLookup from '@/components/PropertyLookup.vue';
+import Vue from 'vue';
+import i18n from 'vue-banana-i18n';
+const messages = {
+	en: {
+		'query-builder-heading': 'Very fancy query builder title',
+	},
+};
+
+Vue.use( i18n, {
+	locale: 'en',
+	messages,
+	wikilinks: true,
+} );
 
 function newStore( getters = {} ): Store<any> {
 	return new Vuex.Store( {
@@ -22,7 +35,7 @@ describe( 'QueryBuilder.vue', () => {
 
 	it( 'has a heading', () => {
 		const wrapper = shallowMount( QueryBuilder, { store: newStore(), localVue } );
-		expect( wrapper.find( 'h1' ).text() ).toBe( 'Simple Query Builder' );
+		expect( wrapper.find( 'h1' ).text() ).toBe( 'Very fancy query builder title' );
 	} );
 
 	it( 'passes the selected property back to the PropertyLookup', async () => {

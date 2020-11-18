@@ -1,13 +1,12 @@
 <template>
 	<div class="querybuilder" role="main">
-		<h1 class="querybuilder__heading">Simple Query Builder</h1>
-		<p class="querybuilder__description">
-			Welcome to the test system of the Simple Query Builder. Please note that this is a work in progress,
-			not all features are included, and it can sometimes be broken.
-			<a href="https://w.wiki/kG$">Feedback is welcome here.</a>
-		</p>
+		<h1 class="querybuilder__heading"
+			v-i18n="{msg: 'query-builder-heading'}" />
+		<p class="querybuilder__description"
+			v-i18n-html="{msg: 'query-builder-description', params:['https://w.wiki/kG$']}" />
 		<div role="form">
-			<h2 class="querybuilder__find-title">Find all items...</h2>
+			<h2 class="querybuilder__find-title"
+				v-i18n="{msg: 'query-builder-find-all-items'}" />
 			<div class="querybuilder__rule">
 				<PropertyLookup
 					v-model="selectedProperty"
@@ -15,11 +14,12 @@
 				/>
 				<TextInput
 					class="querybuilder__rule__value"
-					label="Value"
+					:label="$i18n('query-builder-input-value')"
 					ref="value"
 					v-model="textInputValue"
-					:error="fieldErrors.value"
-					placeholder="Enter a value" />
+					:error="fieldErrors.value ?
+						{message: $i18n(fieldErrors.value.message), type: fieldErrors.value.type}: null"
+					:placeholder="$i18n('query-builder-input-enter-value')" />
 			</div>
 			<div class="querybuilder__run">
 				<Button
