@@ -16,17 +16,18 @@ export default Vue.extend( {
 		};
 	},
 	beforeCreate(): void {
-		fetch( 'i18n/en.json' )
-			.then( function ( response ) {
-				return response.json();
-			} ).then( ( messages ) => {
-				Vue.use( i18n, {
-					locale: 'en',
-					messages,
-				} );
-				// TODO: Fix the typing warning
-				( this as any ).isi18nLoaded = true;
+		const fetchi18n = async (): Promise<void> => {
+			const response = await fetch( 'i18n/en.json' );
+			const messages = await response.json();
+			Vue.use( i18n, {
+				locale: 'en',
+				messages,
 			} );
+			// TODO: Fix the typing warning
+			( this as any ).isi18nLoaded = true;
+		};
+
+		fetchi18n();
 	},
 	name: 'App',
 	components: {
