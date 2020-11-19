@@ -1,3 +1,15 @@
 {
-  "query-builder-run-query": "Run query"
+  "query-builder-heading": "Simple Query Builder",
+  "query-builder-find-all-items": "Find all items...",
+  "query-builder-run-query": "Run query",
+  "query-builder-input-value-label": "Value",
+  "query-builder-input-value-placeholder": "Enter a value",
+  "query-builder-property-lookup-label": "Property",
+  "query-builder-property-lookup-placeholder": "Enter a property",
+  "query-builder-property-lookup-no-match-found": "No match was found",
+  "query-builder-result-placeholder": "Results will be displayed here",
+  "query-builder-result-error-empty-form": "Looks like the Query Builder was empty, please enter a valid query first, then try running it again.",
+  "query-builder-result-error-incomplete-form": "One or more fields are empty. Please complete the query or select a fitting field type.",
+  "query-builder-result-error-missing-property": "Please select a property",
+  "query-builder-result-error-missing-value": "Please enter a value"
 }

@@ -30,20 +30,25 @@ describe( 'validator', () => {
 			value: 'Q5',
 		};
 
-		const formErrors = [
-			{
-				type: 'error',
+		const expectedResult: ValidationResult = {
+			formErrors: [
+				{
+					type: 'error',
+					message: 'query-builder-result-error-incomplete-form',
+				},
+			],
+			fieldErrors: {
+				property: {
+					type: 'error',
+					message: 'query-builder-result-error-missing-property',
+				},
+				value: null,
 			},
-		];
+		};
 
 		const validator = new Validator( formValues );
-		const validationResult = validator.validate();
 
-		expect( validationResult.formErrors ).toHaveLength( 1 );
-		expect( validationResult.formErrors[ 0 ].type ).toBe( formErrors[ 0 ].type );
-		expect( validationResult.fieldErrors.property ).not.toBeNull();
-		expect( validationResult.fieldErrors.value ).toBeNull();
-		expect( validationResult.fieldErrors.property ).toHaveProperty( 'type' );
+		expect( validator.validate() ).toStrictEqual( expectedResult );
 
 	} );
 
@@ -56,20 +61,25 @@ describe( 'validator', () => {
 			value: null,
 		};
 
-		const formErrors = [
-			{
-				type: 'error',
+		const expectedResult: ValidationResult = {
+			formErrors: [
+				{
+					type: 'error',
+					message: 'query-builder-result-error-incomplete-form',
+				},
+			],
+			fieldErrors: {
+				property: null,
+				value: {
+					type: 'error',
+					message: 'query-builder-result-error-missing-value',
+				},
 			},
-		];
+		};
 
 		const validator = new Validator( formValues );
-		const validationResult = validator.validate();
 
-		expect( validationResult.formErrors ).toHaveLength( 1 );
-		expect( validationResult.formErrors[ 0 ].type ).toBe( formErrors[ 0 ].type );
-		expect( validationResult.fieldErrors.property ).toBeNull();
-		expect( validationResult.fieldErrors.value ).not.toBeNull();
-		expect( validationResult.fieldErrors.value ).toHaveProperty( 'type' );
+		expect( validator.validate() ).toStrictEqual( expectedResult );
 	} );
 
 	it( 'returns notice when the form is empty', () => {
@@ -78,18 +88,21 @@ describe( 'validator', () => {
 			value: null,
 		};
 
-		const formErrors = [
-			{
-				type: 'notice',
+		const expectedResult: ValidationResult = {
+			formErrors: [
+				{
+					type: 'notice',
+					message: 'query-builder-result-error-empty-form',
+				},
+			],
+			fieldErrors: {
+				property: null,
+				value: null,
 			},
-		];
+		};
 
 		const validator = new Validator( formValues );
-		const validationResult = validator.validate();
 
-		expect( validationResult.formErrors ).toHaveLength( 1 );
-		expect( validationResult.formErrors[ 0 ].type ).toBe( formErrors[ 0 ].type );
-		expect( validationResult.fieldErrors.property ).toBeNull();
-		expect( validationResult.fieldErrors.value ).toBeNull();
+		expect( validator.validate() ).toStrictEqual( expectedResult );
 	} );
 } );

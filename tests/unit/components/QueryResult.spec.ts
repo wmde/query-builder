@@ -1,6 +1,8 @@
 import Vuex, { Store } from 'vuex';
 import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
 import QueryResult from '@/components/QueryResult.vue';
+import Vue from 'vue';
+import i18n from 'vue-banana-i18n';
 
 function newStore( state = {} ): Store<any> {
 	return new Vuex.Store( {
@@ -13,6 +15,17 @@ function newStore( state = {} ): Store<any> {
 }
 
 const localVue = createLocalVue();
+const messages = {
+	en: {
+		'query-builder-result-placeholder': 'Result placeholder',
+	},
+};
+
+Vue.use( i18n, {
+	locale: 'en',
+	messages,
+	wikilinks: true,
+} );
 localVue.use( Vuex );
 
 describe( 'QueryResult.vue', () => {
@@ -26,7 +39,7 @@ describe( 'QueryResult.vue', () => {
 				errors: [],
 			},
 		} );
-		expect( wrapper.find( 'div' ).text() ).toBe( 'Results will be displayed here' );
+		expect( wrapper.find( 'div' ).text() ).toBe( 'Result placeholder' );
 		expect( wrapper.findAll( 'iframe' ) ).toHaveLength( 0 );
 	} );
 

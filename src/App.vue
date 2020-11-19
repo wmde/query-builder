@@ -18,10 +18,13 @@ export default Vue.extend( {
 	beforeCreate(): void {
 		const fetchi18n = async (): Promise<void> => {
 			const response = await fetch( 'i18n/en.json' );
-			const messages = await response.json();
+			const messages = {
+				en: await response.json(),
+			};
 			Vue.use( i18n, {
 				locale: 'en',
 				messages,
+				wikilinks: true,
 			} );
 			// TODO: Fix the typing warning
 			( this as any ).isi18nLoaded = true;

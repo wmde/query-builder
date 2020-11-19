@@ -2,9 +2,18 @@ import PropertyLookup from '@/components/PropertyLookup.vue';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { Lookup } from '@wmde/wikit-vue-components';
 import Vuex from 'vuex';
+import Vue from 'vue';
+import i18n from 'vue-banana-i18n';
 
 const localVue = createLocalVue();
+const messages = {};
 localVue.use( Vuex );
+
+Vue.use( i18n, {
+	locale: 'en',
+	messages,
+	wikilinks: true,
+} );
 
 describe( 'PropertyLookup.vue', () => {
 	it( 'bubbles input events from the Lookup up', () => {
@@ -62,6 +71,6 @@ describe( 'PropertyLookup.vue', () => {
 			},
 		} );
 
-		expect( wrapper.findComponent( Lookup ).props( 'error' ) ).toBe( error );
+		expect( wrapper.findComponent( Lookup ).props( 'error' ) ).toStrictEqual( error );
 	} );
 } );

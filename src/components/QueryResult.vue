@@ -2,11 +2,11 @@
 	<div class="querybuilder__result">
 		<div v-if="errors.length !== 0" class="querybuilder__result__errors">
 			<div v-for="(error, index) in errors" :class="error.type" :key="index">
-				{{error.message}}
+				{{ $i18n(error.message) }}
 			</div>
 		</div>
 		<div v-else-if="encodedQuery.length === 0" class="querybuilder__result__description">
-			Results will be displayed here
+			{{ $i18n('query-builder-result-placeholder')}}
 		</div>
 		<!-- TODO use global config variables instead of hardcoding the url-->
 		<iframe
