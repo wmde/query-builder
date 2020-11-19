@@ -5,8 +5,8 @@
 		:error="error ? {message: $i18n(error.message), type: error.type} : null"
 		:menu-items="searchResults"
 		:search-input.sync="search"
-		:placeholder="$i18n('query-builder-property-lookup-enter-property')"
-		:label="$i18n('query-builder-property-lookup-property')"
+		:placeholder="$i18n('query-builder-property-lookup-placeholder')"
+		:label="$i18n('query-builder-property-lookup-label')"
 	>
 		<template
 			v-slot:no-results
