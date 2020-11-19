@@ -1,4 +1,5 @@
 import Error from '@/data-model/Error';
+import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
 export default interface RootState {
 	conditionRow: ConditionRow;
@@ -12,5 +13,8 @@ export interface ConditionRow {
 	};
 	valueData: {
 		value: string;
+	};
+	propertyValueRelation: {
+		value: PropertyValueRelation;
 	};
 }

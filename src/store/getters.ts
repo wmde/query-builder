@@ -2,6 +2,7 @@ import RootState from './RootState';
 import QueryRepresentation from '@/sparql/QueryRepresentation';
 import Property from '@/data-model/Property';
 import Error from '@/data-model/Error';
+import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
 export default {
 	query( rootState: RootState ): QueryRepresentation {
@@ -9,6 +10,7 @@ export default {
 			condition: {
 				propertyId: rootState.conditionRow.propertyData.id,
 				value: rootState.conditionRow.valueData.value,
+				propertyValueRelation: rootState.conditionRow.propertyValueRelation.value,
 			},
 		};
 	},
@@ -20,6 +22,9 @@ export default {
 	},
 	value( rootState: RootState ): string {
 		return rootState.conditionRow.valueData.value;
+	},
+	propertyValueRelation( rootState: RootState ): PropertyValueRelation {
+		return rootState.conditionRow.propertyValueRelation.value;
 	},
 	getErrors( rootState: RootState ): Error[] {
 		return rootState.errors;

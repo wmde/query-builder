@@ -1,5 +1,6 @@
 import allNamespaces from '@/sparql/rdfNamespaces';
 import QueryObjectBuilder from '@/sparql/QueryObjectBuilder';
+import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
 describe( 'QueryObjectBuilder', () => {
 	it( 'simple', () => {
@@ -49,6 +50,7 @@ describe( 'QueryObjectBuilder', () => {
 			condition: {
 				propertyId: 'P281',
 				value: 'XXXX',
+				propertyValueRelation: PropertyValueRelation.Matching,
 			},
 		} );
 

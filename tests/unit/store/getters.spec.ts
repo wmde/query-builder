@@ -1,6 +1,7 @@
 import RootState from '@/store/RootState';
 import getters from '@/store/getters';
 import QueryRepresentation from '@/sparql/QueryRepresentation';
+import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
 describe( 'getters', () => {
 	describe( 'query', () => {
@@ -9,6 +10,7 @@ describe( 'getters', () => {
 				conditionRow: {
 					valueData: { value: 'foo' },
 					propertyData: { id: 'P123', label: 'abc' },
+					propertyValueRelation: { value: PropertyValueRelation.Matching },
 				},
 				errors: [],
 			};
@@ -17,6 +19,7 @@ describe( 'getters', () => {
 				condition: {
 					propertyId: 'P123',
 					value: 'foo',
+					propertyValueRelation: PropertyValueRelation.Matching,
 				},
 			};
 

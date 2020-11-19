@@ -1,5 +1,6 @@
 import mutations from '@/store/mutations';
 import RootState from '@/store/RootState';
+import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
 describe( 'mutations', () => {
 
@@ -9,6 +10,7 @@ describe( 'mutations', () => {
 			conditionRow: {
 				valueData: { value: 'foo' },
 				propertyData: { id: 'P123', label: 'abc' },
+				propertyValueRelation: { value: PropertyValueRelation.Matching },
 			},
 			errors: [],
 		};
@@ -24,6 +26,7 @@ describe( 'mutations', () => {
 			conditionRow: {
 				valueData: { value: 'foo' },
 				propertyData: { id: 'P123', label: 'abc' },
+				propertyValueRelation: { value: PropertyValueRelation.Matching },
 			},
 			errors: [],
 		};

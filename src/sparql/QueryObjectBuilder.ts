@@ -1,6 +1,7 @@
 import rdfNamespaces from '@/sparql/rdfNamespaces';
 import QueryRepresentation from '@/sparql/QueryRepresentation';
-import { SelectQuery } from 'sparqljs';
+import { SelectQuery, Term } from 'sparqljs';
+import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
 export default class QueryObjectBuilder {
 	private queryObject: SelectQuery;
@@ -23,6 +24,29 @@ export default class QueryObjectBuilder {
 				value: 'item',
 			},
 		];
+
+		let tripleObject = {} as Term;
+
+		switch ( queryRepresentation.condition.propertyValueRelation ) {
+			case ( PropertyValueRelation.Matching ):
+				tripleObject = {
+					termType: 'Literal',
+					value: queryRepresentation.condition.value,
+				};
+				break;
+			case ( PropertyValueRelation.Regardless ):
+				tripleObject = {
+					termType: 'BlankNode',
+					value: 'anyValue',
+				};
+				break;
+			default:
+				tripleObject = {
+					termType: 'Literal',
+					value: queryRepresentation.condition.value,
+				};
+		}
+
 		this.queryObject.where = [
 			{
 				type: 'bgp',
@@ -43,10 +67,7 @@ export default class QueryObjectBuilder {
 								value: rdfNamespaces.ps + queryRepresentation.condition.propertyId,
 							},
 							] },
-						object: {
-							termType: 'Literal',
-							value: queryRepresentation.condition.value,
-						},
+						object: tripleObject,
 					},
 				],
 			},
