@@ -13,6 +13,9 @@
 					v-model="selectedProperty"
 					:error="fieldErrors.property"
 				/>
+				<ValueTypeDropDown
+					@input="onInput"
+				/>
 				<TextInput
 					class="querybuilder__rule__value"
 					label="Value"
@@ -41,6 +44,7 @@ import { mapState } from 'vuex';
 import { Button, TextInput } from '@wmde/wikit-vue-components';
 
 import PropertyLookup from '@/components/PropertyLookup.vue';
+import ValueTypeDropDown from '@/components/ValueTypeDropDown.vue';
 import QueryResult from '@/components/QueryResult.vue';
 import SearchResult from '@/data-access/SearchResult';
 import Property from '@/data-model/Property';
@@ -58,9 +62,13 @@ export default Vue.extend( {
 				property: null as null | Error,
 				value: null as null | Error,
 			},
+			selectedOption: '',
 		};
 	},
 	methods: {
+		onInput( value: string ): void {
+			this.selectedOption = value;
+		},
 		validate(): void {
 			const formValues = {
 				property: this.selectedProperty,
@@ -105,6 +113,7 @@ export default Vue.extend( {
 		TextInput,
 		QueryResult,
 		PropertyLookup,
+		ValueTypeDropDown,
 	},
 } );
 </script>
