@@ -6,6 +6,7 @@ import mutations from './mutations';
 import getters from './getters';
 import QueryBuilderServices from '@/QueryBuilderServices';
 import RootState from '@/store/RootState';
+import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
 Vue.use( Vuex );
 
@@ -20,6 +21,9 @@ export function createStore( services: QueryBuilderServices ): Store<RootState> 
 				},
 				valueData: {
 					value: '',
+				},
+				propertyValueRelation: {
+					value: PropertyValueRelation.Matching,
 				},
 			},
 			errors: [],
