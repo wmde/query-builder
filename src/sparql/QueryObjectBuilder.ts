@@ -1,6 +1,6 @@
 import rdfNamespaces from '@/sparql/rdfNamespaces';
 import QueryRepresentation from '@/sparql/QueryRepresentation';
-import { SelectQuery, Term } from 'sparqljs';
+import { Pattern, SelectQuery, Term } from 'sparqljs';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
 export default class QueryObjectBuilder {
@@ -32,6 +32,12 @@ export default class QueryObjectBuilder {
 				tripleObject = {
 					termType: 'Literal',
 					value: queryRepresentation.condition.value,
+				};
+				break;
+			case ( PropertyValueRelation.NotMatching ):
+				tripleObject = {
+					termType: 'Variable',
+					value: 'instance',
 				};
 				break;
 			case ( PropertyValueRelation.Regardless ):
@@ -72,6 +78,28 @@ export default class QueryObjectBuilder {
 				],
 			},
 		];
+
+		if ( queryRepresentation.condition.propertyValueRelation === PropertyValueRelation.NotMatching ) {
+			const filterCondition = {
+				type: 'filter',
+				expression: {
+					type: 'operation',
+					operator: '!=',
+					args: [
+						{
+							termType: 'Variable',
+							value: 'instance',
+						},
+						{
+							termType: 'Literal',
+							value: queryRepresentation.condition.value,
+						},
+					],
+				},
+			};
+
+			this.queryObject.where.push( filterCondition as Pattern );
+		}
 
 		return this.queryObject;
 	}
