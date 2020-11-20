@@ -22,7 +22,7 @@ export default Vue.extend( {
 	name: 'ValueTypeDropDown',
 	data() {
 		return {
-			selected: '',
+			selected: PropertyValueRelation.Matching,
 			optionItems: PropertyValueRelation,
 		};
 	},

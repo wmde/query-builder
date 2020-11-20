@@ -1,5 +1,6 @@
 import FormValues from '@/form/FormValues';
 import Validator, { ValidationResult } from '@/form/Validator';
+import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
 describe( 'validator', () => {
 	it( 'returns no errors with a complete form', () => {
@@ -9,6 +10,7 @@ describe( 'validator', () => {
 				label: 'instance of',
 			},
 			value: 'Q5',
+			propertyValueRelation: PropertyValueRelation.Matching,
 		};
 
 		const expectedResult: ValidationResult = {
@@ -28,6 +30,7 @@ describe( 'validator', () => {
 		const formValues: FormValues = {
 			property: null,
 			value: 'Q5',
+			propertyValueRelation: PropertyValueRelation.Matching,
 		};
 
 		const expectedResult: ValidationResult = {
@@ -52,13 +55,14 @@ describe( 'validator', () => {
 
 	} );
 
-	it( 'returns one error with a value missing', () => {
+	it( 'returns one error with a value missing when PropertyValueRelation = Matching', () => {
 		const formValues: FormValues = {
 			property: {
 				id: 'P31',
 				label: 'instance of',
 			},
 			value: null,
+			propertyValueRelation: PropertyValueRelation.Matching,
 		};
 
 		const expectedResult: ValidationResult = {
@@ -82,10 +86,34 @@ describe( 'validator', () => {
 		expect( validator.validate() ).toStrictEqual( expectedResult );
 	} );
 
+	it( 'returns no errors with a value missing when PropertyValueRelation = Regardless', () => {
+		const formValues: FormValues = {
+			property: {
+				id: 'P31',
+				label: 'instance of',
+			},
+			value: null,
+			propertyValueRelation: PropertyValueRelation.Regardless,
+		};
+
+		const expectedResult: ValidationResult = {
+			formErrors: [],
+			fieldErrors: {
+				property: null,
+				value: null,
+			},
+		};
+
+		const validator = new Validator( formValues );
+
+		expect( validator.validate() ).toStrictEqual( expectedResult );
+	} );
+
 	it( 'returns notice when the form is empty', () => {
 		const formValues: FormValues = {
 			property: null,
 			value: null,
+			propertyValueRelation: PropertyValueRelation.Matching,
 		};
 
 		const expectedResult: ValidationResult = {
