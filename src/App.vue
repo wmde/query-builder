@@ -29,19 +29,13 @@ export default Vue.extend( {
 			};
 
 			if ( this.lang !== 'en' ) {
-				const responseLang = await fetch( 'i18n/' + this.lang + '.json' ).catch(
-					() => {
-						// TODO: Show a user-facing notification instead
-						console.warn( 'The language requested could not be retrieved, falling back to English' );
-						messages[ this.lang ] = {};
-					},
-				) as Response;
-				if ( responseLang.ok ) {
-					try {
-						messages[ this.lang ] = await responseLang.json();
-					} catch ( e ) {
-						console.warn( 'The language requested does not exist, falling back to English' );
-					}
+				try {
+					const responseLang = await fetch( 'i18n/' + this.lang + '.json' );
+					messages[ this.lang ] = await responseLang.json();
+				} catch ( e ) {
+					// TODO: Show a user-facing notification instead
+					console.warn( 'The language requested could not be retrieved, falling back to English' );
+					messages[ this.lang ] = {};
 				}
 			}
 
