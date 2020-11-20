@@ -1,25 +1,20 @@
 import Vue from 'vue';
 import ValueTypeDropDown from '@/components/ValueTypeDropDown.vue';
+import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import { shallowMount } from '@vue/test-utils';
 
 describe( 'ValueTypeDropDown.vue', () => {
 	it( 'emits an `input` event containing the selected option item upon selection', async () => {
-		const optionItems = [
-			{ value: 'matching' },
-			{ value: 'regardless of value' },
-		];
+		const optionItems = PropertyValueRelation;
+		const wrapper = shallowMount( ValueTypeDropDown );
 
-		const wrapper = shallowMount( ValueTypeDropDown, { propsData: {
-			value: null,
-		} } );
-
-		wrapper.setData( { optionItems } );
+		wrapper.setData( {
+			selected: optionItems.Matching,
+			optionItems: optionItems,
+		} );
 
 		await Vue.nextTick();
 
-		const selectedItem = 1;
-		wrapper.findAll( '.querybuilder__dropdown-option' ).at( selectedItem ).element.click();
-
-		expect( wrapper.emitted( 'input' )![ 0 ] ).toEqual( [ optionItems[ selectedItem ].value ] );
+		expect( wrapper.emitted( 'input' )![ 0 ][ 0 ] ).toEqual( optionItems.Matching );
 	} );
 } );

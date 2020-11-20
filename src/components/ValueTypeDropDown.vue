@@ -1,36 +1,43 @@
 <template>
-	<select class="querybuilder__dropdown">
+	<select
+		class="querybuilder__dropdown"
+		v-model="selected"
+	>
 		<option
 			class="querybuilder__dropdown-option"
 			v-for="(optionItem, index) in optionItems"
-			:value="optionItem.value"
+			:value="optionItem"
 			:key="index"
-			@click="$emit( 'input', optionItem.value )"
 		>
-			{{ optionItem.value }}
+			{{ optionItem }}
 		</option>
 	</select>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
 export default Vue.extend( {
 	name: 'ValueTypeDropDown',
 	data() {
 		return {
-			selected: null,
-			optionItems: [
-				{ value: 'matching' },
-				{ value: 'regardless of value' },
-				{ value: 'without' },
-			],
+			selected: '',
+			optionItems: PropertyValueRelation,
 		};
 	},
 	props: {
 		value: {
 			type: String,
 			default: null,
+		},
+	},
+	watch: {
+		selected(): void {
+			this.$emit( 'input', this.selected );
+		},
+		value( selectedOption: PropertyValueRelation ): void {
+			this.selected = selectedOption;
 		},
 	},
 } );

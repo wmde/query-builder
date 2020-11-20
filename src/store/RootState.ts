@@ -14,7 +14,7 @@ export interface ConditionRow {
 	valueData: {
 		value: string;
 	};
-	propertyValueRelation: {
+	propertyValueRelationData: {
 		value: PropertyValueRelation;
 	};
 }

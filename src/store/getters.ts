@@ -10,7 +10,7 @@ export default {
 			condition: {
 				propertyId: rootState.conditionRow.propertyData.id,
 				value: rootState.conditionRow.valueData.value,
-				propertyValueRelation: rootState.conditionRow.propertyValueRelation.value,
+				propertyValueRelation: rootState.conditionRow.propertyValueRelationData.value,
 			},
 		};
 	},
@@ -24,7 +24,7 @@ export default {
 		return rootState.conditionRow.valueData.value;
 	},
 	propertyValueRelation( rootState: RootState ): PropertyValueRelation {
-		return rootState.conditionRow.propertyValueRelation.value;
+		return rootState.conditionRow.propertyValueRelationData.value;
 	},
 	getErrors( rootState: RootState ): Error[] {
 		return rootState.errors;

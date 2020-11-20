@@ -22,7 +22,7 @@ export function createStore( services: QueryBuilderServices ): Store<RootState> 
 				valueData: {
 					value: '',
 				},
-				propertyValueRelation: {
+				propertyValueRelationData: {
 					value: PropertyValueRelation.Matching,
 				},
 			},

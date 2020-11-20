@@ -16,7 +16,7 @@
 					:error="fieldErrors.property"
 				/>
 				<ValueTypeDropDown
-					@input="onInput"
+					v-model="selectedPropertyValueRelation"
 				/>
 				<TextInput
 					class="querybuilder__rule__value"
@@ -51,6 +51,7 @@ import ValueTypeDropDown from '@/components/ValueTypeDropDown.vue';
 import QueryResult from '@/components/QueryResult.vue';
 import SearchResult from '@/data-access/SearchResult';
 import Property from '@/data-model/Property';
+import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
 import buildQuery from '@/sparql/buildQuery';
 import Validator from '@/form/Validator';
@@ -65,17 +66,14 @@ export default Vue.extend( {
 				property: null as null | Error,
 				value: null as null | Error,
 			},
-			selectedOption: '',
 		};
 	},
 	methods: {
-		onInput( value: string ): void {
-			this.selectedOption = value;
-		},
 		validate(): void {
 			const formValues = {
 				property: this.selectedProperty,
 				value: this.textInputValue,
+				relation: this.selectedPropertyValueRelation,
 			};
 			const validator = new Validator( formValues );
 			const validationResult = validator.validate();
@@ -101,6 +99,14 @@ export default Vue.extend( {
 			},
 			set( selectedProperty: SearchResult ): void {
 				this.$store.dispatch( 'updateProperty', selectedProperty );
+			},
+		},
+		selectedPropertyValueRelation: {
+			get(): PropertyValueRelation {
+				return this.$store.getters.propertyValueRelation;
+			},
+			set( selectedPropertyValueRelation: string ): void {
+				this.$store.dispatch( 'updatePropertyValueRelation', selectedPropertyValueRelation );
 			},
 		},
 		textInputValue: {

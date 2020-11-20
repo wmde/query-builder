@@ -10,7 +10,7 @@ describe( 'mutations', () => {
 			conditionRow: {
 				valueData: { value: 'foo' },
 				propertyData: { id: 'P123', label: 'abc' },
-				propertyValueRelation: { value: PropertyValueRelation.Matching },
+				propertyValueRelationData: { value: PropertyValueRelation.Matching },
 			},
 			errors: [],
 		};
@@ -26,7 +26,7 @@ describe( 'mutations', () => {
 			conditionRow: {
 				valueData: { value: 'foo' },
 				propertyData: { id: 'P123', label: 'abc' },
-				propertyValueRelation: { value: PropertyValueRelation.Matching },
+				propertyValueRelationData: { value: PropertyValueRelation.Matching },
 			},
 			errors: [],
 		};
