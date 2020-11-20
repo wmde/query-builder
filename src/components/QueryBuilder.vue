@@ -25,7 +25,9 @@
 					v-model="textInputValue"
 					:error="fieldErrors.value ?
 						{message: $i18n(fieldErrors.value.message), type: fieldErrors.value.type}: null"
-					:placeholder="$i18n('query-builder-input-value-placeholder')" />
+					:placeholder="$i18n('query-builder-input-value-placeholder')"
+					:disabled="selectedPropertyValueRelation === propertyValueRelation.Regardless"
+				/>
 			</div>
 			<div class="querybuilder__run">
 				<Button
@@ -66,6 +68,8 @@ export default Vue.extend( {
 				property: null as null | Error,
 				value: null as null | Error,
 			},
+			selectedOption: '',
+			propertyValueRelation: PropertyValueRelation,
 		};
 	},
 	methods: {
@@ -73,7 +77,7 @@ export default Vue.extend( {
 			const formValues = {
 				property: this.selectedProperty,
 				value: this.textInputValue,
-				relation: this.selectedPropertyValueRelation,
+				propertyValueRelation: this.selectedPropertyValueRelation,
 			};
 			const validator = new Validator( formValues );
 			const validationResult = validator.validate();
@@ -105,7 +109,10 @@ export default Vue.extend( {
 			get(): PropertyValueRelation {
 				return this.$store.getters.propertyValueRelation;
 			},
-			set( selectedPropertyValueRelation: string ): void {
+			set( selectedPropertyValueRelation: PropertyValueRelation ): void {
+				if ( selectedPropertyValueRelation === PropertyValueRelation.Regardless ) {
+					this.textInputValue = '';
+				}
 				this.$store.dispatch( 'updatePropertyValueRelation', selectedPropertyValueRelation );
 			},
 		},
