@@ -18,6 +18,9 @@ export default ( searchEntityRepository: SearchEntityRepository ) => ( {
 	updateProperty( context: ActionContext<RootState, RootState>, property: Property ): void {
 		context.commit( 'setProperty', property );
 	},
+	updatePropertyValueRelation( context: ActionContext<RootState, RootState>, propertyValueRelation: string ): void {
+		context.commit( 'setPropertyValueRelation', propertyValueRelation );
+	},
 	setErrors( context: ActionContext<RootState, RootState>, errors: Error[] ): void {
 		context.commit( 'setErrors', errors );
 	},
