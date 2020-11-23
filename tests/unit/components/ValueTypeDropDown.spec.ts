@@ -13,6 +13,8 @@ describe( 'ValueTypeDropDown.vue', () => {
 			optionItems: optionItems,
 		} );
 
+		wrapper.findComponent( ValueTypeDropDown ).vm.$emit( 'input', optionItems.Matching );
+
 		await Vue.nextTick();
 
 		expect( wrapper.emitted( 'input' )![ 0 ][ 0 ] ).toEqual( optionItems.Matching );
