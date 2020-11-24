@@ -9,7 +9,7 @@ Vue.config.productionTip = false;
 const services = new QueryBuilderServices();
 services.set( 'searchEntityRepository', new FetchSearchEntityRepository(
 	'en', // TODO: this should somehow depend on the browser via T263553
-	'https://www.wikidata.org/w/api.php', // TODO: this should somehow be configured at build time
+	process.env.VUE_APP_WIKIBASE_API_URL || '',
 ) );
 
 new Vue( {
