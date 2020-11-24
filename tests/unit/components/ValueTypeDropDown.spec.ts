@@ -8,15 +8,10 @@ describe( 'ValueTypeDropDown.vue', () => {
 		const optionItems = PropertyValueRelation;
 		const wrapper = shallowMount( ValueTypeDropDown );
 
-		wrapper.setData( {
-			selected: optionItems.Matching,
-			optionItems: optionItems,
-		} );
-
-		wrapper.findComponent( ValueTypeDropDown ).vm.$emit( 'input', optionItems.Matching );
+		wrapper.find( `option[value="${optionItems.Regardless}"]` ).setSelected();
 
 		await Vue.nextTick();
 
-		expect( wrapper.emitted( 'input' )![ 0 ][ 0 ] ).toEqual( optionItems.Matching );
+		expect( wrapper.emitted( 'input' )![ 0 ][ 0 ] ).toEqual( optionItems.Regardless );
 	} );
 } );
