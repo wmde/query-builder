@@ -1,9 +1,10 @@
 <template>
 	<div class="querybuilder__result">
 		<div v-if="errors.length !== 0" class="querybuilder__result__errors">
-			<div v-for="(error, index) in errors" :class="error.type" :key="index">
-				{{ $i18n(error.message) }}
-			</div>
+			<Message
+				v-for="(error, index) in errors" :type="error.type" :key="index">
+				<span>{{$i18n(error.message)}}</span>
+			</Message>
 		</div>
 		<div v-else-if="encodedQuery.length === 0" class="querybuilder__result__description">
 			{{ $i18n('query-builder-result-placeholder')}}
@@ -21,6 +22,7 @@
 </template>
 
 <script lang="ts">
+import { Message } from '@wmde/wikit-vue-components';
 import Vue from 'vue';
 import { mapState } from 'vuex';
 
@@ -46,10 +48,13 @@ export default Vue.extend( {
 			errors: 'errors',
 		} ),
 	},
+	components: {
+		Message,
+	},
 } );
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 	.querybuilder__result {
 		margin-block-start: $dimension-layout-small;
 	}
