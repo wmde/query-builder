@@ -88,6 +88,9 @@ export default Vue.extend( {
 			this.fieldErrors = validationResult.fieldErrors;
 		},
 		validateForLimitedSupport( selectedProperty: SearchResult ): void {
+			this.limitedSupport = false;
+			this.fieldErrors.property = null;
+			this.selectedPropertyValueRelation = PropertyValueRelation.Matching;
 			const allowedDatatypes = [ 'external-id', 'string' ];
 			if ( selectedProperty && allowedDatatypes.indexOf( selectedProperty.datatype ) === -1 ) {
 				this.selectedPropertyValueRelation = PropertyValueRelation.Regardless;
