@@ -15,7 +15,7 @@ export default {
 		};
 	},
 	property( rootState: RootState ): Property | null {
-		if ( !rootState.conditionRow.propertyData.id ) {
+		if ( !rootState.conditionRow.propertyData?.id ) {
 			return null;
 		}
 		return rootState.conditionRow.propertyData;
