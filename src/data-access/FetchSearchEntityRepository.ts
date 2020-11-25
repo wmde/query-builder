@@ -48,11 +48,13 @@ export default class FetchSearchEntityRepository implements SearchEntityReposito
 		const data = await response.json();
 
 		// Inject data types
-		const datatypeMapping = await this.getDataTypes( data.search );
-		for ( let i = 0; i < data.search.length; i++ ) {
-			const searchResult = data.search[ i ];
-			if ( searchResult.id in datatypeMapping ) {
-				searchResult.datatype = datatypeMapping[ searchResult.id ].datatype;
+		if ( data.search ) {
+			const datatypeMapping = await this.getDataTypes( data.search );
+			for ( let i = 0; i < data.search.length; i++ ) {
+				const searchResult = data.search[ i ];
+				if ( searchResult.id in datatypeMapping ) {
+					searchResult.datatype = datatypeMapping[ searchResult.id ].datatype;
+				}
 			}
 		}
 
