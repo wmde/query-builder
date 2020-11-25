@@ -92,7 +92,7 @@ export default Vue.extend( {
 			this.fieldErrors.property = null;
 			this.selectedPropertyValueRelation = PropertyValueRelation.Matching;
 			const allowedDatatypes = [ 'external-id', 'string' ];
-			if ( selectedProperty && allowedDatatypes.indexOf( selectedProperty.datatype ) === -1 ) {
+			if ( selectedProperty && !allowedDatatypes.includes( selectedProperty.datatype ) ) {
 				this.selectedPropertyValueRelation = PropertyValueRelation.Regardless;
 				this.limitedSupport = true;
 				this.fieldErrors.property = {
