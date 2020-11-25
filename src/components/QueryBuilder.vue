@@ -17,6 +17,7 @@
 				/>
 				<ValueTypeDropDown
 					v-model="selectedPropertyValueRelation"
+					:disabled="limitedSupport"
 				/>
 				<TextInput
 					class="querybuilder__rule__value"
@@ -69,6 +70,7 @@ export default Vue.extend( {
 				value: null as null | Error,
 			},
 			selectedOption: '',
+			limitedSupport: false,
 			propertyValueRelation: PropertyValueRelation,
 		};
 	},
@@ -84,6 +86,17 @@ export default Vue.extend( {
 			this.errors = validationResult.formErrors;
 			this.$store.dispatch( 'setErrors', validationResult.formErrors );
 			this.fieldErrors = validationResult.fieldErrors;
+		},
+		validateForLimitedSupport( selectedProperty: SearchResult ): void {
+			const allowedDatatypes = [ 'external-id', 'string' ];
+			if ( selectedProperty && allowedDatatypes.indexOf( selectedProperty.datatype ) === -1 ) {
+				this.selectedPropertyValueRelation = PropertyValueRelation.Regardless;
+				this.limitedSupport = true;
+				this.fieldErrors.property = {
+					type: 'warning',
+					message: 'query-builder-property-lookup-limited-support-note',
+				};
+			}
 		},
 		runQuery(): void {
 			this.validate();
@@ -102,6 +115,7 @@ export default Vue.extend( {
 				return this.$store.getters.property;
 			},
 			set( selectedProperty: SearchResult ): void {
+				this.validateForLimitedSupport( selectedProperty );
 				this.$store.dispatch( 'updateProperty', selectedProperty );
 			},
 		},
