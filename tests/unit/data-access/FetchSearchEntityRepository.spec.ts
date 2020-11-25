@@ -33,7 +33,7 @@ describe( 'FetchSearchEntityRepository', () => {
 		};
 		const expectedQuery = Object.entries( expectedParams ).map( ( entry ) => entry.join( '=' ) ).join( '&' );
 		const expectedUrl = `${testEndpoint}?${expectedQuery}`;
-		expect( window.fetch ).toHaveBeenCalledTimes( 2 );
+		expect( window.fetch ).toHaveBeenCalledTimes( 1 );
 		expect( window.fetch ).toHaveBeenCalledWith( expectedUrl );
 		expect( actualResult ).toBe( expectedResult );
 	} );
@@ -46,21 +46,10 @@ describe( 'FetchSearchEntityRepository', () => {
 			testEndpoint,
 		);
 		const testSearch = 'instance';
-		window.fetch = jest.fn().mockImplementation( ( url ) => {
-			if ( url.search( 'wbsearchentities' ) ) {
-				return Promise.resolve( {
-					ok: true,
-					json: async () => ( { search:
-							[ { id: 'P1', label: 'P1 label', description: 'P1 description' } ],
-					} ),
-				} );
-			} else {
-				return Promise.resolve( {
-					ok: true,
-					json: async () => ( { entities: { P1: { datatype: 'string' } } } ),
-				} );
-			}
-		} );
+		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
+			ok: true,
+			json: async () => ( { search: [ { foo: 'bar' } ] } ),
+		} ) );
 		const limit = 12;
 		const offset = 24;
 
@@ -80,7 +69,7 @@ describe( 'FetchSearchEntityRepository', () => {
 		};
 		const expectedQuery = Object.entries( expectedParams ).map( ( entry ) => entry.join( '=' ) ).join( '&' );
 		const expectedUrl = `${testEndpoint}?${expectedQuery}`;
-		expect( window.fetch ).toHaveBeenCalledTimes( 2 );
+		expect( window.fetch ).toHaveBeenCalledTimes( 1 );
 		expect( window.fetch ).toHaveBeenCalledWith( expectedUrl );
 	} );
 
