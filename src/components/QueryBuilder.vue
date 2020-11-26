@@ -57,6 +57,7 @@ import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
 import buildQuery from '@/sparql/buildQuery';
 import Validator from '@/form/Validator';
+import allowedDatatypes from '@/allowedDataTypes';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -107,7 +108,6 @@ export default Vue.extend( {
 			this.limitedSupport = false;
 			this.fieldErrors.property = null;
 			this.selectedPropertyValueRelation = PropertyValueRelation.Matching;
-			const allowedDatatypes = [ 'external-id', 'string' ];
 			if ( selectedProperty && !allowedDatatypes.includes( selectedProperty.datatype ) ) {
 				this.selectedPropertyValueRelation = PropertyValueRelation.Regardless;
 				this.limitedSupport = true;
