@@ -17,6 +17,7 @@
 				/>
 				<ValueTypeDropDown
 					v-model="selectedPropertyValueRelation"
+					:disabled="limitedSupport"
 				/>
 				<TextInput
 					class="querybuilder__rule__value"
@@ -52,7 +53,6 @@ import PropertyLookup from '@/components/PropertyLookup.vue';
 import ValueTypeDropDown from '@/components/ValueTypeDropDown.vue';
 import QueryResult from '@/components/QueryResult.vue';
 import SearchResult from '@/data-access/SearchResult';
-import Property from '@/data-model/Property';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
 import buildQuery from '@/sparql/buildQuery';
@@ -69,6 +69,7 @@ export default Vue.extend( {
 				value: null as null | Error,
 			},
 			selectedOption: '',
+			limitedSupport: false,
 			propertyValueRelation: PropertyValueRelation,
 		};
 	},
@@ -84,6 +85,23 @@ export default Vue.extend( {
 			this.errors = validationResult.formErrors;
 			this.$store.dispatch( 'setErrors', validationResult.formErrors );
 			this.fieldErrors = validationResult.fieldErrors;
+			if ( this.selectedProperty !== null ) {
+				this.validateForLimitedSupport( this.selectedProperty );
+			}
+		},
+		validateForLimitedSupport( selectedProperty: SearchResult ): void {
+			this.limitedSupport = false;
+			this.fieldErrors.property = null;
+			this.selectedPropertyValueRelation = PropertyValueRelation.Matching;
+			const allowedDatatypes = [ 'external-id', 'string' ];
+			if ( selectedProperty && !allowedDatatypes.includes( selectedProperty.datatype ) ) {
+				this.selectedPropertyValueRelation = PropertyValueRelation.Regardless;
+				this.limitedSupport = true;
+				this.fieldErrors.property = {
+					type: 'warning',
+					message: 'query-builder-property-lookup-limited-support-note',
+				};
+			}
 		},
 		runQuery(): void {
 			this.validate();
@@ -98,10 +116,11 @@ export default Vue.extend( {
 	},
 	computed: {
 		selectedProperty: {
-			get(): Property | null {
+			get(): SearchResult | null {
 				return this.$store.getters.property;
 			},
 			set( selectedProperty: SearchResult ): void {
+				this.validateForLimitedSupport( selectedProperty );
 				this.$store.dispatch( 'updateProperty', selectedProperty );
 			},
 		},
