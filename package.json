@@ -10,7 +10,7 @@
     "e2e": "vue-cli-service test:e2e",
     "e2e:saucelabs": "env DATE=\"$(date)\" nightwatch --config nightwatch.conf.js --env sauceChrome,sauceFirefox,sauceEdge,sauceSafari",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --mode production",
     "test:unit": "vue-cli-service test:unit",
     "test:lint": "vue-cli-service lint --no-fix --max-warning 0",
     "test": "npm-run-all test:* && vue-cli-service build",

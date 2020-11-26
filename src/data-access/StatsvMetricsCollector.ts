@@ -2,9 +2,9 @@ import MetricsCollector from '@/data-access/MetricsCollector';
 
 export default class StatsvMetricsCollector implements MetricsCollector {
 	private readonly prefix: string;
-	private readonly endpoint: string;
+	private readonly endpoint: string | null;
 
-	public constructor( prefix: string, endpoint: string ) {
+	public constructor( prefix: string, endpoint: string | null ) {
 		this.prefix = prefix;
 		this.endpoint = endpoint;
 	}

@@ -81,7 +81,7 @@ export default Vue.extend( {
 		incrementMetric( metric: string ): void {
 			const metricsCollector = new StatsvMetricsCollector(
 				'Wikidata.query-builder',
-				'https://www.wikidata.org/beacon/statsv',
+				process.env.NODE_ENV === 'production' ? 'https://www.wikidata.org/beacon/statsv' : null,
 			);
 			metricsCollector.increment( metric );
 		},
