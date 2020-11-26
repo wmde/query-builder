@@ -53,7 +53,6 @@ import PropertyLookup from '@/components/PropertyLookup.vue';
 import ValueTypeDropDown from '@/components/ValueTypeDropDown.vue';
 import QueryResult from '@/components/QueryResult.vue';
 import SearchResult from '@/data-access/SearchResult';
-import Property from '@/data-model/Property';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
 import buildQuery from '@/sparql/buildQuery';
@@ -86,6 +85,9 @@ export default Vue.extend( {
 			this.errors = validationResult.formErrors;
 			this.$store.dispatch( 'setErrors', validationResult.formErrors );
 			this.fieldErrors = validationResult.fieldErrors;
+			if ( this.selectedProperty !== null ) {
+				this.validateForLimitedSupport( this.selectedProperty );
+			}
 		},
 		validateForLimitedSupport( selectedProperty: SearchResult ): void {
 			this.limitedSupport = false;
@@ -114,7 +116,7 @@ export default Vue.extend( {
 	},
 	computed: {
 		selectedProperty: {
-			get(): Property | null {
+			get(): SearchResult | null {
 				return this.$store.getters.property;
 			},
 			set( selectedProperty: SearchResult ): void {
