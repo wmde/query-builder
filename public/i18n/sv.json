@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sabelöga"
+		]
+	},
+	"query-builder-find-all-items": "Hitta alla objekt...",
+	"query-builder-run-query": "Kör frågesökning",
+	"query-builder-input-value-label": "Värde",
+	"query-builder-input-value-placeholder": "Skriv in ett värde",
+	"query-builder-property-lookup-label": "Egenskap",
+	"query-builder-property-lookup-placeholder": "Skriv in en egenskap",
+	"query-builder-property-lookup-no-match-found": "Ingen träff hittades",
+	"query-builder-property-lookup-limited-support-tag": "begränsat stöd",
+	"query-builder-property-lookup-limited-support-note": "Egenskaper med begränsat stöd kan inte filtreras efter värde",
+	"query-builder-result-placeholder": "Resultat visas här",
+	"query-builder-result-error-empty-form": "Verkar som att frågebyggaren var tom, var god skriv in en giltig fråga först och försök igen.",
+	"query-builder-result-error-incomplete-form": "Ett eller flera fält är tomma. Slutför frågesökningen eller välj en passande fälttyp.",
+	"query-builder-result-error-missing-property": "Välj en egenskap",
+	"query-builder-result-error-missing-value": "Skriv in ett värde"
+}

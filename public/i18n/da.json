@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saederup92"
+		]
+	},
+	"query-builder-input-value-label": "Værdi",
+	"query-builder-input-value-placeholder": "Indtast en værdi",
+	"query-builder-property-lookup-label": "Egenskab",
+	"query-builder-result-error-missing-property": "Vælg venligst en egenskab",
+	"query-builder-result-error-missing-value": "Indtast venligst en værdi"
+}

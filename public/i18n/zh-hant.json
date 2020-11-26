@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kly"
+		]
+	},
+	"query-builder-heading": "簡易查詢建置器",
+	"query-builder-find-all-items": "查看所有項目…",
+	"query-builder-run-query": "執行查詢",
+	"query-builder-input-value-label": "值",
+	"query-builder-input-value-placeholder": "請輸入一個值",
+	"query-builder-property-lookup-label": "屬性",
+	"query-builder-property-lookup-placeholder": "請輸入一個屬性",
+	"query-builder-property-lookup-no-match-found": "沒有符合的內容",
+	"query-builder-property-lookup-limited-support-tag": "有限支援",
+	"query-builder-property-lookup-limited-support-note": "為有限支援的屬性不能透過值做出篩選",
+	"query-builder-result-placeholder": "結果會顯示於此",
+	"query-builder-result-error-empty-form": "看起來查詢建置器為空，請先輸入有效的查詢，然後重新執行。",
+	"query-builder-result-error-incomplete-form": "有一個或更多欄位為空。請使用完整的查詢，或是選擇合適的欄位類型。",
+	"query-builder-result-error-missing-property": "請選擇一個屬性",
+	"query-builder-result-error-missing-value": "請選擇一個值"
+}

@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gomoko"
+		]
+	},
+	"query-builder-heading": "Constructeur de requêtes simples",
+	"query-builder-find-all-items": "Trouver tous les éléments…",
+	"query-builder-run-query": "Exécuter la requête",
+	"query-builder-input-value-label": "Valeur",
+	"query-builder-input-value-placeholder": "Saisir une valeur",
+	"query-builder-property-lookup-label": "Propriété",
+	"query-builder-property-lookup-placeholder": "Saisir une propriété",
+	"query-builder-property-lookup-no-match-found": "Aucune correspondance n’a été trouvée",
+	"query-builder-property-lookup-limited-support-tag": "support limité",
+	"query-builder-property-lookup-limited-support-note": "Les propriétés avec un support limité ne peuvent pas être filtrées par valeur",
+	"query-builder-result-placeholder": "Les résultats seront affichés ici",
+	"query-builder-result-error-empty-form": "Il semble que le constructeur de requêtes soit vide ; veuillez d’abord saisir une requête valide, puis essayez de l’exécuter de nouveau.",
+	"query-builder-result-error-incomplete-form": "Un champ au moins est vide. Veuillez compléter la requête ou sélectionner un type de champ adapté.",
+	"query-builder-result-error-missing-property": "Veuillez sélectionner une propriété",
+	"query-builder-result-error-missing-value": "Veuillez saisir une valeur"
+}

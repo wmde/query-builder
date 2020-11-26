@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"MuratTheTurkish"
+		]
+	},
+	"query-builder-heading": "Basit Sorgu Oluşturucu",
+	"query-builder-find-all-items": "Tüm öğeleri bul...",
+	"query-builder-run-query": "Sorgu çalıştır",
+	"query-builder-input-value-label": "Değer",
+	"query-builder-input-value-placeholder": "Bir değer girin",
+	"query-builder-property-lookup-label": "Özellik",
+	"query-builder-property-lookup-placeholder": "Bir özellik girin",
+	"query-builder-property-lookup-no-match-found": "Eşleşme bulunamadı",
+	"query-builder-property-lookup-limited-support-tag": "sınırlı destek",
+	"query-builder-property-lookup-limited-support-note": "Sınırlı desteğe sahip özellikler değere göre filtrelenemez",
+	"query-builder-result-placeholder": "Sonuçlar burada görüntülenecek",
+	"query-builder-result-error-empty-form": "Görünüşe göre Sorgu Oluşturucu boş, lütfen önce geçerli bir sorgu girin, ardından tekrar çalıştırmayı deneyin.",
+	"query-builder-result-error-incomplete-form": "Bir veya daha fazla alan boş. Lütfen sorguyu tamamlayın veya uygun bir alan türü seçin.",
+	"query-builder-result-error-missing-property": "Lütfen bir özellik seçin",
+	"query-builder-result-error-missing-value": "Lütfen bir değer girin"
+}

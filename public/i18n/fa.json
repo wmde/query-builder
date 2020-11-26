@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ladsgroup",
+			"Reza1615"
+		]
+	},
+	"query-builder-heading": "سازنده پرس‌وجوی ساده",
+	"query-builder-find-all-items": "یافتن همه آیتم‌هایی که...",
+	"query-builder-run-query": "اجرای پرس و جو",
+	"query-builder-input-value-label": "مقدار",
+	"query-builder-input-value-placeholder": "یک مقدار وارد کنید",
+	"query-builder-property-lookup-label": "خصوصیت",
+	"query-builder-property-lookup-placeholder": "یک خصوصیت وارد کنید",
+	"query-builder-property-lookup-no-match-found": "هیچ نتیجه‌ای یافت نشد",
+	"query-builder-property-lookup-limited-support-tag": "پشتیبانی محدود",
+	"query-builder-property-lookup-limited-support-note": "ویژگی‌های پشتیبانی محدود را نمی توان با مقدار فیلتر کرد",
+	"query-builder-result-placeholder": "نتایج در اینجا نمایش داده خواهند شد",
+	"query-builder-result-error-empty-form": "به نظر می‌رسد که سازنده پرس‌وجو خالی است. لطفا یک پرس‌وجوی معتبر وارد کنید و دوباره تلاش کنید.",
+	"query-builder-result-error-incomplete-form": "یک یا چند ورودی خالی هستند. لطفا پرس‌وجو را کامل کنید یا یک نوع ورودی صحیح انتخاب کنید.",
+	"query-builder-result-error-missing-property": "لطفاً یک خصوصیت انتخاب کنید",
+	"query-builder-result-error-missing-value": "لطفا یک مقدار وارد کنید"
+}

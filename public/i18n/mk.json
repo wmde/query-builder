@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"query-builder-heading": "Прост срочувач на барања",
+	"query-builder-find-all-items": "Пронајди ги сите предмети...",
+	"query-builder-run-query": "Пушти барање",
+	"query-builder-input-value-label": "Вредност",
+	"query-builder-input-value-placeholder": "Внесете вредност",
+	"query-builder-property-lookup-label": "Својство",
+	"query-builder-property-lookup-placeholder": "Внесете својство",
+	"query-builder-property-lookup-no-match-found": "Нема совпаѓања",
+	"query-builder-property-lookup-limited-support-tag": "ограничена поддршка",
+	"query-builder-property-lookup-limited-support-note": "Својствата со ограничена поддршка не можат да се филтрираат по вредност",
+	"query-builder-result-placeholder": "Тука ќе се прикажува исходот",
+	"query-builder-result-error-empty-form": "Се чини дека Срочувачот на барања е празен. Најпрвин внесете важечко барање, па пуштете го пак.",
+	"query-builder-result-error-incomplete-form": "Едно или повеќе полиња се празни. Пополнете го барањето или изберете соодветен вид на поле.",
+	"query-builder-result-error-missing-property": "Изберете својство",
+	"query-builder-result-error-missing-value": "Внесете вредност"
+}

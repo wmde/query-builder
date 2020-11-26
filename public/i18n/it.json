@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Beta16"
+		]
+	},
+	"query-builder-find-all-items": "Trova tutti gli elementi...",
+	"query-builder-run-query": "Esegui query",
+	"query-builder-input-value-label": "Valore",
+	"query-builder-input-value-placeholder": "Inserisci un valore",
+	"query-builder-property-lookup-label": "Proprietà",
+	"query-builder-property-lookup-placeholder": "Inserisci una proprietà",
+	"query-builder-property-lookup-no-match-found": "Nessun risultato trovato",
+	"query-builder-result-placeholder": "I risultati saranno mostrati qui",
+	"query-builder-result-error-missing-property": "Seleziona una proprietà",
+	"query-builder-result-error-missing-value": "Inserisci un valore"
+}
