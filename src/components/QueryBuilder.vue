@@ -57,6 +57,7 @@ import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
 import buildQuery from '@/sparql/buildQuery';
 import Validator from '@/form/Validator';
+import StatsvMetricsCollector from '@/data-access/StatsvMetricsCollector';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -73,7 +74,17 @@ export default Vue.extend( {
 			propertyValueRelation: PropertyValueRelation,
 		};
 	},
+	created() {
+		this.incrementMetric( 'main-page-loaded' );
+	},
 	methods: {
+		incrementMetric( metric: string ): void {
+			const metricsCollector = new StatsvMetricsCollector(
+				'Wikidata.query-builder',
+				'https://www.wikidata.org/beacon/statsv',
+			);
+			metricsCollector.increment( metric );
+		},
 		validate(): void {
 			const formValues = {
 				property: this.selectedProperty,
@@ -105,6 +116,7 @@ export default Vue.extend( {
 		},
 		runQuery(): void {
 			this.validate();
+			this.incrementMetric( 'run-query-button' );
 			if ( this.errors.length ) {
 				return;
 			}
