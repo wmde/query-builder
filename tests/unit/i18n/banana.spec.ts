@@ -27,6 +27,9 @@ describe( 'banana tests', () => {
 		}
 
 		for ( messageKey in messages.qqq ) {
+			if ( messageKey === '@metadata' ) {
+				continue;
+			}
 			expect( messages.en[ messageKey ] ).toBeTruthy();
 		}
 	} );
