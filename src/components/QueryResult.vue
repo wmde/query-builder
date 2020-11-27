@@ -9,10 +9,9 @@
 		<div v-else-if="encodedQuery.length === 0" class="querybuilder__result__description">
 			{{ $i18n('query-builder-result-placeholder')}}
 		</div>
-		<!-- TODO use global config variables instead of hardcoding the url-->
 		<iframe
 			v-else
-			:src="'https://query.wikidata.org/embed.html#' + encodedQuery"
+			:src="queryServiceEmbedUrl + '#' + encodedQuery"
 			:key="iframeRenderKey"
 			class="querybuilder__result__iframe"
 			referrerpolicy="origin"
@@ -28,6 +27,11 @@ import { mapState } from 'vuex';
 
 export default Vue.extend( {
 	name: 'QueryResult',
+	data() {
+		return {
+			queryServiceEmbedUrl: process.env.VUE_APP_QUERY_SERVICE_EMBED_URL,
+		};
+	},
 	props: {
 		encodedQuery: {
 			type: String,

@@ -16,3 +16,5 @@ services:
         command: 'npm run serve'
         ports:
             - '${PORT}:${PORT}'
+        environment:
+            - NODE_ENV=development
