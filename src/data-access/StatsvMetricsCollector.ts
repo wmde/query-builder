@@ -16,8 +16,7 @@ export default class StatsvMetricsCollector implements MetricsCollector {
 		StatsvMetricsCollector.sendBacon( this.endpoint + '?' + this.prefix + '.' + metric + '=1c' );
 	}
 
-	private static sendBacon( url: string ): void {
-
+	public static sendBacon( url: string ): void {
 		if ( navigator.sendBeacon ) {
 			try {
 				navigator.sendBeacon( url );

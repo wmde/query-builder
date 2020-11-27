@@ -57,7 +57,6 @@ import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
 import buildQuery from '@/sparql/buildQuery';
 import Validator from '@/form/Validator';
-import StatsvMetricsCollector from '@/data-access/StatsvMetricsCollector';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -79,11 +78,7 @@ export default Vue.extend( {
 	},
 	methods: {
 		incrementMetric( metric: string ): void {
-			const metricsCollector = new StatsvMetricsCollector(
-				'Wikidata.query-builder',
-				process.env.NODE_ENV === 'production' ? 'https://www.wikidata.org/beacon/statsv' : null,
-			);
-			metricsCollector.increment( metric );
+			this.$store.dispatch( 'incrementMetric', metric );
 		},
 		validate(): void {
 			const formValues = {

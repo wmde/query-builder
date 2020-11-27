@@ -1,7 +1,9 @@
 import SearchEntityRepository from '@/data-access/SearchEntityRepository';
+import MetricsCollector from '@/data-access/MetricsCollector';
 
 export interface Services {
 	searchEntityRepository: SearchEntityRepository;
+	metricsCollector: MetricsCollector;
 }
 
 export default class QueryBuilderServices {

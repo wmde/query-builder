@@ -5,6 +5,8 @@ import QueryBuilder from '@/components/QueryBuilder.vue';
 import PropertyLookup from '@/components/PropertyLookup.vue';
 import Vue from 'vue';
 import i18n from 'vue-banana-i18n';
+import createActions from '@/store/actions';
+import services from '@/ServicesFactory';
 const messages = {
 	en: {
 		'query-builder-heading': 'Very fancy query builder title',
@@ -25,6 +27,9 @@ function newStore( getters = {} ): Store<any> {
 			} ),
 			...getters,
 		},
+		actions: createActions(
+			services,
+		),
 	} );
 }
 

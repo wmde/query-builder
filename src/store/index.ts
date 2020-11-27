@@ -29,7 +29,7 @@ export function createStore( services: QueryBuilderServices ): Store<RootState> 
 			errors: [],
 		},
 		actions: createActions(
-			services.get( 'searchEntityRepository' ),
+			services,
 		),
 		mutations,
 		getters,

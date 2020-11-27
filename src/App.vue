@@ -8,14 +8,10 @@
 import Vue from 'vue';
 import QueryBuilder from '@/components/QueryBuilder.vue';
 import i18n from 'vue-banana-i18n';
-import StatsvMetricsCollector from '@/data-access/StatsvMetricsCollector';
+import services from '@/ServicesFactory';
 
 Vue.config.errorHandler = function () {
-	const metricsCollector = new StatsvMetricsCollector(
-		'Wikidata.query-builder',
-		process.env.NODE_ENV === 'production' ? 'https://www.wikidata.org/beacon/statsv' : null,
-	);
-	metricsCollector.increment( 'errors' );
+	services.get( 'metricsCollector' ).increment( 'errors' );
 };
 
 export default Vue.extend( {
