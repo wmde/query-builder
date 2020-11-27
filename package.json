@@ -15,6 +15,7 @@
     "test:lint": "vue-cli-service lint --no-fix --max-warning 0",
     "test": "npm-run-all test:* && vue-cli-service build",
     "test:lintcss": "stylelint '**/*.vue'",
+    "test:a11y": "jest --testMatch=\"**/tests/a11y/**\"",
     "fix:css": "stylelint '**/*.vue' --fix",
     "fix:ts": "vue-cli-service lint",
     "netlify": "npx netlify deploy --dir=dist --json"
