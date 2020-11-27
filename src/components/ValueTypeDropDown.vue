@@ -1,9 +1,13 @@
 <template>
 	<div class="querybuilder__dropdown">
-		<label class="querybuilder__dropdown-label">Value Type</label>
+		<label id="valueTypeSelect"
+			class="querybuilder__dropdown-label">
+			Value Type
+		</label>
 		<select
 			class="querybuilder__dropdown-select"
 			v-model="selected"
+			aria-labelledby="valueTypeSelect"
 		>
 			<option
 				class="querybuilder__dropdown-option"
