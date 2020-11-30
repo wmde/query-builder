@@ -93,7 +93,6 @@ export default Vue.extend( {
 		validateForLimitedSupport( selectedProperty: SearchResult ): void {
 			this.limitedSupport = false;
 			this.fieldErrors.property = null;
-			this.selectedPropertyValueRelation = PropertyValueRelation.Matching;
 			if ( selectedProperty && !allowedDatatypes.includes( selectedProperty.datatype ) ) {
 				this.selectedPropertyValueRelation = PropertyValueRelation.Regardless;
 				this.limitedSupport = true;
