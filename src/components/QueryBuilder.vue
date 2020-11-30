@@ -94,20 +94,6 @@ export default Vue.extend( {
 			this.limitedSupport = false;
 			this.fieldErrors.property = null;
 			this.selectedPropertyValueRelation = PropertyValueRelation.Matching;
-			const allowedDatatypes = [ 'external-id', 'string' ];
-			if ( selectedProperty && !allowedDatatypes.includes( selectedProperty.datatype ) ) {
-				this.selectedPropertyValueRelation = PropertyValueRelation.Regardless;
-				this.limitedSupport = true;
-				this.fieldErrors.property = {
-					type: 'warning',
-					message: 'query-builder-property-lookup-limited-support-note',
-				};
-			}
-		},
-		validateForLimitedSupport( selectedProperty: SearchResult ): void {
-			this.limitedSupport = false;
-			this.fieldErrors.property = null;
-			this.selectedPropertyValueRelation = PropertyValueRelation.Matching;
 			if ( selectedProperty && !allowedDatatypes.includes( selectedProperty.datatype ) ) {
 				this.selectedPropertyValueRelation = PropertyValueRelation.Regardless;
 				this.limitedSupport = true;
