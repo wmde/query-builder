@@ -3,4 +3,5 @@ module.exports = {
 	transformIgnorePatterns: [
 		'<rootDir>/node_modules/(?!(@wmde/wikit-vue-components)/)',
 	],
+	coverageReporters: [ 'lcov', 'text' ],
 };
