@@ -6,7 +6,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 on: [push]
-  
+
 name: Test and deploy to netlify
 jobs:
   test-and-dev-deploy:
@@ -23,7 +23,7 @@ jobs:
     - name: Test
       run: npm run test
     - name: Build Project
-      run: npm run build
+      run: source tests/e2e/fake/env.fake && npm run build
     - name: Deploy to netlify
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -34,4 +34,4 @@ jobs:
       env:
         SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
         SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-      run: npm run e2e:saucelabs
+      run: node tests/e2e/fake/index.js & npm run e2e:saucelabs

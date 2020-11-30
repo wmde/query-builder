@@ -28,6 +28,7 @@
 			<LabelOptout />
 			<div class="querybuilder__run">
 				<Button
+					class="querybuilder__run-query-button"
 					@click.native="runQuery"
 					type="progressive"
 					variant="primary"
