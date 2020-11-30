@@ -1,13 +1,15 @@
 {
 	"@metadata": {
-		"authors": []
+		"authors": [
+			"Robby"
+		]
 	},
 	"query-builder-heading": "Title of the page",
 	"query-builder-find-all-items": "header for part of the form finding all items",
 	"query-builder-run-query": "Text on the button that runs the query",
-	"query-builder-input-value-label": "Label of value input field in the form",
+	"query-builder-input-value-label": "Label of value input field in the form\n{{identical|Value}}",
 	"query-builder-input-value-placeholder": "Placeholder of the value input",
-	"query-builder-property-lookup-label": "Label of the property input",
+	"query-builder-property-lookup-label": "Label of the property input\n{{identical|Property}}",
 	"query-builder-property-lookup-placeholder": "Placeholder of the property input",
 	"query-builder-property-lookup-no-match-found": "Error when no properties match",
 	"query-builder-property-lookup-limited-support-tag": "Tags on properties that have a limited support in query builder",

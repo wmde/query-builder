@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robby"
+		]
+	},
+	"query-builder-input-value-label": "Wäert",
+	"query-builder-property-lookup-label": "Eegenschaft",
+	"query-builder-property-lookup-no-match-found": "Et gouf näischt fonnt",
+	"query-builder-property-lookup-limited-support-tag": "limitéiert Ënnerstëtzung"
+}

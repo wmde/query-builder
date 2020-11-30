@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sabelöga"
+			"Sabelöga",
+			"WikiPhoenix"
 		]
 	},
+	"query-builder-heading": "Enkel frågebyggare",
 	"query-builder-find-all-items": "Hitta alla objekt...",
 	"query-builder-run-query": "Kör frågesökning",
 	"query-builder-input-value-label": "Värde",
