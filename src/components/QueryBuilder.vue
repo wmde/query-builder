@@ -119,6 +119,7 @@ export default Vue.extend( {
 				return this.$store.getters.property;
 			},
 			set( selectedProperty: SearchResult ): void {
+				this.selectedPropertyValueRelation = PropertyValueRelation.Matching;
 				this.validateForLimitedSupport( selectedProperty );
 				this.$store.dispatch( 'updateProperty', selectedProperty );
 			},
