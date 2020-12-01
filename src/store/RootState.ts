@@ -2,7 +2,7 @@ import Error from '@/data-model/Error';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
 export default interface RootState {
-	conditionRow: ConditionRow;
+	conditionRows: ConditionRow[];
 	errors: Error[];
 }
 

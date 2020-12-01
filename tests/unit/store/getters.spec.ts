@@ -7,11 +7,11 @@ describe( 'getters', () => {
 	describe( 'query', () => {
 		it( 'returns the QueryRepresentation of the RootState', () => {
 			const state: RootState = {
-				conditionRow: {
+				conditionRows: [ {
 					valueData: { value: 'foo' },
 					propertyData: { id: 'P123', label: 'abc' },
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
-				},
+				} ],
 				errors: [],
 			};
 

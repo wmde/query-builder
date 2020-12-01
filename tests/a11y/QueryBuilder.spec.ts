@@ -29,6 +29,9 @@ describe( 'QueryBuilder.vue', () => {
 					value: '',
 					errors: [],
 				},
+				getters: {
+					value: jest.fn().mockReturnValue( jest.fn() ),
+				},
 			} ),
 			localVue,
 			propsData: {

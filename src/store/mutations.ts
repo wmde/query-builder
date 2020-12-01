@@ -4,14 +4,14 @@ import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
 
 export default {
-	setValue( state: RootState, value: string ): void {
-		state.conditionRow.valueData.value = value;
+	setValue( state: RootState, payload: { value: string; conditionIndex: number } ): void {
+		state.conditionRows[ payload.conditionIndex ].valueData.value = payload.value;
 	},
 	setProperty( state: RootState, property: Property ): void {
-		state.conditionRow.propertyData = property;
+		state.conditionRows[ 0 ].propertyData = property;
 	},
 	setPropertyValueRelation( state: RootState, propertyValueRelation: PropertyValueRelation ): void {
-		state.conditionRow.propertyValueRelationData.value = propertyValueRelation;
+		state.conditionRows[ 0 ].propertyValueRelationData.value = propertyValueRelation;
 	},
 	setErrors( state: RootState, errors: Error[] ): void {
 		state.errors = errors;

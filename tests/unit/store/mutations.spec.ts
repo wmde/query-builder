@@ -7,33 +7,33 @@ describe( 'mutations', () => {
 	it( 'setValue', () => {
 		const expectedValue = 'whatever';
 		const state: RootState = {
-			conditionRow: {
+			conditionRows: [ {
 				valueData: { value: 'foo' },
 				propertyData: { id: 'P123', label: 'abc' },
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
-			},
+			} ],
 			errors: [],
 		};
 
-		mutations.setValue( state, expectedValue );
+		mutations.setValue( state, { value: expectedValue, conditionIndex: 0 } );
 
-		expect( state.conditionRow.valueData.value ).toBe( expectedValue );
+		expect( state.conditionRows[ 0 ].valueData.value ).toBe( expectedValue );
 	} );
 
 	it( 'setProperty', () => {
 		const expectedProperty = { id: 'P456', label: 'def' };
 		const state: RootState = {
-			conditionRow: {
+			conditionRows: [ {
 				valueData: { value: 'foo' },
 				propertyData: { id: 'P123', label: 'abc' },
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
-			},
+			} ],
 			errors: [],
 		};
 
 		mutations.setProperty( state, expectedProperty );
 
-		expect( state.conditionRow.propertyData ).toBe( expectedProperty );
+		expect( state.conditionRows[ 0 ].propertyData ).toBe( expectedProperty );
 	} );
 
 } );

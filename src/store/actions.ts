@@ -14,8 +14,10 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 		// check for empty
 		return await searchEntityRepository.searchProperties( search, 12 );
 	},
-	updateValue( context: ActionContext<RootState, RootState>, value: string ): void {
-		context.commit( 'setValue', value );
+	updateValue(
+		context: ActionContext<RootState, RootState>,
+		payload: { value: string; conditionIndex: number } ): void {
+		context.commit( 'setValue', payload );
 	},
 	updateProperty( context: ActionContext<RootState, RootState>, property: Property ): void {
 		context.commit( 'setProperty', property );

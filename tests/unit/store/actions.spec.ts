@@ -6,14 +6,15 @@ describe( 'actions', () => {
 	it( 'updateValue', () => {
 		const context = { commit: jest.fn() };
 		const value = 'whatever';
+		const conditionIndex = 0;
 		const actions = createActions(
 			services.get( 'searchEntityRepository' ),
 			services.get( 'metricsCollector' ),
 		);
 
-		actions.updateValue( context as any, value );
+		actions.updateValue( context as any, { value, conditionIndex } );
 
-		expect( context.commit ).toHaveBeenCalledWith( 'setValue', value );
+		expect( context.commit ).toHaveBeenCalledWith( 'setValue', { value, conditionIndex } );
 	} );
 
 	it( 'updateProperty', () => {

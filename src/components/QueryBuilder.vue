@@ -143,8 +143,8 @@ export default Vue.extend( {
 			},
 		},
 		textInputValue: {
-			get(): string { return this.$store.getters.value; },
-			set( value: string ): void { this.$store.dispatch( 'updateValue', value ); },
+			get(): string { return this.$store.getters.value( 0 ); },
+			set( value: string ): void { this.$store.dispatch( 'updateValue', { value, conditionIndex: 0 } ); },
 		},
 		...mapState( {
 			errors: 'errors',
