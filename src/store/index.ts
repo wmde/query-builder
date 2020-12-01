@@ -10,22 +10,24 @@ import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
 Vue.use( Vuex );
 
+const conditionRow = {
+	propertyData: {
+		label: '',
+		id: '',
+	},
+	valueData: {
+		value: '',
+	},
+	propertyValueRelationData: {
+		value: PropertyValueRelation.Matching,
+	},
+};
+
 export function createStore( services: QueryBuilderServices ): Store<RootState> {
 
 	return new Store( {
 		state: {
-			conditionRow: {
-				propertyData: {
-					label: '',
-					id: '',
-				},
-				valueData: {
-					value: '',
-				},
-				propertyValueRelationData: {
-					value: PropertyValueRelation.Matching,
-				},
-			},
+			conditionRows: [ conditionRow ],
 			errors: [],
 		},
 		actions: createActions(

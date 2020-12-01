@@ -23,6 +23,7 @@ function newStore( getters = {} ): Store<any> {
 			property: jest.fn().mockReturnValue( {
 				label: 'potato',
 			} ),
+			value: jest.fn().mockReturnValue( jest.fn() ),
 			...getters,
 		},
 	} );
@@ -66,6 +67,7 @@ describe( 'QueryBuilder.vue', () => {
 
 	it( 'updates the store value when the user fills in the value textfield', () => {
 		const store = newStore();
+		const conditionIndex = 0;
 		store.dispatch = jest.fn();
 		const wrapper = shallowMount( QueryBuilder, {
 			store,
@@ -73,10 +75,10 @@ describe( 'QueryBuilder.vue', () => {
 		} );
 		const userInput = 'potato';
 
-		const input = wrapper.findComponent( { ref: 'value' } );
+		const input = wrapper.findAllComponents( { ref: 'value' } ).at( conditionIndex );
 		input.vm.$emit( 'input', userInput );
 
-		expect( store.dispatch ).toHaveBeenCalledWith( 'updateValue', userInput );
+		expect( store.dispatch ).toHaveBeenCalledWith( 'updateValue', { value: userInput, conditionIndex } );
 	} );
 
 	it( 'Get field errors', () => {
