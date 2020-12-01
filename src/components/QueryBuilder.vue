@@ -93,7 +93,6 @@ export default Vue.extend( {
 		validateForLimitedSupport( selectedProperty: SearchResult ): void {
 			this.limitedSupport = false;
 			this.fieldErrors.property = null;
-			this.selectedPropertyValueRelation = PropertyValueRelation.Matching;
 			if ( selectedProperty && !allowedDatatypes.includes( selectedProperty.datatype ) ) {
 				this.selectedPropertyValueRelation = PropertyValueRelation.Regardless;
 				this.limitedSupport = true;
@@ -120,6 +119,7 @@ export default Vue.extend( {
 				return this.$store.getters.property;
 			},
 			set( selectedProperty: SearchResult ): void {
+				this.selectedPropertyValueRelation = PropertyValueRelation.Matching;
 				this.validateForLimitedSupport( selectedProperty );
 				this.$store.dispatch( 'updateProperty', selectedProperty );
 			},
