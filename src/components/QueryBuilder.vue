@@ -10,26 +10,7 @@
 		<div role="form">
 			<h2 class="querybuilder__find-title"
 				v-i18n="{msg: 'query-builder-find-all-items'}" />
-			<div class="querybuilder__rule">
-				<PropertyLookup
-					v-model="selectedProperty"
-					:error="fieldErrors.property"
-				/>
-				<ValueTypeDropDown
-					v-model="selectedPropertyValueRelation"
-					:disabled="limitedSupport"
-				/>
-				<TextInput
-					class="querybuilder__rule__value"
-					:label="$i18n('query-builder-input-value-label')"
-					ref="value"
-					v-model="textInputValue"
-					:error="fieldErrors.value ?
-						{message: $i18n(fieldErrors.value.message), type: fieldErrors.value.type}: null"
-					:placeholder="$i18n('query-builder-input-value-placeholder')"
-					:disabled="selectedPropertyValueRelation === propertyValueRelation.Regardless"
-				/>
-			</div>
+			<QueryCondition/>
 			<div class="querybuilder__run">
 				<Button
 					@click.native="runQuery"
@@ -47,17 +28,12 @@
 <script lang="ts">
 import Vue from 'vue';
 import { mapState } from 'vuex';
-import { Button, TextInput } from '@wmde/wikit-vue-components';
+import { Button } from '@wmde/wikit-vue-components';
 
-import PropertyLookup from '@/components/PropertyLookup.vue';
-import ValueTypeDropDown from '@/components/ValueTypeDropDown.vue';
+import QueryCondition from '@/components/QueryCondition.vue';
 import QueryResult from '@/components/QueryResult.vue';
-import SearchResult from '@/data-access/SearchResult';
-import PropertyValueRelation from '@/data-model/PropertyValueRelation';
-import Error from '@/data-model/Error';
 import buildQuery from '@/sparql/buildQuery';
 import Validator from '@/form/Validator';
-import allowedDatatypes from '@/allowedDataTypes';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -65,13 +41,6 @@ export default Vue.extend( {
 		return {
 			encodedQuery: '',
 			iframeRenderKey: 0,
-			fieldErrors: {
-				property: null as null | Error,
-				value: null as null | Error,
-			},
-			selectedOption: '',
-			limitedSupport: false,
-			propertyValueRelation: PropertyValueRelation,
 		};
 	},
 	created() {
@@ -82,31 +51,17 @@ export default Vue.extend( {
 			this.$store.dispatch( 'incrementMetric', metric );
 		},
 		validate(): void {
+			// TODO: Clean up FormValue <-> Query relation
 			const formValues = {
-				property: this.selectedProperty,
-				value: this.textInputValue,
-				propertyValueRelation: this.selectedPropertyValueRelation,
+				property: this.$store.getters.query.condition.propertyId,
+				value: this.$store.getters.query.condition.value,
+				propertyValueRelation: this.$store.getters.query.condition.propertyValueRelation,
 			};
 			const validator = new Validator( formValues );
 			const validationResult = validator.validate();
 			this.errors = validationResult.formErrors;
 			this.$store.dispatch( 'setErrors', validationResult.formErrors );
-			this.fieldErrors = validationResult.fieldErrors;
-			if ( this.selectedProperty !== null ) {
-				this.validateForLimitedSupport( this.selectedProperty );
-			}
-		},
-		validateForLimitedSupport( selectedProperty: SearchResult ): void {
-			this.limitedSupport = false;
-			this.fieldErrors.property = null;
-			if ( selectedProperty && !allowedDatatypes.includes( selectedProperty.datatype ) ) {
-				this.selectedPropertyValueRelation = PropertyValueRelation.Regardless;
-				this.limitedSupport = true;
-				this.fieldErrors.property = {
-					type: 'warning',
-					message: 'query-builder-property-lookup-limited-support-note',
-				};
-			}
+
 		},
 		runQuery(): void {
 			this.validate();
@@ -121,44 +76,14 @@ export default Vue.extend( {
 		},
 	},
 	computed: {
-		selectedProperty: {
-			get(): SearchResult | null {
-				return this.$store.getters.property( 0 );
-			},
-			set( selectedProperty: SearchResult ): void {
-				this.selectedPropertyValueRelation = PropertyValueRelation.Matching;
-				this.validateForLimitedSupport( selectedProperty );
-				this.$store.dispatch( 'updateProperty', { property: selectedProperty, conditionIndex: 0 } );
-			},
-		},
-		selectedPropertyValueRelation: {
-			get(): PropertyValueRelation {
-				return this.$store.getters.propertyValueRelation( 0 );
-			},
-			set( selectedPropertyValueRelation: PropertyValueRelation ): void {
-				if ( selectedPropertyValueRelation === PropertyValueRelation.Regardless ) {
-					this.textInputValue = '';
-				}
-				this.$store.dispatch(
-					'updatePropertyValueRelation',
-					{ propertyValueRelation: selectedPropertyValueRelation, conditionIndex: 0 },
-				);
-			},
-		},
-		textInputValue: {
-			get(): string { return this.$store.getters.value( 0 ); },
-			set( value: string ): void { this.$store.dispatch( 'updateValue', { value, conditionIndex: 0 } ); },
-		},
 		...mapState( {
 			errors: 'errors',
 		} ),
 	},
 	components: {
 		Button,
-		TextInput,
 		QueryResult,
-		PropertyLookup,
-		ValueTypeDropDown,
+		QueryCondition,
 	},
 } );
 </script>
@@ -206,17 +131,6 @@ a {
 	line-height: $font-line-height-style-heading;
 	color: $font-color-base;
 	margin-block-start: $dimension-static-size-500;
-}
-
-.querybuilder__rule {
-	display: flex;
-	margin-block-start: $dimension-layout-medium;
-	padding-block: $dimension-layout-xsmall;
-	padding-inline: $dimension-layout-medium;
-}
-
-.querybuilder__rule__value {
-	margin-inline-start: $dimension-layout-xsmall;
 }
 
 .querybuilder__run {
