@@ -14,15 +14,16 @@ export default {
 			},
 		};
 	},
-	property( rootState: RootState ): Property | null {
-		if ( !rootState.conditionRows[ 0 ].propertyData?.id ) {
-			return null;
-		}
-		return rootState.conditionRows[ 0 ].propertyData;
+	property( rootState: RootState ) {
+		return ( conditionIndex: number ): ( Property | null ) => {
+			if ( !rootState.conditionRows[ conditionIndex ].propertyData?.id ) {
+				return null;
+			}
+			return rootState.conditionRows[ conditionIndex ].propertyData;
+		};
 	},
 	value( rootState: RootState ) {
 		return ( conditionIndex: number ): string => {
-
 			return rootState.conditionRows[ conditionIndex ].valueData.value;
 		};
 	},

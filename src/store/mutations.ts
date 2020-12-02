@@ -7,8 +7,8 @@ export default {
 	setValue( state: RootState, payload: { value: string; conditionIndex: number } ): void {
 		state.conditionRows[ payload.conditionIndex ].valueData.value = payload.value;
 	},
-	setProperty( state: RootState, property: Property ): void {
-		state.conditionRows[ 0 ].propertyData = property;
+	setProperty( state: RootState, payload: { property: Property; conditionIndex: number } ): void {
+		state.conditionRows[ payload.conditionIndex ].propertyData = payload.property;
 	},
 	setPropertyValueRelation( state: RootState, propertyValueRelation: PropertyValueRelation ): void {
 		state.conditionRows[ 0 ].propertyValueRelationData.value = propertyValueRelation;

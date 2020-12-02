@@ -31,6 +31,8 @@ describe( 'QueryBuilder.vue', () => {
 				},
 				getters: {
 					value: jest.fn().mockReturnValue( jest.fn() ),
+					property: jest.fn().mockReturnValue( jest.fn() ),
+					propertyValueRelation: jest.fn().mockReturnValue( jest.fn() ),
 				},
 			} ),
 			localVue,

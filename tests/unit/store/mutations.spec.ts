@@ -21,6 +21,7 @@ describe( 'mutations', () => {
 	} );
 
 	it( 'setProperty', () => {
+		const conditionIndex = 0;
 		const expectedProperty = { id: 'P456', label: 'def' };
 		const state: RootState = {
 			conditionRows: [ {
@@ -31,9 +32,9 @@ describe( 'mutations', () => {
 			errors: [],
 		};
 
-		mutations.setProperty( state, expectedProperty );
+		mutations.setProperty( state, { property: expectedProperty, conditionIndex } );
 
-		expect( state.conditionRows[ 0 ].propertyData ).toBe( expectedProperty );
+		expect( state.conditionRows[ conditionIndex ].propertyData ).toBe( expectedProperty );
 	} );
 
 } );
