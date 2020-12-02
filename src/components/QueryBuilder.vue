@@ -74,7 +74,13 @@ export default Vue.extend( {
 			propertyValueRelation: PropertyValueRelation,
 		};
 	},
+	created() {
+		this.incrementMetric( 'main-page-loaded' );
+	},
 	methods: {
+		incrementMetric( metric: string ): void {
+			this.$store.dispatch( 'incrementMetric', metric );
+		},
 		validate(): void {
 			const formValues = {
 				property: this.selectedProperty,
@@ -104,6 +110,7 @@ export default Vue.extend( {
 		},
 		runQuery(): void {
 			this.validate();
+			this.incrementMetric( 'run-query-button' );
 			if ( this.errors.length ) {
 				return;
 			}

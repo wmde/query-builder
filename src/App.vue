@@ -8,6 +8,11 @@
 import Vue from 'vue';
 import QueryBuilder from '@/components/QueryBuilder.vue';
 import i18n from 'vue-banana-i18n';
+import services from '@/ServicesFactory';
+
+Vue.config.errorHandler = function () {
+	services.get( 'metricsCollector' ).increment( 'errors' );
+};
 
 export default Vue.extend( {
 	data() {

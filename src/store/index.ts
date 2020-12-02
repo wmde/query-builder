@@ -30,6 +30,7 @@ export function createStore( services: QueryBuilderServices ): Store<RootState> 
 		},
 		actions: createActions(
 			services.get( 'searchEntityRepository' ),
+			services.get( 'metricsCollector' ),
 		),
 		mutations,
 		getters,

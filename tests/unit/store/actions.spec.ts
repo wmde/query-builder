@@ -1,4 +1,5 @@
 import createActions from '@/store/actions';
+import services from '@/ServicesFactory';
 
 describe( 'actions', () => {
 
@@ -6,7 +7,8 @@ describe( 'actions', () => {
 		const context = { commit: jest.fn() };
 		const value = 'whatever';
 		const actions = createActions(
-			{ searchProperties: jest.fn() },
+			services.get( 'searchEntityRepository' ),
+			services.get( 'metricsCollector' ),
 		);
 
 		actions.updateValue( context as any, value );
@@ -21,7 +23,8 @@ describe( 'actions', () => {
 			label: 'Property label',
 		};
 		const actions = createActions(
-			{ searchProperties: jest.fn() },
+			services.get( 'searchEntityRepository' ),
+			services.get( 'metricsCollector' ),
 		);
 
 		actions.updateProperty( context as any, property );
@@ -35,6 +38,7 @@ describe( 'actions', () => {
 			const searchProperties = jest.fn().mockResolvedValue( expectedResult );
 			const actions = createActions(
 				{ searchProperties },
+				services.get( 'metricsCollector' ),
 			);
 			const searchString = 'postal';
 
@@ -45,4 +49,17 @@ describe( 'actions', () => {
 		} );
 	} );
 
+	describe( 'incrementMetric', () => {
+		it( 'increments metric', async () => {
+			const increment = jest.fn();
+			const actions = createActions(
+				services.get( 'searchEntityRepository' ),
+				{ increment },
+			);
+
+			await actions.incrementMetric( {} as any, 'foo' );
+
+			expect( increment ).toHaveBeenCalledWith( 'foo' );
+		} );
+	} );
 } );
