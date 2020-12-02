@@ -28,7 +28,8 @@ function newStore( getters = {} ): Store<any> {
 			...getters,
 		},
 		actions: createActions(
-			services,
+			services.get( 'searchEntityRepository' ),
+			services.get( 'metricsCollector' ),
 		),
 	} );
 }
