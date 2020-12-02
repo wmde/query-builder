@@ -20,9 +20,7 @@ Vue.use( i18n, {
 function newStore( getters = {} ): Store<any> {
 	return new Vuex.Store( {
 		getters: {
-			property: jest.fn().mockReturnValue( {
-				label: 'potato',
-			} ),
+			property: jest.fn().mockReturnValue( jest.fn() ),
 			value: jest.fn().mockReturnValue( jest.fn() ),
 			...getters,
 		},
@@ -41,28 +39,32 @@ describe( 'QueryBuilder.vue', () => {
 
 	it( 'passes the selected property back to the PropertyLookup', async () => {
 		const property = { label: 'postal code', id: 'P123' };
-		const wrapper = shallowMount( QueryBuilder, {
-			store: newStore( {
-				property: jest.fn().mockReturnValue( property ),
-			} ),
-			localVue,
-		} );
+		const conditionIndex = 0;
+		const propertyGetter = () => () => ( property );
 
-		expect( wrapper.findComponent( PropertyLookup ).props( 'value' ) ).toBe( property );
+		const wrapper = shallowMount( QueryBuilder, { store: newStore( { property: propertyGetter } ), localVue } );
+
+		expect(
+			wrapper.findAllComponents( PropertyLookup )
+				.at( conditionIndex )
+				.props( 'value' ),
+		).toStrictEqual( property );
 	} );
 
 	it( 'updates the store property when the user changes it in the lookup', async () => {
 		const property = { label: 'postal code', id: 'P123' };
-		const store = newStore();
+		const propertyGetter = () => () => ( property );
+		const store = newStore( propertyGetter );
+		const conditionIndex = 0;
 		store.dispatch = jest.fn();
 		const wrapper = shallowMount( QueryBuilder, {
 			store,
 			localVue,
 		} );
 
-		wrapper.findComponent( PropertyLookup ).vm.$emit( 'input', property );
+		wrapper.findAllComponents( PropertyLookup ).at( conditionIndex ).vm.$emit( 'input', property );
 
-		expect( store.dispatch ).toHaveBeenCalledWith( 'updateProperty', property );
+		expect( store.dispatch ).toHaveBeenCalledWith( 'updateProperty', { property, conditionIndex } );
 	} );
 
 	it( 'updates the store value when the user fills in the value textfield', () => {

@@ -21,13 +21,14 @@ describe( 'actions', () => {
 			id: 'P666',
 			label: 'Property label',
 		};
+		const conditionIndex = 0;
 		const actions = createActions(
 			{ searchProperties: jest.fn() },
 		);
 
-		actions.updateProperty( context as any, property );
+		actions.updateProperty( context as any, { property, conditionIndex } );
 
-		expect( context.commit ).toHaveBeenCalledWith( 'setProperty', property );
+		expect( context.commit ).toHaveBeenCalledWith( 'setProperty', { property, conditionIndex } );
 	} );
 
 	describe( 'searchProperties', () => {

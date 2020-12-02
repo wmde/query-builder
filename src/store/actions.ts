@@ -18,8 +18,9 @@ export default ( searchEntityRepository: SearchEntityRepository ) => ( {
 		payload: { value: string; conditionIndex: number } ): void {
 		context.commit( 'setValue', payload );
 	},
-	updateProperty( context: ActionContext<RootState, RootState>, property: Property ): void {
-		context.commit( 'setProperty', property );
+	updateProperty( context: ActionContext<RootState, RootState>,
+		payload: { property: Property; conditionIndex: number } ): void {
+		context.commit( 'setProperty', payload );
 	},
 	updatePropertyValueRelation( context: ActionContext<RootState, RootState>,
 		propertyValueRelation: PropertyValueRelation ): void {

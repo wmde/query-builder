@@ -116,12 +116,12 @@ export default Vue.extend( {
 	computed: {
 		selectedProperty: {
 			get(): SearchResult | null {
-				return this.$store.getters.property;
+				return this.$store.getters.property( 0 );
 			},
 			set( selectedProperty: SearchResult ): void {
 				this.selectedPropertyValueRelation = PropertyValueRelation.Matching;
 				this.validateForLimitedSupport( selectedProperty );
-				this.$store.dispatch( 'updateProperty', selectedProperty );
+				this.$store.dispatch( 'updateProperty', { property: selectedProperty, conditionIndex: 0 } );
 			},
 		},
 		selectedPropertyValueRelation: {
