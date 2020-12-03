@@ -27,8 +27,10 @@ export default {
 			return rootState.conditionRows[ conditionIndex ].valueData.value;
 		};
 	},
-	propertyValueRelation( rootState: RootState ): PropertyValueRelation {
-		return rootState.conditionRows[ 0 ].propertyValueRelationData.value;
+	propertyValueRelation( rootState: RootState ) {
+		return ( conditionIndex: number ): PropertyValueRelation => {
+			return rootState.conditionRows[ conditionIndex ].propertyValueRelationData.value;
+		};
 	},
 	getErrors( rootState: RootState ): Error[] {
 		return rootState.errors;

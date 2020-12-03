@@ -10,8 +10,9 @@ export default {
 	setProperty( state: RootState, payload: { property: Property; conditionIndex: number } ): void {
 		state.conditionRows[ payload.conditionIndex ].propertyData = payload.property;
 	},
-	setPropertyValueRelation( state: RootState, propertyValueRelation: PropertyValueRelation ): void {
-		state.conditionRows[ 0 ].propertyValueRelationData.value = propertyValueRelation;
+	setPropertyValueRelation( state: RootState,
+		payload: { propertyValueRelation: PropertyValueRelation; conditionIndex: number } ): void {
+		state.conditionRows[ payload.conditionIndex ].propertyValueRelationData.value = payload.propertyValueRelation;
 	},
 	setErrors( state: RootState, errors: Error[] ): void {
 		state.errors = errors;

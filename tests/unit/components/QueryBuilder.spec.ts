@@ -22,6 +22,7 @@ function newStore( getters = {} ): Store<any> {
 		getters: {
 			property: jest.fn().mockReturnValue( jest.fn() ),
 			value: jest.fn().mockReturnValue( jest.fn() ),
+			propertyValueRelation: jest.fn().mockReturnValue( jest.fn() ),
 			...getters,
 		},
 	} );
