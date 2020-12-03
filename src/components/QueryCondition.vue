@@ -1,5 +1,5 @@
 <template>
-	<div class="querybuilder__rule" :fieldErrorsrrr="fieldErrorsrrr">
+	<div class="querybuilder__rule">
 		<PropertyLookup
 			v-model="selectedProperty"
 			:error="fieldErrors.property"
@@ -23,7 +23,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { mapState } from 'vuex';
 import { TextInput } from '@wmde/wikit-vue-components';
 
 import PropertyLookup from '@/components/PropertyLookup.vue';
@@ -102,9 +101,6 @@ export default Vue.extend( {
 			get(): string { return this.$store.getters.value( 0 ); },
 			set( value: string ): void { this.$store.dispatch( 'updateValue', { value, conditionIndex: 0 } ); },
 		},
-		...mapState( {
-			errors: 'errors',
-		} ),
 	},
 	watch: {
 		'$store.state.errors': function (): void {
