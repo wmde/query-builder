@@ -30,6 +30,7 @@
 					:disabled="selectedPropertyValueRelation === propertyValueRelation.Regardless"
 				/>
 			</div>
+			<AddCondition />
 			<div class="querybuilder__run">
 				<Button
 					@click.native="runQuery"
@@ -58,6 +59,7 @@ import Error from '@/data-model/Error';
 import buildQuery from '@/sparql/buildQuery';
 import Validator from '@/form/Validator';
 import allowedDatatypes from '@/allowedDataTypes';
+import AddCondition from '@/components/AddCondition.vue';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -159,6 +161,7 @@ export default Vue.extend( {
 		QueryResult,
 		PropertyLookup,
 		ValueTypeDropDown,
+		AddCondition,
 	},
 } );
 </script>
