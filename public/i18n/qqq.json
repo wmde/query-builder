@@ -18,5 +18,6 @@
 	"query-builder-result-error-empty-form": "Error message when the form is empty",
 	"query-builder-result-error-incomplete-form": "Error message when the form is incomplete",
 	"query-builder-result-error-missing-property": "Error when property is missing",
-	"query-builder-result-error-missing-value": "Error when value is missing"
+	"query-builder-result-error-missing-value": "Error when value is missing",
+	"query-builder-add-condition": "Text on the button that adds a condition" 
 }
