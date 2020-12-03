@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"query-builder-heading": "Costrutture de 'nderrogaziune semblice",
+	"query-builder-find-all-items": "Iacchie tutte le vôsce...",
+	"query-builder-run-query": "Lange l'inderrogazzione.",
+	"query-builder-input-value-label": "Valore",
+	"query-builder-input-value-placeholder": "Mitte 'nu valore",
+	"query-builder-property-lookup-label": "Probbietà",
+	"query-builder-property-lookup-placeholder": "Mitte 'na probbietà",
+	"query-builder-property-lookup-no-match-found": "Non g'agghie acchiate ninde",
+	"query-builder-property-lookup-limited-support-tag": "supporte limitate",
+	"query-builder-property-lookup-limited-support-note": "Le porbbietà cu supporte limitate non ge ponne essere filtrate pe valore",
+	"query-builder-result-placeholder": "Le resultate iessene aqquà",
+	"query-builder-result-error-empty-form": "'Ndruche cumme 'u Costruttore de 'nderrogaziune ere vacande, pe piacere mitte 'na 'nderrogazione valide apprime, e pò pruève arrete.",
+	"query-builder-result-error-incomplete-form": "Une o cchiù cambe so vacande. Pe piacere comblete 'a 'nderrogazione o scacchie 'nu enghiatore d'u tipe de cambe.",
+	"query-builder-result-error-missing-property": "Pe piacere scacchie 'na probbietà",
+	"query-builder-result-error-missing-value": "Pe piacere mitte 'nu valore"
+}

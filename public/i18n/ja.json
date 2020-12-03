@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Omotecho"
+		]
+	},
+	"query-builder-find-all-items": "すべての項目を検索……",
+	"query-builder-run-query": "クエリを実行",
+	"query-builder-input-value-label": "値",
+	"query-builder-input-value-placeholder": "値を入力",
+	"query-builder-property-lookup-label": "プロパティ",
+	"query-builder-property-lookup-placeholder": "プロパティを入力",
+	"query-builder-property-lookup-no-match-found": "該当するものはありません",
+	"query-builder-result-placeholder": "結果はここに表示されます",
+	"query-builder-result-error-empty-form": "クエリビルダーが空欄のようですので、まず有効なクエリを入力し、次にもう一度、実行してください。",
+	"query-builder-result-error-incomplete-form": "空欄が1つ以上あります。クエリを完了するか、または欄に適切なタイプを選んでください。",
+	"query-builder-result-error-missing-property": "プロパティを選択してください",
+	"query-builder-result-error-missing-value": "値を入力してください"
+}
