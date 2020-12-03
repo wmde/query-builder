@@ -133,13 +133,16 @@ export default Vue.extend( {
 		},
 		selectedPropertyValueRelation: {
 			get(): PropertyValueRelation {
-				return this.$store.getters.propertyValueRelation;
+				return this.$store.getters.propertyValueRelation( 0 );
 			},
 			set( selectedPropertyValueRelation: PropertyValueRelation ): void {
 				if ( selectedPropertyValueRelation === PropertyValueRelation.Regardless ) {
 					this.textInputValue = '';
 				}
-				this.$store.dispatch( 'updatePropertyValueRelation', selectedPropertyValueRelation );
+				this.$store.dispatch(
+					'updatePropertyValueRelation',
+					{ propertyValueRelation: selectedPropertyValueRelation, conditionIndex: 0 },
+				);
 			},
 		},
 		textInputValue: {

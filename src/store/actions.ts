@@ -24,8 +24,8 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 		context.commit( 'setProperty', payload );
 	},
 	updatePropertyValueRelation( context: ActionContext<RootState, RootState>,
-		propertyValueRelation: PropertyValueRelation ): void {
-		context.commit( 'setPropertyValueRelation', propertyValueRelation );
+		payload: { propertyValueRelation: PropertyValueRelation; conditionIndex: number } ): void {
+		context.commit( 'setPropertyValueRelation', payload );
 	},
 	setErrors( context: ActionContext<RootState, RootState>, errors: Error[] ): void {
 		context.commit( 'setErrors', errors );
