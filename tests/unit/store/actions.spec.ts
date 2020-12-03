@@ -1,5 +1,6 @@
 import createActions from '@/store/actions';
 import services from '@/ServicesFactory';
+import SearchOptions from '@/data-access/SearchOptions';
 
 describe( 'actions', () => {
 
@@ -44,11 +45,15 @@ describe( 'actions', () => {
 				{ searchProperties },
 				services.get( 'metricsCollector' ),
 			);
-			const searchString = 'postal';
 
-			const actualResult = await actions.searchProperties( {} as any, searchString );
+			const searchOptions: SearchOptions = { search: 'postal', limit: 12 };
+			const actualResult = await actions.searchProperties( {} as any, searchOptions );
 
-			expect( searchProperties ).toHaveBeenCalledWith( searchString, 12 );
+			expect( searchProperties ).toHaveBeenCalledWith(
+				searchOptions.search,
+				searchOptions.limit,
+				searchOptions.offset,
+			);
 			expect( actualResult ).toStrictEqual( expectedResult );
 		} );
 
@@ -68,7 +73,8 @@ describe( 'actions', () => {
 				services.get( 'metricsCollector' ),
 			);
 
-			const actualResult = await actions.searchProperties( {} as any, 'searchString' );
+			const searchOptions: SearchOptions = { search: 'postal', limit: 12 };
+			const actualResult = await actions.searchProperties( {} as any, searchOptions );
 
 			expect( actualResult ).toStrictEqual( expectedResult );
 		} );

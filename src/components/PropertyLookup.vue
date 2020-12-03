@@ -7,6 +7,7 @@
 		:search-input.sync="search"
 		:placeholder="$i18n('query-builder-property-lookup-placeholder')"
 		:label="$i18n('query-builder-property-lookup-label')"
+		v-on:scroll="handleScroll"
 	>
 		<template
 			v-slot:no-results
@@ -21,6 +22,7 @@ import Vue, { PropType } from 'vue';
 
 import { Lookup } from '@wmde/wikit-vue-components';
 import SearchResult from '@/data-access/SearchResult';
+import SearchOptions from '@/data-access/SearchOptions';
 
 export default Vue.extend( {
 	name: 'PropertyLookup',
@@ -31,11 +33,30 @@ export default Vue.extend( {
 		return {
 			search: '',
 			searchResults: [],
+			topItemIndex: 1,
+			scrollpropertiesSearchResults: [],
+			searchOptions: {} as SearchOptions,
 		};
+	},
+	methods: {
+		handleScroll( event: number ): void {
+			if ( event <= this.topItemIndex ) {
+				this.searchOptions.search = this.search;
+				this.searchOptions.offset = this.topItemIndex;
+
+				this.searchPropertiesOnScroll( this.searchOptions );
+				this.searchResults = this.searchResults.concat( this.scrollpropertiesSearchResults );
+				this.topItemIndex += 13;
+			}
+		},
+		async searchPropertiesOnScroll( options: SearchOptions ): Promise<void> {
+			this.scrollpropertiesSearchResults = await this.$store.dispatch( 'searchProperties', options );
+		},
 	},
 	watch: {
 		async search( newSearchString: string ): Promise<void> {
-			const searchResults = await this.$store.dispatch( 'searchProperties', newSearchString );
+			this.searchOptions.search = newSearchString;
+			const searchResults = await this.$store.dispatch( 'searchProperties', this.searchOptions );
 			this.searchResults = searchResults.map(
 				( item: MenuItem & SearchResult ) => {
 					item.tag = item.tag && this.$i18n( item.tag );
