@@ -17,13 +17,13 @@
 
 <script lang="ts">
 import { MenuItem } from '@wmde/wikit-vue-components/dist/components/MenuItem';
-import Vue, { PropType, VueConstructor } from 'vue';
+import Vue, { PropType } from 'vue';
 
 import { Lookup } from '@wmde/wikit-vue-components';
 import allowedDatatypes from '@/allowedDataTypes';
 import SearchResult from '@/data-access/SearchResult';
 
-export default ( Vue as VueConstructor<Vue & { $i18n: ( i: string ) => string }> ).extend( {
+export default Vue.extend( {
 	name: 'PropertyLookup',
 	components: {
 		Lookup,
