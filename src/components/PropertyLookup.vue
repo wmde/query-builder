@@ -20,7 +20,6 @@ import { MenuItem } from '@wmde/wikit-vue-components/dist/components/MenuItem';
 import Vue, { PropType } from 'vue';
 
 import { Lookup } from '@wmde/wikit-vue-components';
-import allowedDatatypes from '@/allowedDataTypes';
 import SearchResult from '@/data-access/SearchResult';
 
 export default Vue.extend( {
@@ -37,12 +36,12 @@ export default Vue.extend( {
 	watch: {
 		async search( newSearchString: string ): Promise<void> {
 			const searchResults = await this.$store.dispatch( 'searchProperties', newSearchString );
-			this.searchResults = searchResults.map( ( key: MenuItem & SearchResult ) => {
-				if ( !allowedDatatypes.includes( key.datatype ) ) {
-					key.tag = this.$i18n( 'query-builder-property-lookup-limited-support-tag' );
-				}
-				return key;
-			} );
+			this.searchResults = searchResults.map(
+				( item: MenuItem & SearchResult ) => {
+					item.tag = item.tag && this.$i18n( item.tag );
+					return item;
+				},
+			);
 		},
 	},
 	props: {
