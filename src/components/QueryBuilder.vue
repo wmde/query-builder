@@ -12,6 +12,7 @@
 				v-i18n="{msg: 'query-builder-find-all-items'}" />
 			<QueryCondition
 				ref="condition"/>
+			<AddCondition />
 			<div class="querybuilder__run">
 				<Button
 					@click.native="runQuery"
@@ -35,6 +36,7 @@ import QueryCondition from '@/components/QueryCondition.vue';
 import QueryResult from '@/components/QueryResult.vue';
 import buildQuery from '@/sparql/buildQuery';
 import Validator from '@/form/Validator';
+import AddCondition from '@/components/AddCondition.vue';
 
 export default ( Vue as VueConstructor<Vue & { $refs: { condition: InstanceType<typeof QueryCondition> } }> ).extend( {
 	name: 'QueryBuilder',
@@ -87,6 +89,7 @@ export default ( Vue as VueConstructor<Vue & { $refs: { condition: InstanceType<
 		Button,
 		QueryResult,
 		QueryCondition,
+		AddCondition,
 	},
 } );
 </script>
