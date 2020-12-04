@@ -16,11 +16,13 @@ describe( 'getters', () => {
 			};
 
 			const expectedValue: QueryRepresentation = {
-				condition: {
-					propertyId: 'P123',
-					value: 'foo',
-					propertyValueRelation: PropertyValueRelation.Matching,
-				},
+				conditions: [
+					{
+						propertyId: 'P123',
+						value: 'foo',
+						propertyValueRelation: PropertyValueRelation.Matching,
+					},
+				],
 			};
 
 			expect( getters.query( state ) ).toStrictEqual( expectedValue );

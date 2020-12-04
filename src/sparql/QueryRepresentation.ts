@@ -7,5 +7,5 @@ export type Condition = {
 };
 
 export default interface QueryRepresentation {
-	condition: Condition;
+	conditions: Condition[];
 }
