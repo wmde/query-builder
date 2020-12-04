@@ -1,3 +1,4 @@
+import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import { TextInput } from '@wmde/wikit-vue-components';
 import Vuex, { Store } from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
@@ -20,7 +21,9 @@ function newStore( getters = {} ): Store<any> {
 		getters: {
 			property: jest.fn().mockReturnValue( jest.fn() ),
 			value: jest.fn().mockReturnValue( jest.fn() ),
-			propertyValueRelation: jest.fn().mockReturnValue( jest.fn() ),
+			propertyValueRelation: jest.fn().mockReturnValue(
+				jest.fn().mockReturnValue( PropertyValueRelation.Matching ),
+			),
 			...getters,
 		},
 		actions: createActions(

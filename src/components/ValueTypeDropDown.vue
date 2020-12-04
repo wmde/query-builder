@@ -6,7 +6,8 @@
 		</label>
 		<Dropdown
 			class="querybuilder__dropdown-select"
-			v-model="selectedItem"
+			@input="onInput"
+			:value="selected"
 			aria-labelledby="valueTypeSelect"
 			:menuItems="optionItems"
 		/>
@@ -15,49 +16,42 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { PropType } from 'vue';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
-
+import { MenuItem } from '@wmde/wikit-vue-components/dist/components/MenuItem';
 import { Dropdown } from '@wmde/wikit-vue-components';
+
+interface PropertyValueRelationMenuItem extends MenuItem {
+	value: PropertyValueRelation;
+}
 
 export default Vue.extend( {
 	name: 'ValueTypeDropDown',
-	data() {
-		return {
-			selectedItem: {
-				label: PropertyValueRelation.Matching,
-				description: '',
-			},
-			optionItems: Object.values( PropertyValueRelation ).map( ( value: PropertyValueRelation ) => {
-				return { label: value, description: '' };
-			} ),
-		};
-	},
 	props: {
 		value: {
-			type: String,
-			default: null,
+			type: String as PropType<PropertyValueRelation>,
+			required: true,
+		},
+	},
+	methods: {
+		onInput( event: PropertyValueRelationMenuItem ): void {
+			this.$emit( 'input', event.value );
 		},
 	},
 	computed: {
-		selected: {
-			get(): PropertyValueRelation {
-				return this.selectedItem.label;
-			},
-			set( selectedOption: PropertyValueRelation ): void {
-				this.selectedItem = {
-					label: selectedOption,
+		optionItems(): PropertyValueRelationMenuItem[] {
+			return Object.values( PropertyValueRelation ).map( ( value: PropertyValueRelation ) => {
+				return {
+					label: value, // FIXME: replace with i18n -> T269453
 					description: '',
+					value,
 				};
-			},
+			} );
 		},
-	},
-	watch: {
-		selected(): void {
-			this.$emit( 'input', this.selected );
-		},
-		value( selectedOption: PropertyValueRelation ): void {
-			this.selected = selectedOption;
+		selected(): PropertyValueRelationMenuItem | null {
+			return this.optionItems.find(
+				( option: PropertyValueRelationMenuItem ) => option.value === this.value,
+			) || null;
 		},
 	},
 	components: {
