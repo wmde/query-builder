@@ -56,7 +56,7 @@ describe( 'PropertyLookup.vue', () => {
 		// it really needs two ticks ¯\_(ツ)_/¯
 		await localVue.nextTick();
 		await localVue.nextTick();
-		expect( wrapper.findComponent( Lookup ).props( 'menuItems' ) ).toBe( searchRsults );
+		expect( wrapper.findComponent( Lookup ).props( 'menuItems' ) ).toStrictEqual( searchRsults );
 	} );
 
 	it( 'passes error prop down to Lookup', () => {

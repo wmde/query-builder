@@ -4,20 +4,12 @@
 			class="querybuilder__dropdown-label">
 			Value Type
 		</label>
-		<select
+		<Dropdown
 			class="querybuilder__dropdown-select"
-			v-model="selected"
+			v-model="selectedItem"
 			aria-labelledby="valueTypeSelect"
-		>
-			<option
-				class="querybuilder__dropdown-option"
-				v-for="(optionItem, index) in optionItems"
-				:value="optionItem"
-				:key="index"
-			>
-				{{ optionItem }}
-			</option>
-		</select>
+			:menuItems="optionItems"
+		/>
 	</div>
 
 </template>
@@ -26,18 +18,38 @@
 import Vue from 'vue';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
+import { Dropdown } from '@wmde/wikit-vue-components';
+
 export default Vue.extend( {
 	name: 'ValueTypeDropDown',
 	data() {
 		return {
-			selected: PropertyValueRelation.Matching,
-			optionItems: PropertyValueRelation,
+			selectedItem: {
+				label: PropertyValueRelation.Matching,
+				description: '',
+			},
+			optionItems: Object.values( PropertyValueRelation ).map( ( value: PropertyValueRelation ) => {
+				return { label: value, description: '' };
+			} ),
 		};
 	},
 	props: {
 		value: {
 			type: String,
 			default: null,
+		},
+	},
+	computed: {
+		selected: {
+			get(): PropertyValueRelation {
+				return this.selectedItem.label;
+			},
+			set( selectedOption: PropertyValueRelation ): void {
+				this.selectedItem = {
+					label: selectedOption,
+					description: '',
+				};
+			},
 		},
 	},
 	watch: {
@@ -48,6 +60,9 @@ export default Vue.extend( {
 			this.selected = selectedOption;
 		},
 	},
+	components: {
+		Dropdown,
+	},
 } );
 </script>
 <style scoped lang="scss">
@@ -57,12 +72,7 @@ export default Vue.extend( {
 			width: 256px;
 			height: 32px;
 			margin-inline-start: $dimension-layout-xsmall;
-			margin-block-start: 23px;
-			border-color: #a2a9b1;
-			border-style: solid;
-			border-width: 1px;
-			border-radius: 2px;
-			appearance: auto;
+			margin-block-start: 21px;
 		}
 
 		&-label {

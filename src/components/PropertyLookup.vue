@@ -17,11 +17,13 @@
 
 <script lang="ts">
 import { MenuItem } from '@wmde/wikit-vue-components/dist/components/MenuItem';
-import Vue, { PropType } from 'vue';
+import Vue, { PropType, VueConstructor } from 'vue';
 
 import { Lookup } from '@wmde/wikit-vue-components';
+import allowedDatatypes from '@/allowedDataTypes';
+import SearchResult from '@/data-access/SearchResult';
 
-export default Vue.extend( {
+export default ( Vue as VueConstructor<Vue & { $i18n: ( i: string ) => string }> ).extend( {
 	name: 'PropertyLookup',
 	components: {
 		Lookup,
@@ -34,7 +36,13 @@ export default Vue.extend( {
 	},
 	watch: {
 		async search( newSearchString: string ): Promise<void> {
-			this.searchResults = await this.$store.dispatch( 'searchProperties', newSearchString );
+			const searchResults = await this.$store.dispatch( 'searchProperties', newSearchString );
+			this.searchResults = searchResults.map( ( key: MenuItem & SearchResult ) => {
+				if ( !allowedDatatypes.includes( key.datatype ) ) {
+					key.tag = this.$i18n( 'query-builder-property-lookup-limited-support-tag' );
+				}
+				return key;
+			} );
 		},
 	},
 	props: {
