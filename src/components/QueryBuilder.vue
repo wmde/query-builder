@@ -12,6 +12,7 @@
 				v-i18n="{msg: 'query-builder-find-all-items'}" />
 			<QueryCondition
 				ref="condition"/>
+			<AddCondition />
 			<div class="querybuilder__run">
 				<Button
 					@click.native="runQuery"
@@ -35,6 +36,8 @@ import QueryCondition from '@/components/QueryCondition.vue';
 import QueryResult from '@/components/QueryResult.vue';
 import buildQuery from '@/sparql/buildQuery';
 import Validator from '@/form/Validator';
+import AddCondition from '@/components/AddCondition.vue';
+import { Condition } from '@/sparql/QueryRepresentation';
 
 export default ( Vue as VueConstructor<Vue & { $refs: { condition: InstanceType<typeof QueryCondition> } }> ).extend( {
 	name: 'QueryBuilder',
@@ -53,12 +56,14 @@ export default ( Vue as VueConstructor<Vue & { $refs: { condition: InstanceType<
 		},
 		validate(): void {
 			// TODO: Clean up FormValue <-> Query relation
-			const formValues = {
-				property: this.$store.getters.query.condition.propertyId,
-				value: this.$store.getters.query.condition.value,
-				propertyValueRelation: this.$store.getters.query.condition.propertyValueRelation,
-			};
-			const validator = new Validator( formValues );
+			const formValues = this.$store.getters.query.conditions.map( ( condition: Condition ) => {
+				return {
+					property: condition.propertyId,
+					value: condition.value,
+					propertyValueRelation: condition.propertyValueRelation,
+				};
+			} );
+			const validator = new Validator( formValues[ 0 ] );
 			const validationResult = validator.validate();
 			this.errors = validationResult.formErrors;
 			this.$store.dispatch( 'setErrors', validationResult.formErrors );
@@ -87,6 +92,7 @@ export default ( Vue as VueConstructor<Vue & { $refs: { condition: InstanceType<
 		Button,
 		QueryResult,
 		QueryCondition,
+		AddCondition,
 	},
 } );
 </script>
