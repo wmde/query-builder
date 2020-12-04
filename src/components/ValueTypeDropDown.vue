@@ -4,67 +4,64 @@
 			class="querybuilder__dropdown-label">
 			Value Type
 		</label>
-		<select
+		<Dropdown
 			class="querybuilder__dropdown-select"
-			v-model="selected"
+			@input="onInput"
+			:value="selected"
 			aria-labelledby="valueTypeSelect"
-		>
-			<option
-				class="querybuilder__dropdown-option"
-				v-for="(optionItem, index) in optionItems"
-				:value="optionItem"
-				:key="index"
-			>
-				{{ optionItem }}
-			</option>
-		</select>
+			:menuItems="optionItems"
+		/>
 	</div>
 
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { PropType } from 'vue';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
+import { MenuItem } from '@wmde/wikit-vue-components/dist/components/MenuItem';
+import { Dropdown } from '@wmde/wikit-vue-components';
+
+interface PropertyValueRelationMenuItem extends MenuItem {
+	value: PropertyValueRelation;
+}
 
 export default Vue.extend( {
 	name: 'ValueTypeDropDown',
-	data() {
-		return {
-			selected: PropertyValueRelation.Matching,
-			optionItems: PropertyValueRelation,
-		};
-	},
 	props: {
 		value: {
-			type: String,
-			default: null,
+			type: String as PropType<PropertyValueRelation>,
+			required: true,
 		},
 	},
-	watch: {
-		selected(): void {
-			this.$emit( 'input', this.selected );
+	methods: {
+		onInput( event: PropertyValueRelationMenuItem ): void {
+			this.$emit( 'input', event.value );
 		},
-		value( selectedOption: PropertyValueRelation ): void {
-			this.selected = selectedOption;
+	},
+	computed: {
+		optionItems(): PropertyValueRelationMenuItem[] {
+			return Object.values( PropertyValueRelation ).map( ( value: PropertyValueRelation ) => {
+				return {
+					label: value, // FIXME: replace with i18n -> T269453
+					description: '',
+					value,
+				};
+			} );
 		},
+		selected(): PropertyValueRelationMenuItem | null {
+			return this.optionItems.find(
+				( option: PropertyValueRelationMenuItem ) => option.value === this.value,
+			) || null;
+		},
+	},
+	components: {
+		Dropdown,
 	},
 } );
 </script>
 <style scoped lang="scss">
 	// will be removed once dropdown component is implemented in the DS
 	.querybuilder__dropdown {
-		&-select {
-			width: 256px;
-			height: 32px;
-			margin-inline-start: $dimension-layout-xsmall;
-			margin-block-start: 23px;
-			border-color: #a2a9b1;
-			border-style: solid;
-			border-width: 1px;
-			border-radius: 2px;
-			appearance: auto;
-		}
-
 		&-label {
 			position: absolute;
 			width: 1px;

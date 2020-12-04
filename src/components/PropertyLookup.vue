@@ -20,6 +20,7 @@ import { MenuItem } from '@wmde/wikit-vue-components/dist/components/MenuItem';
 import Vue, { PropType } from 'vue';
 
 import { Lookup } from '@wmde/wikit-vue-components';
+import SearchResult from '@/data-access/SearchResult';
 
 export default Vue.extend( {
 	name: 'PropertyLookup',
@@ -34,7 +35,13 @@ export default Vue.extend( {
 	},
 	watch: {
 		async search( newSearchString: string ): Promise<void> {
-			this.searchResults = await this.$store.dispatch( 'searchProperties', newSearchString );
+			const searchResults = await this.$store.dispatch( 'searchProperties', newSearchString );
+			this.searchResults = searchResults.map(
+				( item: MenuItem & SearchResult ) => {
+					item.tag = item.tag && this.$i18n( item.tag );
+					return item;
+				},
+			);
 		},
 	},
 	props: {

@@ -36,8 +36,10 @@ describe( 'actions', () => {
 
 	describe( 'searchProperties', () => {
 		it( 'calls the repo and resolves with the result', async () => {
-			const expectedResult = [ { label: 'postal code', id: 'P123' } ];
-			const searchProperties = jest.fn().mockResolvedValue( expectedResult );
+			const expectedResult = [ { label: 'postal code', id: 'P123', datatype: 'string' } ];
+			const searchProperties = jest.fn().mockResolvedValue(
+				JSON.parse( JSON.stringify( expectedResult ) ),
+			);
 			const actions = createActions(
 				{ searchProperties },
 				services.get( 'metricsCollector' ),
@@ -47,7 +49,28 @@ describe( 'actions', () => {
 			const actualResult = await actions.searchProperties( {} as any, searchString );
 
 			expect( searchProperties ).toHaveBeenCalledWith( searchString, 12 );
-			expect( actualResult ).toBe( expectedResult );
+			expect( actualResult ).toStrictEqual( expectedResult );
+		} );
+
+		it( 'adds message to properties with limited support', async () => {
+			const searchInput = [ { label: 'postal code', id: 'P123', datatype: 'wikibase-sense' } ];
+			const expectedResult = [
+				{
+					...searchInput[ 0 ],
+					tag: 'query-builder-property-lookup-limited-support-tag',
+				},
+			];
+			const searchProperties = jest.fn().mockResolvedValue(
+				JSON.parse( JSON.stringify( searchInput ) ),
+			);
+			const actions = createActions(
+				{ searchProperties },
+				services.get( 'metricsCollector' ),
+			);
+
+			const actualResult = await actions.searchProperties( {} as any, 'searchString' );
+
+			expect( actualResult ).toStrictEqual( expectedResult );
 		} );
 	} );
 

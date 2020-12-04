@@ -1,3 +1,5 @@
+import allowedDatatypes from '@/allowedDataTypes';
+import { MenuItem } from '@wmde/wikit-vue-components/dist/components/MenuItem';
 import { ActionContext } from 'vuex';
 import RootState from './RootState';
 import SearchResult from '@/data-access/SearchResult';
@@ -12,7 +14,13 @@ import SearchEntityRepository from '@/data-access/SearchEntityRepository';
 export default ( searchEntityRepository: SearchEntityRepository, metricsCollector: MetricsCollector ) => ( {
 	async searchProperties( _context: ActionContext<RootState, RootState>, search: string ): Promise<SearchResult[]> {
 		// check for empty
-		return await searchEntityRepository.searchProperties( search, 12 );
+		const searchResults = await searchEntityRepository.searchProperties( search, 12 );
+		return searchResults.map( ( searchResult: MenuItem & SearchResult ) => {
+			if ( !allowedDatatypes.includes( searchResult.datatype ) ) {
+				searchResult.tag = 'query-builder-property-lookup-limited-support-tag';
+			}
+			return searchResult;
+		} );
 	},
 	updateValue(
 		context: ActionContext<RootState, RootState>,
