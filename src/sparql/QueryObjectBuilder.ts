@@ -1,5 +1,5 @@
 import rdfNamespaces from '@/sparql/rdfNamespaces';
-import QueryRepresentation from '@/sparql/QueryRepresentation';
+import QueryRepresentation, { Condition } from '@/sparql/QueryRepresentation';
 import { Pattern, SelectQuery, Term } from 'sparqljs';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
@@ -25,13 +25,21 @@ export default class QueryObjectBuilder {
 			},
 		];
 
+		for ( let i = 0; i < queryRepresentation.conditions.length; i++ ) {
+			this.buildFromQueryCondition( queryRepresentation.conditions[ i ] );
+		}
+
+		return this.queryObject;
+	}
+
+	private buildFromQueryCondition( condition: Condition ): void {
 		let tripleObject = {} as Term;
 
-		switch ( queryRepresentation.condition.propertyValueRelation ) {
+		switch ( condition.propertyValueRelation ) {
 			case ( PropertyValueRelation.Matching ):
 				tripleObject = {
 					termType: 'Literal',
-					value: queryRepresentation.condition.value,
+					value: condition.value,
 				};
 				break;
 			case ( PropertyValueRelation.NotMatching ):
@@ -49,11 +57,15 @@ export default class QueryObjectBuilder {
 			default:
 				tripleObject = {
 					termType: 'Literal',
-					value: queryRepresentation.condition.value,
+					value: condition.value,
 				};
 		}
 
-		this.queryObject.where = [
+		if ( !this.queryObject.where ) {
+			this.queryObject.where = [];
+		}
+
+		this.queryObject.where.push(
 			{
 				type: 'bgp',
 				triples: [
@@ -66,20 +78,20 @@ export default class QueryObjectBuilder {
 							pathType: '/',
 							items: [ {
 								termType: 'NamedNode',
-								value: rdfNamespaces.p + queryRepresentation.condition.propertyId,
+								value: rdfNamespaces.p + condition.propertyId,
 							},
 							{
 								termType: 'NamedNode',
-								value: rdfNamespaces.ps + queryRepresentation.condition.propertyId,
+								value: rdfNamespaces.ps + condition.propertyId,
 							},
 							] },
 						object: tripleObject,
 					},
 				],
 			},
-		];
+		);
 
-		if ( queryRepresentation.condition.propertyValueRelation === PropertyValueRelation.NotMatching ) {
+		if ( condition.propertyValueRelation === PropertyValueRelation.NotMatching ) {
 			const filterCondition = {
 				type: 'filter',
 				expression: {
@@ -92,7 +104,7 @@ export default class QueryObjectBuilder {
 						},
 						{
 							termType: 'Literal',
-							value: queryRepresentation.condition.value,
+							value: condition.value,
 						},
 					],
 				},
@@ -100,7 +112,5 @@ export default class QueryObjectBuilder {
 
 			this.queryObject.where.push( filterCondition as Pattern );
 		}
-
-		return this.queryObject;
 	}
 }

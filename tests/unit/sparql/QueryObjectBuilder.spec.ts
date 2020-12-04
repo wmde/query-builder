@@ -47,11 +47,13 @@ describe( 'QueryObjectBuilder', () => {
 		};
 
 		const actual = builder.buildFromQueryRepresentation( {
-			condition: {
-				propertyId: 'P281',
-				value: 'XXXX',
-				propertyValueRelation: PropertyValueRelation.Matching,
-			},
+			conditions: [
+				{
+					propertyId: 'P281',
+					value: 'XXXX',
+					propertyValueRelation: PropertyValueRelation.Matching,
+				},
+			],
 		} );
 
 		expect( actual ).toStrictEqual( expected );

@@ -7,11 +7,13 @@ import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 export default {
 	query( rootState: RootState ): QueryRepresentation {
 		return {
-			condition: {
-				propertyId: rootState.conditionRows[ 0 ].propertyData.id,
-				value: rootState.conditionRows[ 0 ].valueData.value,
-				propertyValueRelation: rootState.conditionRows[ 0 ].propertyValueRelationData.value,
-			},
+			conditions: [
+				{
+					propertyId: rootState.conditionRows[ 0 ].propertyData.id,
+					value: rootState.conditionRows[ 0 ].valueData.value,
+					propertyValueRelation: rootState.conditionRows[ 0 ].propertyValueRelationData.value,
+				},
+			],
 		};
 	},
 	property( rootState: RootState ) {

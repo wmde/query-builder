@@ -7,11 +7,13 @@ describe( 'buildQuery', () => {
 		const propertyId = 'P666';
 		const value = 'blah';
 		const propertyValueRelation = PropertyValueRelation.Matching;
-		expect( buildQuery( { condition: {
-			propertyId,
-			value,
-			propertyValueRelation,
-		} } ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }` );
+		expect( buildQuery( { conditions: [
+			{
+				propertyId,
+				value,
+				propertyValueRelation,
+			},
+		] } ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }` );
 	} );
 
 	it( 'builds a query from a property and a string value with not matching selected', () => {
@@ -25,11 +27,13 @@ describe( 'buildQuery', () => {
 			FILTER(?instance != "${value}")
 			}`;
 
-		const receivedQuery = buildQuery( { condition: {
-			propertyId,
-			value,
-			propertyValueRelation,
-		} } );
+		const receivedQuery = buildQuery( { conditions: [
+			{
+				propertyId,
+				value,
+				propertyValueRelation,
+			},
+		] } );
 
 		expect( receivedQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
@@ -38,11 +42,34 @@ describe( 'buildQuery', () => {
 		const propertyId = 'P666';
 		const propertyValueRelation = PropertyValueRelation.Regardless;
 
-		expect( buildQuery( { condition: {
-			propertyId,
-			value: '',
-			propertyValueRelation,
-		} } ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) _:anyValue. }` );
+		expect( buildQuery( { conditions: [
+			{
+				propertyId,
+				value: '',
+				propertyValueRelation,
+			},
+		] } ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) _:anyValue. }` );
 	} );
 
+	it( 'builds a query from multiple conditions', () => {
+		const expectedQuery =
+			`SELECT ?item WHERE {
+			?item (p:P666/ps:P666) "blah".
+			?item (p:P66/ps:P66) _:anyValue.
+			}`;
+		const actualQuery = buildQuery( { conditions: [
+			{
+				propertyId: 'P666',
+				value: 'blah',
+				propertyValueRelation: PropertyValueRelation.Matching,
+			},
+			{
+				propertyId: 'P66',
+				value: '',
+				propertyValueRelation: PropertyValueRelation.Regardless,
+			},
+		] } );
+
+		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
+	} );
 } );
