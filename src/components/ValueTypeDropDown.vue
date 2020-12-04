@@ -62,13 +62,6 @@ export default Vue.extend( {
 <style scoped lang="scss">
 	// will be removed once dropdown component is implemented in the DS
 	.querybuilder__dropdown {
-		&-select {
-			width: 256px;
-			height: 32px;
-			margin-inline-start: $dimension-layout-xsmall;
-			margin-block-start: 21px;
-		}
-
 		&-label {
 			position: absolute;
 			width: 1px;

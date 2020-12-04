@@ -1,15 +1,17 @@
 <template>
-	<div class="querybuilder__rule">
+	<div class="query-condition">
 		<PropertyLookup
+			class="query-condition__property-lookup"
 			v-model="selectedProperty"
 			:error="fieldErrors.property"
 		/>
 		<ValueTypeDropDown
+			class="query-condition__value-type-dropdown"
 			v-model="selectedPropertyValueRelation"
 			:disabled="limitedSupport"
 		/>
 		<TextInput
-			class="querybuilder__rule__value"
+			class="query-condition__value-input"
 			:label="$i18n('query-builder-input-value-label')"
 			ref="value"
 			v-model="textInputValue"
@@ -114,14 +116,19 @@ export default Vue.extend( {
 
 <style scoped lang="scss">
 
-	.querybuilder__rule {
+	.query-condition {
 		display: flex;
+		align-items: flex-end;
 		margin-block-start: $dimension-layout-medium;
 		padding-block: $dimension-layout-xsmall;
 		padding-inline: $dimension-layout-medium;
 	}
 
-	.querybuilder__rule__value {
+	.query-condition__value-type-dropdown {
+		margin-inline-start: $dimension-layout-xsmall;
+	}
+
+	.query-condition__value-input {
 		margin-inline-start: $dimension-layout-xsmall;
 	}
 
