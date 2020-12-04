@@ -16,7 +16,7 @@
 			:error="fieldErrors.value ?
 				{message: $i18n(fieldErrors.value.message), type: fieldErrors.value.type}: null"
 			:placeholder="$i18n('query-builder-input-value-placeholder')"
-			:disabled="selectedPropertyValueRelation === propertyValueRelation.Regardless"
+			:disabled="isTextInputDisabled()"
 		/>
 	</div>
 </template>
@@ -42,7 +42,6 @@ export default Vue.extend( {
 				value: null as null | Error,
 			},
 			limitedSupport: false,
-			propertyValueRelation: PropertyValueRelation,
 		};
 	},
 	methods: {
@@ -70,6 +69,9 @@ export default Vue.extend( {
 					message: 'query-builder-property-lookup-limited-support-note',
 				};
 			}
+		},
+		isTextInputDisabled(): boolean {
+			return this.selectedPropertyValueRelation === PropertyValueRelation.Regardless;
 		},
 	},
 	computed: {
@@ -100,11 +102,6 @@ export default Vue.extend( {
 		textInputValue: {
 			get(): string { return this.$store.getters.value( 0 ); },
 			set( value: string ): void { this.$store.dispatch( 'updateValue', { value, conditionIndex: 0 } ); },
-		},
-	},
-	watch: {
-		'$store.state.errors': function (): void {
-			this.validate();
 		},
 	},
 	components: {
