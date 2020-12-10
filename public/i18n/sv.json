@@ -19,5 +19,6 @@
 	"query-builder-result-error-empty-form": "Verkar som att frågebyggaren var tom, var god skriv in en giltig fråga först och försök igen.",
 	"query-builder-result-error-incomplete-form": "Ett eller flera fält är tomma. Slutför frågesökningen eller välj en passande fälttyp.",
 	"query-builder-result-error-missing-property": "Välj en egenskap",
-	"query-builder-result-error-missing-value": "Skriv in ett värde"
+	"query-builder-result-error-missing-value": "Skriv in ett värde",
+	"query-builder-add-condition": "Lägg till villkor"
 }

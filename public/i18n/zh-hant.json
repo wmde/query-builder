@@ -18,5 +18,6 @@
 	"query-builder-result-error-empty-form": "看起來查詢建置器為空，請先輸入有效的查詢，然後重新執行。",
 	"query-builder-result-error-incomplete-form": "有一個或更多欄位為空。請使用完整的查詢，或是選擇合適的欄位類型。",
 	"query-builder-result-error-missing-property": "請選擇一個屬性",
-	"query-builder-result-error-missing-value": "請選擇一個值"
+	"query-builder-result-error-missing-value": "請選擇一個值",
+	"query-builder-add-condition": "添加條件"
 }

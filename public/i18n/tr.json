@@ -18,5 +18,6 @@
 	"query-builder-result-error-empty-form": "Görünüşe göre Sorgu Oluşturucu boş, lütfen önce geçerli bir sorgu girin, ardından tekrar çalıştırmayı deneyin.",
 	"query-builder-result-error-incomplete-form": "Bir veya daha fazla alan boş. Lütfen sorguyu tamamlayın veya uygun bir alan türü seçin.",
 	"query-builder-result-error-missing-property": "Lütfen bir özellik seçin",
-	"query-builder-result-error-missing-value": "Lütfen bir değer girin"
+	"query-builder-result-error-missing-value": "Lütfen bir değer girin",
+	"query-builder-add-condition": "Koşul ekle"
 }

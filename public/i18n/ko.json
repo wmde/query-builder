@@ -15,5 +15,6 @@
 	"query-builder-property-lookup-limited-support-tag": "지원 제한됨",
 	"query-builder-result-placeholder": "결과는 여기에 표시됩니다",
 	"query-builder-result-error-missing-property": "속성을 선택해 주십시오",
-	"query-builder-result-error-missing-value": "값을 입력해 주십시오"
+	"query-builder-result-error-missing-value": "값을 입력해 주십시오",
+	"query-builder-add-condition": "조건 추가"
 }

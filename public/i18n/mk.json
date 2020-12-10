@@ -18,5 +18,6 @@
 	"query-builder-result-error-empty-form": "Се чини дека Срочувачот на барања е празен. Најпрвин внесете важечко барање, па пуштете го пак.",
 	"query-builder-result-error-incomplete-form": "Едно или повеќе полиња се празни. Пополнете го барањето или изберете соодветен вид на поле.",
 	"query-builder-result-error-missing-property": "Изберете својство",
-	"query-builder-result-error-missing-value": "Внесете вредност"
+	"query-builder-result-error-missing-value": "Внесете вредност",
+	"query-builder-add-condition": "Додај услов"
 }

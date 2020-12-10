@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Beta16"
+			"Beta16",
+			"Costabile"
 		]
 	},
 	"query-builder-find-all-items": "Trova tutti gli elementi...",
@@ -13,5 +14,6 @@
 	"query-builder-property-lookup-no-match-found": "Nessun risultato trovato",
 	"query-builder-result-placeholder": "I risultati saranno mostrati qui",
 	"query-builder-result-error-missing-property": "Seleziona una proprietà",
-	"query-builder-result-error-missing-value": "Inserisci un valore"
+	"query-builder-result-error-missing-value": "Inserisci un valore",
+	"query-builder-add-condition": "Aggiungi condizione"
 }

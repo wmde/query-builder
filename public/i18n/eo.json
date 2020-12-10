@@ -10,5 +10,6 @@
 	"query-builder-property-lookup-no-match-found": "Neniu matĉo estis trovita",
 	"query-builder-property-lookup-limited-support-tag": "Limigita subteno",
 	"query-builder-result-placeholder": "Rezultoj estos montrita ĉi tie",
-	"query-builder-result-error-missing-value": "Bonvolu eniru valoron"
+	"query-builder-result-error-missing-value": "Bonvolu eniru valoron",
+	"query-builder-add-condition": "Aldoni kondiĉon"
 }

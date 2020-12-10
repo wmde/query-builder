@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"YaronSh"
+			"YaronSh",
+			"ישראל קלר"
 		]
 	},
 	"query-builder-heading": "בונה שאילתות פשוטות",
@@ -18,5 +19,6 @@
 	"query-builder-result-error-empty-form": "נראה שבונה השאילתות היה ריק, נא למלא שאילתה תקפה תחילה ואז לנסות להריץ אותו שוב.",
 	"query-builder-result-error-incomplete-form": "שדה אחד או יותר נותרו ריקים. נא להשלים את השאילתה או לבחור סוג שדה תואם.",
 	"query-builder-result-error-missing-property": "נא לבחור מאפיין",
-	"query-builder-result-error-missing-value": "נא למלא ערך"
+	"query-builder-result-error-missing-value": "נא למלא ערך",
+	"query-builder-add-condition": "הוספת תנאי"
 }

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gomoko"
+			"Gomoko",
+			"Verdy p"
 		]
 	},
 	"query-builder-heading": "Constructeur de requêtes simples",
@@ -18,5 +19,6 @@
 	"query-builder-result-error-empty-form": "Il semble que le constructeur de requêtes soit vide ; veuillez d’abord saisir une requête valide, puis essayez de l’exécuter de nouveau.",
 	"query-builder-result-error-incomplete-form": "Un champ au moins est vide. Veuillez compléter la requête ou sélectionner un type de champ adapté.",
 	"query-builder-result-error-missing-property": "Veuillez sélectionner une propriété",
-	"query-builder-result-error-missing-value": "Veuillez saisir une valeur"
+	"query-builder-result-error-missing-value": "Veuillez saisir une valeur",
+	"query-builder-add-condition": "Ajouter une condition"
 }

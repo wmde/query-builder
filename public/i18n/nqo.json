@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lancine.kounfantoh.fofana"
+		]
+	},
+	"query-builder-input-value-label": "ߡߐ߬ߟߐ߲",
+	"query-builder-input-value-placeholder": "ߡߐ߬ߟߐ߲ ߘߏ߫ ߟߊߘߏ߲߬",
+	"query-builder-result-error-missing-value": "ߡߐ߬ߟߐ߲ ߘߏ߫ ߟߊߘߏ߲߬ ߖߊ߰ߣߌ߲߫",
+	"query-builder-add-condition": "ߛߙߊߕߌ ߝߙߊ߬"
+}
