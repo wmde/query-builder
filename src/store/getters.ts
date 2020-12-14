@@ -1,3 +1,4 @@
+import allowedDatatypes from '@/allowedDataTypes';
 import RootState from './RootState';
 import QueryRepresentation from '@/sparql/QueryRepresentation';
 import Property from '@/data-model/Property';
@@ -24,9 +25,25 @@ export default {
 			return rootState.conditionRows[ conditionIndex ].propertyData;
 		};
 	},
+	propertyError( rootState: RootState ) {
+		return ( conditionIndex: number ): ( Error | null ) => {
+			return rootState.conditionRows[ conditionIndex ].propertyData.propertyError;
+		};
+	},
+	limitedSupport( rootState: RootState ) {
+		return ( conditionIndex: number ): boolean => {
+			const datatype = rootState.conditionRows[ conditionIndex ].propertyData.datatype;
+			return datatype !== null && !allowedDatatypes.includes( datatype );
+		};
+	},
 	value( rootState: RootState ) {
 		return ( conditionIndex: number ): string => {
 			return rootState.conditionRows[ conditionIndex ].valueData.value;
+		};
+	},
+	valueError( rootState: RootState ) {
+		return ( conditionIndex: number ): ( Error | null ) => {
+			return rootState.conditionRows[ conditionIndex ].valueData.valueError;
 		};
 	},
 	propertyValueRelation( rootState: RootState ) {

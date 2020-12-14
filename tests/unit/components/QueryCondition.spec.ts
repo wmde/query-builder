@@ -21,6 +21,9 @@ function newStore( getters = {} ): Store<any> {
 		getters: {
 			property: jest.fn().mockReturnValue( jest.fn() ),
 			value: jest.fn().mockReturnValue( jest.fn() ),
+			valueError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( null ) ),
+			propertyError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( null ) ),
+			limitedSupport: jest.fn().mockReturnValue( jest.fn().mockReturnValue( false ) ),
 			propertyValueRelation: jest.fn().mockReturnValue(
 				jest.fn().mockReturnValue( PropertyValueRelation.Matching ),
 			),
@@ -84,26 +87,19 @@ describe( 'QueryCondition.vue', () => {
 		expect( store.dispatch ).toHaveBeenCalledWith( 'updateValue', { value: userInput, conditionIndex } );
 	} );
 
-	it( 'Get field errors', () => {
+	it( 'shows field errors', () => {
 		const wrapper = shallowMount( QueryCondition, {
-			store: newStore(),
+			store: newStore( {
+				propertyError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( {
+					type: 'error',
+					message: 'Property Error Message!',
+				} ) ),
+				valueError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( {
+					type: 'warning',
+					message: 'Value Warning Message!',
+				} ) ),
+			} ),
 			localVue,
-			data() {
-				return {
-					encodedQuery: '',
-					iframeRenderKey: 0,
-					fieldErrors: {
-						property: {
-							type: 'error',
-							message: 'Property Error Message!',
-						},
-						value: {
-							type: 'warning',
-							message: 'Value Warning Message!',
-						},
-					},
-				};
-			},
 		} );
 
 		expect( wrapper.findComponent( PropertyLookup ).props( 'error' ) ).toStrictEqual( {

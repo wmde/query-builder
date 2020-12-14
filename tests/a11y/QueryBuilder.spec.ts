@@ -1,3 +1,4 @@
+import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import { createLocalVue, mount } from '@vue/test-utils';
 import QueryBuilder from '@/components/QueryBuilder.vue';
 import { axe, toHaveNoViolations } from 'jest-axe';
@@ -21,18 +22,25 @@ Vue.use( i18n, {
 
 describe( 'QueryBuilder.vue', () => {
 	it( 'should not have obvious accessibility issues', async () => {
-		const property = { label: 'postal code', id: 'P123' };
 		const wrapper = mount( QueryBuilder, {
 			store: new Vuex.Store( {
 				state: {
-					property: property,
-					value: '',
 					errors: [],
 				},
 				getters: {
-					value: jest.fn().mockReturnValue( jest.fn() ),
-					property: jest.fn().mockReturnValue( jest.fn() ),
-					propertyValueRelation: jest.fn().mockReturnValue( jest.fn() ),
+					value: jest.fn().mockReturnValue( jest.fn().mockReturnValue( '' ) ),
+					valueError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( null ) ),
+					property: jest.fn().mockReturnValue( jest.fn().mockReturnValue(
+						{ label: 'postal code', id: 'P123' },
+					) ),
+					propertyError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( null ) ),
+					limitedSupport: jest.fn().mockReturnValue( jest.fn().mockReturnValue( false ) ),
+					propertyValueRelation: jest.fn().mockReturnValue(
+						jest.fn().mockReturnValue( PropertyValueRelation.Matching ),
+					),
+				},
+				actions: {
+					incrementMetric: jest.fn(),
 				},
 			} ),
 			localVue,

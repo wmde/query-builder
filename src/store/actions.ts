@@ -1,10 +1,11 @@
 import allowedDatatypes from '@/allowedDataTypes';
+import FormValues from '@/form/FormValues';
+import Validator from '@/form/Validator';
 import { MenuItem } from '@wmde/wikit-vue-components/dist/components/MenuItem';
 import { ActionContext } from 'vuex';
-import RootState from './RootState';
+import RootState, { ConditionRow } from './RootState';
 import SearchResult from '@/data-access/SearchResult';
 import Error from '@/data-model/Error';
-import Property from '@/data-model/Property';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import MetricsCollector from '@/data-access/MetricsCollector';
 import SearchEntityRepository from '@/data-access/SearchEntityRepository';
@@ -31,8 +32,20 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 		context.commit( 'setValue', payload );
 	},
 	updateProperty( context: ActionContext<RootState, RootState>,
-		payload: { property: Property; conditionIndex: number } ): void {
+		payload: { property: { label: string; id: string; datatype: string }; conditionIndex: number } ): void {
+
 		context.commit( 'setProperty', payload );
+		if ( payload.property && !allowedDatatypes.includes( payload.property.datatype ) ) {
+			context.dispatch( 'setConditionAsLimitedSupport', payload.conditionIndex );
+		} else {
+			context.commit(
+				'setFieldErrors',
+				{
+					index: payload.conditionIndex,
+					errors: { propertyError: null },
+				},
+			);
+		}
 	},
 	updatePropertyValueRelation( context: ActionContext<RootState, RootState>,
 		payload: { propertyValueRelation: PropertyValueRelation; conditionIndex: number } ): void {
@@ -46,5 +59,61 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 	},
 	addCondition( context: ActionContext<RootState, RootState> ): void {
 		context.commit( 'addCondition' );
+	},
+	setConditionAsLimitedSupport( context: ActionContext<RootState, RootState>, conditionIndex: number ): void {
+		context.dispatch(
+			'updatePropertyValueRelation',
+			{ propertyValueRelation: PropertyValueRelation.Regardless, conditionIndex },
+		);
+		context.dispatch( 'updateValue', { value: '', conditionIndex } );
+		context.commit(
+			'setFieldErrors',
+			{
+				index: conditionIndex,
+				errors: {
+					propertyError: {
+						type: 'warning',
+						message: 'query-builder-property-lookup-limited-support-note',
+					},
+				},
+			},
+		);
+	},
+	validateForm( context: ActionContext<RootState, RootState> ): void {
+
+		const validator = new Validator(
+			context.rootState.conditionRows.map( ( condition: ConditionRow ): FormValues => {
+				// TODO: refactor FormValues to match ConditionRow and remove this mapping
+				return {
+					property: condition.propertyData,
+					value: condition.valueData.value,
+					propertyValueRelation: condition.propertyValueRelationData.value,
+				};
+			} ),
+		);
+		const validationResult = validator.validate();
+		context.commit( 'setErrors', validationResult.formErrors );
+
+		// set field errors for each row
+		validationResult.fieldErrors.forEach( ( errors, conditionIndex ) => {
+			context.commit(
+				'setFieldErrors',
+				{
+					index: conditionIndex,
+					errors: {
+						propertyError: errors.property,
+						valueError: errors.value,
+					},
+				},
+			);
+		} );
+
+		// re-set limited support warning again where applicable
+		context.rootState.conditionRows.forEach( ( conditionRow, index ) => {
+			const datatype = conditionRow.propertyData?.datatype;
+			if ( datatype && !allowedDatatypes.includes( datatype ) ) {
+				context.dispatch( 'setConditionAsLimitedSupport', index );
+			}
+		} );
 	},
 } );

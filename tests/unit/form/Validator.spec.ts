@@ -15,13 +15,13 @@ describe( 'validator', () => {
 
 		const expectedResult: ValidationResult = {
 			formErrors: [],
-			fieldErrors: {
+			fieldErrors: [ {
 				property: null,
 				value: null,
-			},
+			} ],
 		};
 
-		const validator = new Validator( formValues );
+		const validator = new Validator( [ formValues ] );
 
 		expect( validator.validate() ).toStrictEqual( expectedResult );
 	} );
@@ -40,19 +40,46 @@ describe( 'validator', () => {
 					message: 'query-builder-result-error-incomplete-form',
 				},
 			],
-			fieldErrors: {
+			fieldErrors: [ {
 				property: {
 					type: 'error',
 					message: 'query-builder-result-error-missing-property',
 				},
 				value: null,
-			},
+			} ],
 		};
 
-		const validator = new Validator( formValues );
+		const validator = new Validator( [ formValues ] );
 
 		expect( validator.validate() ).toStrictEqual( expectedResult );
+	} );
 
+	it( 'returns one error with a property empty', () => {
+		const formValues: FormValues = {
+			property: { id: '', label: '' },
+			value: 'Q5',
+			propertyValueRelation: PropertyValueRelation.Matching,
+		};
+
+		const expectedResult: ValidationResult = {
+			formErrors: [
+				{
+					type: 'error',
+					message: 'query-builder-result-error-incomplete-form',
+				},
+			],
+			fieldErrors: [ {
+				property: {
+					type: 'error',
+					message: 'query-builder-result-error-missing-property',
+				},
+				value: null,
+			} ],
+		};
+
+		const validator = new Validator( [ formValues ] );
+
+		expect( validator.validate() ).toStrictEqual( expectedResult );
 	} );
 
 	it( 'returns one error with a value missing when PropertyValueRelation = Matching', () => {
@@ -72,36 +99,36 @@ describe( 'validator', () => {
 					message: 'query-builder-result-error-incomplete-form',
 				},
 			],
-			fieldErrors: {
+			fieldErrors: [ {
 				property: null,
 				value: {
 					type: 'error',
 					message: 'query-builder-result-error-missing-value',
 				},
-			},
+			} ],
 		};
 
-		const validator = new Validator( formValues );
+		const validator = new Validator( [ formValues ] );
 
 		expect( validator.validate() ).toStrictEqual( expectedResult );
 	} );
 
 	it( 'returns no errors with a value missing when PropertyValueRelation = Regardless', () => {
-		const formValues: FormValues = {
+		const formValues: FormValues[] = [ {
 			property: {
 				id: 'P31',
 				label: 'instance of',
 			},
 			value: null,
 			propertyValueRelation: PropertyValueRelation.Regardless,
-		};
+		} ];
 
 		const expectedResult: ValidationResult = {
 			formErrors: [],
-			fieldErrors: {
+			fieldErrors: [ {
 				property: null,
 				value: null,
-			},
+			} ],
 		};
 
 		const validator = new Validator( formValues );
@@ -110,11 +137,11 @@ describe( 'validator', () => {
 	} );
 
 	it( 'returns notice when the form is empty', () => {
-		const formValues: FormValues = {
+		const formValues: FormValues[] = [ {
 			property: null,
 			value: null,
 			propertyValueRelation: PropertyValueRelation.Matching,
-		};
+		} ];
 
 		const expectedResult: ValidationResult = {
 			formErrors: [
@@ -123,10 +150,10 @@ describe( 'validator', () => {
 					message: 'query-builder-result-error-empty-form',
 				},
 			],
-			fieldErrors: {
+			fieldErrors: [ {
 				property: null,
 				value: null,
-			},
+			} ],
 		};
 
 		const validator = new Validator( formValues );
