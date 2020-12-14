@@ -18,5 +18,6 @@
 	"query-builder-result-error-empty-form": "Kelihatannya Pembangun Kueri masih kosong, tolong masukkan kueri yang valid terlebih dahulu, lalu coba jalankan lagi.",
 	"query-builder-result-error-incomplete-form": "Satu atau lebih isian masih kosong. Tolong lengkapi kueri atau pilih tipe isian yang sesuai.",
 	"query-builder-result-error-missing-property": "Tolong pilih sebuah atribut",
-	"query-builder-result-error-missing-value": "Tolong masukkan sebuah nilai"
+	"query-builder-result-error-missing-value": "Tolong masukkan sebuah nilai",
+	"query-builder-add-condition": "Tambahkan kondisi"
 }

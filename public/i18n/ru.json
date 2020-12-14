@@ -18,5 +18,6 @@
 	"query-builder-result-error-empty-form": "Похоже, построитель запросов был пуст. Сначала введите допустимый запрос, а затем попробуйте запустить его снова.",
 	"query-builder-result-error-incomplete-form": "Одно или несколько полей пусты. Пожалуйста, дозаполните запрос или выберите подходящий тип поля.",
 	"query-builder-result-error-missing-property": "Пожалуйста, выберите свойство",
-	"query-builder-result-error-missing-value": "Пожалуйста, введите значение"
+	"query-builder-result-error-missing-value": "Пожалуйста, введите значение",
+	"query-builder-add-condition": "Добавить условие"
 }
