@@ -42,7 +42,13 @@ export default Vue.extend( {
 		optionItems(): PropertyValueRelationMenuItem[] {
 			return Object.values( PropertyValueRelation ).map( ( value: PropertyValueRelation ) => {
 				return {
-					label: value, // FIXME: replace with i18n -> T269453
+					/*
+					* Values that can be used here:
+					* query-builder-value-type-relation-dropdown-matching
+					* query-builder-value-type-relation-dropdown-without
+					* query-builder-value-type-relation-dropdown-regardless-of-value
+					*/
+					label: this.$i18n( `query-builder-value-type-relation-dropdown-${value}` ),
 					description: '',
 					value,
 				};
