@@ -37,4 +37,25 @@ describe( 'mutations', () => {
 		expect( state.conditionRows[ conditionIndex ].propertyData ).toBe( expectedProperty );
 	} );
 
+	it( 'addCondition', () => {
+		const expectedNewConditionRow = {
+			valueData: { value: '' },
+			propertyData: { id: '', label: '' },
+			propertyValueRelationData: { value: PropertyValueRelation.Matching },
+		};
+		const state: RootState = {
+			conditionRows: [ {
+				valueData: { value: 'foo' },
+				propertyData: { id: 'P123', label: 'abc' },
+				propertyValueRelationData: { value: PropertyValueRelation.Matching },
+			} ],
+			errors: [],
+		};
+
+		mutations.addCondition( state );
+
+		expect( state.conditionRows.length ).toBe( 2 );
+		expect( state.conditionRows[ 1 ] ).toStrictEqual( expectedNewConditionRow );
+	} );
+
 } );
