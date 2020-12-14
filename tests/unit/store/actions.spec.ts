@@ -87,4 +87,18 @@ describe( 'actions', () => {
 			expect( increment ).toHaveBeenCalledWith( 'foo' );
 		} );
 	} );
+
+	it( 'addCondition', () => {
+		const context = { commit: jest.fn() };
+
+		const actions = createActions(
+			services.get( 'searchEntityRepository' ),
+			services.get( 'metricsCollector' ),
+		);
+
+		actions.addCondition( context as any );
+
+		expect( context.commit ).toHaveBeenCalledWith( 'addCondition' );
+	} );
+
 } );

@@ -10,7 +10,7 @@ import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
 Vue.use( Vuex );
 
-const conditionRow = {
+export const conditionRow = {
 	propertyData: {
 		label: '',
 		id: '',

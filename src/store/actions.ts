@@ -41,4 +41,7 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 	incrementMetric( context: ActionContext<RootState, RootState>, metric: string ): void {
 		metricsCollector.increment( metric );
 	},
+	addCondition( context: ActionContext<RootState, RootState> ): void {
+		context.commit( 'addCondition' );
+	},
 } );
