@@ -14,5 +14,8 @@
   "query-builder-result-error-incomplete-form": "One or more fields are empty. Please complete the query or select a fitting field type.",
   "query-builder-result-error-missing-property": "Please select a property",
   "query-builder-result-error-missing-value": "Please enter a value",
-  "query-builder-add-condition": "Add condition"
+  "query-builder-add-condition": "Add condition",
+  "query-builder-value-type-relation-dropdown-matching": "matching",
+  "query-builder-value-type-relation-dropdown-without": "without",
+  "query-builder-value-type-relation-dropdown-regardless-of-value": "regardless of value"
 }
