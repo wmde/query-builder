@@ -65,7 +65,7 @@ describe( 'FetchSearchEntityRepository', () => {
 			errorformat: 'plaintext',
 			origin: '*',
 			limit,
-			offset,
+			continue: offset,
 		};
 		const expectedQuery = Object.entries( expectedParams ).map( ( entry ) => entry.join( '=' ) ).join( '&' );
 		const expectedUrl = `${testEndpoint}?${expectedQuery}`;

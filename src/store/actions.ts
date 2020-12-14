@@ -8,13 +8,16 @@ import Property from '@/data-model/Property';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import MetricsCollector from '@/data-access/MetricsCollector';
 import SearchEntityRepository from '@/data-access/SearchEntityRepository';
+import SearchOptions from '@/data-access/SearchOptions';
 
 // eslint-disable-next-line max-len
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/explicit-module-boundary-types
 export default ( searchEntityRepository: SearchEntityRepository, metricsCollector: MetricsCollector ) => ( {
-	async searchProperties( _context: ActionContext<RootState, RootState>, search: string ): Promise<SearchResult[]> {
+	async searchProperties(
+		_context: ActionContext<RootState, RootState>,
+		options: SearchOptions ): Promise<SearchResult[]> {
 		// check for empty
-		const searchResults = await searchEntityRepository.searchProperties( search, 12 );
+		const searchResults = await searchEntityRepository.searchProperties( options.search, 12, options.offset );
 		return searchResults.map( ( searchResult: MenuItem & SearchResult ) => {
 			if ( !allowedDatatypes.includes( searchResult.datatype ) ) {
 				searchResult.tag = 'query-builder-property-lookup-limited-support-tag';

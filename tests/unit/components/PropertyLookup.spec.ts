@@ -4,6 +4,7 @@ import { Lookup } from '@wmde/wikit-vue-components';
 import Vuex from 'vuex';
 import Vue from 'vue';
 import i18n from 'vue-banana-i18n';
+import SearchOptions from '@/data-access/SearchOptions';
 
 const localVue = createLocalVue();
 const messages = {};
@@ -46,12 +47,13 @@ describe( 'PropertyLookup.vue', () => {
 		store.dispatch = jest.fn().mockResolvedValue( searchRsults );
 		const wrapper = shallowMount( PropertyLookup, { store, localVue } );
 
-		const searchString = 'postal';
-		wrapper.findComponent( Lookup ).vm.$emit( 'update:search-input', searchString );
+		const searchOptions: SearchOptions = { search: 'postal', limit: 12 };
+
+		wrapper.findComponent( Lookup ).vm.$emit( 'update:search-input', searchOptions.search );
 		await localVue.nextTick();
 
-		expect( store.dispatch ).toHaveBeenCalledWith( 'searchProperties', searchString );
-		expect( wrapper.findComponent( Lookup ).props( 'searchInput' ) ).toBe( searchString );
+		expect( store.dispatch ).toHaveBeenCalledWith( 'searchProperties', { search: searchOptions.search } );
+		expect( wrapper.findComponent( Lookup ).props( 'searchInput' ) ).toBe( searchOptions.search );
 
 		// it really needs two ticks ¯\_(ツ)_/¯
 		await localVue.nextTick();
