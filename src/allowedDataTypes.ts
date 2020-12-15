@@ -1,14 +1,14 @@
 const allowedDataTypes = [
 	/* string typed datatypes */
+	'string',
+	'external-id',
+	/* other (non-string) typed datatypes - TODO: add support
 	'commonsMedia',
 	'geo-shape',
-	'string',
 	'tabular-data',
 	'url',
-	'external-id',
-	'musical-notation',
 	'math',
-	/* other (non-string) typed datatypes - TODO: add support
+	'musical-notation',
     'time',
 	'globe-coordinate',
 	'monolingualtext',
