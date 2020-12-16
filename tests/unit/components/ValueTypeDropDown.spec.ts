@@ -27,4 +27,15 @@ describe( 'ValueTypeDropDown.vue', () => {
 
 		expect( wrapper.emitted( 'input' )![ 0 ][ 0 ] ).toEqual( optionItems.Regardless );
 	} );
+
+	it( 'passes the disabled prop down to the Dropdown', () => {
+		const wrapper = mount( ValueTypeDropDown, {
+			propsData: {
+				value: PropertyValueRelation.Matching,
+				disabled: true,
+			},
+		} );
+
+		expect( wrapper.findComponent( Dropdown ).props( 'disabled' ) ).toBe( true );
+	} );
 } );
