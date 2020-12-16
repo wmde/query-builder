@@ -41,8 +41,11 @@ describe( 'actions', () => {
 			const searchProperties = jest.fn().mockResolvedValue(
 				JSON.parse( JSON.stringify( expectedResult ) ),
 			);
+			const searchItemValues = jest.fn().mockResolvedValue(
+				JSON.parse( JSON.stringify( expectedResult ) ),
+			);
 			const actions = createActions(
-				{ searchProperties },
+				{ searchProperties, searchItemValues },
 				services.get( 'metricsCollector' ),
 			);
 
@@ -68,14 +71,43 @@ describe( 'actions', () => {
 			const searchProperties = jest.fn().mockResolvedValue(
 				JSON.parse( JSON.stringify( searchInput ) ),
 			);
+			const searchItemValues = jest.fn().mockResolvedValue(
+				JSON.parse( JSON.stringify( searchInput ) ),
+			);
 			const actions = createActions(
-				{ searchProperties },
+				{ searchProperties, searchItemValues },
 				services.get( 'metricsCollector' ),
 			);
 
 			const searchOptions: SearchOptions = { search: 'postal', limit: 12 };
 			const actualResult = await actions.searchProperties( {} as any, searchOptions );
 
+			expect( actualResult ).toStrictEqual( expectedResult );
+		} );
+	} );
+
+	describe( 'searchItemValues', () => {
+		it( 'calls the repo and resolves with the result', async () => {
+			const expectedResult = [ { label: 'potato', id: 'Q666', datatype: 'string' } ];
+			const searchProperties = jest.fn().mockResolvedValue(
+				JSON.parse( JSON.stringify( expectedResult ) ),
+			);
+			const searchItemValues = jest.fn().mockResolvedValue(
+				JSON.parse( JSON.stringify( expectedResult ) ),
+			);
+			const actions = createActions(
+				{ searchProperties, searchItemValues },
+				services.get( 'metricsCollector' ),
+			);
+
+			const searchOptions: SearchOptions = { search: 'potato', limit: 12 };
+			const actualResult = await actions.searchItemValues( {} as any, searchOptions );
+
+			expect( searchItemValues ).toHaveBeenCalledWith(
+				searchOptions.search,
+				searchOptions.limit,
+				searchOptions.offset,
+			);
 			expect( actualResult ).toStrictEqual( expectedResult );
 		} );
 	} );
