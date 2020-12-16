@@ -10,6 +10,7 @@
 			:value="selected"
 			aria-labelledby="valueTypeSelect"
 			:menuItems="optionItems"
+			:disabled="disabled"
 		/>
 	</div>
 
@@ -31,6 +32,10 @@ export default Vue.extend( {
 		value: {
 			type: String as PropType<PropertyValueRelation>,
 			required: true,
+		},
+		disabled: {
+			type: Boolean,
+			default: false,
 		},
 	},
 	methods: {
