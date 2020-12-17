@@ -1,3 +1,4 @@
+import AddCondition from '@/components/AddCondition.vue';
 import Vuex, { Store } from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import QueryBuilder from '@/components/QueryBuilder.vue';
@@ -35,5 +36,10 @@ describe( 'QueryBuilder.vue', () => {
 	it( 'has a heading', () => {
 		const wrapper = shallowMount( QueryBuilder, { store: newStore(), localVue } );
 		expect( wrapper.find( 'h1' ).text() ).toBe( 'Very fancy query builder title' );
+	} );
+
+	it( 'adds a new condition when clicking the Add condition button', () => {
+		const wrapper = shallowMount( QueryBuilder, { store: newStore(), localVue } );
+		wrapper.findComponent( AddCondition ).trigger( 'add-condition' );
 	} );
 } );

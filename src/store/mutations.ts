@@ -2,7 +2,7 @@ import RootState from './RootState';
 import Property from '@/data-model/Property';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
-import { conditionRow, newEmptyPropertyData } from './index';
+import { getFreshConditionRow, newEmptyPropertyData } from './index';
 
 export default {
 	setValue( state: RootState, payload: { value: string; conditionIndex: number } ): void {
@@ -27,7 +27,7 @@ export default {
 		state.errors = errors;
 	},
 	addCondition( state: RootState ): void {
-		state.conditionRows.push( conditionRow );
+		state.conditionRows.push( getFreshConditionRow() );
 	},
 	setFieldErrors(
 		state: RootState,

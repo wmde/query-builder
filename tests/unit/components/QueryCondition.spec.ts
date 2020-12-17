@@ -46,7 +46,13 @@ describe( 'QueryCondition.vue', () => {
 		const conditionIndex = 0;
 		const propertyGetter = () => () => ( property );
 
-		const wrapper = shallowMount( QueryCondition, { store: newStore( { property: propertyGetter } ), localVue } );
+		const wrapper = shallowMount( QueryCondition, {
+			store: newStore( { property: propertyGetter } ),
+			localVue,
+			propsData: {
+				'condition-index': 0,
+			},
+		} );
 
 		expect(
 			wrapper.findAllComponents( PropertyLookup )
@@ -64,6 +70,9 @@ describe( 'QueryCondition.vue', () => {
 		const wrapper = shallowMount( QueryCondition, {
 			store,
 			localVue,
+			propsData: {
+				'condition-index': 0,
+			},
 		} );
 
 		wrapper.findAllComponents( PropertyLookup ).at( conditionIndex ).vm.$emit( 'input', property );
@@ -78,6 +87,9 @@ describe( 'QueryCondition.vue', () => {
 		const wrapper = shallowMount( QueryCondition, {
 			store,
 			localVue,
+			propsData: {
+				'condition-index': 0,
+			},
 		} );
 		const userInput = 'potato';
 
@@ -100,6 +112,9 @@ describe( 'QueryCondition.vue', () => {
 				} ) ),
 			} ),
 			localVue,
+			propsData: {
+				'condition-index': 0,
+			},
 		} );
 
 		expect( wrapper.findComponent( PropertyLookup ).props( 'error' ) ).toStrictEqual( {

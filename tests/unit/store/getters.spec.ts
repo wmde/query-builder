@@ -12,6 +12,7 @@ describe( 'getters', () => {
 					valueData: { value: '', valueError: null },
 					propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
+					conditionId: '0.123',
 				} ],
 				errors: [],
 			};
@@ -25,6 +26,7 @@ describe( 'getters', () => {
 					valueData: { value: '', valueError: null },
 					propertyData: { id: '', label: '', datatype: null, propertyError: null },
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
+					conditionId: '0.123',
 				} ],
 				errors: [],
 			};
@@ -43,6 +45,7 @@ describe( 'getters', () => {
 						propertyError: null,
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
+					conditionId: '0.123',
 				} ],
 				errors: [],
 			};
@@ -58,6 +61,7 @@ describe( 'getters', () => {
 					valueData: { value: 'foo', valueError: null },
 					propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
+					conditionId: '0.123',
 				} ],
 				errors: [],
 			};

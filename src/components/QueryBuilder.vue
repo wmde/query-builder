@@ -10,8 +10,12 @@
 		<div role="form">
 			<h2 class="querybuilder__find-title"
 				v-i18n="{msg: 'query-builder-find-all-items'}" />
-			<QueryCondition />
-			<AddCondition />
+			<QueryCondition
+				v-for="(condition, index) in conditionRows"
+				:condition-index="index"
+				:key="condition.conditionId"
+			/>
+			<AddCondition @add-condition="addCondition" />
 			<div class="querybuilder__run">
 				<Button
 					@click.native="runQuery"
@@ -27,6 +31,7 @@
 </template>
 
 <script lang="ts">
+import { ConditionRow } from '@/store/RootState';
 import Vue from 'vue';
 import { mapState } from 'vuex';
 import { Button } from '@wmde/wikit-vue-components';
@@ -62,8 +67,14 @@ export default Vue.extend( {
 			// force the iframe to rerender https://stackoverflow.com/a/48755228
 			this.iframeRenderKey = Math.random();
 		},
+		addCondition(): void {
+			this.$store.dispatch( 'addCondition' );
+		},
 	},
 	computed: {
+		conditionRows(): ConditionRow[] {
+			return this.$store.getters.conditionRows;
+		},
 		...mapState( {
 			errors: 'errors',
 		} ),

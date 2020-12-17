@@ -5,7 +5,7 @@ import createActions from './actions';
 import mutations from './mutations';
 import getters from './getters';
 import QueryBuilderServices from '@/QueryBuilderServices';
-import RootState, { PropertyData } from '@/store/RootState';
+import RootState, { PropertyData, ConditionRow } from '@/store/RootState';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
 
@@ -20,22 +20,25 @@ export function newEmptyPropertyData( propertyError: Error|null = null ): Proper
 	};
 }
 
-export const conditionRow = {
-	propertyData: newEmptyPropertyData(),
-	valueData: {
-		value: '',
-		valueError: null,
-	},
-	propertyValueRelationData: {
-		value: PropertyValueRelation.Matching,
-	},
-};
+export function getFreshConditionRow(): ConditionRow {
+	return {
+		propertyData: newEmptyPropertyData(),
+		valueData: {
+			value: '',
+			valueError: null,
+		},
+		propertyValueRelationData: {
+			value: PropertyValueRelation.Matching,
+		},
+		conditionId: `condition-id-${Math.random()}`,
+	};
+}
 
 export function createStore( services: QueryBuilderServices ): Store<RootState> {
 
 	return new Store( {
 		state: {
-			conditionRows: [ conditionRow ],
+			conditionRows: [ getFreshConditionRow() ],
 			errors: [],
 		},
 		actions: createActions(
