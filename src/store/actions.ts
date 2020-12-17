@@ -29,10 +29,7 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 		_context: ActionContext<RootState, RootState>,
 		options: SearchOptions ): Promise<SearchResult[]> {
 		// check for empty
-		const searchResults = await searchEntityRepository.searchItemValues( options.search, 12, options.offset );
-		return searchResults.map( ( searchResult: MenuItem & SearchResult ) => {
-			return searchResult;
-		} );
+		return await searchEntityRepository.searchItemValues( options.search, 12, options.offset );
 	},
 	updateValue(
 		context: ActionContext<RootState, RootState>,

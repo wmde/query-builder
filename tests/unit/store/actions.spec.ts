@@ -41,11 +41,8 @@ describe( 'actions', () => {
 			const searchProperties = jest.fn().mockResolvedValue(
 				JSON.parse( JSON.stringify( expectedResult ) ),
 			);
-			const searchItemValues = jest.fn().mockResolvedValue(
-				JSON.parse( JSON.stringify( expectedResult ) ),
-			);
 			const actions = createActions(
-				{ searchProperties, searchItemValues },
+				{ searchProperties, searchItemValues: jest.fn() },
 				services.get( 'metricsCollector' ),
 			);
 
@@ -69,13 +66,10 @@ describe( 'actions', () => {
 				},
 			];
 			const searchProperties = jest.fn().mockResolvedValue(
-				JSON.parse( JSON.stringify( searchInput ) ),
-			);
-			const searchItemValues = jest.fn().mockResolvedValue(
-				JSON.parse( JSON.stringify( searchInput ) ),
+				JSON.parse( JSON.stringify( expectedResult ) ),
 			);
 			const actions = createActions(
-				{ searchProperties, searchItemValues },
+				{ searchProperties, searchItemValues: jest.fn() },
 				services.get( 'metricsCollector' ),
 			);
 
@@ -89,14 +83,11 @@ describe( 'actions', () => {
 	describe( 'searchItemValues', () => {
 		it( 'calls the repo and resolves with the result', async () => {
 			const expectedResult = [ { label: 'potato', id: 'Q666', datatype: 'string' } ];
-			const searchProperties = jest.fn().mockResolvedValue(
-				JSON.parse( JSON.stringify( expectedResult ) ),
-			);
 			const searchItemValues = jest.fn().mockResolvedValue(
 				JSON.parse( JSON.stringify( expectedResult ) ),
 			);
 			const actions = createActions(
-				{ jest.fn(), searchItemValues },
+				{ searchProperties: jest.fn(), searchItemValues },
 				services.get( 'metricsCollector' ),
 			);
 

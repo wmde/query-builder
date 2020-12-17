@@ -175,34 +175,26 @@ describe( 'FetchSearchEntityRepository', () => {
 		expect( repo.searchItemValues( 'John Smith' ) ).rejects.toThrow( expectedError );
 	} );
 
-	it( 'throws an error if there is a server side problem fetching a property', () => {
+	it( 'throws an error if there is a network problem fetching a property', () => {
 		const repo = new FetchSearchEntityRepository(
 			'eo',
 			'https://example.com/w/api.php',
 		);
-		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
-			ok: false,
-			status: 500,
-			statusText: 'Server Error',
-		} ) );
+		window.fetch = jest.fn().mockImplementation( () => Promise.reject() );
 
-		const expectedError = new TechnicalProblem( '500: Server Error' );
+		const expectedError = new TechnicalProblem( 'Network error' );
 
 		expect( repo.searchProperties( 'instance' ) ).rejects.toThrow( expectedError );
 	} );
 
-	it( 'throws an error if there is a server side problem fetching an item', () => {
+	it( 'throws an error if there is a network problem fetching an item value', () => {
 		const repo = new FetchSearchEntityRepository(
 			'eo',
 			'https://example.com/w/api.php',
 		);
-		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
-			ok: false,
-			status: 500,
-			statusText: 'Server Error',
-		} ) );
+		window.fetch = jest.fn().mockImplementation( () => Promise.reject() );
 
-		const expectedError = new TechnicalProblem( '500: Server Error' );
+		const expectedError = new TechnicalProblem( 'Network error' );
 
 		expect( repo.searchItemValues( 'John Smith' ) ).rejects.toThrow( expectedError );
 	} );
