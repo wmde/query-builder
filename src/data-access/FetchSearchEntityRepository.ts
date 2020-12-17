@@ -11,13 +11,13 @@ export default class FetchSearchEntityRepository implements SearchEntityReposito
 		this.endpoint = endpoint;
 	}
 
-	public async searchProperties( searchString: string, limit?: number, offset?: number ):
+	private async searchEntities( searchString: string, entityType: string, limit?: number, offset?: number ):
 	Promise<SearchResult[]> {
 		const params: { [key: string]: string } = {
 			action: 'wbsearchentities',
 			search: searchString,
 			language: this.forLanguageCode,
-			type: 'property',
+			type: entityType,
 			format: 'json',
 			formatversion: '2',
 			errorformat: 'plaintext',
@@ -48,5 +48,13 @@ export default class FetchSearchEntityRepository implements SearchEntityReposito
 		const data = await response.json();
 
 		return data.search;
+	}
+
+	public searchProperties( searchString: string, limit?: number, offset?: number ): Promise<SearchResult[]> {
+		return this.searchEntities( searchString, 'property', limit, offset );
+	}
+
+	public searchItemValues( searchString: string, limit?: number, offset?: number ): Promise<SearchResult[]> {
+		return this.searchEntities( searchString, 'item', limit, offset );
 	}
 }

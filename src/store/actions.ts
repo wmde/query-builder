@@ -25,6 +25,12 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 			return searchResult;
 		} );
 	},
+	async searchItemValues(
+		_context: ActionContext<RootState, RootState>,
+		options: SearchOptions ): Promise<SearchResult[]> {
+		// check for empty
+		return await searchEntityRepository.searchItemValues( options.search, 12, options.offset );
+	},
 	updateValue(
 		context: ActionContext<RootState, RootState>,
 		payload: { value: string; conditionIndex: number } ): void {

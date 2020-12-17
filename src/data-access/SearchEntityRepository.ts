@@ -6,4 +6,5 @@ import SearchResult from './SearchResult';
  */
 export default interface SearchEntityRepository {
 	searchProperties( searchString: string, limit?: number, offset?: number ): Promise<SearchResult[]>;
+	searchItemValues( searchString: string, limit?: number, offset?: number ): Promise<SearchResult[]>;
 }
