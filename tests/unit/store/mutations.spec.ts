@@ -8,8 +8,8 @@ describe( 'mutations', () => {
 		const expectedValue = 'whatever';
 		const state: RootState = {
 			conditionRows: [ {
-				valueData: { value: 'foo' },
-				propertyData: { id: 'P123', label: 'abc' },
+				valueData: { value: 'foo', valueError: null },
+				propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
 			} ],
 			errors: [],
@@ -20,33 +20,64 @@ describe( 'mutations', () => {
 		expect( state.conditionRows[ 0 ].valueData.value ).toBe( expectedValue );
 	} );
 
-	it( 'setProperty', () => {
-		const conditionIndex = 0;
-		const expectedProperty = { id: 'P456', label: 'def' };
-		const state: RootState = {
-			conditionRows: [ {
-				valueData: { value: 'foo' },
-				propertyData: { id: 'P123', label: 'abc' },
-				propertyValueRelationData: { value: PropertyValueRelation.Matching },
-			} ],
-			errors: [],
-		};
+	describe( 'setProperty', () => {
 
-		mutations.setProperty( state, { property: expectedProperty, conditionIndex } );
+		it( 'sets a new property in the state', () => {
+			const conditionIndex = 0;
+			const expectedProperty = { id: 'P456', label: 'def', datatype: 'string', propertyError: null };
+			const state: RootState = {
+				conditionRows: [ {
+					valueData: { value: 'foo', valueError: null },
+					propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
+					propertyValueRelationData: { value: PropertyValueRelation.Matching },
+				} ],
+				errors: [],
+			};
 
-		expect( state.conditionRows[ conditionIndex ].propertyData ).toBe( expectedProperty );
+			mutations.setProperty( state, { property: expectedProperty, conditionIndex } );
+
+			expect( state.conditionRows[ conditionIndex ].propertyData ).toStrictEqual( expectedProperty );
+		} );
+
+		it( 'clears a property from the state', () => {
+			const preExistingPropertyError = { message: 'some error', type: 'warning' } as const;
+			const state: RootState = {
+				conditionRows: [ {
+					valueData: { value: 'foo', valueError: null },
+					propertyData: {
+						id: 'P123',
+						label: 'abc',
+						datatype: 'string',
+						propertyError: preExistingPropertyError,
+					},
+					propertyValueRelationData: { value: PropertyValueRelation.Matching },
+				} ],
+				errors: [],
+			};
+
+			mutations.setProperty( state, { property: null, conditionIndex: 0 } );
+
+			expect( state.conditionRows[ 0 ].propertyData ).toStrictEqual(
+				{
+					id: '',
+					label: '',
+					datatype: null,
+					propertyError: preExistingPropertyError,
+				},
+			);
+		} );
 	} );
 
 	it( 'addCondition', () => {
 		const expectedNewConditionRow = {
-			valueData: { value: '' },
-			propertyData: { id: '', label: '' },
+			valueData: { value: '', valueError: null },
+			propertyData: { id: '', label: '', datatype: null, propertyError: null },
 			propertyValueRelationData: { value: PropertyValueRelation.Matching },
 		};
 		const state: RootState = {
 			conditionRows: [ {
-				valueData: { value: 'foo' },
-				propertyData: { id: 'P123', label: 'abc' },
+				valueData: { value: 'foo', valueError: null },
+				propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
 			} ],
 			errors: [],

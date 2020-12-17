@@ -7,14 +7,19 @@ export default interface RootState {
 }
 
 export interface ConditionRow {
-	propertyData: {
-		id: string;
-		label: string;
-	};
+	propertyData: PropertyData;
 	valueData: {
 		value: string;
+		valueError: Error|null;
 	};
 	propertyValueRelationData: {
 		value: PropertyValueRelation;
 	};
+}
+
+export interface PropertyData {
+	id: string;
+	label: string;
+	datatype: string|null;
+	propertyError: Error|null;
 }

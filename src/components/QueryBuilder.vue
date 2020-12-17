@@ -10,8 +10,7 @@
 		<div role="form">
 			<h2 class="querybuilder__find-title"
 				v-i18n="{msg: 'query-builder-find-all-items'}" />
-			<QueryCondition
-				ref="condition"/>
+			<QueryCondition />
 			<AddCondition />
 			<div class="querybuilder__run">
 				<Button
@@ -28,18 +27,16 @@
 </template>
 
 <script lang="ts">
-import Vue, { VueConstructor } from 'vue';
+import Vue from 'vue';
 import { mapState } from 'vuex';
 import { Button } from '@wmde/wikit-vue-components';
 
 import QueryCondition from '@/components/QueryCondition.vue';
 import QueryResult from '@/components/QueryResult.vue';
 import buildQuery from '@/sparql/buildQuery';
-import Validator from '@/form/Validator';
 import AddCondition from '@/components/AddCondition.vue';
-import { Condition } from '@/sparql/QueryRepresentation';
 
-export default ( Vue as VueConstructor<Vue & { $refs: { condition: InstanceType<typeof QueryCondition> } }> ).extend( {
+export default Vue.extend( {
 	name: 'QueryBuilder',
 	data() {
 		return {
@@ -54,25 +51,8 @@ export default ( Vue as VueConstructor<Vue & { $refs: { condition: InstanceType<
 		incrementMetric( metric: string ): void {
 			this.$store.dispatch( 'incrementMetric', metric );
 		},
-		validate(): void {
-			// TODO: Clean up FormValue <-> Query relation
-			const formValues = this.$store.getters.query.conditions.map( ( condition: Condition ) => {
-				return {
-					property: condition.propertyId,
-					value: condition.value,
-					propertyValueRelation: condition.propertyValueRelation,
-				};
-			} );
-			const validator = new Validator( formValues[ 0 ] );
-			const validationResult = validator.validate();
-			this.errors = validationResult.formErrors;
-			this.$store.dispatch( 'setErrors', validationResult.formErrors );
-
-			this.$refs.condition.validate();
-
-		},
-		runQuery(): void {
-			this.validate();
+		async runQuery(): Promise<void> {
+			await this.$store.dispatch( 'validateForm' );
 			this.incrementMetric( 'run-query-button' );
 			if ( this.errors.length ) {
 				return;

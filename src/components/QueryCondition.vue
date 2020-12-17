@@ -3,20 +3,19 @@
 		<PropertyLookup
 			class="query-condition__property-lookup"
 			v-model="selectedProperty"
-			:error="fieldErrors.property"
+			:error="propertyError(0)"
 		/>
 		<ValueTypeDropDown
 			class="query-condition__value-type-dropdown"
 			v-model="selectedPropertyValueRelation"
-			:disabled="limitedSupport"
+			:disabled="limitedSupport(0)"
 		/>
 		<TextInput
 			class="query-condition__value-input"
 			:label="$i18n('query-builder-input-value-label')"
 			ref="value"
 			v-model="textInputValue"
-			:error="fieldErrors.value ?
-				{message: $i18n(fieldErrors.value.message), type: fieldErrors.value.type}: null"
+			:error="valueError"
 			:placeholder="$i18n('query-builder-input-value-placeholder')"
 			:disabled="isTextInputDisabled()"
 		/>
@@ -32,46 +31,11 @@ import ValueTypeDropDown from '@/components/ValueTypeDropDown.vue';
 import SearchResult from '@/data-access/SearchResult';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
-import allowedDatatypes from '@/allowedDataTypes';
-import Validator from '@/form/Validator';
+import { mapGetters } from 'vuex';
 
 export default Vue.extend( {
 	name: 'QueryCondition',
-	data() {
-		return {
-			fieldErrors: {
-				property: null as null | Error,
-				value: null as null | Error,
-			},
-			limitedSupport: false,
-		};
-	},
 	methods: {
-		validate(): void {
-			const formValues = {
-				property: this.selectedProperty,
-				value: this.textInputValue,
-				propertyValueRelation: this.selectedPropertyValueRelation,
-			};
-			const validator = new Validator( formValues );
-			const validationResult = validator.validate();
-			this.fieldErrors = validationResult.fieldErrors;
-			if ( this.selectedProperty !== null ) {
-				this.validateForLimitedSupport( this.selectedProperty );
-			}
-		},
-		validateForLimitedSupport( selectedProperty: SearchResult ): void {
-			this.limitedSupport = false;
-			this.fieldErrors.property = null;
-			if ( selectedProperty && !allowedDatatypes.includes( selectedProperty.datatype ) ) {
-				this.selectedPropertyValueRelation = PropertyValueRelation.Regardless;
-				this.limitedSupport = true;
-				this.fieldErrors.property = {
-					type: 'warning',
-					message: 'query-builder-property-lookup-limited-support-note',
-				};
-			}
-		},
 		isTextInputDisabled(): boolean {
 			return this.selectedPropertyValueRelation === PropertyValueRelation.Regardless;
 		},
@@ -82,8 +46,6 @@ export default Vue.extend( {
 				return this.$store.getters.property( 0 );
 			},
 			set( selectedProperty: SearchResult ): void {
-				this.selectedPropertyValueRelation = PropertyValueRelation.Matching;
-				this.validateForLimitedSupport( selectedProperty );
 				this.$store.dispatch( 'updateProperty', { property: selectedProperty, conditionIndex: 0 } );
 			},
 		},
@@ -105,6 +67,20 @@ export default Vue.extend( {
 			get(): string { return this.$store.getters.value( 0 ); },
 			set( value: string ): void { this.$store.dispatch( 'updateValue', { value, conditionIndex: 0 } ); },
 		},
+		valueError(): Error | null {
+			const valueError = this.$store.getters.valueError( 0 );
+			if ( valueError === null ) {
+				return null;
+			}
+			return {
+				message: this.$i18n( valueError.message ),
+				type: valueError.type,
+			};
+		},
+		...mapGetters( [
+			'propertyError',
+			'limitedSupport',
+		] ),
 	},
 	components: {
 		TextInput,
