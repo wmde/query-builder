@@ -19,5 +19,8 @@
 	"query-builder-result-error-incomplete-form": "Bir veya daha fazla alan boş. Lütfen sorguyu tamamlayın veya uygun bir alan türü seçin.",
 	"query-builder-result-error-missing-property": "Lütfen bir özellik seçin",
 	"query-builder-result-error-missing-value": "Lütfen bir değer girin",
-	"query-builder-add-condition": "Koşul ekle"
+	"query-builder-add-condition": "Koşul ekle",
+	"query-builder-value-type-relation-dropdown-matching": "eşleme",
+	"query-builder-value-type-relation-dropdown-without": "olmadan",
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "değeri ne olursa olsun"
 }

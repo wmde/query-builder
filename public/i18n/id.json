@@ -19,5 +19,8 @@
 	"query-builder-result-error-incomplete-form": "Satu atau lebih isian masih kosong. Tolong lengkapi kueri atau pilih tipe isian yang sesuai.",
 	"query-builder-result-error-missing-property": "Tolong pilih sebuah atribut",
 	"query-builder-result-error-missing-value": "Tolong masukkan sebuah nilai",
-	"query-builder-add-condition": "Tambahkan kondisi"
+	"query-builder-add-condition": "Tambahkan kondisi",
+	"query-builder-value-type-relation-dropdown-matching": "cocok dengan",
+	"query-builder-value-type-relation-dropdown-without": "tanpa",
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "tidak memperhatikan nilai"
 }

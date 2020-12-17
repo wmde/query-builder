@@ -19,5 +19,8 @@
 	"query-builder-result-error-incomplete-form": "Едно или повеќе полиња се празни. Пополнете го барањето или изберете соодветен вид на поле.",
 	"query-builder-result-error-missing-property": "Изберете својство",
 	"query-builder-result-error-missing-value": "Внесете вредност",
-	"query-builder-add-condition": "Додај услов"
+	"query-builder-add-condition": "Додај услов",
+	"query-builder-value-type-relation-dropdown-matching": "соодветство",
+	"query-builder-value-type-relation-dropdown-without": "без",
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "независно од вредноста"
 }

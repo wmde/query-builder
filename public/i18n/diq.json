@@ -19,5 +19,8 @@
 	"query-builder-result-error-incomplete-form": "Yew yana zêde ca vengo. Kerem kerê persi temam kerê yana ravêrde yew tewrê vayi weçinê",
 	"query-builder-result-error-missing-property": "Yew xısusiyetê weçinê",
 	"query-builder-result-error-missing-value": "Yew ercê weçinê",
-	"query-builder-add-condition": "Şert dekerê"
+	"query-builder-add-condition": "Şert dekerê",
+	"query-builder-value-type-relation-dropdown-matching": "hewliye",
+	"query-builder-value-type-relation-dropdown-without": "bê",
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "Erc çend beno se"
 }

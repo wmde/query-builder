@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Florian COLLIN",
 			"Gomoko",
 			"Verdy p"
 		]
@@ -20,5 +21,8 @@
 	"query-builder-result-error-incomplete-form": "Un champ au moins est vide. Veuillez compléter la requête ou sélectionner un type de champ adapté.",
 	"query-builder-result-error-missing-property": "Veuillez sélectionner une propriété",
 	"query-builder-result-error-missing-value": "Veuillez saisir une valeur",
-	"query-builder-add-condition": "Ajouter une condition"
+	"query-builder-add-condition": "Ajouter une condition",
+	"query-builder-value-type-relation-dropdown-matching": "correspondant à",
+	"query-builder-value-type-relation-dropdown-without": "sans",
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "quelle que soit la valeur"
 }
