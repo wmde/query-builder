@@ -96,7 +96,7 @@ describe( 'actions', () => {
 				JSON.parse( JSON.stringify( expectedResult ) ),
 			);
 			const actions = createActions(
-				{ searchProperties, searchItemValues },
+				{ jest.fn(), searchItemValues },
 				services.get( 'metricsCollector' ),
 			);
 
