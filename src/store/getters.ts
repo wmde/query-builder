@@ -1,5 +1,5 @@
 import allowedDatatypes from '@/allowedDataTypes';
-import RootState from './RootState';
+import RootState, { ConditionRow } from './RootState';
 import QueryRepresentation from '@/sparql/QueryRepresentation';
 import Property from '@/data-model/Property';
 import Error from '@/data-model/Error';
@@ -16,6 +16,9 @@ export default {
 				};
 			} ),
 		};
+	},
+	conditionRows( rootState: RootState ): ConditionRow[] {
+		return rootState.conditionRows;
 	},
 	property( rootState: RootState ) {
 		return ( conditionIndex: number ): ( Property | null ) => {

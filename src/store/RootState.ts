@@ -15,6 +15,7 @@ export interface ConditionRow {
 	propertyValueRelationData: {
 		value: PropertyValueRelation;
 	};
+	readonly conditionId: string;
 }
 
 export interface PropertyData {

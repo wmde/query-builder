@@ -11,6 +11,7 @@ describe( 'mutations', () => {
 				valueData: { value: 'foo', valueError: null },
 				propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
+				conditionId: '0.123',
 			} ],
 			errors: [],
 		};
@@ -30,6 +31,7 @@ describe( 'mutations', () => {
 					valueData: { value: 'foo', valueError: null },
 					propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
+					conditionId: '0.123',
 				} ],
 				errors: [],
 			};
@@ -51,6 +53,7 @@ describe( 'mutations', () => {
 						propertyError: preExistingPropertyError,
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
+					conditionId: '0.123',
 				} ],
 				errors: [],
 			};
@@ -73,12 +76,14 @@ describe( 'mutations', () => {
 			valueData: { value: '', valueError: null },
 			propertyData: { id: '', label: '', datatype: null, propertyError: null },
 			propertyValueRelationData: { value: PropertyValueRelation.Matching },
+			conditionId: 'TO BE FILLED WITH THE GENERATED RANDOM VALUE',
 		};
 		const state: RootState = {
 			conditionRows: [ {
 				valueData: { value: 'foo', valueError: null },
 				propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
+				conditionId: '0.123',
 			} ],
 			errors: [],
 		};
@@ -86,6 +91,9 @@ describe( 'mutations', () => {
 		mutations.addCondition( state );
 
 		expect( state.conditionRows.length ).toBe( 2 );
+
+		// expect the random value
+		expectedNewConditionRow.conditionId = state.conditionRows[ 1 ].conditionId;
 		expect( state.conditionRows[ 1 ] ).toStrictEqual( expectedNewConditionRow );
 	} );
 

@@ -35,6 +35,12 @@ import { mapGetters } from 'vuex';
 
 export default Vue.extend( {
 	name: 'QueryCondition',
+	props: {
+		conditionIndex: {
+			type: Number,
+			required: true,
+		},
+	},
 	methods: {
 		isTextInputDisabled(): boolean {
 			return this.selectedPropertyValueRelation === PropertyValueRelation.Regardless;
@@ -43,15 +49,18 @@ export default Vue.extend( {
 	computed: {
 		selectedProperty: {
 			get(): SearchResult | null {
-				return this.$store.getters.property( 0 );
+				return this.$store.getters.property( this.conditionIndex );
 			},
 			set( selectedProperty: SearchResult ): void {
-				this.$store.dispatch( 'updateProperty', { property: selectedProperty, conditionIndex: 0 } );
+				this.$store.dispatch(
+					'updateProperty',
+					{ property: selectedProperty, conditionIndex: this.conditionIndex },
+				);
 			},
 		},
 		selectedPropertyValueRelation: {
 			get(): PropertyValueRelation {
-				return this.$store.getters.propertyValueRelation( 0 );
+				return this.$store.getters.propertyValueRelation( this.conditionIndex );
 			},
 			set( selectedPropertyValueRelation: PropertyValueRelation ): void {
 				if ( selectedPropertyValueRelation === PropertyValueRelation.Regardless ) {
@@ -59,16 +68,18 @@ export default Vue.extend( {
 				}
 				this.$store.dispatch(
 					'updatePropertyValueRelation',
-					{ propertyValueRelation: selectedPropertyValueRelation, conditionIndex: 0 },
+					{ propertyValueRelation: selectedPropertyValueRelation, conditionIndex: this.conditionIndex },
 				);
 			},
 		},
 		textInputValue: {
-			get(): string { return this.$store.getters.value( 0 ); },
-			set( value: string ): void { this.$store.dispatch( 'updateValue', { value, conditionIndex: 0 } ); },
+			get(): string { return this.$store.getters.value( this.conditionIndex ); },
+			set( value: string ): void {
+				this.$store.dispatch( 'updateValue', { value, conditionIndex: this.conditionIndex } );
+			},
 		},
 		valueError(): Error | null {
-			const valueError = this.$store.getters.valueError( 0 );
+			const valueError = this.$store.getters.valueError( this.conditionIndex );
 			if ( valueError === null ) {
 				return null;
 			}
