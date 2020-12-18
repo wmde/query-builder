@@ -51,6 +51,7 @@ describe( 'QueryObjectBuilder', () => {
 				{
 					propertyId: 'P281',
 					value: 'XXXX',
+					datatype: 'string',
 					propertyValueRelation: PropertyValueRelation.Matching,
 				},
 			],
