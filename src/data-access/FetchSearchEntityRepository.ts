@@ -13,6 +13,9 @@ export default class FetchSearchEntityRepository implements SearchEntityReposito
 
 	private async searchEntities( searchString: string, entityType: string, limit?: number, offset?: number ):
 	Promise<SearchResult[]> {
+		if ( !searchString ) {
+			throw new Error( 'The parameter searchString must not be empty!' );
+		}
 		const params: { [key: string]: string } = {
 			action: 'wbsearchentities',
 			search: searchString,
