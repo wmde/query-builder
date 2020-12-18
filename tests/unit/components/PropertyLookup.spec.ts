@@ -52,7 +52,7 @@ describe( 'PropertyLookup.vue', () => {
 		wrapper.findComponent( Lookup ).vm.$emit( 'update:search-input', searchOptions.search );
 		await localVue.nextTick();
 
-		expect( store.dispatch ).toHaveBeenCalledWith( 'searchProperties', { search: searchOptions.search } );
+		expect( store.dispatch ).toHaveBeenCalledWith( 'searchProperties', searchOptions );
 		expect( wrapper.findComponent( Lookup ).props( 'searchInput' ) ).toBe( searchOptions.search );
 
 		// it really needs two ticks ¯\_(ツ)_/¯

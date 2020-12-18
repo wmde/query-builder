@@ -24,6 +24,8 @@ import { Lookup } from '@wmde/wikit-vue-components';
 import SearchResult from '@/data-access/SearchResult';
 import SearchOptions from '@/data-access/SearchOptions';
 
+const NUMBER_OF_SEARCH_RESULTS = 12;
+
 export default Vue.extend( {
 	name: 'PropertyLookup',
 	components: {
@@ -39,11 +41,12 @@ export default Vue.extend( {
 	methods: {
 		handleScroll( event: number ): void {
 			if ( this.topItemIndex <= event ) {
-				this.topItemIndex += 12;
+				this.topItemIndex += NUMBER_OF_SEARCH_RESULTS;
 
 				const searchOptions: SearchOptions = {
 					search: this.search,
 					offset: this.topItemIndex,
+					limit: NUMBER_OF_SEARCH_RESULTS,
 				};
 
 				this.searchPropertiesOnScroll( searchOptions );
@@ -58,6 +61,7 @@ export default Vue.extend( {
 		async search( newSearchString: string ): Promise<void> {
 			const searchOptions: SearchOptions = {
 				search: newSearchString,
+				limit: NUMBER_OF_SEARCH_RESULTS,
 			};
 
 			const searchResults = await this.$store.dispatch( 'searchProperties', searchOptions );
