@@ -3,12 +3,12 @@
 		<PropertyLookup
 			class="query-condition__property-lookup"
 			v-model="selectedProperty"
-			:error="propertyError(0)"
+			:error="propertyError(conditionIndex)"
 		/>
 		<ValueTypeDropDown
 			class="query-condition__value-type-dropdown"
 			v-model="selectedPropertyValueRelation"
-			:disabled="limitedSupport(0)"
+			:disabled="limitedSupport(conditionIndex)"
 		/>
 		<TextInput
 			class="query-condition__value-input"
