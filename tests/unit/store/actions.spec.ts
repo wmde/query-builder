@@ -65,11 +65,9 @@ describe( 'actions', () => {
 
 			expect( context.commit ).toHaveBeenCalledTimes( 2 );
 			expect( context.commit ).toHaveBeenCalledWith( 'setProperty', { property, conditionIndex } );
-			expect( context.commit ).toHaveBeenCalledWith( 'setFieldErrors', {
-				index: 0,
-				errors: {
-					propertyError: null,
-				},
+			expect( context.commit ).toHaveBeenCalledWith( 'clearFieldErrors', {
+				conditionIndex: 0,
+				errorsToClear: 'property',
 			} );
 		} );
 

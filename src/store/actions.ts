@@ -45,10 +45,10 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 			context.dispatch( 'setConditionAsLimitedSupport', payload.conditionIndex );
 		} else {
 			context.commit(
-				'setFieldErrors',
+				'clearFieldErrors',
 				{
-					index: payload.conditionIndex,
-					errors: { propertyError: null },
+					conditionIndex: payload.conditionIndex,
+					errorsToClear: 'property',
 				},
 			);
 		}
