@@ -34,29 +34,33 @@ export default Vue.extend( {
 			search: '',
 			searchResults: [],
 			topItemIndex: 1,
-			scrollpropertiesSearchResults: [],
-			searchOptions: {} as SearchOptions,
 		};
 	},
 	methods: {
 		handleScroll( event: number ): void {
-			if ( event <= this.topItemIndex ) {
-				this.searchOptions.search = this.search;
-				this.searchOptions.offset = this.topItemIndex;
+			if ( this.topItemIndex <= event ) {
+				this.topItemIndex += 12;
 
-				this.searchPropertiesOnScroll( this.searchOptions );
-				this.searchResults = this.searchResults.concat( this.scrollpropertiesSearchResults );
-				this.topItemIndex += 13;
+				const searchOptions: SearchOptions = {
+					search: this.search,
+					offset: this.topItemIndex,
+				};
+
+				this.searchPropertiesOnScroll( searchOptions );
 			}
 		},
 		async searchPropertiesOnScroll( options: SearchOptions ): Promise<void> {
-			this.scrollpropertiesSearchResults = await this.$store.dispatch( 'searchProperties', options );
+			const searchResults = await this.$store.dispatch( 'searchProperties', options );
+			this.searchResults = this.searchResults.concat( searchResults );
 		},
 	},
 	watch: {
 		async search( newSearchString: string ): Promise<void> {
-			this.searchOptions.search = newSearchString;
-			const searchResults = await this.$store.dispatch( 'searchProperties', this.searchOptions );
+			const searchOptions: SearchOptions = {
+				search: newSearchString,
+			};
+
+			const searchResults = await this.$store.dispatch( 'searchProperties', searchOptions );
 			this.searchResults = searchResults.map(
 				( item: MenuItem & SearchResult ) => {
 					item.tag = item.tag && this.$i18n( item.tag );
