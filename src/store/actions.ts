@@ -17,7 +17,11 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 	async searchProperties(
 		_context: ActionContext<RootState, RootState>,
 		options: SearchOptions ): Promise<SearchResult[]> {
-		const searchResults = await searchEntityRepository.searchProperties( options.search, 12, options.offset );
+		const searchResults = await searchEntityRepository.searchProperties(
+			options.search,
+			options.limit,
+			options.offset,
+		);
 		return searchResults.map( ( searchResult: MenuItem & SearchResult ) => {
 			if ( !allowedDatatypes.includes( searchResult.datatype ) ) {
 				searchResult.tag = 'query-builder-property-lookup-limited-support-tag';
@@ -29,7 +33,11 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 		_context: ActionContext<RootState, RootState>,
 		options: SearchOptions ): Promise<SearchResult[]> {
 		// check for empty
-		return await searchEntityRepository.searchItemValues( options.search, 12, options.offset );
+		return await searchEntityRepository.searchItemValues(
+			options.search,
+			options.limit,
+			options.offset,
+		);
 	},
 	updateValue(
 		context: ActionContext<RootState, RootState>,
