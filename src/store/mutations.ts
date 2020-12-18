@@ -46,4 +46,18 @@ export default {
 			state.conditionRows[ payload.index ].valueData.valueError = payload.errors.valueError;
 		}
 	},
+	clearFieldErrors(
+		state: RootState,
+		payload: {
+			conditionIndex: number;
+			errorsToClear: 'property'|'value'|'both';
+		},
+	): void {
+		if ( payload.errorsToClear === 'property' || payload.errorsToClear === 'both' ) {
+			state.conditionRows[ payload.conditionIndex ].propertyData.propertyError = null;
+		}
+		if ( payload.errorsToClear === 'value' || payload.errorsToClear === 'both' ) {
+			state.conditionRows[ payload.conditionIndex ].valueData.valueError = null;
+		}
+	},
 };

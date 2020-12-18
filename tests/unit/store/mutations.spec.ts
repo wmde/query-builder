@@ -97,4 +97,68 @@ describe( 'mutations', () => {
 		expect( state.conditionRows[ 1 ] ).toStrictEqual( expectedNewConditionRow );
 	} );
 
+	describe( 'clearFieldErrors', () => {
+		it( 'clears the property error', () => {
+			const state: RootState = {
+				conditionRows: [ {
+					valueData: { value: '', valueError: { message: 'message-key', type: 'error' } },
+					propertyData: {
+						id: '',
+						label: '',
+						datatype: null,
+						propertyError: { message: 'message-key', type: 'error' },
+					},
+					propertyValueRelationData: { value: PropertyValueRelation.Matching },
+					conditionId: '0.123',
+				} ],
+				errors: [],
+			};
+
+			mutations.clearFieldErrors( state, { conditionIndex: 0, errorsToClear: 'property' } );
+			expect( state.conditionRows[ 0 ].propertyData.propertyError ).toBe( null );
+			expect( state.conditionRows[ 0 ].valueData.valueError ).not.toBe( null );
+		} );
+
+		it( 'clears the value error', () => {
+			const state: RootState = {
+				conditionRows: [ {
+					valueData: { value: '', valueError: { message: 'message-key', type: 'error' } },
+					propertyData: {
+						id: '',
+						label: '',
+						datatype: null,
+						propertyError: { message: 'message-key', type: 'error' },
+					},
+					propertyValueRelationData: { value: PropertyValueRelation.Matching },
+					conditionId: '0.123',
+				} ],
+				errors: [],
+			};
+
+			mutations.clearFieldErrors( state, { conditionIndex: 0, errorsToClear: 'value' } );
+			expect( state.conditionRows[ 0 ].valueData.valueError ).toBe( null );
+			expect( state.conditionRows[ 0 ].propertyData.propertyError ).not.toBe( null );
+		} );
+
+		it( 'clears the both errors', () => {
+			const state: RootState = {
+				conditionRows: [ {
+					valueData: { value: '', valueError: { message: 'message-key', type: 'error' } },
+					propertyData: {
+						id: '',
+						label: '',
+						datatype: null,
+						propertyError: { message: 'message-key', type: 'error' },
+					},
+					propertyValueRelationData: { value: PropertyValueRelation.Matching },
+					conditionId: '0.123',
+				} ],
+				errors: [],
+			};
+
+			mutations.clearFieldErrors( state, { conditionIndex: 0, errorsToClear: 'both' } );
+			expect( state.conditionRows[ 0 ].propertyData.propertyError ).toBe( null );
+			expect( state.conditionRows[ 0 ].valueData.valueError ).toBe( null );
+		} );
+	} );
 } );
