@@ -17,7 +17,6 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 	async searchProperties(
 		_context: ActionContext<RootState, RootState>,
 		options: SearchOptions ): Promise<SearchResult[]> {
-		// check for empty
 		const searchResults = await searchEntityRepository.searchProperties(
 			options.search,
 			options.limit,

@@ -59,6 +59,9 @@ export default Vue.extend( {
 	},
 	watch: {
 		async search( newSearchString: string ): Promise<void> {
+			if ( !newSearchString ) {
+				return;
+			}
 			const searchOptions: SearchOptions = {
 				search: newSearchString,
 				limit: NUMBER_OF_SEARCH_RESULTS,
