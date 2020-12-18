@@ -3,10 +3,10 @@
 		:value="value"
 		@input="$emit( 'input', $event )"
 		:error="error ? {message: $i18n(error.message), type: error.type} : null"
-		:searchForMenuItems="searchForProperties"
-		:label="$i18n('query-builder-property-lookup-label')"
-		:placeholder="$i18n('query-builder-property-lookup-placeholder')"
-		:no-match-found-message="$i18n('query-builder-property-lookup-no-match-found')"
+		:searchForMenuItems="searchForItems"
+		:label="$i18n('query-builder-input-value-label')"
+		:placeholder="$i18n('query-builder-input-value-placeholder')"
+		:no-match-found-message="$i18n('query-builder-item-value-lookup-no-match-found')"
 	/>
 </template>
 
@@ -18,23 +18,13 @@ import { MenuItem } from '@wmde/wikit-vue-components/dist/components/MenuItem';
 import Vue, { PropType } from 'vue';
 
 export default Vue.extend( {
-	name: 'PropertyLookup',
+	name: 'ItemValueLookup',
 	components: {
 		EntityLookup,
 	},
 	methods: {
-		setTagForSearchResults( searchResults: SearchResult[] ): SearchResult[] {
-			return searchResults.map(
-				( item: MenuItem & SearchResult ) => {
-					item.tag = item.tag && this.$i18n( item.tag );
-					return item;
-				},
-			);
-		},
-		async searchForProperties( options: SearchOptions ): Promise<SearchResult[]> {
-			return this.setTagForSearchResults(
-				await this.$store.dispatch( 'searchProperties', options ),
-			);
+		searchForItems( options: SearchOptions ): Promise<SearchResult[]> {
+			return this.$store.dispatch( 'searchItemValues', options );
 		},
 	},
 	props: {
