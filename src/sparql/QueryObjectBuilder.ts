@@ -29,6 +29,10 @@ export default class QueryObjectBuilder {
 			this.buildFromQueryCondition( queryRepresentation.conditions[ i ] );
 		}
 
+		if ( queryRepresentation.limit ) {
+			this.queryObject.limit = queryRepresentation.limit;
+		}
+
 		return this.queryObject;
 	}
 

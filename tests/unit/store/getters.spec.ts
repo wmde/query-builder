@@ -78,5 +78,31 @@ describe( 'getters', () => {
 
 			expect( getters.query( state ) ).toStrictEqual( expectedValue );
 		} );
+
+		it( 'returns the QueryRepresentation of the RootState with a limit', () => {
+			const state: RootState = {
+				conditionRows: [ {
+					valueData: { value: 'foo', valueError: null },
+					propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
+					propertyValueRelationData: { value: PropertyValueRelation.Matching },
+					conditionId: '0.123',
+				} ],
+				limit: 20,
+				errors: [],
+			};
+
+			const expectedValue: QueryRepresentation = {
+				conditions: [
+					{
+						propertyId: 'P123',
+						value: 'foo',
+						propertyValueRelation: PropertyValueRelation.Matching,
+					},
+				],
+				limit: 20,
+			};
+
+			expect( getters.query( state ) ).toStrictEqual( expectedValue );
+		} );
 	} );
 } );
