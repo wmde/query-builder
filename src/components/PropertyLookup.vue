@@ -34,7 +34,7 @@ export default Vue.extend( {
 	data() {
 		return {
 			search: '',
-			searchResults: [],
+			searchResults: [] as SearchResult[],
 			topItemIndex: 1,
 		};
 	},
@@ -53,8 +53,18 @@ export default Vue.extend( {
 			}
 		},
 		async searchPropertiesOnScroll( options: SearchOptions ): Promise<void> {
-			const searchResults = await this.$store.dispatch( 'searchProperties', options );
+			let searchResults = await this.$store.dispatch( 'searchProperties', options );
+			searchResults = this.setTagForSearchResults( searchResults );
+
 			this.searchResults = this.searchResults.concat( searchResults );
+		},
+		setTagForSearchResults( searchResults: SearchResult[] ): SearchResult[] {
+			return searchResults.map(
+				( item: MenuItem & SearchResult ) => {
+					item.tag = item.tag && this.$i18n( item.tag );
+					return item;
+				},
+			);
 		},
 	},
 	watch: {
@@ -68,12 +78,7 @@ export default Vue.extend( {
 			};
 
 			const searchResults = await this.$store.dispatch( 'searchProperties', searchOptions );
-			this.searchResults = searchResults.map(
-				( item: MenuItem & SearchResult ) => {
-					item.tag = item.tag && this.$i18n( item.tag );
-					return item;
-				},
-			);
+			this.searchResults = this.setTagForSearchResults( searchResults );
 		},
 	},
 	props: {
