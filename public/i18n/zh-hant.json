@@ -19,5 +19,8 @@
 	"query-builder-result-error-incomplete-form": "有一個或更多欄位為空。請使用完整的查詢，或是選擇合適的欄位類型。",
 	"query-builder-result-error-missing-property": "請選擇一個屬性",
 	"query-builder-result-error-missing-value": "請選擇一個值",
-	"query-builder-add-condition": "添加條件"
+	"query-builder-add-condition": "添加條件",
+	"query-builder-value-type-relation-dropdown-matching": "符合",
+	"query-builder-value-type-relation-dropdown-without": "不帶",
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "不論值內容"
 }

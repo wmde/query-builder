@@ -11,5 +11,7 @@
 	"query-builder-property-lookup-limited-support-tag": "Limigita subteno",
 	"query-builder-result-placeholder": "Rezultoj estos montrita ĉi tie",
 	"query-builder-result-error-missing-value": "Bonvolu eniru valoron",
-	"query-builder-add-condition": "Aldoni kondiĉon"
+	"query-builder-add-condition": "Aldoni kondiĉon",
+	"query-builder-value-type-relation-dropdown-matching": "Komparado",
+	"query-builder-value-type-relation-dropdown-without": "Sen"
 }

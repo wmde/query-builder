@@ -20,5 +20,8 @@
 	"query-builder-result-error-incomplete-form": "שדה אחד או יותר נותרו ריקים. נא להשלים את השאילתה או לבחור סוג שדה תואם.",
 	"query-builder-result-error-missing-property": "נא לבחור מאפיין",
 	"query-builder-result-error-missing-value": "נא למלא ערך",
-	"query-builder-add-condition": "הוספת תנאי"
+	"query-builder-add-condition": "הוספת תנאי",
+	"query-builder-value-type-relation-dropdown-matching": "תואם",
+	"query-builder-value-type-relation-dropdown-without": "ללא",
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "ללא תלות בערך"
 }

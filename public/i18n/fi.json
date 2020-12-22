@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Maantietäjä"
+		]
+	},
+	"query-builder-heading": "Yksinkertainen kyselyrakentaja",
+	"query-builder-find-all-items": "Etsi kaikki kohteet...",
+	"query-builder-run-query": "Suorita kysely",
+	"query-builder-input-value-label": "Arvo",
+	"query-builder-input-value-placeholder": "Syötä arvo",
+	"query-builder-property-lookup-label": "Ominaisuus",
+	"query-builder-property-lookup-placeholder": "Syötä ominaisuus",
+	"query-builder-property-lookup-no-match-found": "Ei hakutuloksia",
+	"query-builder-property-lookup-limited-support-tag": "Rajoitettu tuki.",
+	"query-builder-property-lookup-limited-support-note": "Rajoitetun tuen omaavia ominaisuuksia ei voida suodattaa arvon perusteella",
+	"query-builder-result-placeholder": "Tulokset näytetään tässä.",
+	"query-builder-result-error-empty-form": "Näyttää siltä, että kyselyrakentaja oli tyhjä. Kirjoita ensin kelvollinen kysely ja yritä sitten suorittaa se uudelleen.",
+	"query-builder-result-error-incomplete-form": "Yksi tai useampi kenttä on tyhjä. Täytä kysely tai valitse sopiva kenttätyyppi.",
+	"query-builder-result-error-missing-property": "Valitse ominaisuus",
+	"query-builder-result-error-missing-value": "Syötä arvo.",
+	"query-builder-add-condition": "Lisää ehto",
+	"query-builder-value-type-relation-dropdown-matching": "vastaavuus",
+	"query-builder-value-type-relation-dropdown-without": "ilman",
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "arvosta riippumatta"
+}

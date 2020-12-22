@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mohanad Kh"
+		]
+	},
+	"query-builder-heading": "منشئ استعلام بسيط",
+	"query-builder-find-all-items": "ابحث عن جميع العناصر ...",
+	"query-builder-run-query": "تشغيل الاستعلام",
+	"query-builder-input-value-label": "قيمة",
+	"query-builder-input-value-placeholder": "أدخل قيمة",
+	"query-builder-property-lookup-label": "خاصية",
+	"query-builder-property-lookup-placeholder": "أدخل خاصية",
+	"query-builder-property-lookup-no-match-found": "لم يُعثر على تطابق"
+}
