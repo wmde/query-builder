@@ -97,6 +97,32 @@ describe( 'mutations', () => {
 		expect( state.conditionRows[ 1 ] ).toStrictEqual( expectedNewConditionRow );
 	} );
 
+	it( 'removeCondition', () => {
+		const keptRow = {
+			valueData: { value: 'foo', valueError: null },
+			propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
+			propertyValueRelationData: { value: PropertyValueRelation.Matching },
+			conditionId: '0.123',
+		};
+		const state: RootState = {
+			conditionRows: [ keptRow,
+				{
+					valueData: { value: 'potato', valueError: null },
+					propertyData: { id: 'P666', label: 'Day of the beast', datatype: 'string', propertyError: null },
+					propertyValueRelationData: { value: PropertyValueRelation.Regardless },
+					conditionId: '3',
+				},
+			],
+			errors: [],
+		};
+
+		mutations.removeCondition( state, 1 );
+
+		expect( state.conditionRows.length ).toBe( 1 );
+		expect( state.conditionRows[ 0 ] ).toStrictEqual( keptRow );
+
+	} );
+
 	describe( 'clearFieldErrors', () => {
 		it( 'clears the property error', () => {
 			const state: RootState = {

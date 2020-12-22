@@ -19,12 +19,19 @@
 			:placeholder="$i18n('query-builder-input-value-placeholder')"
 			:disabled="isTextInputDisabled()"
 		/>
+		<Button
+			class="query-condition__remove"
+			type="primaryDestructive"
+			@click.native="removeCondition"
+			:disabled="!canDelete"
+		> Trash
+		</Button>
 	</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { TextInput } from '@wmde/wikit-vue-components';
+import { TextInput, Button } from '@wmde/wikit-vue-components';
 
 import PropertyLookup from '@/components/PropertyLookup.vue';
 import ValueTypeDropDown from '@/components/ValueTypeDropDown.vue';
@@ -45,8 +52,16 @@ export default Vue.extend( {
 		isTextInputDisabled(): boolean {
 			return this.selectedPropertyValueRelation === PropertyValueRelation.Regardless;
 		},
+		removeCondition(): void {
+			if ( this.canDelete ) {
+				this.$store.dispatch( 'removeCondition', this.conditionIndex );
+			}
+		},
 	},
 	computed: {
+		canDelete(): boolean {
+			return this.$store.getters.conditionRows.length > 1;
+		},
 		selectedProperty: {
 			get(): SearchResult | null {
 				return this.$store.getters.property( this.conditionIndex );
@@ -97,6 +112,7 @@ export default Vue.extend( {
 		TextInput,
 		PropertyLookup,
 		ValueTypeDropDown,
+		Button,
 	},
 } );
 </script>
@@ -109,6 +125,10 @@ export default Vue.extend( {
 		margin-block-start: $dimension-layout-medium;
 		padding-block: $dimension-layout-xsmall;
 		padding-inline: $dimension-layout-medium;
+
+		&__remove {
+			margin-inline-start: auto;
+		}
 	}
 
 	.query-condition__value-type-dropdown {

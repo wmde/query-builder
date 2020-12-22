@@ -73,6 +73,9 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 	addCondition( context: ActionContext<RootState, RootState> ): void {
 		context.commit( 'addCondition' );
 	},
+	removeCondition( context: ActionContext<RootState, RootState>, conditionIndex: number ): void {
+		context.commit( 'removeCondition', conditionIndex );
+	},
 	setConditionAsLimitedSupport( context: ActionContext<RootState, RootState>, conditionIndex: number ): void {
 		context.dispatch(
 			'updatePropertyValueRelation',
