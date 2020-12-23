@@ -17,5 +17,6 @@
   "query-builder-add-condition": "Add condition",
   "query-builder-value-type-relation-dropdown-matching": "matching",
   "query-builder-value-type-relation-dropdown-without": "without",
-  "query-builder-value-type-relation-dropdown-regardless-of-value": "regardless of value"
+  "query-builder-value-type-relation-dropdown-regardless-of-value": "regardless of value",
+  "query-builder-limit-number-results-description": "Limit the number of results to"
 }
