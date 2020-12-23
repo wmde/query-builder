@@ -100,6 +100,28 @@ describe( 'QueryCondition.vue', () => {
 		expect( store.dispatch ).toHaveBeenCalledWith( 'updateValue', { value: userInput, conditionIndex } );
 	} );
 
+	it( 'removes current row when the removeCondition button is clicked', async () => {
+		const store = newStore();
+		const conditionIndex = 0;
+		store.dispatch = jest.fn();
+		const wrapper = shallowMount( QueryCondition, {
+			store,
+			localVue,
+			propsData: {
+				'condition-index': conditionIndex,
+			},
+			computed: {
+				canDelete: () => true,
+			},
+		} );
+
+		wrapper.find( '.query-condition__remove' ).trigger( 'click' );
+
+		await Vue.nextTick();
+
+		expect( store.dispatch ).toHaveBeenCalledWith( 'removeCondition', conditionIndex );
+	} );
+
 	it( 'shows field errors', () => {
 		const wrapper = shallowMount( QueryCondition, {
 			store: newStore( {
