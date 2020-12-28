@@ -16,6 +16,7 @@
 				:key="condition.conditionId"
 			/>
 			<AddCondition @add-condition="addCondition" />
+			<Limit />
 			<div class="querybuilder__run">
 				<Button
 					@click.native="runQuery"
@@ -40,6 +41,7 @@ import QueryCondition from '@/components/QueryCondition.vue';
 import QueryResult from '@/components/QueryResult.vue';
 import buildQuery from '@/sparql/buildQuery';
 import AddCondition from '@/components/AddCondition.vue';
+import Limit from '@/components/Limit.vue';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -84,6 +86,7 @@ export default Vue.extend( {
 		QueryResult,
 		QueryCondition,
 		AddCondition,
+		Limit,
 	},
 } );
 </script>
