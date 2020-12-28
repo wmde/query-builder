@@ -41,6 +41,7 @@ export function createStore( services: QueryBuilderServices ): Store<RootState> 
 			conditionRows: [ getFreshConditionRow() ],
 			errors: [],
 			limit: 100,
+			useLimit: true,
 		},
 		actions: createActions(
 			services.get( 'searchEntityRepository' ),
