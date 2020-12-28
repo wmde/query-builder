@@ -13,7 +13,8 @@ describe( 'buildQuery', () => {
 				value,
 				propertyValueRelation,
 			},
-		] } ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }` );
+		],
+		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }` );
 	} );
 
 	it( 'builds a query from a property and a string value with not matching selected', () => {
@@ -48,7 +49,8 @@ describe( 'buildQuery', () => {
 				value: '',
 				propertyValueRelation,
 			},
-		] } ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) _:anyValue. }` );
+		],
+		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) _:anyValue. }` );
 	} );
 
 	it( 'builds a query from multiple conditions, one matching and one regardless', () => {
