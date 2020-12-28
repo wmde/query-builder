@@ -13,6 +13,7 @@ describe( 'mutations', () => {
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
 				conditionId: '0.123',
 			} ],
+			useLimit: false,
 			errors: [],
 		};
 
@@ -33,6 +34,7 @@ describe( 'mutations', () => {
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],
+				useLimit: false,
 				errors: [],
 			};
 
@@ -55,6 +57,7 @@ describe( 'mutations', () => {
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],
+				useLimit: false,
 				errors: [],
 			};
 
@@ -85,6 +88,7 @@ describe( 'mutations', () => {
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
 				conditionId: '0.123',
 			} ],
+			useLimit: false,
 			errors: [],
 		};
 
@@ -111,6 +115,7 @@ describe( 'mutations', () => {
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],
+				useLimit: false,
 				errors: [],
 			};
 
@@ -132,6 +137,7 @@ describe( 'mutations', () => {
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],
+				useLimit: false,
 				errors: [],
 			};
 
@@ -153,6 +159,7 @@ describe( 'mutations', () => {
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],
+				useLimit: false,
 				errors: [],
 			};
 

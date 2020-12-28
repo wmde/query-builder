@@ -26,6 +26,9 @@ export default {
 	setLimit( state: RootState, limit: number ): void {
 		state.limit = limit;
 	},
+	setUseLimit( state: RootState, useLimit: boolean ): void {
+		state.useLimit = useLimit;
+	},
 	setErrors( state: RootState, errors: Error[] ): void {
 		state.errors = errors;
 	},
