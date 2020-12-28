@@ -58,6 +58,9 @@ export default {
 	limit( rootState: RootState ): ( number | undefined ) {
 		return rootState.limit;
 	},
+	useLimit( rootState: RootState ): boolean {
+		return rootState.useLimit;
+	},
 	getErrors( rootState: RootState ): Error[] {
 		return rootState.errors;
 	},
