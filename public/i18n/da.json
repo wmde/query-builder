@@ -9,5 +9,6 @@
 	"query-builder-property-lookup-label": "Egenskab",
 	"query-builder-result-error-missing-property": "Vælg venligst en egenskab",
 	"query-builder-result-error-missing-value": "Indtast venligst en værdi",
-	"query-builder-value-type-relation-dropdown-without": "uden"
+	"query-builder-value-type-relation-dropdown-without": "uden",
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "uanset værdien"
 }
