@@ -29,6 +29,9 @@ export default {
 	addCondition( state: RootState ): void {
 		state.conditionRows.push( getFreshConditionRow() );
 	},
+	removeCondition( state: RootState, conditionIndex: number ): void {
+		state.conditionRows.splice( conditionIndex, 1 );
+	},
 	setFieldErrors(
 		state: RootState,
 		payload: {

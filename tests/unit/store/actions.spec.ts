@@ -190,6 +190,19 @@ describe( 'actions', () => {
 		expect( context.commit ).toHaveBeenCalledWith( 'addCondition' );
 	} );
 
+	it( 'removeCondition', () => {
+		const context = { commit: jest.fn() };
+
+		const actions = createActions(
+			services.get( 'searchEntityRepository' ),
+			services.get( 'metricsCollector' ),
+		);
+
+		actions.removeCondition( context as any, 0 );
+
+		expect( context.commit ).toHaveBeenCalledWith( 'removeCondition', 0 );
+	} );
+
 	describe( 'validateForm', () => {
 		it( 'adds only a notice for a single empty line', () => {
 			const context = {
