@@ -1,3 +1,4 @@
+import DeleteConditionButton from '@/components/DeleteConditionButton.vue';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import { TextInput } from '@wmde/wikit-vue-components';
 import Vuex, { Store } from 'vuex';
@@ -115,7 +116,7 @@ describe( 'QueryCondition.vue', () => {
 			},
 		} );
 
-		wrapper.find( '.query-condition__remove' ).trigger( 'click' );
+		wrapper.findComponent( DeleteConditionButton ).vm.$emit( 'click' );
 
 		await Vue.nextTick();
 
