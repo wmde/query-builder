@@ -72,6 +72,7 @@ describe( 'getters', () => {
 						propertyId: 'P123',
 						value: 'foo',
 						propertyValueRelation: PropertyValueRelation.Matching,
+						datatype: 'string',
 					},
 				],
 			};

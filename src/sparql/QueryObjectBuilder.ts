@@ -36,34 +36,47 @@ export default class QueryObjectBuilder {
 		return this.queryObject;
 	}
 
-	private buildFromQueryCondition( condition: Condition ): void {
-		let tripleObject = {} as Term;
-
+	private buildTripleObject( condition: Condition ): Term {
+		// TODO: Consider extracting this into a new class when adding less than / more than
 		switch ( condition.propertyValueRelation ) {
-			case ( PropertyValueRelation.Matching ):
-				tripleObject = {
-					termType: 'Literal',
-					value: condition.value,
-				};
-				break;
 			case ( PropertyValueRelation.NotMatching ):
-				tripleObject = {
+				return {
 					termType: 'Variable',
 					value: 'instance',
 				};
-				break;
 			case ( PropertyValueRelation.Regardless ):
-				tripleObject = {
+				return {
 					termType: 'BlankNode',
 					value: 'anyValue',
 				};
-				break;
+			case ( PropertyValueRelation.Matching ):
+				return this.buildTripleObjectForExplicitValue( condition.datatype, condition.value );
 			default:
-				tripleObject = {
-					termType: 'Literal',
-					value: condition.value,
-				};
+				throw new Error( `unsupported relation: ${condition.propertyValueRelation}` );
 		}
+	}
+
+	private buildTripleObjectForExplicitValue( datatype: string, value: string ): Term {
+		// TODO: Consider extracting this into a new class when adding unit type
+		switch ( datatype ) {
+			case 'string':
+			case 'external-id':
+				return {
+					termType: 'Literal',
+					value: value,
+				};
+			case 'wikibase-item':
+				return {
+					termType: 'NamedNode', // this.mapDatatypeToTermType( condition.datatype ),
+					value: `${rdfNamespaces.wd}${value}`,
+				};
+			default:
+				throw new Error( `unsupported datatype: ${datatype}` );
+		}
+	}
+
+	private buildFromQueryCondition( condition: Condition ): void {
+		const tripleObject: Term = this.buildTripleObject( condition );
 
 		if ( !this.queryObject.where ) {
 			this.queryObject.where = [];
@@ -106,10 +119,7 @@ export default class QueryObjectBuilder {
 							termType: 'Variable',
 							value: 'instance',
 						},
-						{
-							termType: 'Literal',
-							value: condition.value,
-						},
+						this.buildTripleObjectForExplicitValue( condition.datatype, condition.value ),
 					],
 				},
 			};

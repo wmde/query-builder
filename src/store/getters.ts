@@ -13,6 +13,7 @@ export default {
 					propertyId: condition.propertyData.id,
 					value: condition.valueData.value,
 					propertyValueRelation: condition.propertyValueRelationData.value,
+					datatype: condition.propertyData.datatype!,
 				};
 			} ),
 			...rootState.limit && { limit: rootState.limit },

@@ -11,6 +11,7 @@ describe( 'buildQuery', () => {
 			{
 				propertyId,
 				value,
+				datatype: 'string',
 				propertyValueRelation,
 			},
 		] } ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }` );
@@ -31,6 +32,7 @@ describe( 'buildQuery', () => {
 			{
 				propertyId,
 				value,
+				datatype: 'string',
 				propertyValueRelation,
 			},
 		] } );
@@ -46,6 +48,7 @@ describe( 'buildQuery', () => {
 			{
 				propertyId,
 				value: '',
+				datatype: 'string',
 				propertyValueRelation,
 			},
 		] } ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) _:anyValue. }` );
@@ -61,11 +64,13 @@ describe( 'buildQuery', () => {
 			{
 				propertyId: 'P666',
 				value: 'blah',
+				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.Matching,
 			},
 			{
 				propertyId: 'P66',
 				value: '',
+				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.Regardless,
 			},
 		] } );
@@ -84,11 +89,13 @@ describe( 'buildQuery', () => {
 			{
 				propertyId: 'P666',
 				value: 'blah',
+				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.Matching,
 			},
 			{
 				propertyId: 'P66',
 				value: 'foo',
+				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.NotMatching,
 			},
 		] } );
@@ -107,15 +114,32 @@ describe( 'buildQuery', () => {
 			{
 				propertyId: 'P666',
 				value: 'blah',
+				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.NotMatching,
 			},
 			{
 				propertyId: 'P66',
 				value: 'foo',
+				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.Matching,
 			},
 		] } );
 
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
+	} );
+
+	it( 'builds a query from a property and an wikibase-item value', () => {
+		const propertyId = 'P31';
+		const value = 'Q146';
+		const propertyValueRelation = PropertyValueRelation.Matching;
+		const datatype = 'wikibase-item';
+		expect( buildQuery( { conditions: [
+			{
+				propertyId,
+				value,
+				propertyValueRelation,
+				datatype,
+			},
+		] } ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) wd:${value}. }` );
 	} );
 } );
