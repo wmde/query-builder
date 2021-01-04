@@ -114,6 +114,7 @@ a {
 	font-size: $font-size-style-h1;
 	line-height: $font-line-height-style-heading;
 	color: $font-color-base;
+	margin-block-end: $dimension-layout-xxsmall;
 }
 
 .querybuilder__description {
@@ -122,6 +123,11 @@ a {
 	font-size: $font-size-style-description;
 	line-height: $font-line-height-style-description;
 	color: $font-color-base;
+	max-width: 672px; // TODO: replace with token
+
+	@media (max-width: 671px) {
+		width: 100%;
+	}
 }
 
 .querybuilder__find-title {
@@ -130,7 +136,7 @@ a {
 	font-size: $font-size-style-h4;
 	line-height: $font-line-height-style-heading;
 	color: $font-color-base;
-	margin-block-start: $dimension-static-size-500;
+	margin-block-start: $dimension-layout-large;
 }
 
 .querybuilder__run {
