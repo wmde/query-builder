@@ -52,9 +52,13 @@ describe( 'ItemValueLookup.vue', () => {
 		const wrapper = shallowMount( ItemValueLookup, { store, localVue } );
 
 		expect( wrapper.findComponent( EntityLookup ).props( 'searchForMenuItems' ) )
+			// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+			// @ts-ignore
 			.toBe( wrapper.vm.searchForItems );
 
 		const searchOptions: SearchOptions = { search: 'postal', limit: 12 };
+		// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+		// @ts-ignore
 		const actualSearchOptions = await wrapper.vm.searchForItems( searchOptions );
 
 		expect( store.dispatch ).toHaveBeenCalledWith( 'searchItemValues', searchOptions );

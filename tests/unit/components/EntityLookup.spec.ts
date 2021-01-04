@@ -13,9 +13,17 @@ localVue.use( i18n, {
 	wikilinks: true,
 } );
 
+const defaultProps = {
+	label: 'some label copy',
+	noMatchFoundMessage: 'some error copy',
+	searchForMenuItems: jest.fn(),
+};
+
 describe( 'EntityLookup.vue', () => {
 	it( 'bubbles input events from the Lookup up', () => {
-		const wrapper = shallowMount( EntityLookup );
+		const wrapper = shallowMount( EntityLookup, {
+			propsData: defaultProps,
+		} );
 		const someEventContent = {};
 
 		wrapper.findComponent( Lookup ).vm.$emit( 'input', someEventContent );
@@ -31,6 +39,7 @@ describe( 'EntityLookup.vue', () => {
 
 		const wrapper = shallowMount( EntityLookup, {
 			propsData: {
+				...defaultProps,
 				value: property,
 			},
 		} );
@@ -44,6 +53,7 @@ describe( 'EntityLookup.vue', () => {
 		const wrapper = shallowMount( EntityLookup, {
 			localVue,
 			propsData: {
+				...defaultProps,
 				searchForMenuItems,
 			},
 		} );
@@ -70,6 +80,7 @@ describe( 'EntityLookup.vue', () => {
 
 		const wrapper = shallowMount( EntityLookup, {
 			propsData: {
+				...defaultProps,
 				error,
 			},
 		} );
