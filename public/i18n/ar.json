@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mohanad Kh"
+			"Mohanad Kh",
+			"محمد أحمد عبد الفتاح"
 		]
 	},
 	"query-builder-heading": "منشئ استعلام بسيط",
@@ -11,5 +12,10 @@
 	"query-builder-input-value-placeholder": "أدخل قيمة",
 	"query-builder-property-lookup-label": "خاصية",
 	"query-builder-property-lookup-placeholder": "أدخل خاصية",
-	"query-builder-property-lookup-no-match-found": "لم يُعثر على تطابق"
+	"query-builder-property-lookup-no-match-found": "لم يُعثر على تطابق",
+	"query-builder-property-lookup-limited-support-tag": "دعم محدود",
+	"query-builder-result-placeholder": "ستُعرض النتائج هنا",
+	"query-builder-result-error-missing-property": "يرجى اختيار خاصية",
+	"query-builder-result-error-missing-value": "يرجى اختيار قيمة",
+	"query-builder-add-condition": "أضف شرطًا"
 }

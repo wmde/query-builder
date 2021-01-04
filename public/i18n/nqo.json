@@ -7,5 +7,7 @@
 	"query-builder-input-value-label": "ߡߐ߬ߟߐ߲",
 	"query-builder-input-value-placeholder": "ߡߐ߬ߟߐ߲ ߘߏ߫ ߟߊߘߏ߲߬",
 	"query-builder-result-error-missing-value": "ߡߐ߬ߟߐ߲ ߘߏ߫ ߟߊߘߏ߲߬ ߖߊ߰ߣߌ߲߫",
-	"query-builder-add-condition": "ߛߙߊߕߌ ߝߙߊ߬"
+	"query-builder-add-condition": "ߛߙߊߕߌ ߝߙߊ߬",
+	"query-builder-value-type-relation-dropdown-matching": "ߦߋ߫ ߦߋ߲߬",
+	"query-builder-value-type-relation-dropdown-without": "ߕߍ߫ ߦߋ߲߬"
 }

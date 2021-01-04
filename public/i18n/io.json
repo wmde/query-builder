@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joao Xavier"
+		]
+	},
+	"query-builder-heading": "Konstruktero simpla di demandi",
+	"query-builder-find-all-items": "Trovez omna elementi...",
+	"query-builder-run-query": "Facar demando",
+	"query-builder-input-value-label": "Valoro",
+	"query-builder-input-value-placeholder": "Enirez valoro",
+	"query-builder-property-lookup-label": "Atributo",
+	"query-builder-property-lookup-placeholder": "Enirez atributo",
+	"query-builder-property-lookup-no-match-found": "Nula kombinuro trovesis",
+	"query-builder-property-lookup-limited-support-tag": "Limitizita suporto",
+	"query-builder-property-lookup-limited-support-note": "Propraji kun limitizita suporto ne povas selektesar segun valoro",
+	"query-builder-result-placeholder": "La rezulti montresos hike",
+	"query-builder-result-error-empty-form": "Semblas ke la konstruktero di demandi (''Query Builder'') esis vakua. Komence, voluntez furnisar valida demando, pose probez itere.",
+	"query-builder-result-error-incomplete-form": "Un o plusa informi ne furnisesis. Voluntez kompletar la demando, o selektar tipo di informo por furnisar.",
+	"query-builder-result-error-missing-property": "Voluntez selektar atributo",
+	"query-builder-result-error-missing-value": "Voluntez informar ula valoro",
+	"query-builder-add-condition": "Adjuntez kondiciono",
+	"query-builder-value-type-relation-dropdown-matching": "komparanta",
+	"query-builder-value-type-relation-dropdown-without": "sen",
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "sen egardar valoro"
+}
