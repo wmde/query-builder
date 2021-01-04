@@ -4,6 +4,7 @@
   "query-builder-run-query": "Run query",
   "query-builder-input-value-label": "Value",
   "query-builder-input-value-placeholder": "Enter a value",
+  "query-builder-item-value-lookup-no-match-found": "No match was found",
   "query-builder-property-lookup-label": "Property",
   "query-builder-property-lookup-placeholder": "Enter a property",
   "query-builder-property-lookup-no-match-found": "No match was found",
