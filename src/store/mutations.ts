@@ -23,6 +23,9 @@ export default {
 		payload: { propertyValueRelation: PropertyValueRelation; conditionIndex: number } ): void {
 		state.conditionRows[ payload.conditionIndex ].propertyValueRelationData.value = payload.propertyValueRelation;
 	},
+	setLimit( state: RootState, limit: number ): void {
+		state.limit = limit;
+	},
 	setErrors( state: RootState, errors: Error[] ): void {
 		state.errors = errors;
 	},

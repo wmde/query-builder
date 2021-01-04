@@ -56,6 +56,9 @@ export default {
 			return rootState.conditionRows[ conditionIndex ].propertyValueRelationData.value;
 		};
 	},
+	limit( rootState: RootState ): ( number | undefined ) {
+		return rootState.limit;
+	},
 	getErrors( rootState: RootState ): Error[] {
 		return rootState.errors;
 	},
