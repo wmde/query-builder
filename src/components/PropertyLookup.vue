@@ -26,7 +26,9 @@ export default Vue.extend( {
 		setTagForSearchResults( searchResults: SearchResult[] ): SearchResult[] {
 			return searchResults.map(
 				( item: MenuItem & SearchResult ) => {
-					item.tag = item.tag && this.$i18n( item.tag );
+					if ( item.tag ) {
+						item.tag = this.$i18n( item.tag );
+					}
 					return item;
 				},
 			);
