@@ -123,7 +123,7 @@ a {
 	font-size: $font-size-style-description;
 	line-height: $font-line-height-style-description;
 	color: $font-color-base;
-	max-width: 672px;
+	max-width: 672px; // TODO: replace with token
 
 	@media (max-width: 671px) {
 		width: 100%;
