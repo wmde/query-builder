@@ -19,20 +19,19 @@
 			:placeholder="$i18n('query-builder-input-value-placeholder')"
 			:disabled="isTextInputDisabled()"
 		/>
-		<Button
+		<DeleteConditionButton
 			class="query-condition__remove"
-			type="primaryDestructive"
-			@click.native="removeCondition"
 			:disabled="!canDelete"
-		> Trash
-		</Button>
+			@click="removeCondition"
+		/>
 	</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { TextInput, Button } from '@wmde/wikit-vue-components';
+import { TextInput } from '@wmde/wikit-vue-components';
 
+import DeleteConditionButton from '@/components/DeleteConditionButton.vue';
 import PropertyLookup from '@/components/PropertyLookup.vue';
 import ValueTypeDropDown from '@/components/ValueTypeDropDown.vue';
 import SearchResult from '@/data-access/SearchResult';
@@ -112,7 +111,7 @@ export default Vue.extend( {
 		TextInput,
 		PropertyLookup,
 		ValueTypeDropDown,
-		Button,
+		DeleteConditionButton,
 	},
 } );
 </script>
