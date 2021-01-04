@@ -110,6 +110,7 @@ describe( 'QueryObjectBuilder', () => {
 					propertyId: 'P281',
 					value: 'XXXX',
 					propertyValueRelation: PropertyValueRelation.Matching,
+					datatype: 'string',
 				},
 			],
 			limit: 20,
