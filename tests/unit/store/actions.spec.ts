@@ -63,8 +63,12 @@ describe( 'actions', () => {
 
 			actions.updateProperty( context as any, { property, conditionIndex } );
 
-			expect( context.commit ).toHaveBeenCalledTimes( 2 );
+			expect( context.commit ).toHaveBeenCalledTimes( 3 );
 			expect( context.commit ).toHaveBeenCalledWith( 'setProperty', { property, conditionIndex } );
+			expect( context.commit ).toHaveBeenCalledWith(
+				'setDatatype',
+				{ datatype: 'string', conditionIndex },
+			);
 			expect( context.commit ).toHaveBeenCalledWith( 'clearFieldErrors', {
 				conditionIndex: 0,
 				errorsToClear: 'property',
@@ -89,8 +93,12 @@ describe( 'actions', () => {
 
 			actions.updateProperty( context as any, { property, conditionIndex } );
 
-			expect( context.commit ).toHaveBeenCalledTimes( 1 );
+			expect( context.commit ).toHaveBeenCalledTimes( 2 );
 			expect( context.commit ).toHaveBeenCalledWith( 'setProperty', { property, conditionIndex } );
+			expect( context.commit ).toHaveBeenCalledWith(
+				'setDatatype',
+				{ datatype: 'some unsupported data type', conditionIndex },
+			);
 			expect( context.dispatch ).toHaveBeenCalledWith( 'setConditionAsLimitedSupport', 0 );
 		} );
 	} );
@@ -209,10 +217,10 @@ describe( 'actions', () => {
 				rootState: {
 					conditionRows: [
 						{
+							datatype: null,
 							propertyData: {
 								id: '',
 								label: '',
-								datatype: null,
 								propertyError: null,
 							},
 							valueData: {
@@ -253,10 +261,10 @@ describe( 'actions', () => {
 				rootState: {
 					conditionRows: [
 						{
+							datatype: 'string',
 							propertyData: {
 								id: 'P123',
 								label: 'some string',
-								datatype: 'string',
 								propertyError: null,
 							},
 							valueData: {
@@ -300,10 +308,10 @@ describe( 'actions', () => {
 				rootState: {
 					conditionRows: [
 						{
+							datatype: 'string',
 							propertyData: {
 								id: 'P123',
 								label: 'some string',
-								datatype: 'string',
 								propertyError: null,
 							},
 							valueData: {
@@ -348,10 +356,10 @@ describe( 'actions', () => {
 				rootState: {
 					conditionRows: [
 						{
+							datatype: 'some unsupported data type',
 							propertyData: {
 								id: 'P123',
 								label: 'some string',
-								datatype: 'some unsupported data type',
 								propertyError: null,
 							},
 							valueData: {

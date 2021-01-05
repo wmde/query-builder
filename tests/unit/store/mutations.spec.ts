@@ -9,7 +9,8 @@ describe( 'mutations', () => {
 		const state: RootState = {
 			conditionRows: [ {
 				valueData: { value: 'foo', valueError: null },
-				propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
+				datatype: 'string',
+				propertyData: { id: 'P123', label: 'abc', propertyError: null },
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
 				conditionId: '0.123',
 			} ],
@@ -31,7 +32,8 @@ describe( 'mutations', () => {
 			const state: RootState = {
 				conditionRows: [ {
 					valueData: { value: 'foo', valueError: null },
-					propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
+					datatype: 'string',
+					propertyData: { id: 'P123', label: 'abc', propertyError: null },
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],
@@ -50,10 +52,10 @@ describe( 'mutations', () => {
 			const state: RootState = {
 				conditionRows: [ {
 					valueData: { value: 'foo', valueError: null },
+					datatype: 'string',
 					propertyData: {
 						id: 'P123',
 						label: 'abc',
-						datatype: 'string',
 						propertyError: preExistingPropertyError,
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
@@ -70,7 +72,6 @@ describe( 'mutations', () => {
 				{
 					id: '',
 					label: '',
-					datatype: null,
 					propertyError: preExistingPropertyError,
 				},
 			);
@@ -80,14 +81,16 @@ describe( 'mutations', () => {
 	it( 'addCondition', () => {
 		const expectedNewConditionRow = {
 			valueData: { value: '', valueError: null },
-			propertyData: { id: '', label: '', datatype: null, propertyError: null },
+			datatype: null,
+			propertyData: { id: '', label: '', propertyError: null },
 			propertyValueRelationData: { value: PropertyValueRelation.Matching },
 			conditionId: 'TO BE FILLED WITH THE GENERATED RANDOM VALUE',
 		};
 		const state: RootState = {
 			conditionRows: [ {
 				valueData: { value: 'foo', valueError: null },
-				propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
+				datatype: 'string',
+				propertyData: { id: 'P123', label: 'abc', propertyError: null },
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
 				conditionId: '0.123',
 			} ],
@@ -108,7 +111,8 @@ describe( 'mutations', () => {
 	it( 'removeCondition', () => {
 		const keptRow = {
 			valueData: { value: 'foo', valueError: null },
-			propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
+			datatype: 'string',
+			propertyData: { id: 'P123', label: 'abc', propertyError: null },
 			propertyValueRelationData: { value: PropertyValueRelation.Matching },
 			conditionId: '0.123',
 		};
@@ -116,7 +120,8 @@ describe( 'mutations', () => {
 			conditionRows: [ keptRow,
 				{
 					valueData: { value: 'potato', valueError: null },
-					propertyData: { id: 'P666', label: 'Day of the beast', datatype: 'string', propertyError: null },
+					datatype: 'string',
+					propertyData: { id: 'P666', label: 'Day of the beast', propertyError: null },
 					propertyValueRelationData: { value: PropertyValueRelation.Regardless },
 					conditionId: '3',
 				},
@@ -138,10 +143,10 @@ describe( 'mutations', () => {
 			const state: RootState = {
 				conditionRows: [ {
 					valueData: { value: '', valueError: { message: 'message-key', type: 'error' } },
+					datatype: null,
 					propertyData: {
 						id: '',
 						label: '',
-						datatype: null,
 						propertyError: { message: 'message-key', type: 'error' },
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
@@ -161,10 +166,10 @@ describe( 'mutations', () => {
 			const state: RootState = {
 				conditionRows: [ {
 					valueData: { value: '', valueError: { message: 'message-key', type: 'error' } },
+					datatype: null,
 					propertyData: {
 						id: '',
 						label: '',
-						datatype: null,
 						propertyError: { message: 'message-key', type: 'error' },
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
@@ -184,10 +189,10 @@ describe( 'mutations', () => {
 			const state: RootState = {
 				conditionRows: [ {
 					valueData: { value: '', valueError: { message: 'message-key', type: 'error' } },
+					datatype: null,
 					propertyData: {
 						id: '',
 						label: '',
-						datatype: null,
 						propertyError: { message: 'message-key', type: 'error' },
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },

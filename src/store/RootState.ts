@@ -10,6 +10,7 @@ export default interface RootState {
 
 export interface ConditionRow {
 	propertyData: PropertyData;
+	datatype: string|null;
 	valueData: {
 		value: string;
 		valueError: Error|null;
@@ -23,6 +24,5 @@ export interface ConditionRow {
 export interface PropertyData {
 	id: string;
 	label: string;
-	datatype: string|null;
 	propertyError: Error|null;
 }

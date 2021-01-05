@@ -13,7 +13,7 @@ export default {
 					propertyId: condition.propertyData.id,
 					value: condition.valueData.value,
 					propertyValueRelation: condition.propertyValueRelationData.value,
-					datatype: condition.propertyData.datatype!,
+					datatype: condition.datatype!,
 				};
 			} ),
 			...rootState.useLimit && { limit: rootState.limit },
@@ -37,7 +37,7 @@ export default {
 	},
 	limitedSupport( rootState: RootState ) {
 		return ( conditionIndex: number ): boolean => {
-			const datatype = rootState.conditionRows[ conditionIndex ].propertyData.datatype;
+			const datatype = rootState.conditionRows[ conditionIndex ].datatype;
 			return datatype !== null && !allowedDatatypes.includes( datatype );
 		};
 	},
@@ -54,6 +54,11 @@ export default {
 	propertyValueRelation( rootState: RootState ) {
 		return ( conditionIndex: number ): PropertyValueRelation => {
 			return rootState.conditionRows[ conditionIndex ].propertyValueRelationData.value;
+		};
+	},
+	datatype( rootState: RootState ) {
+		return ( conditionIndex: number ): string | null => {
+			return rootState.conditionRows[ conditionIndex ].datatype;
 		};
 	},
 	limit( rootState: RootState ): ( number | undefined ) {

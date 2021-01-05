@@ -19,6 +19,9 @@ export default {
 			...payload.property,
 		};
 	},
+	setDatatype( state: RootState, payload: { datatype: string; conditionIndex: number } ): void {
+		state.conditionRows[ payload.conditionIndex ].datatype = payload.datatype;
+	},
 	setPropertyValueRelation( state: RootState,
 		payload: { propertyValueRelation: PropertyValueRelation; conditionIndex: number } ): void {
 		state.conditionRows[ payload.conditionIndex ].propertyValueRelationData.value = payload.propertyValueRelation;

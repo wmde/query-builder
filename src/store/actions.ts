@@ -48,6 +48,12 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 		payload: { property: { label: string; id: string; datatype: string }; conditionIndex: number } ): void {
 
 		context.commit( 'setProperty', payload );
+		if ( payload.property.datatype ) {
+			context.commit( 'setDatatype', {
+				datatype: payload.property.datatype,
+				conditionIndex: payload.conditionIndex,
+			} );
+		}
 		if ( payload.property && !allowedDatatypes.includes( payload.property.datatype ) ) {
 			context.dispatch( 'setConditionAsLimitedSupport', payload.conditionIndex );
 		} else {
@@ -132,7 +138,7 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 
 		// re-set limited support warning again where applicable
 		context.rootState.conditionRows.forEach( ( conditionRow, index ) => {
-			const datatype = conditionRow.propertyData?.datatype;
+			const datatype = conditionRow.datatype;
 			if ( datatype && !allowedDatatypes.includes( datatype ) ) {
 				context.dispatch( 'setConditionAsLimitedSupport', index );
 			}

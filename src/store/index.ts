@@ -15,7 +15,6 @@ export function newEmptyPropertyData( propertyError: Error|null = null ): Proper
 	return {
 		label: '',
 		id: '',
-		datatype: null,
 		propertyError,
 	};
 }
@@ -23,6 +22,7 @@ export function newEmptyPropertyData( propertyError: Error|null = null ): Proper
 export function getFreshConditionRow(): ConditionRow {
 	return {
 		propertyData: newEmptyPropertyData(),
+		datatype: null,
 		valueData: {
 			value: '',
 			valueError: null,
