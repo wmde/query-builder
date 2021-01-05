@@ -51,3 +51,10 @@ export default Vue.extend( {
 	},
 } );
 </script>
+<style lang="scss">
+	.query-condition__property-lookup {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+	}
+</style>
