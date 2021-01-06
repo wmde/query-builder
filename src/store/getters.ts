@@ -16,7 +16,7 @@ export default {
 					datatype: condition.propertyData.datatype!,
 				};
 			} ),
-			...rootState.limit && { limit: rootState.limit },
+			...rootState.useLimit && { limit: rootState.limit },
 		};
 	},
 	conditionRows( rootState: RootState ): ConditionRow[] {
