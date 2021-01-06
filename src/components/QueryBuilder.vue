@@ -19,7 +19,8 @@
 			<div class="querybuilder__run">
 				<Button
 					@click.native="runQuery"
-					type="primaryProgressive"
+					type="progressive"
+					variant="primary"
 					v-i18n="{msg: 'query-builder-run-query'}" />
 			</div>
 		</div>
