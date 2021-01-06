@@ -14,8 +14,8 @@
 			class="querybuilder__limit-input"
 			v-model="textInputValue"
 			:disabled="!checked"
-			:label="$i18n('query-builder-limit-number-results-description')"
-		/> <!-- TODO: decide how the missing label should be handled -->
+			label="Maximum number of results"
+		/>
 	</div>
 </template>
 
@@ -51,7 +51,7 @@ export default Vue.extend( {
 } );
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 
 .querybuilder__limit {
 	display: flex;
@@ -65,6 +65,19 @@ export default Vue.extend( {
 .querybuilder__limit-input {
 	// TODO: change to real ones
 	margin-inline-start: $dimension-layout-xxsmall;
+
+	//hides the label of the TextInput while still allowing to be used by screen readers
+	.wikit-TextInput__label {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		-webkit-clip-path: inset(50%);
+		clip-path: inset(50%);
+		border: 0;
+	}
 }
 
 .querybuilder__limit-checkbox {
