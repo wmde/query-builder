@@ -15,7 +15,7 @@ export default {
 					propertyValueRelation: condition.propertyValueRelationData.value,
 				};
 			} ),
-			...rootState.limit && { limit: rootState.limit },
+			...rootState.useLimit && { limit: rootState.limit },
 		};
 	},
 	conditionRows( rootState: RootState ): ConditionRow[] {
