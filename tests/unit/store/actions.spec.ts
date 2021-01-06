@@ -44,6 +44,26 @@ describe( 'actions', () => {
 		} );
 	} );
 
+	it( 'unsetProperty', () => {
+		const context = {
+			commit: jest.fn(),
+		};
+		const conditionIndex = 0;
+		const actions = createActions(
+			services.get( 'searchEntityRepository' ),
+			services.get( 'metricsCollector' ),
+		);
+
+		actions.unsetProperty( context as any, conditionIndex );
+
+		expect( context.commit ).toHaveBeenCalledTimes( 2 );
+		expect( context.commit ).toHaveBeenCalledWith( 'unsetProperty', conditionIndex );
+		expect( context.commit ).toHaveBeenCalledWith( 'clearFieldErrors', {
+			conditionIndex,
+			errorsToClear: 'property',
+		} );
+	} );
+
 	describe( 'updateProperty', () => {
 		it( 'commits the property to the store', () => {
 			const context = {

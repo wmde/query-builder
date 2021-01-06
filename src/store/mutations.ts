@@ -9,15 +9,14 @@ export default {
 		state.conditionRows[ payload.conditionIndex ].valueData.value = payload.value;
 	},
 	setProperty( state: RootState, payload: { property: Property | null; conditionIndex: number } ): void {
-		if ( !payload.property ) {
-			state.conditionRows[ payload.conditionIndex ].propertyData.isPropertySet = false;
-			return;
-		}
 		state.conditionRows[ payload.conditionIndex ].propertyData = {
 			...state.conditionRows[ payload.conditionIndex ].propertyData,
 			...payload.property,
 		};
 		state.conditionRows[ payload.conditionIndex ].propertyData.isPropertySet = true;
+	},
+	unsetProperty( state: RootState, conditionIndex: number ): void {
+		state.conditionRows[ conditionIndex ].propertyData.isPropertySet = false;
 	},
 	setPropertyValueRelation( state: RootState,
 		payload: { propertyValueRelation: PropertyValueRelation; conditionIndex: number } ): void {
