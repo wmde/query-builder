@@ -67,6 +67,7 @@ describe( 'getters', () => {
 					conditionId: '0.123',
 				} ],
 				useLimit: false,
+				limit: 20,
 				errors: [],
 			};
 
