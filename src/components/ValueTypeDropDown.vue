@@ -1,14 +1,10 @@
 <template>
 	<div class="querybuilder__dropdown">
-		<label id="valueTypeSelect"
-			class="querybuilder__dropdown-label">
-			Value Type
-		</label>
 		<Dropdown
 			class="querybuilder__dropdown-select"
 			@input="onInput"
 			:value="selected"
-			aria-labelledby="valueTypeSelect"
+			label="Value Type"
 			:menuItems="optionItems"
 			:disabled="disabled"
 		/>
@@ -70,10 +66,10 @@ export default Vue.extend( {
 	},
 } );
 </script>
-<style scoped lang="scss">
+<style lang="scss">
 	// will be removed once dropdown component is implemented in the DS
-	.querybuilder__dropdown {
-		&-label {
+	.querybuilder__dropdown-select {
+		.wikit-Dropdown__label {
 			position: absolute;
 			width: 1px;
 			height: 1px;
