@@ -1,7 +1,8 @@
 <template>
 	<Button
 		class="delete-condition-button"
-		type="primaryDestructive"
+		type="destructive"
+		variant="primary"
 		@click.native="$emit('click')"
 		:disabled="disabled"
 	> Trash
