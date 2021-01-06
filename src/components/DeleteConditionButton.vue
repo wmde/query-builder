@@ -1,16 +1,18 @@
 <template>
 	<Button
+		iconOnly
 		class="delete-condition-button"
-		type="destructive"
-		variant="primary"
+		type="neutral"
+		variant="quiet"
+		:aria-label="$i18n('query-builder-delete-condition')"
 		@click.native="$emit('click')"
 		:disabled="disabled"
-	> Trash
+	> <Icon type="trash" size="large" color="inherit" />
 	</Button>
 </template>
 
 <script lang="ts">
-import { Button } from '@wmde/wikit-vue-components';
+import { Button, Icon } from '@wmde/wikit-vue-components';
 import Vue from 'vue';
 export default Vue.extend( {
 	name: 'DeleteConditionButton',
@@ -22,6 +24,7 @@ export default Vue.extend( {
 	},
 	components: {
 		Button,
+		Icon,
 	},
 } );
 </script>
