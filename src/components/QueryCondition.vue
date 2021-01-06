@@ -120,7 +120,7 @@ export default Vue.extend( {
 
 	.query-condition {
 		display: flex;
-		align-items: flex-end;
+		align-items: flex-start;
 		margin-block-start: $dimension-layout-medium;
 		padding-block: $dimension-layout-xsmall;
 		padding-inline: $dimension-layout-medium;
@@ -131,6 +131,7 @@ export default Vue.extend( {
 	}
 
 	.query-condition__value-type-dropdown {
+		margin-block-start: $dimension-layout-small;
 		margin-inline-start: $dimension-layout-xsmall;
 	}
 
