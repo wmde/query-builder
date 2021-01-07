@@ -39,10 +39,14 @@
 				:iframeRenderKey="iframeRenderKey"
 			/>
 		</main>
+		<Footer
+			class="query-builder__footer"
+		/>
 	</div>
 </template>
 
 <script lang="ts">
+import Footer from '@/components/Footer.vue';
 import { ConditionRow } from '@/store/RootState';
 import Vue from 'vue';
 import { mapState } from 'vuex';
@@ -100,6 +104,7 @@ export default Vue.extend( {
 		AddCondition,
 		Limit,
 		LabelOptout,
+		Footer,
 	},
 } );
 </script>
@@ -208,5 +213,9 @@ $largeViewportWidth: 90em; //~1438px
 
 .querybuilder__run {
 	margin-block-start: $dimension-layout-medium;
+}
+
+.query-builder__footer {
+	margin-block-start: $dimension-layout-large;
 }
 </style>
