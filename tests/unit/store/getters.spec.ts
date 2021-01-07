@@ -15,6 +15,8 @@ describe( 'getters', () => {
 					conditionId: '0.123',
 				} ],
 				errors: [],
+				limit: 0,
+				useLimit: false,
 			};
 
 			expect( getters.limitedSupport( state )( 0 ) ).toBe( false );
@@ -28,7 +30,9 @@ describe( 'getters', () => {
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],
+				limit: 0,
 				errors: [],
+				useLimit: false,
 			};
 
 			expect( getters.limitedSupport( state )( 0 ) ).toBe( false );
@@ -47,6 +51,8 @@ describe( 'getters', () => {
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],
+				limit: 0,
+				useLimit: false,
 				errors: [],
 			};
 
@@ -63,6 +69,8 @@ describe( 'getters', () => {
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],
+				limit: 0,
+				useLimit: false,
 				errors: [],
 			};
 
@@ -89,6 +97,7 @@ describe( 'getters', () => {
 					conditionId: '0.123',
 				} ],
 				limit: 20,
+				useLimit: true,
 				errors: [],
 			};
 
