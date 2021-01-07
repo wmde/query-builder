@@ -6,6 +6,7 @@ export default interface RootState {
 	errors: Error[];
 	limit: number;
 	useLimit: boolean;
+	omitLabels: boolean;
 }
 
 export interface ConditionRow {

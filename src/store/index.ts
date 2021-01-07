@@ -42,6 +42,7 @@ export function createStore( services: QueryBuilderServices ): Store<RootState> 
 			errors: [],
 			limit: 100,
 			useLimit: true,
+			omitLabels: false,
 		},
 		actions: createActions(
 			services.get( 'searchEntityRepository' ),

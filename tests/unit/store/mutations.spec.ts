@@ -15,6 +15,7 @@ describe( 'mutations', () => {
 			} ],
 			limit: 0,
 			useLimit: false,
+			omitLabels: true,
 			errors: [],
 		};
 
@@ -37,6 +38,7 @@ describe( 'mutations', () => {
 				} ],
 				limit: 0,
 				useLimit: false,
+				omitLabels: true,
 				errors: [],
 			};
 
@@ -61,6 +63,7 @@ describe( 'mutations', () => {
 				} ],
 				limit: 0,
 				useLimit: false,
+				omitLabels: true,
 				errors: [],
 			};
 
@@ -93,6 +96,7 @@ describe( 'mutations', () => {
 			} ],
 			limit: 0,
 			useLimit: false,
+			omitLabels: true,
 			errors: [],
 		};
 
@@ -123,6 +127,7 @@ describe( 'mutations', () => {
 			],
 			limit: 0,
 			useLimit: false,
+			omitLabels: true,
 			errors: [],
 		};
 
@@ -149,6 +154,7 @@ describe( 'mutations', () => {
 				} ],
 				limit: 0,
 				useLimit: false,
+				omitLabels: true,
 				errors: [],
 			};
 
@@ -172,6 +178,7 @@ describe( 'mutations', () => {
 				} ],
 				limit: 0,
 				useLimit: false,
+				omitLabels: true,
 				errors: [],
 			};
 
@@ -195,6 +202,7 @@ describe( 'mutations', () => {
 				} ],
 				limit: 0,
 				useLimit: false,
+				omitLabels: true,
 				errors: [],
 			};
 

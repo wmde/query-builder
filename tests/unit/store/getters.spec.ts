@@ -14,6 +14,7 @@ describe( 'getters', () => {
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],
+				omitLabels: true,
 				errors: [],
 				limit: 0,
 				useLimit: false,
@@ -31,6 +32,7 @@ describe( 'getters', () => {
 					conditionId: '0.123',
 				} ],
 				limit: 0,
+				omitLabels: true,
 				errors: [],
 				useLimit: false,
 			};
@@ -53,6 +55,7 @@ describe( 'getters', () => {
 				} ],
 				limit: 0,
 				useLimit: false,
+				omitLabels: true,
 				errors: [],
 			};
 
@@ -71,6 +74,7 @@ describe( 'getters', () => {
 				} ],
 				limit: 0,
 				useLimit: false,
+				omitLabels: true,
 				errors: [],
 			};
 
@@ -96,6 +100,7 @@ describe( 'getters', () => {
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],
+				omitLabels: true,
 				limit: 20,
 				useLimit: true,
 				errors: [],
