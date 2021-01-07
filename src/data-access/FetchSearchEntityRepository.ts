@@ -20,6 +20,7 @@ export default class FetchSearchEntityRepository implements SearchEntityReposito
 			action: 'wbsearchentities',
 			search: searchString,
 			language: this.forLanguageCode,
+			uselang: this.forLanguageCode,
 			type: entityType,
 			format: 'json',
 			formatversion: '2',

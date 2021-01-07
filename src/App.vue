@@ -14,35 +14,24 @@ Vue.config.errorHandler = function () {
 	services.get( 'metricsCollector' ).increment( 'errors' );
 };
 
+const languageService = services.get( 'languageService' );
+
 export default Vue.extend( {
 	data() {
 		return {
 			isi18nLoaded: false as boolean,
-			lang: 'en' as string,
+			lang: languageService.getAppLanguageCode(),
 			textDirection: '',
 		};
 	},
 	created(): void {
 		const fetchi18n = async (): Promise<void> => {
-			const urlParams = new URLSearchParams( window.location.search );
-			if ( urlParams.has( 'uselang' ) ) {
-				this.lang = urlParams.get( 'uselang' ) as string;
-			}
-
-			const responseEn = await fetch( 'i18n/en.json' );
 			const messages: { [key: string]: { [key: string]: string} } = {
-				en: await responseEn.json(),
+				en: await languageService.getMessagesForLangCode( 'en' ),
 			};
 
 			if ( this.lang !== 'en' ) {
-				try {
-					const responseLang = await fetch( 'i18n/' + this.lang + '.json' );
-					messages[ this.lang ] = await responseLang.json();
-				} catch ( e ) {
-					// TODO: Show a user-facing notification instead
-					console.warn( 'The language requested could not be retrieved, falling back to English' );
-					messages[ this.lang ] = {};
-				}
+				messages[ this.lang ] = await languageService.getMessagesForLangCode( this.lang );
 			}
 
 			Vue.use( i18n, {
