@@ -9,6 +9,7 @@
 	"query-builder-run-query": "執行查詢",
 	"query-builder-input-value-label": "值",
 	"query-builder-input-value-placeholder": "請輸入一個值",
+	"query-builder-item-value-lookup-no-match-found": "找不到符合的內容",
 	"query-builder-property-lookup-label": "屬性",
 	"query-builder-property-lookup-placeholder": "請輸入一個屬性",
 	"query-builder-property-lookup-no-match-found": "沒有符合的內容",
@@ -22,5 +23,6 @@
 	"query-builder-add-condition": "添加條件",
 	"query-builder-value-type-relation-dropdown-matching": "符合",
 	"query-builder-value-type-relation-dropdown-without": "不帶",
-	"query-builder-value-type-relation-dropdown-regardless-of-value": "不論值內容"
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "不論值內容",
+	"query-builder-delete-condition": "刪除條件"
 }

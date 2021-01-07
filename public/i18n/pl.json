@@ -9,6 +9,7 @@
 	"query-builder-run-query": "Uruchom zapytanie",
 	"query-builder-input-value-label": "Wartość",
 	"query-builder-input-value-placeholder": "Wprowadź wartość",
+	"query-builder-item-value-lookup-no-match-found": "Brak wyników",
 	"query-builder-property-lookup-label": "Właściwość",
 	"query-builder-property-lookup-placeholder": "Wprowadź właściwość",
 	"query-builder-property-lookup-no-match-found": "Nie znaleziono wyników",
@@ -19,5 +20,6 @@
 	"query-builder-result-error-incomplete-form": "Jedno lub więcej pól jest puste. Dokończ zapytanie lub wybierz odpowiedni rodzaj pola.",
 	"query-builder-result-error-missing-property": "Wybierz właściwość",
 	"query-builder-result-error-missing-value": "Wprowadź wartość",
-	"query-builder-add-condition": "Dodaj warunek"
+	"query-builder-add-condition": "Dodaj warunek",
+	"query-builder-delete-condition": "Usuń warunek"
 }

@@ -10,6 +10,7 @@
 	"query-builder-run-query": "Kör frågesökning",
 	"query-builder-input-value-label": "Värde",
 	"query-builder-input-value-placeholder": "Skriv in ett värde",
+	"query-builder-item-value-lookup-no-match-found": "Ingen träff hittades",
 	"query-builder-property-lookup-label": "Egenskap",
 	"query-builder-property-lookup-placeholder": "Skriv in en egenskap",
 	"query-builder-property-lookup-no-match-found": "Ingen träff hittades",

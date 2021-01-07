@@ -11,6 +11,7 @@
 	"query-builder-run-query": "Exécuter la requête",
 	"query-builder-input-value-label": "Valeur",
 	"query-builder-input-value-placeholder": "Saisir une valeur",
+	"query-builder-item-value-lookup-no-match-found": "Aucune correspondance trouvée",
 	"query-builder-property-lookup-label": "Propriété",
 	"query-builder-property-lookup-placeholder": "Saisir une propriété",
 	"query-builder-property-lookup-no-match-found": "Aucune correspondance n’a été trouvée",
@@ -24,5 +25,6 @@
 	"query-builder-add-condition": "Ajouter une condition",
 	"query-builder-value-type-relation-dropdown-matching": "correspondant à",
 	"query-builder-value-type-relation-dropdown-without": "sans",
-	"query-builder-value-type-relation-dropdown-regardless-of-value": "quelle que soit la valeur"
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "quelle que soit la valeur",
+	"query-builder-delete-condition": "Supprimer la condition"
 }

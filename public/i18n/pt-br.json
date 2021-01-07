@@ -9,6 +9,7 @@
 	"query-builder-run-query": "Executar consulta",
 	"query-builder-input-value-label": "Valor",
 	"query-builder-input-value-placeholder": "Insira um valor",
+	"query-builder-item-value-lookup-no-match-found": "Nenhuma combinação encontrada",
 	"query-builder-property-lookup-label": "Propriedade",
 	"query-builder-property-lookup-placeholder": "Insira uma propriedade",
 	"query-builder-property-lookup-no-match-found": "Nenhuma combinação encontrada",
@@ -22,5 +23,6 @@
 	"query-builder-add-condition": "Adicionar condição",
 	"query-builder-value-type-relation-dropdown-matching": "correspondente",
 	"query-builder-value-type-relation-dropdown-without": "sem",
-	"query-builder-value-type-relation-dropdown-regardless-of-value": "independentemente do valor"
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "independentemente do valor",
+	"query-builder-delete-condition": "Excluir condição"
 }

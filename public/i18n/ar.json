@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Mohanad Kh",
+			"NEHAOUA",
 			"محمد أحمد عبد الفتاح"
 		]
 	},
@@ -10,12 +11,19 @@
 	"query-builder-run-query": "تشغيل الاستعلام",
 	"query-builder-input-value-label": "قيمة",
 	"query-builder-input-value-placeholder": "أدخل قيمة",
+	"query-builder-item-value-lookup-no-match-found": "لم يتم العثور على تطابق",
 	"query-builder-property-lookup-label": "خاصية",
 	"query-builder-property-lookup-placeholder": "أدخل خاصية",
 	"query-builder-property-lookup-no-match-found": "لم يُعثر على تطابق",
 	"query-builder-property-lookup-limited-support-tag": "دعم محدود",
+	"query-builder-property-lookup-limited-support-note": "لا يمكن تصفية الخصائص ذات الدعم المحدود حسب القيمة",
 	"query-builder-result-placeholder": "ستُعرض النتائج هنا",
+	"query-builder-result-error-empty-form": "يبدو أن منشئ الاستعلام كان فارغاً، الرجاء إدخال استعلام صالح أولاً، ثم حاول تشغيله مرة أخرى.",
+	"query-builder-result-error-incomplete-form": "حقل واحد أو أكثر فارغ. الرجاء إكمال الاستعلام أو تحديد نوع حقل مناسب.",
 	"query-builder-result-error-missing-property": "يرجى اختيار خاصية",
 	"query-builder-result-error-missing-value": "يرجى اختيار قيمة",
-	"query-builder-add-condition": "أضف شرطًا"
+	"query-builder-add-condition": "أضف شرطًا",
+	"query-builder-value-type-relation-dropdown-matching": "تطابق",
+	"query-builder-value-type-relation-dropdown-without": "دون",
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "بغض النظر عن القيمة"
 }

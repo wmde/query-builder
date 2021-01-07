@@ -9,6 +9,7 @@
 	"query-builder-run-query": "Пушти барање",
 	"query-builder-input-value-label": "Вредност",
 	"query-builder-input-value-placeholder": "Внесете вредност",
+	"query-builder-item-value-lookup-no-match-found": "Нема совпаѓања",
 	"query-builder-property-lookup-label": "Својство",
 	"query-builder-property-lookup-placeholder": "Внесете својство",
 	"query-builder-property-lookup-no-match-found": "Нема совпаѓања",
@@ -22,5 +23,6 @@
 	"query-builder-add-condition": "Додај услов",
 	"query-builder-value-type-relation-dropdown-matching": "соодветство",
 	"query-builder-value-type-relation-dropdown-without": "без",
-	"query-builder-value-type-relation-dropdown-regardless-of-value": "независно од вредноста"
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "независно од вредноста",
+	"query-builder-delete-condition": "Избриши го условот"
 }

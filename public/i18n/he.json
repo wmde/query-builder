@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"YaronSh",
 			"ישראל קלר"
 		]
@@ -10,6 +11,7 @@
 	"query-builder-run-query": "הרצת שאילתה",
 	"query-builder-input-value-label": "ערך",
 	"query-builder-input-value-placeholder": "נא למלא ערך",
+	"query-builder-item-value-lookup-no-match-found": "לא נמצאה התאמה",
 	"query-builder-property-lookup-label": "מאפיין",
 	"query-builder-property-lookup-placeholder": "נא למלא מאפיין",
 	"query-builder-property-lookup-no-match-found": "לא נמצאו התאמות",
@@ -23,5 +25,6 @@
 	"query-builder-add-condition": "הוספת תנאי",
 	"query-builder-value-type-relation-dropdown-matching": "תואם",
 	"query-builder-value-type-relation-dropdown-without": "ללא",
-	"query-builder-value-type-relation-dropdown-regardless-of-value": "ללא תלות בערך"
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "ללא תלות בערך",
+	"query-builder-delete-condition": "מחיקת תנאי"
 }
