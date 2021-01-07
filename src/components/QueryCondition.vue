@@ -121,9 +121,9 @@ export default Vue.extend( {
 	.query-condition {
 		display: flex;
 		align-items: flex-start;
-		margin-block-start: $dimension-layout-medium;
 		padding-block: $dimension-layout-xsmall;
 		padding-inline: $dimension-layout-medium;
+		background-color: $background-color-base-default;
 
 		&__remove {
 			margin-inline-start: auto;
