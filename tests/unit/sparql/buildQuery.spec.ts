@@ -14,7 +14,9 @@ describe( 'buildQuery', () => {
 				datatype: 'string',
 				propertyValueRelation,
 			},
-		] } ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }` );
+		],
+		omitLabels: true,
+		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }` );
 	} );
 
 	it( 'builds a query from a property and a string value with not matching selected', () => {
@@ -35,7 +37,7 @@ describe( 'buildQuery', () => {
 				datatype: 'string',
 				propertyValueRelation,
 			},
-		] } );
+		], omitLabels: true } );
 
 		expect( receivedQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
@@ -51,7 +53,9 @@ describe( 'buildQuery', () => {
 				datatype: 'string',
 				propertyValueRelation,
 			},
-		] } ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) _:anyValue. }` );
+		],
+		omitLabels: true,
+		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) _:anyValue. }` );
 	} );
 
 	it( 'builds a query from multiple conditions, one matching and one regardless', () => {
@@ -73,7 +77,7 @@ describe( 'buildQuery', () => {
 				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.Regardless,
 			},
-		] } );
+		], omitLabels: true } );
 
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
@@ -98,7 +102,7 @@ describe( 'buildQuery', () => {
 				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.NotMatching,
 			},
-		] } );
+		], omitLabels: true } );
 
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
@@ -123,7 +127,7 @@ describe( 'buildQuery', () => {
 				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.Matching,
 			},
-		] } );
+		], omitLabels: true } );
 
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
@@ -140,6 +144,7 @@ describe( 'buildQuery', () => {
 				propertyValueRelation,
 				datatype,
 			},
-		] } ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) wd:${value}. }` );
+		], omitLabels: true,
+		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) wd:${value}. }` );
 	} );
 } );

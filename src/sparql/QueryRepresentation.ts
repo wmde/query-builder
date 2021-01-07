@@ -10,4 +10,5 @@ export type Condition = {
 export default interface QueryRepresentation {
 	conditions: Condition[];
 	limit?: number;
+	omitLabels: boolean;
 }

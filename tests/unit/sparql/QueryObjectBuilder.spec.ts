@@ -55,6 +55,7 @@ describe( 'QueryObjectBuilder', () => {
 					propertyValueRelation: PropertyValueRelation.Matching,
 				},
 			],
+			omitLabels: true,
 		} );
 
 		expect( actual ).toStrictEqual( expected );
@@ -113,6 +114,7 @@ describe( 'QueryObjectBuilder', () => {
 					datatype: 'string',
 				},
 			],
+			omitLabels: true,
 			limit: 20,
 		} );
 

@@ -17,6 +17,7 @@ export default {
 				};
 			} ),
 			...rootState.useLimit && { limit: rootState.limit },
+			omitLabels: rootState.omitLabels,
 		};
 	},
 	conditionRows( rootState: RootState ): ConditionRow[] {

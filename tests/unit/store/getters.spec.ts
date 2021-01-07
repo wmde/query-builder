@@ -32,7 +32,7 @@ describe( 'getters', () => {
 					conditionId: '0.123',
 				} ],
 				limit: 0,
-				omitLabels: true,
+				omitLabels: false,
 				errors: [],
 				useLimit: false,
 			};
@@ -55,7 +55,7 @@ describe( 'getters', () => {
 				} ],
 				limit: 0,
 				useLimit: false,
-				omitLabels: true,
+				omitLabels: false,
 				errors: [],
 			};
 
@@ -87,6 +87,7 @@ describe( 'getters', () => {
 						datatype: 'string',
 					},
 				],
+				omitLabels: true,
 			};
 
 			expect( getters.query( state ) ).toStrictEqual( expectedValue );
@@ -115,6 +116,7 @@ describe( 'getters', () => {
 						datatype: 'string',
 					},
 				],
+				omitLabels: true,
 				limit: 20,
 			};
 
