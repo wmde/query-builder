@@ -26,5 +26,6 @@
 	"query-builder-value-type-relation-dropdown-without": "Text on dropdown option to have the Query Builder select items that have the given property, but not with the given value. See also {{msg-mw|query-builder-value-type-relation-dropdown-matching}} and {{msg-mw|query-builder-value-type-relation-dropdown-regardless-of-value}}",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "Text on dropdown option to have the Query Builder select items that have the given property, regardless of the value it contains. See also {{msg-mw|query-builder-value-type-relation-dropdown-matching}} and {{msg-mw|query-builder-value-type-relation-dropdown-without}}",
 	"query-builder-delete-condition": "Text for screen readers for button that deletes the condition",
-	"query-builder-limit-number-results-description": "Text between checkbox and textfield for limiting the number of results"
+	"query-builder-limit-number-results-description": "Text between checkbox and textfield for limiting the number of results",
+	"query-builder-label-opt-out": "Label for checkbox to select showing IDs instead of labels in search results. Selecting this option can help prevent timeouts in big queries"
 }
