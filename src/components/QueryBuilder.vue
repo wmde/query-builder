@@ -1,7 +1,7 @@
 <template>
 	<div class="querybuilder" role="main">
-		<h1 class="querybuilder__heading"
-			v-i18n="{msg: 'query-builder-heading'}" />
+		<h1 class="querybuilder__heading"><bdi id="directionSample"
+			v-i18n="{msg: 'query-builder-heading'}" /></h1>
 		<p class="querybuilder__description">
 			Welcome to the test system of the Simple Query Builder. Please note that this is a work in progress,
 			not all features are included, and it can sometimes be broken.
