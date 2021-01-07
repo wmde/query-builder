@@ -10,11 +10,15 @@
 		<div role="form">
 			<h2 class="querybuilder__find-title"
 				v-i18n="{msg: 'query-builder-find-all-items'}" />
-			<QueryCondition
+			<div
+				class="querybuilder__condition-wrapper"
 				v-for="(condition, index) in conditionRows"
-				:condition-index="index"
 				:key="condition.conditionId"
-			/>
+			>
+				<QueryCondition
+					:condition-index="index"
+				/>
+			</div>
 			<AddCondition @add-condition="addCondition" />
 			<Limit />
 			<div class="querybuilder__run">
@@ -110,6 +114,13 @@ a {
 .querybuilder {
 	padding-block: $dimension-spacing-xlarge;
 	padding-inline: $dimension-spacing-xlarge;
+}
+
+.querybuilder__condition-wrapper {
+	margin-block-start: $dimension-layout-medium;
+	padding-block: $dimension-layout-xsmall;
+	padding-inline: $dimension-layout-xsmall;
+	background-color: $color-base-70; // maybe replace with an alias token?
 }
 
 .querybuilder__heading {
