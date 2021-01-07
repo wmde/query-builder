@@ -25,6 +25,48 @@ export default class QueryObjectBuilder {
 			},
 		];
 
+		if ( !queryRepresentation.omitLabels ) {
+			this.queryObject.variables.push(
+				{
+					termType: 'Variable',
+					value: 'itemLabel',
+				} );
+
+			if ( !this.queryObject.where ) {
+				this.queryObject.where = [];
+			}
+
+			this.queryObject.where.push(
+				{
+					type: 'service',
+					patterns: [
+						{
+							type: 'bgp',
+							triples: [ {
+								subject: {
+									termType: 'NamedNode',
+									value: rdfNamespaces.bd + 'serviceParam',
+								},
+								predicate: {
+									termType: 'NamedNode',
+									value: rdfNamespaces.wikibase + 'language',
+								},
+								object: {
+									termType: 'Literal',
+									value: '[AUTO_LANGUAGE]',
+								},
+							} ],
+						},
+					],
+					name: {
+						termType: 'NamedNode',
+						value: rdfNamespaces.wikibase + 'label',
+					},
+					silent: false,
+				},
+			);
+		}
+
 		for ( let i = 0; i < queryRepresentation.conditions.length; i++ ) {
 			this.buildFromQueryCondition( queryRepresentation.conditions[ i ] );
 		}

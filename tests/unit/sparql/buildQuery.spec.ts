@@ -147,4 +147,25 @@ describe( 'buildQuery', () => {
 		], omitLabels: true,
 		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) wd:${value}. }` );
 	} );
+
+	it( 'builds a query from a property and a string value with omitLabels set to false (shows labels)', () => {
+		const propertyId = 'P666';
+		const value = 'blah';
+		const propertyValueRelation = PropertyValueRelation.Matching;
+		const expectedQuery =
+			`SELECT ?item ?itemLabel WHERE {
+			SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
+			?item (p:P666/ps:P666) "blah". }`;
+		const actualQuery = buildQuery( { conditions: [
+			{
+				propertyId,
+				value,
+				datatype: 'string',
+				propertyValueRelation,
+			},
+		],
+		omitLabels: false,
+		} );
+		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
+	} );
 } );
