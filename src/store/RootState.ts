@@ -4,7 +4,7 @@ import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 export default interface RootState {
 	conditionRows: ConditionRow[];
 	errors: Error[];
-	limit?: number;
+	limit: number;
 	useLimit: boolean;
 }
 
