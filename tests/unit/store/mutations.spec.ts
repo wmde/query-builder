@@ -138,6 +138,30 @@ describe( 'mutations', () => {
 
 	} );
 
+	it( 'setOmitLabels', () => {
+		const state: RootState = {
+			conditionRows: [
+				{
+					valueData: { value: 'potato', valueError: null },
+					propertyData: { id: 'P666', label: 'Day of the beast', datatype: 'string', propertyError: null },
+					propertyValueRelationData: { value: PropertyValueRelation.Regardless },
+					conditionId: '3',
+				},
+			],
+			limit: 0,
+			useLimit: false,
+			omitLabels: true,
+			errors: [],
+		};
+
+		const omitLabels = false;
+
+		mutations.setOmitLabels( state, omitLabels );
+
+		expect( state.omitLabels ).toBe( omitLabels );
+
+	} );
+
 	describe( 'clearFieldErrors', () => {
 		it( 'clears the property error', () => {
 			const state: RootState = {

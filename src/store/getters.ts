@@ -63,6 +63,9 @@ export default {
 	useLimit( rootState: RootState ): boolean {
 		return rootState.useLimit;
 	},
+	omitLabels( rootState: RootState ): boolean {
+		return rootState.omitLabels;
+	},
 	getErrors( rootState: RootState ): Error[] {
 		return rootState.errors;
 	},

@@ -70,6 +70,9 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 	setUseLimit( context: ActionContext<RootState, RootState>, useLimit: boolean ): void {
 		context.commit( 'setUseLimit', useLimit );
 	},
+	setOmitLabels( context: ActionContext<RootState, RootState>, omitLabels: boolean ): void {
+		context.commit( 'setOmitLabels', omitLabels );
+	},
 	setErrors( context: ActionContext<RootState, RootState>, errors: Error[] ): void {
 		context.commit( 'setErrors', errors );
 	},
