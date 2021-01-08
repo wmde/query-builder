@@ -21,6 +21,7 @@
 			</div>
 			<AddCondition @add-condition="addCondition" />
 			<Limit />
+			<LabelOptout />
 			<div class="querybuilder__run">
 				<Button
 					@click.native="runQuery"
@@ -47,6 +48,7 @@ import QueryResult from '@/components/QueryResult.vue';
 import buildQuery from '@/sparql/buildQuery';
 import AddCondition from '@/components/AddCondition.vue';
 import Limit from '@/components/Limit.vue';
+import LabelOptout from '@/components/LabelOptout.vue';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -92,6 +94,7 @@ export default Vue.extend( {
 		QueryCondition,
 		AddCondition,
 		Limit,
+		LabelOptout,
 	},
 } );
 </script>
