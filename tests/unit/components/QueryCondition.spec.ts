@@ -1,6 +1,6 @@
 import DeleteConditionButton from '@/components/DeleteConditionButton.vue';
+import StringValueInput from '@/components/StringValueInput.vue';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
-import { TextInput } from '@wmde/wikit-vue-components';
 import Vuex, { Store } from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import PropertyLookup from '@/components/PropertyLookup.vue';
@@ -95,7 +95,7 @@ describe( 'QueryCondition.vue', () => {
 		} );
 		const userInput = 'potato';
 
-		const input = wrapper.findAllComponents( { ref: 'value' } ).at( conditionIndex );
+		const input = wrapper.findComponent( StringValueInput );
 		input.vm.$emit( 'input', userInput );
 
 		expect( store.dispatch ).toHaveBeenCalledWith( 'updateValue', { value: userInput, conditionIndex } );
@@ -145,7 +145,7 @@ describe( 'QueryCondition.vue', () => {
 			type: 'error',
 			message: 'Property Error Message!',
 		} );
-		expect( wrapper.findComponent( TextInput ).props( 'error' ) ).toStrictEqual( {
+		expect( wrapper.findComponent( StringValueInput ).props( 'error' ) ).toStrictEqual( {
 			type: 'warning',
 			message: 'Value Warning Message!',
 		} );
