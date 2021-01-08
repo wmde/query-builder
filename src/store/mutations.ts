@@ -29,6 +29,9 @@ export default {
 	setUseLimit( state: RootState, useLimit: boolean ): void {
 		state.useLimit = useLimit;
 	},
+	setOmitLabels( state: RootState, omitLabels: boolean ): void {
+		state.omitLabels = omitLabels;
+	},
 	setErrors( state: RootState, errors: Error[] ): void {
 		state.errors = errors;
 	},

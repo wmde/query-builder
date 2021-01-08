@@ -15,6 +15,7 @@ describe( 'mutations', () => {
 			} ],
 			limit: 0,
 			useLimit: false,
+			omitLabels: true,
 			errors: [],
 		};
 
@@ -37,6 +38,7 @@ describe( 'mutations', () => {
 				} ],
 				limit: 0,
 				useLimit: false,
+				omitLabels: true,
 				errors: [],
 			};
 
@@ -61,6 +63,7 @@ describe( 'mutations', () => {
 				} ],
 				limit: 0,
 				useLimit: false,
+				omitLabels: true,
 				errors: [],
 			};
 
@@ -93,6 +96,7 @@ describe( 'mutations', () => {
 			} ],
 			limit: 0,
 			useLimit: false,
+			omitLabels: true,
 			errors: [],
 		};
 
@@ -123,6 +127,7 @@ describe( 'mutations', () => {
 			],
 			limit: 0,
 			useLimit: false,
+			omitLabels: true,
 			errors: [],
 		};
 
@@ -130,6 +135,30 @@ describe( 'mutations', () => {
 
 		expect( state.conditionRows.length ).toBe( 1 );
 		expect( state.conditionRows[ 0 ] ).toStrictEqual( keptRow );
+
+	} );
+
+	it( 'setOmitLabels', () => {
+		const state: RootState = {
+			conditionRows: [
+				{
+					valueData: { value: 'potato', valueError: null },
+					propertyData: { id: 'P666', label: 'Day of the beast', datatype: 'string', propertyError: null },
+					propertyValueRelationData: { value: PropertyValueRelation.Regardless },
+					conditionId: '3',
+				},
+			],
+			limit: 0,
+			useLimit: false,
+			omitLabels: true,
+			errors: [],
+		};
+
+		const omitLabels = false;
+
+		mutations.setOmitLabels( state, omitLabels );
+
+		expect( state.omitLabels ).toBe( omitLabels );
 
 	} );
 
@@ -149,6 +178,7 @@ describe( 'mutations', () => {
 				} ],
 				limit: 0,
 				useLimit: false,
+				omitLabels: true,
 				errors: [],
 			};
 
@@ -172,6 +202,7 @@ describe( 'mutations', () => {
 				} ],
 				limit: 0,
 				useLimit: false,
+				omitLabels: true,
 				errors: [],
 			};
 
@@ -195,6 +226,7 @@ describe( 'mutations', () => {
 				} ],
 				limit: 0,
 				useLimit: false,
+				omitLabels: true,
 				errors: [],
 			};
 

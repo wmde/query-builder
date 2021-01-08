@@ -17,6 +17,7 @@ export default {
 				};
 			} ),
 			...rootState.useLimit && { limit: rootState.limit },
+			omitLabels: rootState.omitLabels,
 		};
 	},
 	conditionRows( rootState: RootState ): ConditionRow[] {
@@ -61,6 +62,9 @@ export default {
 	},
 	useLimit( rootState: RootState ): boolean {
 		return rootState.useLimit;
+	},
+	omitLabels( rootState: RootState ): boolean {
+		return rootState.omitLabels;
 	},
 	getErrors( rootState: RootState ): Error[] {
 		return rootState.errors;

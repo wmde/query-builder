@@ -203,6 +203,21 @@ describe( 'actions', () => {
 		expect( context.commit ).toHaveBeenCalledWith( 'removeCondition', 0 );
 	} );
 
+	it( 'setOmitLabels', () => {
+		const context = { commit: jest.fn() };
+
+		const actions = createActions(
+			services.get( 'searchEntityRepository' ),
+			services.get( 'metricsCollector' ),
+		);
+
+		const omitLabels = false;
+
+		actions.setOmitLabels( context as any, omitLabels );
+
+		expect( context.commit ).toHaveBeenCalledWith( 'setOmitLabels', omitLabels );
+	} );
+
 	describe( 'validateForm', () => {
 		it( 'adds only a notice for a single empty line', () => {
 			const context = {
