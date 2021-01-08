@@ -117,7 +117,7 @@ a {
 }
 
 .querybuilder__condition-wrapper {
-	margin-block-start: $dimension-layout-medium;
+	margin-block: $dimension-layout-xsmall;
 	padding-block: $dimension-layout-xsmall;
 	padding-inline: $dimension-layout-xsmall;
 	background-color: $color-base-70; // maybe replace with an alias token?
