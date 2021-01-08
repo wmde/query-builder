@@ -144,6 +144,8 @@ $clearWidth: 671px; // Todo: We probably don't want a magic number here
 .query-condition {
 	padding-block: $dimension-layout-xsmall;
 	padding-inline: $dimension-layout-xsmall;
+	border: $border-width-thin $border-style-base $border-color-base-default;
+	border-radius: $border-radius-base;
 	background-color: $background-color-base-default;
 
 	&__remove {
@@ -178,6 +180,10 @@ $clearWidth: 671px; // Todo: We probably don't want a magic number here
 
 .query-condition__value-type-dropdown {
 	margin-block-start: $dimension-layout-small;
+
+	@media (max-width: $clearWidth) {
+		margin-block-start: 0;
+	}
 }
 
 </style>

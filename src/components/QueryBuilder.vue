@@ -123,7 +123,9 @@ a {
 	margin-block: $dimension-layout-xsmall;
 	padding-block: $dimension-layout-xsmall;
 	padding-inline: $dimension-layout-xsmall;
-	background-color: $color-base-70; // maybe replace with an alias token?
+	background-color: $color-base-80; // maybe replace with an alias token?
+	border: $border-width-thin $border-style-base $border-color-base-default;
+	border-radius: $border-radius-base;
 }
 
 .querybuilder__heading {
