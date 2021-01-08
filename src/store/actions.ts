@@ -57,6 +57,11 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 	updateProperty( context: ActionContext<RootState, RootState>,
 		payload: { property: { label: string; id: string; datatype: string }; conditionIndex: number } ): void {
 
+		const oldDatatype = context.getters.datatype( payload.conditionIndex );
+		if ( oldDatatype && oldDatatype !== payload.property.datatype ) {
+			context.commit( 'clearValue', payload.conditionIndex );
+		}
+
 		context.commit( 'setProperty', payload );
 		if ( !allowedDatatypes.includes( payload.property.datatype ) ) {
 			context.dispatch( 'setConditionAsLimitedSupport', payload.conditionIndex );

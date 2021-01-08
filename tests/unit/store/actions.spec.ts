@@ -69,6 +69,9 @@ describe( 'actions', () => {
 			const context = {
 				commit: jest.fn(),
 				dispatch: jest.fn(),
+				getters: {
+					datatype: jest.fn().mockReturnValue( null ),
+				},
 			};
 			const property = {
 				id: 'P666',
@@ -95,6 +98,9 @@ describe( 'actions', () => {
 			const context = {
 				commit: jest.fn(),
 				dispatch: jest.fn(),
+				getters: {
+					datatype: jest.fn().mockReturnValue( null ),
+				},
 			};
 			const property = {
 				id: 'P666',
@@ -112,6 +118,36 @@ describe( 'actions', () => {
 			expect( context.commit ).toHaveBeenCalledTimes( 1 );
 			expect( context.commit ).toHaveBeenCalledWith( 'setProperty', { property, conditionIndex } );
 			expect( context.dispatch ).toHaveBeenCalledWith( 'setConditionAsLimitedSupport', 0 );
+		} );
+
+		it( 'clears an existing value if a property with a different datatype is selected', () => {
+			const context = {
+				commit: jest.fn(),
+				dispatch: jest.fn(),
+				getters: {
+					datatype: jest.fn().mockReturnValue( 'string' ),
+				},
+			};
+			const property = {
+				id: 'P666',
+				label: 'Property label',
+				datatype: 'wikibase-item',
+			};
+			const conditionIndex = 0;
+			const actions = createActions(
+				services.get( 'searchEntityRepository' ),
+				services.get( 'metricsCollector' ),
+			);
+
+			actions.updateProperty( context as any, { property, conditionIndex } );
+
+			expect( context.commit ).toHaveBeenCalledTimes( 3 );
+			expect( context.commit ).toHaveBeenCalledWith( 'setProperty', { property, conditionIndex } );
+			expect( context.commit ).toHaveBeenCalledWith( 'clearValue', conditionIndex );
+			expect( context.commit ).toHaveBeenCalledWith( 'clearFieldErrors', {
+				conditionIndex: 0,
+				errorsToClear: 'property',
+			} );
 		} );
 	} );
 

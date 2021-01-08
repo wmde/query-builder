@@ -102,7 +102,7 @@ describe( 'mutations', () => {
 
 	it( 'addCondition', () => {
 		const expectedNewConditionRow = {
-			valueData: { value: '', valueError: null },
+			valueData: { value: null, valueError: null },
 			propertyData: { id: '', label: '', datatype: null, isPropertySet: false, propertyError: null },
 			propertyValueRelationData: { value: PropertyValueRelation.Matching },
 			conditionId: 'TO BE FILLED WITH THE GENERATED RANDOM VALUE',
