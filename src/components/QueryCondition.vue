@@ -25,14 +25,11 @@
 				/>
 			</div>
 			<div>
-				<TextInput
+				<StringValueInput
 					class="query-condition__value-input"
-					:label="$i18n('query-builder-input-value-label')"
-					ref="value"
+					:disabled="isTextInputDisabled()"
 					v-model="textInputValue"
 					:error="valueError"
-					:placeholder="$i18n('query-builder-input-value-placeholder')"
-					:disabled="isTextInputDisabled()"
 				/>
 			</div>
 			<div>
@@ -49,8 +46,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Dropdown, TextInput, Button } from '@wmde/wikit-vue-components';
+import { Dropdown, Button } from '@wmde/wikit-vue-components';
 
+import StringValueInput from '@/components/StringValueInput.vue';
 import DeleteConditionButton from '@/components/DeleteConditionButton.vue';
 import PropertyLookup from '@/components/PropertyLookup.vue';
 import ValueTypeDropDown from '@/components/ValueTypeDropDown.vue';
@@ -132,7 +130,7 @@ export default Vue.extend( {
 		] ),
 	},
 	components: {
-		TextInput,
+		StringValueInput,
 		PropertyLookup,
 		ValueTypeDropDown,
 		DeleteConditionButton,
