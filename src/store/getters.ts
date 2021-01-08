@@ -38,6 +38,9 @@ export default {
 	},
 	limitedSupport( rootState: RootState ) {
 		return ( conditionIndex: number ): boolean => {
+			if ( !rootState.conditionRows[ conditionIndex ].propertyData.isPropertySet ) {
+				return false;
+			}
 			const datatype = rootState.conditionRows[ conditionIndex ].propertyData.datatype;
 			return datatype !== null && !allowedDatatypes.includes( datatype );
 		};

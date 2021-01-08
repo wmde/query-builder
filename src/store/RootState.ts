@@ -26,4 +26,5 @@ export interface PropertyData {
 	label: string;
 	datatype: string|null;
 	propertyError: Error|null;
+	isPropertySet: boolean;
 }

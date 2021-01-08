@@ -10,7 +10,13 @@ describe( 'getters', () => {
 			const state: RootState = {
 				conditionRows: [ {
 					valueData: { value: '', valueError: null },
-					propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
+					propertyData: {
+						id: 'P123',
+						label: 'abc',
+						datatype: 'string',
+						isPropertySet: true,
+						propertyError: null,
+					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],
@@ -27,7 +33,7 @@ describe( 'getters', () => {
 			const state: RootState = {
 				conditionRows: [ {
 					valueData: { value: '', valueError: null },
-					propertyData: { id: '', label: '', datatype: null, propertyError: null },
+					propertyData: { id: '', label: '', datatype: null, isPropertySet: false, propertyError: null },
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],
@@ -48,6 +54,7 @@ describe( 'getters', () => {
 						id: 'P123',
 						label: 'Lorem Ipsum',
 						datatype: 'I am not supported',
+						isPropertySet: true,
 						propertyError: null,
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
@@ -68,7 +75,13 @@ describe( 'getters', () => {
 			const state: RootState = {
 				conditionRows: [ {
 					valueData: { value: 'foo', valueError: null },
-					propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
+					propertyData: {
+						id: 'P123',
+						label: 'abc',
+						datatype: 'string',
+						isPropertySet: true,
+						propertyError: null,
+					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],
@@ -97,7 +110,13 @@ describe( 'getters', () => {
 			const state: RootState = {
 				conditionRows: [ {
 					valueData: { value: 'foo', valueError: null },
-					propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
+					propertyData: {
+						id: 'P123',
+						label: 'abc',
+						datatype: 'string',
+						isPropertySet: true,
+						propertyError: null,
+					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 				} ],

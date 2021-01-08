@@ -263,7 +263,7 @@ describe( 'actions', () => {
 			} );
 		} );
 
-		it( 'adds errors if the form is incomplete', () => {
+		it( 'adds errors if the form is missing a value', () => {
 			const context = {
 				rootState: {
 					conditionRows: [
@@ -272,6 +272,7 @@ describe( 'actions', () => {
 								id: 'P123',
 								label: 'some string',
 								datatype: 'string',
+								isPropertySet: true,
 								propertyError: null,
 							},
 							valueData: {
@@ -310,6 +311,54 @@ describe( 'actions', () => {
 			} );
 		} );
 
+		it( 'adds errors if the form is missing a property', () => {
+			const context = {
+				rootState: {
+					conditionRows: [
+						{
+							propertyData: {
+								id: 'P123',
+								label: 'some string',
+								datatype: 'string',
+								isPropertySet: false,
+								propertyError: null,
+							},
+							valueData: {
+								value: '10777',
+								valueError: null,
+							},
+							propertyValueRelationData: {
+								value: PropertyValueRelation.Matching,
+							},
+						} as ConditionRow,
+					],
+				},
+				commit: jest.fn(),
+			};
+
+			const actions = createActions(
+				services.get( 'searchEntityRepository' ),
+				services.get( 'metricsCollector' ),
+			);
+
+			actions.validateForm( context as any );
+
+			expect( context.commit ).toHaveBeenCalledWith( 'setErrors', [ {
+				message: 'query-builder-result-error-incomplete-form',
+				type: 'error',
+			} ] );
+			expect( context.commit ).toHaveBeenCalledWith( 'setFieldErrors', {
+				errors: {
+					valueError: null,
+					propertyError: {
+						message: 'query-builder-result-error-missing-property',
+						type: 'error',
+					},
+				},
+				index: 0,
+			} );
+		} );
+
 		it( 'removes existing errors', () => {
 			const context = {
 				rootState: {
@@ -319,6 +368,7 @@ describe( 'actions', () => {
 								id: 'P123',
 								label: 'some string',
 								datatype: 'string',
+								isPropertySet: true,
 								propertyError: null,
 							},
 							valueData: {
@@ -367,6 +417,7 @@ describe( 'actions', () => {
 								id: 'P123',
 								label: 'some string',
 								datatype: 'some unsupported data type',
+								isPropertySet: true,
 								propertyError: null,
 							},
 							valueData: {

@@ -16,6 +16,7 @@ export function newEmptyPropertyData( propertyError: Error|null = null ): Proper
 		label: '',
 		id: '',
 		datatype: null,
+		isPropertySet: false,
 		propertyError,
 	};
 }
