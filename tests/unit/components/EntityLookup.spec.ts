@@ -1,13 +1,16 @@
 import EntityLookup from '@/components/EntityLookup.vue';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { Lookup } from '@wmde/wikit-vue-components';
+import Vue from 'vue';
 import i18n from 'vue-banana-i18n';
 import SearchOptions from '@/data-access/SearchOptions';
 
 const localVue = createLocalVue();
-const messages = {};
+const messages = { en: {
+	'some-error-message-key': 'some-error-copy',
+} };
 
-localVue.use( i18n, {
+Vue.use( i18n, {
 	locale: 'en',
 	messages,
 	wikilinks: true,
@@ -75,7 +78,7 @@ describe( 'EntityLookup.vue', () => {
 	it( 'passes error prop down to Lookup', () => {
 		const error = {
 			type: 'error',
-			message: 'some description',
+			message: 'some-error-message-key',
 		};
 
 		const wrapper = shallowMount( EntityLookup, {
@@ -85,6 +88,9 @@ describe( 'EntityLookup.vue', () => {
 			},
 		} );
 
-		expect( wrapper.findComponent( Lookup ).props( 'error' ) ).toStrictEqual( error );
+		expect( wrapper.findComponent( Lookup ).props( 'error' ) ).toStrictEqual( {
+			type: 'error',
+			message: 'some-error-copy',
+		} );
 	} );
 } );

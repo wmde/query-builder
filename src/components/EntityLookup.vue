@@ -2,11 +2,12 @@
 	<Lookup
 		:value="value"
 		@input="$emit( 'input', $event )"
-		:error="error"
+		:error="error ? {message: $i18n(error.message), type: error.type} : null"
 		:menu-items="searchResults"
 		:search-input.sync="search"
 		:placeholder="placeholder"
 		:label="label"
+		:disabled="disabled"
 		v-on:scroll="handleScroll"
 	>
 		<template
@@ -88,6 +89,10 @@ export default Vue.extend( {
 		error: {
 			type: Object,
 			default: null,
+		},
+		disabled: {
+			type: Boolean,
+			default: false,
 		},
 		label: {
 			type: String,

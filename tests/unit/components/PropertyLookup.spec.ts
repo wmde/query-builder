@@ -68,7 +68,7 @@ describe( 'PropertyLookup.vue', () => {
 		expect( actualSearchOptions ).toStrictEqual( expectedSearchResults );
 	} );
 
-	it( 'passes error prop down to Lookup', () => {
+	it( 'passes error prop down to EntityLookup', () => {
 		const error = {
 			type: 'error',
 			message: 'some description',
