@@ -1,5 +1,5 @@
 <template>
-	<div id="app" :lang="lang" dir="textDirection">
+	<div id="app" :lang="lang" :dir="textDirection">
 		<QueryBuilder v-if="isi18nLoaded"/>
 	</div>
 </template>
@@ -51,10 +51,12 @@ export default Vue.extend( {
 				wikilinks: true,
 			} );
 			this.isi18nLoaded = true;
-			this.textDirection = getComputedStyle( document.getElementById( 'app' ) as Element ).direction;
 		};
 
 		fetchi18n();
+	},
+	updated() {
+		this.textDirection = getComputedStyle( document.getElementById( 'directionSample' ) as Element ).direction;
 	},
 	name: 'App',
 	components: {
