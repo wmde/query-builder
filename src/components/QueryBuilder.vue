@@ -114,9 +114,16 @@ a {
 	}
 }
 
+$tinyViewportWidth: 36em;
+
 .querybuilder {
-	padding-block: $dimension-spacing-xlarge;
-	padding-inline: $dimension-spacing-xlarge;
+	padding-block: $dimension-layout-small;
+	padding-inline: $dimension-layout-small;
+
+	@media (max-width: $tinyViewportWidth) {
+		padding-block: $dimension-layout-xsmall;
+		padding-inline: $dimension-layout-xsmall;
+	}
 }
 
 .querybuilder__condition-wrapper {
@@ -126,6 +133,11 @@ a {
 	background-color: $color-base-80; // maybe replace with an alias token?
 	border: $border-width-thin $border-style-base $border-color-base-default;
 	border-radius: $border-radius-base;
+
+	@media (max-width: $tinyViewportWidth) {
+		padding-block: $dimension-layout-xxsmall;
+		padding-inline: $dimension-layout-xxsmall;
+	}
 }
 
 .querybuilder__heading {

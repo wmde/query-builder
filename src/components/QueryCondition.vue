@@ -139,7 +139,7 @@ export default Vue.extend( {
 </script>
 
 <style scoped lang="scss">
-$clearWidth: 671px; // Todo: We probably don't want a magic number here
+$tinyViewportWidth: 36em; // Set so that inputs show all below each other in the smallest layout
 
 .query-condition {
 	padding-block: $dimension-layout-xsmall;
@@ -147,6 +147,11 @@ $clearWidth: 671px; // Todo: We probably don't want a magic number here
 	border: $border-width-thin $border-style-base $border-color-base-default;
 	border-radius: $border-radius-base;
 	background-color: $background-color-base-default;
+
+	@media (max-width: $tinyViewportWidth) {
+		padding-block: $dimension-layout-xxsmall;
+		padding-inline: $dimension-layout-xxsmall;
+	}
 
 	&__remove {
 		margin-inline-start: $dimension-layout-small;
@@ -159,7 +164,7 @@ $clearWidth: 671px; // Todo: We probably don't want a magic number here
 		margin-block-start: $dimension-layout-small;
 		margin-inline-end: $dimension-layout-large;
 
-		@media (max-width: $clearWidth) {
+		@media (max-width: $tinyViewportWidth) {
 			margin-block-start: 0;
 			margin-inline-end: 0;
 		}
@@ -167,11 +172,11 @@ $clearWidth: 671px; // Todo: We probably don't want a magic number here
 
 	&__input-container {
 		display: grid;
-		// Todo: those 17em were chosen by trial to play nice with the 671px $clearWidth - not ideal
-		grid-template-columns: repeat(auto-fit, minmax(17em, 1fr));
+		// 16em == 256px minimum-width as defined by UX
+		grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
 		grid-gap: $dimension-layout-xsmall;
 
-		@media (max-width: $clearWidth) {
+		@media (max-width: $tinyViewportWidth) {
 			padding-block-start: $dimension-layout-small;
 			clear: both;
 		}
@@ -181,7 +186,7 @@ $clearWidth: 671px; // Todo: We probably don't want a magic number here
 .query-condition__value-type-dropdown {
 	margin-block-start: $dimension-layout-small;
 
-	@media (max-width: $clearWidth) {
+	@media (max-width: $tinyViewportWidth) {
 		margin-block-start: 0;
 	}
 }
