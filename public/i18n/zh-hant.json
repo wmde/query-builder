@@ -24,5 +24,6 @@
 	"query-builder-value-type-relation-dropdown-matching": "符合",
 	"query-builder-value-type-relation-dropdown-without": "不帶",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "不論值內容",
-	"query-builder-delete-condition": "刪除條件"
+	"query-builder-delete-condition": "刪除條件",
+	"query-builder-limit-number-results-description": "將結果數量限制成"
 }

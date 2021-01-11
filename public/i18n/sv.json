@@ -24,5 +24,8 @@
 	"query-builder-add-condition": "Lägg till villkor",
 	"query-builder-value-type-relation-dropdown-matching": "matchar",
 	"query-builder-value-type-relation-dropdown-without": "utan",
-	"query-builder-value-type-relation-dropdown-regardless-of-value": "oavsett värdet"
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "oavsett värdet",
+	"query-builder-delete-condition": "Radera villkor",
+	"query-builder-limit-number-results-description": "Begränsa antalet resultat till",
+	"query-builder-label-opt-out": "Visa ID:n istället för etiketter (kan förhindra timeout)"
 }

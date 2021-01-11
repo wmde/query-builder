@@ -21,5 +21,6 @@
 	"query-builder-result-error-missing-property": "Wybierz właściwość",
 	"query-builder-result-error-missing-value": "Wprowadź wartość",
 	"query-builder-add-condition": "Dodaj warunek",
-	"query-builder-delete-condition": "Usuń warunek"
+	"query-builder-delete-condition": "Usuń warunek",
+	"query-builder-label-opt-out": "Pokazuj ID zamiast etykiet (zapobiega błędom)"
 }

@@ -25,5 +25,6 @@
 	"query-builder-value-type-relation-dropdown-without": "olmadan",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "değeri ne olursa olsun",
 	"query-builder-delete-condition": "Koşulu sil",
-	"query-builder-limit-number-results-description": "Sonuçların sayısını sınırla"
+	"query-builder-limit-number-results-description": "Sonuçların sayısını sınırla",
+	"query-builder-label-opt-out": "Etiketler yerine kimlikleri göster (zaman aşımını önleyebilir)"
 }

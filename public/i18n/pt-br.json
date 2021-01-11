@@ -24,5 +24,7 @@
 	"query-builder-value-type-relation-dropdown-matching": "correspondente",
 	"query-builder-value-type-relation-dropdown-without": "sem",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "independentemente do valor",
-	"query-builder-delete-condition": "Excluir condição"
+	"query-builder-delete-condition": "Excluir condição",
+	"query-builder-limit-number-results-description": "Limite o número de resultados a",
+	"query-builder-label-opt-out": "Mostrar IDs em vez de rótulos (pode evitar o tempo limite)"
 }

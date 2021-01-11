@@ -24,5 +24,6 @@
 	"query-builder-value-type-relation-dropdown-matching": "соодветство",
 	"query-builder-value-type-relation-dropdown-without": "без",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "независно од вредноста",
-	"query-builder-delete-condition": "Избриши го условот"
+	"query-builder-delete-condition": "Избриши го условот",
+	"query-builder-limit-number-results-description": "Ограничи бр. на исходни ставки на"
 }

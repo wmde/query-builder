@@ -3,6 +3,8 @@
 		"authors": [
 			"Florian COLLIN",
 			"Gomoko",
+			"Thibaut120094",
+			"VIGNERON",
 			"Verdy p"
 		]
 	},
@@ -26,5 +28,7 @@
 	"query-builder-value-type-relation-dropdown-matching": "correspondant à",
 	"query-builder-value-type-relation-dropdown-without": "sans",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "quelle que soit la valeur",
-	"query-builder-delete-condition": "Supprimer la condition"
+	"query-builder-delete-condition": "Supprimer la condition",
+	"query-builder-limit-number-results-description": "Limiter le nombre de résultats à",
+	"query-builder-label-opt-out": "Montrer les identifiants plutôt que les libellés (pour éviter le ''timeout'')."
 }
