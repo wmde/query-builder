@@ -87,6 +87,11 @@ export default {
 	omitLabels( rootState: RootState ): boolean {
 		return rootState.omitLabels;
 	},
+	subclasses( rootState: RootState ) {
+		return ( conditionIndex: number ): boolean => {
+			return rootState.conditionRows[ conditionIndex ].subclasses;
+		};
+	},
 	getErrors( rootState: RootState ): Error[] {
 		return rootState.errors;
 	},

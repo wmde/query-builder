@@ -259,6 +259,20 @@ describe( 'actions', () => {
 		expect( context.commit ).toHaveBeenCalledWith( 'removeCondition', 0 );
 	} );
 
+	it( 'setSubclasses', () => {
+		const context = { commit: jest.fn() };
+		const subclasses = true;
+		const conditionIndex = 0;
+		const actions = createActions(
+			services.get( 'searchEntityRepository' ),
+			services.get( 'metricsCollector' ),
+		);
+
+		actions.setSubclasses( context as any, { subclasses, conditionIndex } );
+
+		expect( context.commit ).toHaveBeenCalledWith( 'setSubclasses', { subclasses, conditionIndex } );
+	} );
+
 	it( 'setOmitLabels', () => {
 		const context = { commit: jest.fn() };
 

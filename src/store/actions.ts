@@ -88,6 +88,10 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 	setOmitLabels( context: ActionContext<RootState, RootState>, omitLabels: boolean ): void {
 		context.commit( 'setOmitLabels', omitLabels );
 	},
+	setSubclasses( context: ActionContext<RootState, RootState>,
+		payload: { subclasses: boolean; conditionIndex: number } ): void {
+		context.commit( 'setSubclasses', payload );
+	},
 	setErrors( context: ActionContext<RootState, RootState>, errors: Error[] ): void {
 		context.commit( 'setErrors', errors );
 	},
