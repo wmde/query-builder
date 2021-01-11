@@ -102,6 +102,7 @@ describe( 'getters', () => {
 						value: 'foo',
 						propertyValueRelation: PropertyValueRelation.Matching,
 						datatype: 'string',
+						subclasses: false,
 					},
 				],
 				omitLabels: true,
@@ -138,6 +139,7 @@ describe( 'getters', () => {
 						value: 'foo',
 						propertyValueRelation: PropertyValueRelation.Matching,
 						datatype: 'string',
+						subclasses: false,
 					},
 				],
 				omitLabels: true,
@@ -146,5 +148,37 @@ describe( 'getters', () => {
 
 			expect( getters.query( state ) ).toStrictEqual( expectedValue );
 		} );
+
+		it( 'returns the QueryRepresentation of the RootState with subclasses', () => {
+			const state: RootState = {
+				conditionRows: [ {
+					valueData: { value: 'foo', valueError: null },
+					propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
+					propertyValueRelationData: { value: PropertyValueRelation.Matching },
+					conditionId: '0.123',
+					subclasses: true,
+				} ],
+				omitLabels: true,
+				limit: 0,
+				useLimit: false,
+				errors: [],
+			};
+
+			const expectedValue: QueryRepresentation = {
+				conditions: [
+					{
+						propertyId: 'P123',
+						value: 'foo',
+						propertyValueRelation: PropertyValueRelation.Matching,
+						datatype: 'string',
+						subclasses: true,
+					},
+				],
+				omitLabels: true,
+			};
+
+			expect( getters.query( state ) ).toStrictEqual( expectedValue );
+		} );
+
 	} );
 } );

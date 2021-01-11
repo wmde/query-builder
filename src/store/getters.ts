@@ -27,6 +27,7 @@ export default {
 					value: getQueryValueFromStoreValue( condition.propertyData.datatype, condition.valueData.value ),
 					propertyValueRelation: condition.propertyValueRelationData.value,
 					datatype: condition.propertyData.datatype,
+					subclasses: condition.subclasses,
 				};
 			} ),
 			...rootState.useLimit && { limit: rootState.limit },
