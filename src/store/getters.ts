@@ -60,7 +60,7 @@ export default {
 			return rootState.conditionRows[ conditionIndex ].propertyValueRelationData.value;
 		};
 	},
-	limit( rootState: RootState ): ( number | undefined ) {
+	limit( rootState: RootState ): ( number ) {
 		return rootState.limit;
 	},
 	useLimit( rootState: RootState ): boolean {
