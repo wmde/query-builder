@@ -1,3 +1,4 @@
+import debounce from 'lodash/debounce';
 import SearchEntityRepository from '@/data-access/SearchEntityRepository';
 import SearchResult from '@/data-access/SearchResult';
 import TechnicalProblem from '@/data-access/errors/TechnicalProblem';
@@ -39,8 +40,12 @@ export default class FetchSearchEntityRepository implements SearchEntityReposito
 			url.searchParams.set( key, params[ key ] );
 		}
 		let response: Response;
+		const debouncedFetch = debounce( fetch, 300, {
+			leading: true,
+			trailing: true,
+		} );
 		try {
-			response = await fetch( url.toString() );
+			response = await debouncedFetch( url.toString() ) as Response;
 		} catch ( e ) {
 			throw new TechnicalProblem( 'Network error' );
 		}
