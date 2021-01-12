@@ -31,10 +31,14 @@ export default Vue.extend( {
 	computed: {
 		textInputValue: {
 			// TODO: change after deciding how to validate numbers for TextInput
-			get(): ( string | undefined ) {
-				return this.$store.getters.limit?.toString();
+			get(): ( number ) {
+				return this.$store.getters.limit;
 			},
 			set( value: string ): void {
+				if ( isNaN( parseInt( value ) ) ) {
+					this.$store.dispatch( 'setLimit', null );
+					return;
+				}
 				this.$store.dispatch( 'setLimit', parseInt( value ) );
 			},
 		},
