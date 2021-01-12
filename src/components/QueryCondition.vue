@@ -85,7 +85,11 @@ export default Vue.extend( {
 			get(): SearchResult | null {
 				return this.$store.getters.property( this.conditionIndex );
 			},
-			set( selectedProperty: SearchResult ): void {
+			set( selectedProperty: SearchResult | null ): void {
+				if ( selectedProperty === null ) {
+					this.$store.dispatch( 'unsetProperty', this.conditionIndex );
+					return;
+				}
 				this.$store.dispatch(
 					'updateProperty',
 					{ property: selectedProperty, conditionIndex: this.conditionIndex },

@@ -44,11 +44,21 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 		payload: { value: string; conditionIndex: number } ): void {
 		context.commit( 'setValue', payload );
 	},
+	unsetProperty( context: ActionContext<RootState, RootState>, conditionIndex: number ): void {
+		context.commit( 'unsetProperty', conditionIndex );
+		context.commit(
+			'clearFieldErrors',
+			{
+				conditionIndex,
+				errorsToClear: 'property',
+			},
+		);
+	},
 	updateProperty( context: ActionContext<RootState, RootState>,
 		payload: { property: { label: string; id: string; datatype: string }; conditionIndex: number } ): void {
 
 		context.commit( 'setProperty', payload );
-		if ( payload.property && !allowedDatatypes.includes( payload.property.datatype ) ) {
+		if ( !allowedDatatypes.includes( payload.property.datatype ) ) {
 			context.dispatch( 'setConditionAsLimitedSupport', payload.conditionIndex );
 		} else {
 			context.commit(
