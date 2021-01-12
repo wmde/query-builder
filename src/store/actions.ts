@@ -110,7 +110,7 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 			context.rootState.conditionRows.map( ( condition: ConditionRow ): FormValues => {
 				// TODO: refactor FormValues to match ConditionRow and remove this mapping
 				return {
-					property: condition.propertyData,
+					property: condition.propertyData.isPropertySet ? condition.propertyData : null,
 					value: condition.valueData.value,
 					propertyValueRelation: condition.propertyValueRelationData.value,
 				};

@@ -2,7 +2,7 @@ import RootState from './RootState';
 import Property from '@/data-model/Property';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
-import { getFreshConditionRow, newEmptyPropertyData } from './index';
+import { getFreshConditionRow } from './index';
 
 export default {
 	setValue( state: RootState, payload: { value: string; conditionIndex: number } ): void {
@@ -10,14 +10,14 @@ export default {
 	},
 	setProperty( state: RootState, payload: { property: Property | null; conditionIndex: number } ): void {
 		if ( !payload.property ) {
-			state.conditionRows[ payload.conditionIndex ].propertyData = newEmptyPropertyData(
-				state.conditionRows[ payload.conditionIndex ].propertyData.propertyError,
-			);
+			state.conditionRows[ payload.conditionIndex ].propertyData.isPropertySet = false;
+			return;
 		}
 		state.conditionRows[ payload.conditionIndex ].propertyData = {
 			...state.conditionRows[ payload.conditionIndex ].propertyData,
 			...payload.property,
 		};
+		state.conditionRows[ payload.conditionIndex ].propertyData.isPropertySet = true;
 	},
 	setPropertyValueRelation( state: RootState,
 		payload: { propertyValueRelation: PropertyValueRelation; conditionIndex: number } ): void {
