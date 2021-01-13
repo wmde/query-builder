@@ -92,8 +92,12 @@ export default Vue.extend( {
 					this.$store.dispatch( 'unsetProperty', this.conditionIndex );
 					return;
 				}
-				this.$store.dispatch(
-					'updateProperty',
+				if ( selectedProperty.datatype === 'wikibase-item' ) {
+					this.$store.dispatch( 'setSubclasses', { conditionIndex: this.conditionIndex, subclasses: true } );
+				} else {
+					this.$store.dispatch( 'setSubclasses', { conditionIndex: this.conditionIndex, subclasses: false } );
+				}
+				this.$store.dispatch( 'updateProperty',
 					{ property: selectedProperty, conditionIndex: this.conditionIndex },
 				);
 			},

@@ -102,6 +102,46 @@ describe( 'QueryCondition.vue', () => {
 		expect( store.dispatch ).toHaveBeenCalledWith( 'updateValue', { value: userInput, conditionIndex } );
 	} );
 
+	it( 'set subclasses to true when property type is wikibase-item', async () => {
+
+		const property = { label: 'postal code', id: 'P123', datatype: 'wikibase-item' };
+		const propertyGetter = () => () => ( property );
+		const store = newStore( propertyGetter );
+		const conditionIndex = 0;
+		store.dispatch = jest.fn();
+		const wrapper = shallowMount( QueryCondition, {
+			store,
+			localVue,
+			propsData: {
+				'condition-index': 0,
+			},
+		} );
+
+		wrapper.findAllComponents( PropertyLookup ).at( conditionIndex ).vm.$emit( 'input', property );
+
+		expect( store.dispatch ).toHaveBeenCalledWith( 'setSubclasses', { subclasses: true, conditionIndex } );
+	} );
+
+	it( 'set subclasses to false when property type is string', async () => {
+
+		const property = { label: 'postal code', id: 'P123', datatype: 'string' };
+		const propertyGetter = () => () => ( property );
+		const store = newStore( propertyGetter );
+		const conditionIndex = 0;
+		store.dispatch = jest.fn();
+		const wrapper = shallowMount( QueryCondition, {
+			store,
+			localVue,
+			propsData: {
+				'condition-index': 0,
+			},
+		} );
+
+		wrapper.findAllComponents( PropertyLookup ).at( conditionIndex ).vm.$emit( 'input', property );
+
+		expect( store.dispatch ).toHaveBeenCalledWith( 'setSubclasses', { subclasses: false, conditionIndex } );
+	} );
+
 	it( 'removes current row when the removeCondition button is clicked', async () => {
 		const store = newStore();
 		const conditionIndex = 0;
