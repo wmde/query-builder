@@ -2,7 +2,7 @@
 	<EntityLookup
 		:value="value"
 		@input="$emit( 'input', $event )"
-		:error="error ? {message: $i18n(error.message), type: error.type} : null"
+		:error="error"
 		:searchForMenuItems="searchForProperties"
 		:label="$i18n('query-builder-property-lookup-label')"
 		:placeholder="$i18n('query-builder-property-lookup-placeholder')"

@@ -2,11 +2,12 @@
 	<EntityLookup
 		:value="value"
 		@input="$emit( 'input', $event )"
-		:error="error ? {message: $i18n(error.message), type: error.type} : null"
+		:error="error"
 		:searchForMenuItems="searchForItems"
 		:label="$i18n('query-builder-input-value-label')"
 		:placeholder="$i18n('query-builder-input-value-placeholder')"
 		:no-match-found-message="$i18n('query-builder-item-value-lookup-no-match-found')"
+		:disabled="disabled"
 	/>
 </template>
 
@@ -35,6 +36,10 @@ export default Vue.extend( {
 		error: {
 			type: Object,
 			default: null,
+		},
+		disabled: {
+			type: Boolean,
+			default: false,
 		},
 	},
 } );
