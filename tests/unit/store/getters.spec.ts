@@ -153,7 +153,13 @@ describe( 'getters', () => {
 			const state: RootState = {
 				conditionRows: [ {
 					valueData: { value: 'foo', valueError: null },
-					propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null },
+					propertyData: {
+						id: 'P123',
+						label: 'abc',
+						datatype: 'string',
+						propertyError: null,
+						isPropertySet: true,
+					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
 					subclasses: true,

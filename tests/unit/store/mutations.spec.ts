@@ -35,7 +35,13 @@ describe( 'mutations', () => {
 
 		it( 'sets a new property in the state', () => {
 			const conditionIndex = 0;
-			const expectedProperty = { id: 'P456', label: 'def', datatype: 'string', propertyError: null };
+			const expectedProperty = {
+				id: 'P456',
+				label: 'def',
+				datatype: 'string',
+				isPropertySet: true,
+				propertyError: null,
+			};
 			const state: RootState = {
 				conditionRows: [ {
 					valueData: { value: 'foo', valueError: null },
@@ -102,7 +108,13 @@ describe( 'mutations', () => {
 		const state: RootState = {
 			conditionRows: [ {
 				valueData: { value: 'foo', valueError: null },
-				propertyData: { id: 'P123', label: 'abc', datatype: 'string', propertyError: null, isPropertySet: true, },
+				propertyData: {
+					id: 'P123',
+					label: 'abc',
+					datatype: 'string',
+					isPropertySet: true,
+					propertyError: null,
+				},
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
 				conditionId: '0.123',
 				subclasses: false,
