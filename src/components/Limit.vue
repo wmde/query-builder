@@ -14,7 +14,8 @@
 			class="querybuilder__limit-input"
 			v-model="textInputValue"
 			:disabled="!checked"
-			label="Maximum number of results"
+			:label="$i18n('query-builder-limit-number-screenreader-label')"
+			:placeholder="$i18n('query-builder-limit-number-placeholder')"
 		/>
 	</div>
 </template>
