@@ -25,7 +25,7 @@ export function getFreshConditionRow(): ConditionRow {
 	return {
 		propertyData: newEmptyPropertyData(),
 		valueData: {
-			value: '',
+			value: null,
 			valueError: null,
 		},
 		propertyValueRelationData: {

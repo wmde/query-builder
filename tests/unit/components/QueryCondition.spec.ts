@@ -1,5 +1,5 @@
 import DeleteConditionButton from '@/components/DeleteConditionButton.vue';
-import StringValueInput from '@/components/StringValueInput.vue';
+import ValueInput from '@/components/ValueInput.vue';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Vuex, { Store } from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
@@ -21,6 +21,7 @@ function newStore( getters = {} ): Store<any> {
 	return new Vuex.Store( {
 		getters: {
 			property: jest.fn().mockReturnValue( jest.fn() ),
+			datatype: jest.fn().mockReturnValue( jest.fn() ),
 			value: jest.fn().mockReturnValue( jest.fn() ),
 			valueError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( null ) ),
 			propertyError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( null ) ),
@@ -95,7 +96,7 @@ describe( 'QueryCondition.vue', () => {
 		} );
 		const userInput = 'potato';
 
-		const input = wrapper.findComponent( StringValueInput );
+		const input = wrapper.findComponent( ValueInput );
 		input.vm.$emit( 'input', userInput );
 
 		expect( store.dispatch ).toHaveBeenCalledWith( 'updateValue', { value: userInput, conditionIndex } );
@@ -145,7 +146,7 @@ describe( 'QueryCondition.vue', () => {
 			type: 'error',
 			message: 'Property Error Message!',
 		} );
-		expect( wrapper.findComponent( StringValueInput ).props( 'error' ) ).toStrictEqual( {
+		expect( wrapper.findComponent( ValueInput ).props( 'error' ) ).toStrictEqual( {
 			type: 'warning',
 			message: 'Value Warning Message!',
 		} );

@@ -1,19 +1,32 @@
 import allowedDatatypes from '@/allowedDataTypes';
-import RootState, { ConditionRow } from './RootState';
+import RootState, { ConditionRow, ItemValue, StringValue, Value } from './RootState';
 import QueryRepresentation from '@/sparql/QueryRepresentation';
 import Property from '@/data-model/Property';
 import Error from '@/data-model/Error';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
+function getQueryValueFromStoreValue( datatype: string, storeValue: Value ): string {
+	if ( storeValue === null ) {
+		return '';
+	}
+	if ( datatype === 'wikibase-item' ) {
+		return ( storeValue as ItemValue ).id;
+	}
+	return storeValue as StringValue;
+}
+
 export default {
 	query( rootState: RootState ): QueryRepresentation {
 		return {
 			conditions: rootState.conditionRows.map( ( condition ) => {
+				if ( condition.propertyData.datatype === null ) {
+					throw new Error( 'missing datatype!' );
+				}
 				return {
 					propertyId: condition.propertyData.id,
-					value: condition.valueData.value,
+					value: getQueryValueFromStoreValue( condition.propertyData.datatype, condition.valueData.value ),
 					propertyValueRelation: condition.propertyValueRelationData.value,
-					datatype: condition.propertyData.datatype!,
+					datatype: condition.propertyData.datatype,
 				};
 			} ),
 			...rootState.useLimit && { limit: rootState.limit },
@@ -36,6 +49,11 @@ export default {
 			return rootState.conditionRows[ conditionIndex ].propertyData.propertyError;
 		};
 	},
+	datatype( rootState: RootState ) {
+		return ( conditionIndex: number ): string | null => {
+			return rootState.conditionRows[ conditionIndex ].propertyData.datatype;
+		};
+	},
 	limitedSupport( rootState: RootState ) {
 		return ( conditionIndex: number ): boolean => {
 			if ( !rootState.conditionRows[ conditionIndex ].propertyData.isPropertySet ) {
@@ -46,7 +64,7 @@ export default {
 		};
 	},
 	value( rootState: RootState ) {
-		return ( conditionIndex: number ): string => {
+		return ( conditionIndex: number ): Value => {
 			return rootState.conditionRows[ conditionIndex ].valueData.value;
 		};
 	},

@@ -9,10 +9,19 @@ export default interface RootState {
 	omitLabels: boolean;
 }
 
+export interface ItemValue {
+	id: string;
+	label: string;
+}
+
+export type StringValue = string;
+
+export type Value = ItemValue | StringValue | null;
+
 export interface ConditionRow {
 	propertyData: PropertyData;
 	valueData: {
-		value: string;
+		value: Value;
 		valueError: Error|null;
 	};
 	propertyValueRelationData: {

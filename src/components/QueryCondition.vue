@@ -25,11 +25,12 @@
 				/>
 			</div>
 			<div>
-				<StringValueInput
+				<ValueInput
 					class="query-condition__value-input"
 					:disabled="isTextInputDisabled()"
 					v-model="textInputValue"
 					:error="valueError"
+					:datatype="datatype"
 				/>
 			</div>
 			<div>
@@ -48,7 +49,7 @@
 import Vue from 'vue';
 import { Dropdown, Button } from '@wmde/wikit-vue-components';
 
-import StringValueInput from '@/components/StringValueInput.vue';
+import ValueInput from '@/components/ValueInput.vue';
 import DeleteConditionButton from '@/components/DeleteConditionButton.vue';
 import PropertyLookup from '@/components/PropertyLookup.vue';
 import ValueTypeDropDown from '@/components/ValueTypeDropDown.vue';
@@ -76,6 +77,9 @@ export default Vue.extend( {
 		},
 	},
 	computed: {
+		datatype(): string | null {
+			return this.$store.getters.datatype( this.conditionIndex );
+		},
 		canDelete(): boolean {
 			return this.$store.getters.conditionRows.length > 1;
 		},
@@ -130,7 +134,7 @@ export default Vue.extend( {
 		] ),
 	},
 	components: {
-		StringValueInput,
+		ValueInput,
 		PropertyLookup,
 		ValueTypeDropDown,
 		DeleteConditionButton,
