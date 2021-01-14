@@ -89,7 +89,7 @@ export default class QueryObjectBuilder {
 			case ( PropertyValueRelation.Regardless ):
 				return {
 					termType: 'BlankNode',
-					value: 'anyValue',
+					value: 'anyValue' + condition.propertyId,
 				};
 			case ( PropertyValueRelation.Matching ):
 				return this.buildTripleObjectForExplicitValue( condition.datatype, condition.value );
