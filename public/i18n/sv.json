@@ -27,5 +27,7 @@
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "oavsett värdet",
 	"query-builder-delete-condition": "Radera villkor",
 	"query-builder-limit-number-results-description": "Begränsa antalet resultat till",
+	"query-builder-limit-number-placeholder": "Ange en siffra",
+	"query-builder-limit-number-screenreader-label": "Maximalt antal resultat",
 	"query-builder-label-opt-out": "Visa ID:n istället för etiketter (kan förhindra timeout)"
 }

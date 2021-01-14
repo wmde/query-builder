@@ -17,5 +17,7 @@
 	"query-builder-result-error-missing-property": "Seleziona una proprietà",
 	"query-builder-result-error-missing-value": "Inserisci un valore",
 	"query-builder-add-condition": "Aggiungi condizione",
-	"query-builder-delete-condition": "Cancella condizione"
+	"query-builder-delete-condition": "Cancella condizione",
+	"query-builder-limit-number-placeholder": "Inserisci un numero",
+	"query-builder-limit-number-screenreader-label": "Numero massimo di risultati."
 }

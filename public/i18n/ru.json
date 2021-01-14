@@ -9,6 +9,7 @@
 	"query-builder-run-query": "Запустить запрос",
 	"query-builder-input-value-label": "Значение",
 	"query-builder-input-value-placeholder": "Введите значение",
+	"query-builder-item-value-lookup-no-match-found": "Совпадений не найдено",
 	"query-builder-property-lookup-label": "Свойство",
 	"query-builder-property-lookup-placeholder": "Введите свойство",
 	"query-builder-property-lookup-no-match-found": "Совпадений не найдено",
@@ -22,5 +23,8 @@
 	"query-builder-add-condition": "Добавить условие",
 	"query-builder-value-type-relation-dropdown-matching": "соответствие",
 	"query-builder-value-type-relation-dropdown-without": "без",
-	"query-builder-value-type-relation-dropdown-regardless-of-value": "независимо от значения"
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "независимо от значения",
+	"query-builder-delete-condition": "Удалить условие",
+	"query-builder-limit-number-results-description": "Ограничьте количество результатов до",
+	"query-builder-label-opt-out": "Показывать идентификаторы вместо меток (может предотвратить тайм-аут)"
 }
