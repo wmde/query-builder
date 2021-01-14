@@ -55,14 +55,14 @@ describe( 'buildQuery', () => {
 			},
 		],
 		omitLabels: true,
-		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) _:anyValue. }` );
+		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) _:anyValue${propertyId}. }` );
 	} );
 
 	it( 'builds a query from multiple conditions, one matching and one regardless', () => {
 		const expectedQuery =
 			`SELECT ?item WHERE {
 			?item (p:P666/ps:P666) "blah".
-			?item (p:P66/ps:P66) _:anyValue.
+			?item (p:P66/ps:P66) _:anyValueP66.
 			}`;
 		const actualQuery = buildQuery( { conditions: [
 			{
