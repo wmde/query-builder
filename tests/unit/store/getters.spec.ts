@@ -19,6 +19,7 @@ describe( 'getters', () => {
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
+					subclasses: false,
 				} ],
 				omitLabels: true,
 				errors: [],
@@ -36,6 +37,7 @@ describe( 'getters', () => {
 					propertyData: { id: '', label: '', datatype: null, isPropertySet: false, propertyError: null },
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
+					subclasses: false,
 				} ],
 				limit: 0,
 				omitLabels: false,
@@ -59,6 +61,7 @@ describe( 'getters', () => {
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
+					subclasses: false,
 				} ],
 				limit: 0,
 				useLimit: false,
@@ -84,6 +87,7 @@ describe( 'getters', () => {
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
+					subclasses: false,
 				} ],
 				limit: 0,
 				useLimit: false,
@@ -98,6 +102,7 @@ describe( 'getters', () => {
 						value: 'foo',
 						propertyValueRelation: PropertyValueRelation.Matching,
 						datatype: 'string',
+						subclasses: false,
 					},
 				],
 				omitLabels: true,
@@ -119,6 +124,7 @@ describe( 'getters', () => {
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
+					subclasses: false,
 				} ],
 				omitLabels: true,
 				limit: 20,
@@ -133,6 +139,7 @@ describe( 'getters', () => {
 						value: 'foo',
 						propertyValueRelation: PropertyValueRelation.Matching,
 						datatype: 'string',
+						subclasses: false,
 					},
 				],
 				omitLabels: true,
@@ -141,5 +148,43 @@ describe( 'getters', () => {
 
 			expect( getters.query( state ) ).toStrictEqual( expectedValue );
 		} );
+
+		it( 'returns the QueryRepresentation of the RootState with subclasses', () => {
+			const state: RootState = {
+				conditionRows: [ {
+					valueData: { value: 'foo', valueError: null },
+					propertyData: {
+						id: 'P123',
+						label: 'abc',
+						datatype: 'string',
+						propertyError: null,
+						isPropertySet: true,
+					},
+					propertyValueRelationData: { value: PropertyValueRelation.Matching },
+					conditionId: '0.123',
+					subclasses: true,
+				} ],
+				omitLabels: true,
+				limit: 0,
+				useLimit: false,
+				errors: [],
+			};
+
+			const expectedValue: QueryRepresentation = {
+				conditions: [
+					{
+						propertyId: 'P123',
+						value: 'foo',
+						propertyValueRelation: PropertyValueRelation.Matching,
+						datatype: 'string',
+						subclasses: true,
+					},
+				],
+				omitLabels: true,
+			};
+
+			expect( getters.query( state ) ).toStrictEqual( expectedValue );
+		} );
+
 	} );
 } );

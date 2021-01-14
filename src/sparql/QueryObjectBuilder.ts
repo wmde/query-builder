@@ -1,6 +1,6 @@
 import rdfNamespaces from '@/sparql/rdfNamespaces';
 import QueryRepresentation, { Condition } from '@/sparql/QueryRepresentation';
-import { Pattern, SelectQuery, Term } from 'sparqljs';
+import { IriTerm, Pattern, PropertyPath, SelectQuery, Term } from 'sparqljs';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
 export default class QueryObjectBuilder {
@@ -117,6 +117,33 @@ export default class QueryObjectBuilder {
 		}
 	}
 
+	private buildTriplePredicateItems( condition: Condition ): ( PropertyPath|IriTerm )[] {
+		const items: ( PropertyPath|IriTerm )[] = [ {
+			termType: 'NamedNode',
+			value: rdfNamespaces.p + condition.propertyId,
+		},
+		{
+			termType: 'NamedNode',
+			value: rdfNamespaces.ps + condition.propertyId,
+		} ];
+
+		if ( condition.subclasses ) {
+			items.push(
+				{
+					type: 'path',
+					pathType: '*',
+					items: [ {
+						termType: 'NamedNode',
+						value: rdfNamespaces.wdt + process.env.VUE_APP_SUBCLASS_PROPERTY,
+					},
+					],
+				},
+			);
+		}
+
+		return items;
+	}
+
 	private buildFromQueryCondition( condition: Condition ): void {
 		const tripleObject: Term = this.buildTripleObject( condition );
 
@@ -135,15 +162,7 @@ export default class QueryObjectBuilder {
 						},
 						predicate: { type: 'path',
 							pathType: '/',
-							items: [ {
-								termType: 'NamedNode',
-								value: rdfNamespaces.p + condition.propertyId,
-							},
-							{
-								termType: 'NamedNode',
-								value: rdfNamespaces.ps + condition.propertyId,
-							},
-							] },
+							items: this.buildTriplePredicateItems( condition ) },
 						object: tripleObject,
 					},
 				],

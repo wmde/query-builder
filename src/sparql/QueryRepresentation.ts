@@ -5,6 +5,7 @@ export type Condition = {
 	value: string;
 	datatype: string; // FIXME: make enum?
 	propertyValueRelation: PropertyValueRelation;
+	subclasses: boolean;
 };
 
 export default interface QueryRepresentation {

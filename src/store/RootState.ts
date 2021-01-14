@@ -27,6 +27,7 @@ export interface ConditionRow {
 	propertyValueRelationData: {
 		value: PropertyValueRelation;
 	};
+	subclasses: boolean;
 	readonly conditionId: string;
 }
 

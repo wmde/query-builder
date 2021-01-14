@@ -18,6 +18,7 @@ describe( 'mutations', () => {
 				},
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
 				conditionId: '0.123',
+				subclasses: false,
 			} ],
 			limit: 0,
 			useLimit: false,
@@ -53,6 +54,7 @@ describe( 'mutations', () => {
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
+					subclasses: false,
 				} ],
 				limit: 0,
 				useLimit: false,
@@ -80,6 +82,7 @@ describe( 'mutations', () => {
 				},
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
 				conditionId: '0.123',
+				subclasses: false,
 			} ],
 			limit: 0,
 			useLimit: false,
@@ -100,12 +103,40 @@ describe( 'mutations', () => {
 		);
 	} );
 
+	it( 'setSubclasses', () => {
+		const expectedValue = true;
+		const state: RootState = {
+			conditionRows: [ {
+				valueData: { value: 'foo', valueError: null },
+				propertyData: {
+					id: 'P123',
+					label: 'abc',
+					datatype: 'string',
+					isPropertySet: true,
+					propertyError: null,
+				},
+				propertyValueRelationData: { value: PropertyValueRelation.Matching },
+				conditionId: '0.123',
+				subclasses: false,
+			} ],
+			limit: 0,
+			useLimit: false,
+			omitLabels: true,
+			errors: [],
+		};
+
+		mutations.setSubclasses( state, { subclasses: expectedValue, conditionIndex: 0 } );
+
+		expect( state.conditionRows[ 0 ].subclasses ).toBe( expectedValue );
+	} );
+
 	it( 'addCondition', () => {
 		const expectedNewConditionRow = {
 			valueData: { value: null, valueError: null },
 			propertyData: { id: '', label: '', datatype: null, isPropertySet: false, propertyError: null },
 			propertyValueRelationData: { value: PropertyValueRelation.Matching },
 			conditionId: 'TO BE FILLED WITH THE GENERATED RANDOM VALUE',
+			subclasses: false,
 		};
 		const state: RootState = {
 			conditionRows: [ {
@@ -119,6 +150,7 @@ describe( 'mutations', () => {
 				},
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
 				conditionId: '0.123',
+				subclasses: false,
 			} ],
 			limit: 0,
 			useLimit: false,
@@ -147,6 +179,7 @@ describe( 'mutations', () => {
 			},
 			propertyValueRelationData: { value: PropertyValueRelation.Matching },
 			conditionId: '0.123',
+			subclasses: false,
 		};
 		const state: RootState = {
 			conditionRows: [ keptRow,
@@ -161,6 +194,7 @@ describe( 'mutations', () => {
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Regardless },
 					conditionId: '3',
+					subclasses: false,
 				},
 			],
 			limit: 0,
@@ -190,6 +224,7 @@ describe( 'mutations', () => {
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Regardless },
 					conditionId: '3',
+					subclasses: false,
 				},
 			],
 			limit: 0,
@@ -220,6 +255,7 @@ describe( 'mutations', () => {
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
+					subclasses: false,
 				} ],
 				limit: 0,
 				useLimit: false,
@@ -245,6 +281,7 @@ describe( 'mutations', () => {
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
+					subclasses: false,
 				} ],
 				limit: 0,
 				useLimit: false,
@@ -270,6 +307,7 @@ describe( 'mutations', () => {
 					},
 					propertyValueRelationData: { value: PropertyValueRelation.Matching },
 					conditionId: '0.123',
+					subclasses: false,
 				} ],
 				limit: 0,
 				useLimit: false,

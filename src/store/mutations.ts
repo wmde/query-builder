@@ -34,6 +34,9 @@ export default {
 	setOmitLabels( state: RootState, omitLabels: boolean ): void {
 		state.omitLabels = omitLabels;
 	},
+	setSubclasses( state: RootState, payload: { subclasses: boolean; conditionIndex: number } ): void {
+		state.conditionRows[ payload.conditionIndex ].subclasses = payload.subclasses;
+	},
 	setErrors( state: RootState, errors: Error[] ): void {
 		state.errors = errors;
 	},

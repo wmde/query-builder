@@ -13,6 +13,7 @@ describe( 'buildQuery', () => {
 				value,
 				datatype: 'string',
 				propertyValueRelation,
+				subclasses: false,
 			},
 		],
 		omitLabels: true,
@@ -36,6 +37,7 @@ describe( 'buildQuery', () => {
 				value,
 				datatype: 'string',
 				propertyValueRelation,
+				subclasses: false,
 			},
 		], omitLabels: true } );
 
@@ -52,6 +54,7 @@ describe( 'buildQuery', () => {
 				value: '',
 				datatype: 'string',
 				propertyValueRelation,
+				subclasses: false,
 			},
 		],
 		omitLabels: true,
@@ -70,12 +73,14 @@ describe( 'buildQuery', () => {
 				value: 'blah',
 				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.Matching,
+				subclasses: false,
 			},
 			{
 				propertyId: 'P66',
 				value: '',
 				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.Regardless,
+				subclasses: false,
 			},
 		], omitLabels: true } );
 
@@ -95,12 +100,14 @@ describe( 'buildQuery', () => {
 				value: 'blah',
 				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.Matching,
+				subclasses: false,
 			},
 			{
 				propertyId: 'P66',
 				value: 'foo',
 				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.NotMatching,
+				subclasses: false,
 			},
 		], omitLabels: true } );
 
@@ -120,12 +127,14 @@ describe( 'buildQuery', () => {
 				value: 'blah',
 				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.NotMatching,
+				subclasses: false,
 			},
 			{
 				propertyId: 'P66',
 				value: 'foo',
 				datatype: 'string',
 				propertyValueRelation: PropertyValueRelation.Matching,
+				subclasses: false,
 			},
 		], omitLabels: true } );
 
@@ -143,6 +152,7 @@ describe( 'buildQuery', () => {
 				value,
 				propertyValueRelation,
 				datatype,
+				subclasses: false,
 			},
 		], omitLabels: true,
 		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) wd:${value}. }` );
@@ -162,10 +172,35 @@ describe( 'buildQuery', () => {
 				value,
 				datatype: 'string',
 				propertyValueRelation,
+				subclasses: false,
 			},
 		],
 		omitLabels: false,
 		} );
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
+
+	it( 'builds a query from a property and a string value with subclasses', async () => {
+		const propertyId = 'P666';
+		const value = 'blah';
+		const subclassesId = process.env.VUE_APP_SUBCLASS_PROPERTY;
+		const propertyValueRelation = PropertyValueRelation.Matching;
+		const expectedQuery =
+		`SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}/(wdt:${subclassesId}*)) "${value}". }`;
+
+		const actualQuery = buildQuery( { conditions: [
+			{
+				propertyId,
+				value,
+				datatype: 'string',
+				propertyValueRelation,
+				subclasses: true,
+			},
+		],
+		omitLabels: true,
+		} );
+
+		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
+	} );
+
 } );

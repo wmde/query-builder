@@ -31,6 +31,7 @@ export function getFreshConditionRow(): ConditionRow {
 		propertyValueRelationData: {
 			value: PropertyValueRelation.Matching,
 		},
+		subclasses: false,
 		conditionId: `condition-id-${Math.random()}`,
 	};
 }

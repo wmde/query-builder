@@ -27,6 +27,7 @@ export default {
 					value: getQueryValueFromStoreValue( condition.propertyData.datatype, condition.valueData.value ),
 					propertyValueRelation: condition.propertyValueRelationData.value,
 					datatype: condition.propertyData.datatype,
+					subclasses: condition.subclasses,
 				};
 			} ),
 			...rootState.useLimit && { limit: rootState.limit },
@@ -86,6 +87,11 @@ export default {
 	},
 	omitLabels( rootState: RootState ): boolean {
 		return rootState.omitLabels;
+	},
+	subclasses( rootState: RootState ) {
+		return ( conditionIndex: number ): boolean => {
+			return rootState.conditionRows[ conditionIndex ].subclasses;
+		};
 	},
 	getErrors( rootState: RootState ): Error[] {
 		return rootState.errors;
