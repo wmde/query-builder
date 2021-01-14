@@ -25,4 +25,6 @@
   "query-builder-limit-number-screenreader-label": "Maximum number of results",
   "query-builder-label-opt-out": "Show IDs instead of labels (may prevent timeout)",
   "query-builder-include-subclasses": "Include values from subclasses of this value"
+  "query-builder-negation-option-label-with": "With",
+  "query-builder-negation-option-label-without": "Without"
 }

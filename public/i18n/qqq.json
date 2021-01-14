@@ -31,4 +31,6 @@
 	"query-builder-limit-number-screenreader-label": "Label for screen-readers only for the number input that limits the number of results. There is a separate checkbox to turn the limit on or off.",
 	"query-builder-label-opt-out": "Label for checkbox to select showing IDs instead of labels in search results. Selecting this option can help prevent timeouts in big queries",
 	"query-builder-include-subclasses": "Label for checkbox for including subclasses from the selected value within a condition in search results"
+	"query-builder-negation-option-label-with": "FIXME",
+	"query-builder-negation-option-label-without": "FIXME"
 }
