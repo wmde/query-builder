@@ -149,7 +149,7 @@ export default Vue.extend( {
 </script>
 
 <style scoped lang="scss">
-$tinyViewportWidth: 36em; // Set so that inputs show all below each other in the smallest layout
+$tinyViewportWidth: 38em; // Set so that inputs show all below each other in the smallest layout
 
 .query-condition {
 	padding-block: $dimension-layout-xsmall;
@@ -195,10 +195,6 @@ $tinyViewportWidth: 36em; // Set so that inputs show all below each other in the
 
 .query-condition__value-type-dropdown {
 	margin-block-start: $dimension-layout-small;
-
-	@media (max-width: $tinyViewportWidth) {
-		margin-block-start: 0;
-	}
 }
 
 </style>
