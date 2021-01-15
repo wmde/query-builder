@@ -28,6 +28,7 @@ export default {
 					propertyValueRelation: condition.propertyValueRelationData.value,
 					datatype: condition.propertyData.datatype,
 					subclasses: condition.subclasses,
+					negate: condition.negate,
 				};
 			} ),
 			...rootState.useLimit && { limit: rootState.limit },
@@ -77,6 +78,11 @@ export default {
 	propertyValueRelation( rootState: RootState ) {
 		return ( conditionIndex: number ): PropertyValueRelation => {
 			return rootState.conditionRows[ conditionIndex ].propertyValueRelationData.value;
+		};
+	},
+	negate( rootState: RootState ) {
+		return ( conditionIndex: number ): boolean => {
+			return rootState.conditionRows[ conditionIndex ].negate;
 		};
 	},
 	limit( rootState: RootState ): ( number ) {

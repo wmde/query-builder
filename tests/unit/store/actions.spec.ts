@@ -273,6 +273,20 @@ describe( 'actions', () => {
 		expect( context.commit ).toHaveBeenCalledWith( 'setSubclasses', { subclasses, conditionIndex } );
 	} );
 
+	it( 'setNegate', () => {
+		const context = { commit: jest.fn() };
+		const negate = true;
+		const conditionIndex = 0;
+		const actions = createActions(
+			services.get( 'searchEntityRepository' ),
+			services.get( 'metricsCollector' ),
+		);
+
+		actions.setNegate( context as any, { value: negate, conditionIndex } );
+
+		expect( context.commit ).toHaveBeenCalledWith( 'setNegate', { value: negate, conditionIndex } );
+	} );
+
 	it( 'setOmitLabels', () => {
 		const context = { commit: jest.fn() };
 

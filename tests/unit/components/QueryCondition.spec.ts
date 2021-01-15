@@ -9,6 +9,7 @@ import i18n from 'vue-banana-i18n';
 import createActions from '@/store/actions';
 import services from '@/ServicesFactory';
 import QueryCondition from '@/components/QueryCondition.vue';
+import NegationToggle from '@/components/NegationToggle.vue';
 const messages = {};
 
 Vue.use( i18n, {
@@ -23,6 +24,7 @@ function newStore( getters = {} ): Store<any> {
 			property: jest.fn().mockReturnValue( jest.fn() ),
 			datatype: jest.fn().mockReturnValue( jest.fn() ),
 			value: jest.fn().mockReturnValue( jest.fn() ),
+			negate: jest.fn().mockReturnValue( jest.fn() ),
 			valueError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( null ) ),
 			propertyError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( null ) ),
 			conditionRows: jest.fn().mockReturnValue( jest.fn().mockReturnValue( Array ) ),
@@ -191,5 +193,23 @@ describe( 'QueryCondition.vue', () => {
 			message: 'Value Warning Message!',
 		} );
 
+	} );
+
+	it( 'Set negate to without when store sets', () => {
+		const store = newStore();
+		const conditionIndex = 0;
+		store.dispatch = jest.fn();
+		const wrapper = shallowMount( QueryCondition, {
+			store,
+			localVue,
+			propsData: {
+				'condition-index': 0,
+			},
+		} );
+
+		const input = wrapper.findComponent( NegationToggle );
+		input.vm.$emit( 'input', 'without' );
+
+		expect( store.dispatch ).toHaveBeenCalledWith( 'setNegate', { value: true, conditionIndex } );
 	} );
 } );

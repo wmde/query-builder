@@ -79,6 +79,11 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 		payload: { propertyValueRelation: PropertyValueRelation; conditionIndex: number } ): void {
 		context.commit( 'setPropertyValueRelation', payload );
 	},
+	setNegate(
+		context: ActionContext<RootState, RootState>,
+		payload: { value: boolean; conditionIndex: number } ): void {
+		context.commit( 'setNegate', payload );
+	},
 	setLimit( context: ActionContext<RootState, RootState>, limit: number ): void {
 		context.commit( 'setLimit', limit );
 	},

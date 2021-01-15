@@ -28,6 +28,7 @@ export interface ConditionRow {
 		value: PropertyValueRelation;
 	};
 	subclasses: boolean;
+	negate: boolean;
 	readonly conditionId: string;
 }
 

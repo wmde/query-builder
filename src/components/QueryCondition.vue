@@ -5,10 +5,10 @@
 			:disabled="!canDelete"
 			@click="removeCondition"
 		/>
-		<div class="query-condition__toggle-button-group">
-			<Button disabled="true" style="border-right: 1px darkgrey solid;">with</Button>
-			<Button disabled="true">without</Button>
-		</div>
+		<NegationToggle
+			class="query-condition__toggle-button-group"
+			v-model="negateValue"
+		/>
 		<div class="query-condition__input-container">
 			<div>
 				<PropertyLookup
@@ -47,7 +47,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Dropdown, Button } from '@wmde/wikit-vue-components';
+import { Dropdown } from '@wmde/wikit-vue-components';
 
 import ValueInput from '@/components/ValueInput.vue';
 import DeleteConditionButton from '@/components/DeleteConditionButton.vue';
@@ -57,6 +57,7 @@ import SearchResult from '@/data-access/SearchResult';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
 import { mapGetters } from 'vuex';
+import NegationToggle from '@/components/NegationToggle.vue';
 
 export default Vue.extend( {
 	name: 'QueryCondition',
@@ -122,6 +123,19 @@ export default Vue.extend( {
 				this.$store.dispatch( 'updateValue', { value, conditionIndex: this.conditionIndex } );
 			},
 		},
+		negateValue: {
+			get(): string {
+				const negate = this.$store.getters.negate( this.conditionIndex );
+				return negate === true ? 'without' : 'with';
+			},
+			set( value: string ): void {
+				if ( value !== 'with' && value !== 'without' ) {
+					throw new Error( 'Unknown negate value: ' + value );
+				}
+				const valueBoolean = value === 'without';
+				this.$store.dispatch( 'setNegate', { value: valueBoolean, conditionIndex: this.conditionIndex } );
+			},
+		},
 		valueError(): Error | null {
 			const valueError = this.$store.getters.valueError( this.conditionIndex );
 			if ( valueError === null ) {
@@ -143,7 +157,7 @@ export default Vue.extend( {
 		ValueTypeDropDown,
 		DeleteConditionButton,
 		Dropdown,
-		Button,
+		NegationToggle,
 	},
 } );
 </script>
