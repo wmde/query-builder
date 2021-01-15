@@ -203,4 +203,27 @@ describe( 'buildQuery', () => {
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
 
+	it( 'builds a query from a property and a string value but with negate', () => {
+		const propertyId = 'P666';
+		const value = 'blah';
+		const propertyValueRelation = PropertyValueRelation.Matching;
+		const expectedQuery =
+			`SELECT ?item WHERE {
+			MINUS { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }
+			?item wikibase:sitelinks _:anyValue. }`;
+
+		const actualQuery = buildQuery( { conditions: [
+			{
+				propertyId,
+				value,
+				datatype: 'string',
+				propertyValueRelation,
+				subclasses: false,
+				negate: true,
+			},
+		],
+		omitLabels: true,
+		} );
+		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
+	} );
 } );
