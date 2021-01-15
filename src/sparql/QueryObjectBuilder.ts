@@ -71,6 +71,41 @@ export default class QueryObjectBuilder {
 			this.buildFromQueryCondition( queryRepresentation.conditions[ i ] );
 		}
 
+		if ( this.queryObject.where ) {
+			// If it's a negate query only, we need to add "any item" to it otherwise it returns empty result.
+			let isOnlyNegateQuery = true;
+			for ( let i = 0; i < this.queryObject.where?.length; i++ ) {
+				if ( this.queryObject.where[ i ].type !== 'minus' ) {
+					isOnlyNegateQuery = false;
+					break;
+				}
+			}
+
+			if ( isOnlyNegateQuery ) {
+				this.queryObject.where.push(
+					{
+						type: 'bgp',
+						triples: [
+							{
+								subject: {
+									termType: 'Variable',
+									value: 'item',
+								},
+								predicate: {
+									termType: 'NamedNode',
+									value: rdfNamespaces.wikibase + 'sitelinks',
+								},
+								object: {
+									termType: 'BlankNode',
+									value: 'anyValue',
+								},
+							},
+						],
+					},
+				);
+			}
+		}
+
 		if ( queryRepresentation.limit ) {
 			this.queryObject.limit = queryRepresentation.limit;
 		}
@@ -146,28 +181,35 @@ export default class QueryObjectBuilder {
 
 	private buildFromQueryCondition( condition: Condition ): void {
 		const tripleObject: Term = this.buildTripleObject( condition );
+		const negate: boolean = condition.negate || false;
+		const bgp: Pattern = {
+			type: 'bgp',
+			triples: [
+				{
+					subject: {
+						termType: 'Variable',
+						value: 'item',
+					},
+					predicate: { type: 'path',
+						pathType: '/',
+						items: this.buildTriplePredicateItems( condition ) },
+					object: tripleObject,
+				},
+			],
+		};
 
 		if ( !this.queryObject.where ) {
 			this.queryObject.where = [];
 		}
 
-		this.queryObject.where.push(
-			{
-				type: 'bgp',
-				triples: [
-					{
-						subject: {
-							termType: 'Variable',
-							value: 'item',
-						},
-						predicate: { type: 'path',
-							pathType: '/',
-							items: this.buildTriplePredicateItems( condition ) },
-						object: tripleObject,
-					},
-				],
-			},
-		);
+		if ( negate === true ) {
+			this.queryObject.where.push( {
+				type: 'minus',
+				patterns: [ bgp ],
+			} );
+		} else {
+			this.queryObject.where.push( bgp );
+		}
 
 		if ( condition.propertyValueRelation === PropertyValueRelation.NotMatching ) {
 			const filterCondition = {
