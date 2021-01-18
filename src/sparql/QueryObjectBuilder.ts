@@ -75,7 +75,8 @@ export default class QueryObjectBuilder {
 			// If it's a negate query only, we need to add "any item" to it otherwise it returns empty result.
 			let isOnlyNegateQuery = true;
 			for ( let i = 0; i < this.queryObject.where?.length; i++ ) {
-				if ( this.queryObject.where[ i ].type !== 'minus' ) {
+				const type = this.queryObject.where[ i ].type;
+				if ( type !== 'minus' && type !== 'service' ) {
 					isOnlyNegateQuery = false;
 					break;
 				}
