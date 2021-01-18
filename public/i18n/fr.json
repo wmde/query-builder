@@ -5,7 +5,8 @@
 			"Gomoko",
 			"Thibaut120094",
 			"VIGNERON",
-			"Verdy p"
+			"Verdy p",
+			"Wladek92"
 		]
 	},
 	"query-builder-heading": "Constructeur de requêtes simples",
@@ -32,5 +33,8 @@
 	"query-builder-limit-number-results-description": "Limiter le nombre de résultats à",
 	"query-builder-limit-number-placeholder": "Saisir un nombre",
 	"query-builder-limit-number-screenreader-label": "Nombre maximal de résultats",
-	"query-builder-label-opt-out": "Montrer les identifiants plutôt que les libellés (pour éviter le ''timeout'')."
+	"query-builder-label-opt-out": "Montrer les identifiants plutôt que les libellés (pour éviter le ''timeout'').",
+	"query-builder-include-subclasses": "Inclure les valeurs à partir des sous-classes de cette valeur",
+	"query-builder-negation-option-label-with": "Avec",
+	"query-builder-negation-option-label-without": "Sans"
 }

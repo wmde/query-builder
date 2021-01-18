@@ -19,5 +19,7 @@
 	"query-builder-add-condition": "Aggiungi condizione",
 	"query-builder-delete-condition": "Cancella condizione",
 	"query-builder-limit-number-placeholder": "Inserisci un numero",
-	"query-builder-limit-number-screenreader-label": "Numero massimo di risultati."
+	"query-builder-limit-number-screenreader-label": "Numero massimo di risultati.",
+	"query-builder-negation-option-label-with": "Con",
+	"query-builder-negation-option-label-without": "Senza"
 }

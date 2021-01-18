@@ -28,5 +28,8 @@
 	"query-builder-limit-number-results-description": "Ограничи бр. на исходни ставки на",
 	"query-builder-limit-number-placeholder": "Внесете број",
 	"query-builder-limit-number-screenreader-label": "Највеќе ставки во исходот",
-	"query-builder-label-opt-out": "Прикажи назнаки место натписи (може да го спречи истекот)"
+	"query-builder-label-opt-out": "Прикажи назнаки место натписи (може да го спречи истекот)",
+	"query-builder-include-subclasses": "Вклучи и вредности од поткласите на оваа вредност",
+	"query-builder-negation-option-label-with": "Со",
+	"query-builder-negation-option-label-without": "Без"
 }

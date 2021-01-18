@@ -28,5 +28,10 @@
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "ללא תלות בערך",
 	"query-builder-delete-condition": "מחיקת תנאי",
 	"query-builder-limit-number-results-description": "להגביל את מספר התוצאות ל־",
-	"query-builder-label-opt-out": "להציג מזהים במקום תוויות (יכול למנוע ניתוק בשל זמן עיבוד ארוך)"
+	"query-builder-limit-number-placeholder": "נא להזין מספר",
+	"query-builder-limit-number-screenreader-label": "מספר מרבי של תוצאות",
+	"query-builder-label-opt-out": "להציג מזהים במקום תוויות (יכול למנוע ניתוק בשל זמן עיבוד ארוך)",
+	"query-builder-include-subclasses": "לכלול ערכים מתוך תת־מחלקות של הערך הזה",
+	"query-builder-negation-option-label-with": "עם",
+	"query-builder-negation-option-label-without": "בלי"
 }

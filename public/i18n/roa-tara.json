@@ -28,5 +28,8 @@
 	"query-builder-limit-number-results-description": "Limite 'u numere de resultate a",
 	"query-builder-limit-number-placeholder": "Mitte 'nu numere",
 	"query-builder-limit-number-screenreader-label": "Numere massime de resultate",
-	"query-builder-label-opt-out": "'Ndruche le ID invece de le etichette (pe prevenì 'u timeout)"
+	"query-builder-label-opt-out": "'Ndruche le ID invece de le etichette (pe prevenì 'u timeout)",
+	"query-builder-include-subclasses": "'Nglude le valore da le sotteclasse de stu valore",
+	"query-builder-negation-option-label-with": "Cu",
+	"query-builder-negation-option-label-without": "Senze"
 }

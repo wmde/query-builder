@@ -10,5 +10,7 @@
 	"query-builder-result-error-missing-property": "Vælg venligst en egenskab",
 	"query-builder-result-error-missing-value": "Indtast venligst en værdi",
 	"query-builder-value-type-relation-dropdown-without": "uden",
-	"query-builder-value-type-relation-dropdown-regardless-of-value": "uanset værdien"
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "uanset værdien",
+	"query-builder-negation-option-label-with": "Med",
+	"query-builder-negation-option-label-without": "Uden"
 }

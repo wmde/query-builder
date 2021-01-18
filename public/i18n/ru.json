@@ -1,7 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Okras"
+			"Kareyac",
+			"Okras",
+			"Wileyfoxyx"
 		]
 	},
 	"query-builder-heading": "Простой конструктор запросов",
@@ -26,5 +28,9 @@
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "независимо от значения",
 	"query-builder-delete-condition": "Удалить условие",
 	"query-builder-limit-number-results-description": "Ограничьте количество результатов до",
-	"query-builder-label-opt-out": "Показывать идентификаторы вместо меток (может предотвратить тайм-аут)"
+	"query-builder-limit-number-placeholder": "Введите число",
+	"query-builder-limit-number-screenreader-label": "Максимальное количество результатов",
+	"query-builder-label-opt-out": "Показывать идентификаторы вместо меток (может предотвратить тайм-аут)",
+	"query-builder-negation-option-label-with": "С",
+	"query-builder-negation-option-label-without": "Без"
 }

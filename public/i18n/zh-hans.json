@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			")8",
+			"Wuqianye",
+			"Yfdyh000"
+		]
+	},
+	"query-builder-input-value-label": "值",
+	"query-builder-item-value-lookup-no-match-found": "找不到匹配项目",
+	"query-builder-delete-condition": "删除条件",
+	"query-builder-limit-number-results-description": "限制结果数至",
+	"query-builder-limit-number-placeholder": "输入数量",
+	"query-builder-limit-number-screenreader-label": "最大结果数量",
+	"query-builder-label-opt-out": "显示ID而非标签（可能避免超时）"
+}

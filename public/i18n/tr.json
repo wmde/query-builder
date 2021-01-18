@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Hedda",
 			"MuratTheTurkish"
 		]
 	},
 	"query-builder-heading": "Basit Sorgu Oluşturucu",
-	"query-builder-find-all-items": "Tüm öğeleri bul...",
-	"query-builder-run-query": "Sorgu çalıştır",
+	"query-builder-find-all-items": "Tüm ögeleri bul...",
+	"query-builder-run-query": "Sorguyu çalıştır",
 	"query-builder-input-value-label": "Değer",
 	"query-builder-input-value-placeholder": "Bir değer girin",
 	"query-builder-item-value-lookup-no-match-found": "Eşleşme bulunamadı",
@@ -26,5 +27,10 @@
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "değeri ne olursa olsun",
 	"query-builder-delete-condition": "Koşulu sil",
 	"query-builder-limit-number-results-description": "Sonuçların sayısını sınırla",
-	"query-builder-label-opt-out": "Etiketler yerine kimlikleri göster (zaman aşımını önleyebilir)"
+	"query-builder-limit-number-placeholder": "Bir sayı girin",
+	"query-builder-limit-number-screenreader-label": "Maksimum sonuç sayısı",
+	"query-builder-label-opt-out": "Etiketler yerine kimlikleri göster (zaman aşımını önleyebilir)",
+	"query-builder-include-subclasses": "Bu değerin alt sınıflarındaki değerleri dahil et",
+	"query-builder-negation-option-label-with": "Şununla:",
+	"query-builder-negation-option-label-without": "Şu olmadan:"
 }
