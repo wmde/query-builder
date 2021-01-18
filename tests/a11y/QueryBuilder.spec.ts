@@ -22,6 +22,14 @@ Vue.use( i18n, {
 
 describe( 'QueryBuilder.vue', () => {
 	it( 'should not have obvious accessibility issues', async () => {
+		const condition = {
+			propertyId: 'P1',
+			value: 'foo',
+			datatype: 'string',
+			propertyValueRelation: PropertyValueRelation.Matching,
+			subclasses: false,
+			negate: false,
+		};
 		const wrapper = mount( QueryBuilder, {
 			store: new Vuex.Store( {
 				state: {
@@ -33,11 +41,14 @@ describe( 'QueryBuilder.vue', () => {
 					property: jest.fn().mockReturnValue( jest.fn().mockReturnValue(
 						{ label: 'postal code', id: 'P123' },
 					) ),
+					conditionRows: jest.fn().mockReturnValue( [ condition ] ),
 					propertyError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( null ) ),
 					limitedSupport: jest.fn().mockReturnValue( jest.fn().mockReturnValue( false ) ),
 					propertyValueRelation: jest.fn().mockReturnValue(
 						jest.fn().mockReturnValue( PropertyValueRelation.Matching ),
 					),
+					negate: jest.fn().mockReturnValue( jest.fn().mockReturnValue( condition.negate ) ),
+					datatype: jest.fn().mockReturnValue( jest.fn().mockReturnValue( condition.datatype ) ),
 				},
 				actions: {
 					incrementMetric: jest.fn(),

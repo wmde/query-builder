@@ -2,7 +2,6 @@
 	<div class="query-condition">
 		<DeleteConditionButton
 			class="query-condition__remove"
-			:disabled="!canDelete"
 			@click="removeCondition"
 		/>
 		<NegationToggle
@@ -72,17 +71,12 @@ export default Vue.extend( {
 			return this.selectedPropertyValueRelation === PropertyValueRelation.Regardless;
 		},
 		removeCondition(): void {
-			if ( this.canDelete ) {
-				this.$store.dispatch( 'removeCondition', this.conditionIndex );
-			}
+			this.$store.dispatch( 'removeCondition', this.conditionIndex );
 		},
 	},
 	computed: {
 		datatype(): string | null {
 			return this.$store.getters.datatype( this.conditionIndex );
-		},
-		canDelete(): boolean {
-			return this.$store.getters.conditionRows.length > 1;
 		},
 		selectedProperty: {
 			get(): SearchResult | null {

@@ -10,6 +10,10 @@
 		<div role="form">
 			<h2 class="querybuilder__find-title"
 				v-i18n="{msg: 'query-builder-find-all-items'}" />
+			<div v-if="!conditionRows.length"
+				class="querybuilder__condition-placeholder"
+				v-i18n="{msg: 'query-builder-condition-placeholder'}"
+			/>
 			<div
 				class="querybuilder__condition-wrapper"
 				v-for="(condition, index) in conditionRows"
@@ -138,6 +142,18 @@ $tinyViewportWidth: 36em;
 		padding-block: $dimension-layout-xxsmall;
 		padding-inline: $dimension-layout-xxsmall;
 	}
+}
+
+.querybuilder__condition-placeholder {
+	background-color: $background-color-neutral-default;
+	margin-block: $dimension-layout-xsmall;
+	padding-block: $dimension-layout-xsmall;
+	text-align: center;
+	border-radius: $border-radius-base;
+	font-family: $font-family-style-description;
+	font-weight: $font-weight-style-description;
+	font-size: $font-size-style-description;
+	line-height: $font-line-height-style-description;
 }
 
 .querybuilder__heading {
