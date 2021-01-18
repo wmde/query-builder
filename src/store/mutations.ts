@@ -18,6 +18,9 @@ export default {
 		};
 		state.conditionRows[ payload.conditionIndex ].propertyData.isPropertySet = true;
 	},
+	setNegate( state: RootState, payload: { value: boolean; conditionIndex: number } ): void {
+		state.conditionRows[ payload.conditionIndex ].negate = payload.value;
+	},
 	unsetProperty( state: RootState, conditionIndex: number ): void {
 		state.conditionRows[ conditionIndex ].propertyData.isPropertySet = false;
 	},
