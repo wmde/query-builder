@@ -1,29 +1,39 @@
 import buildQuery from '@/sparql/buildQuery';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
+import { Condition } from '@/sparql/QueryRepresentation';
 
 describe( 'buildQuery', () => {
+
+	function getSimpleCondition( propertyId: string, value: string ): Condition {
+		const propertyValueRelation = PropertyValueRelation.Matching;
+		const simpleCondition: Condition = {
+			propertyId,
+			value,
+			datatype: 'string',
+			propertyValueRelation,
+			subclasses: false,
+			negate: false,
+		};
+
+		return simpleCondition;
+	}
 
 	it( 'builds a query from a property and a string value', () => {
 		const propertyId = 'P666';
 		const value = 'blah';
-		const propertyValueRelation = PropertyValueRelation.Matching;
-		expect( buildQuery( { conditions: [
-			{
-				propertyId,
-				value,
-				datatype: 'string',
-				propertyValueRelation,
-				subclasses: false,
-			},
-		],
-		omitLabels: true,
+		expect( buildQuery( {
+			conditions: [
+				getSimpleCondition( propertyId, value ),
+			],
+			omitLabels: true,
 		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }` );
 	} );
 
 	it( 'builds a query from a property and a string value with not matching selected', () => {
 		const propertyId = 'P666';
 		const value = 'blah';
-		const propertyValueRelation = PropertyValueRelation.NotMatching;
+		const condition = getSimpleCondition( propertyId, value );
+		condition.propertyValueRelation = PropertyValueRelation.NotMatching;
 
 		const expectedQuery =
 			`SELECT ?item WHERE {
@@ -31,33 +41,22 @@ describe( 'buildQuery', () => {
 			FILTER(?instance != "${value}")
 			}`;
 
-		const receivedQuery = buildQuery( { conditions: [
-			{
-				propertyId,
-				value,
-				datatype: 'string',
-				propertyValueRelation,
-				subclasses: false,
-			},
-		], omitLabels: true } );
+		const receivedQuery = buildQuery( {
+			conditions: [ condition ],
+			omitLabels: true,
+		} );
 
 		expect( receivedQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
 
 	it( 'builds a query from a property with "any value" selected', () => {
 		const propertyId = 'P666';
-		const propertyValueRelation = PropertyValueRelation.Regardless;
+		const condition = getSimpleCondition( propertyId, '' );
+		condition.propertyValueRelation = PropertyValueRelation.Regardless;
 
-		expect( buildQuery( { conditions: [
-			{
-				propertyId,
-				value: '',
-				datatype: 'string',
-				propertyValueRelation,
-				subclasses: false,
-			},
-		],
-		omitLabels: true,
+		expect( buildQuery( {
+			conditions: [ condition ],
+			omitLabels: true,
 		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) _:anyValue${propertyId}. }` );
 	} );
 
@@ -67,22 +66,15 @@ describe( 'buildQuery', () => {
 			?item (p:P666/ps:P666) "blah".
 			?item (p:P66/ps:P66) _:anyValueP66.
 			}`;
-		const actualQuery = buildQuery( { conditions: [
-			{
-				propertyId: 'P666',
-				value: 'blah',
-				datatype: 'string',
-				propertyValueRelation: PropertyValueRelation.Matching,
-				subclasses: false,
-			},
-			{
-				propertyId: 'P66',
-				value: '',
-				datatype: 'string',
-				propertyValueRelation: PropertyValueRelation.Regardless,
-				subclasses: false,
-			},
-		], omitLabels: true } );
+		const secondCondition = getSimpleCondition( 'P66', '' );
+		secondCondition.propertyValueRelation = PropertyValueRelation.Regardless;
+		const actualQuery = buildQuery( {
+			conditions: [
+				getSimpleCondition( 'P666', 'blah' ),
+				secondCondition,
+			],
+			omitLabels: true,
+		} );
 
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
@@ -94,22 +86,15 @@ describe( 'buildQuery', () => {
 			?item (p:P66/ps:P66) ?instance.
 			FILTER(?instance != "foo")
 			}`;
-		const actualQuery = buildQuery( { conditions: [
-			{
-				propertyId: 'P666',
-				value: 'blah',
-				datatype: 'string',
-				propertyValueRelation: PropertyValueRelation.Matching,
-				subclasses: false,
-			},
-			{
-				propertyId: 'P66',
-				value: 'foo',
-				datatype: 'string',
-				propertyValueRelation: PropertyValueRelation.NotMatching,
-				subclasses: false,
-			},
-		], omitLabels: true } );
+		const secondCondition = getSimpleCondition( 'P66', 'foo' );
+		secondCondition.propertyValueRelation = PropertyValueRelation.NotMatching;
+		const actualQuery = buildQuery( {
+			conditions: [
+				getSimpleCondition( 'P666', 'blah' ),
+				secondCondition,
+			],
+			omitLabels: true,
+		} );
 
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
@@ -121,22 +106,15 @@ describe( 'buildQuery', () => {
 			FILTER(?instance != "blah")
 			?item (p:P66/ps:P66) "foo".
 			}`;
-		const actualQuery = buildQuery( { conditions: [
-			{
-				propertyId: 'P666',
-				value: 'blah',
-				datatype: 'string',
-				propertyValueRelation: PropertyValueRelation.NotMatching,
-				subclasses: false,
-			},
-			{
-				propertyId: 'P66',
-				value: 'foo',
-				datatype: 'string',
-				propertyValueRelation: PropertyValueRelation.Matching,
-				subclasses: false,
-			},
-		], omitLabels: true } );
+		const firstCondition = getSimpleCondition( 'P666', 'blah' );
+		firstCondition.propertyValueRelation = PropertyValueRelation.NotMatching;
+		const actualQuery = buildQuery( {
+			conditions: [
+				firstCondition,
+				getSimpleCondition( 'P66', 'foo' ),
+			],
+			omitLabels: true,
+		} );
 
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
@@ -144,38 +122,24 @@ describe( 'buildQuery', () => {
 	it( 'builds a query from a property and an wikibase-item value', () => {
 		const propertyId = 'P31';
 		const value = 'Q146';
-		const propertyValueRelation = PropertyValueRelation.Matching;
-		const datatype = 'wikibase-item';
-		expect( buildQuery( { conditions: [
-			{
-				propertyId,
-				value,
-				propertyValueRelation,
-				datatype,
-				subclasses: false,
-			},
-		], omitLabels: true,
+		const condition = getSimpleCondition( propertyId, value );
+		condition.datatype = 'wikibase-item';
+		expect( buildQuery( {
+			conditions: [ condition ],
+			omitLabels: true,
 		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) wd:${value}. }` );
 	} );
 
 	it( 'builds a query from a property and a string value with omitLabels set to false (shows labels)', () => {
 		const propertyId = 'P666';
 		const value = 'blah';
-		const propertyValueRelation = PropertyValueRelation.Matching;
 		const expectedQuery =
 			`SELECT ?item ?itemLabel WHERE {
 			SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
 			?item (p:P666/ps:P666) "blah". }`;
-		const actualQuery = buildQuery( { conditions: [
-			{
-				propertyId,
-				value,
-				datatype: 'string',
-				propertyValueRelation,
-				subclasses: false,
-			},
-		],
-		omitLabels: false,
+		const actualQuery = buildQuery( {
+			conditions: [ getSimpleCondition( propertyId, value ) ],
+			omitLabels: false,
 		} );
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
@@ -184,20 +148,14 @@ describe( 'buildQuery', () => {
 		const propertyId = 'P666';
 		const value = 'blah';
 		const subclassesId = process.env.VUE_APP_SUBCLASS_PROPERTY;
-		const propertyValueRelation = PropertyValueRelation.Matching;
 		const expectedQuery =
 		`SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}/(wdt:${subclassesId}*)) "${value}". }`;
+		const condition = getSimpleCondition( propertyId, value );
+		condition.subclasses = true;
 
-		const actualQuery = buildQuery( { conditions: [
-			{
-				propertyId,
-				value,
-				datatype: 'string',
-				propertyValueRelation,
-				subclasses: true,
-			},
-		],
-		omitLabels: true,
+		const actualQuery = buildQuery( {
+			conditions: [ condition ],
+			omitLabels: true,
 		} );
 
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
@@ -206,23 +164,15 @@ describe( 'buildQuery', () => {
 	it( 'builds a query from a property and a string value but with negate', () => {
 		const propertyId = 'P666';
 		const value = 'blah';
-		const propertyValueRelation = PropertyValueRelation.Matching;
 		const expectedQuery =
 			`SELECT ?item WHERE {
 			MINUS { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }
 			?item wikibase:sitelinks _:anyValue. }`;
-
-		const actualQuery = buildQuery( { conditions: [
-			{
-				propertyId,
-				value,
-				datatype: 'string',
-				propertyValueRelation,
-				subclasses: false,
-				negate: true,
-			},
-		],
-		omitLabels: true,
+		const condition = getSimpleCondition( propertyId, value );
+		condition.negate = true;
+		const actualQuery = buildQuery( {
+			conditions: [ condition ],
+			omitLabels: true,
 		} );
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );

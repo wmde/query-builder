@@ -2,32 +2,33 @@ import mutations from '@/store/mutations';
 import RootState, { ConditionRow } from '@/store/RootState';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
-const simpleRootState = {
-	conditionRows: [ {
-		valueData: { value: 'foo', valueError: null },
-		propertyData: {
-			id: 'P123',
-			label: 'abc',
-			datatype: 'string',
-			isPropertySet: true,
-			propertyError: null,
-		},
-		propertyValueRelationData: { value: PropertyValueRelation.Matching },
-		conditionId: '0.123',
-		subclasses: false,
-		negate: false,
-	} ],
-	limit: 0,
-	useLimit: false,
-	omitLabels: true,
-	errors: [],
-};
-
 describe( 'mutations', () => {
-
+	function getFreshRootState(): RootState {
+		const simpleRootState = {
+			conditionRows: [ {
+				valueData: { value: 'foo', valueError: null },
+				propertyData: {
+					id: 'P123',
+					label: 'abc',
+					datatype: 'string',
+					isPropertySet: true,
+					propertyError: null,
+				},
+				propertyValueRelationData: { value: PropertyValueRelation.Matching },
+				conditionId: '0.123',
+				subclasses: false,
+				negate: false,
+			} ],
+			limit: 0,
+			useLimit: false,
+			omitLabels: true,
+			errors: [],
+		};
+		return simpleRootState;
+	}
 	it( 'setValue', () => {
 		const expectedValue = 'whatever';
-		const state: RootState = JSON.parse( JSON.stringify( simpleRootState ) );
+		const state: RootState = getFreshRootState();
 
 		mutations.setValue( state, { value: expectedValue, conditionIndex: 0 } );
 
@@ -45,7 +46,7 @@ describe( 'mutations', () => {
 				isPropertySet: true,
 				propertyError: null,
 			};
-			const state: RootState = JSON.parse( JSON.stringify( simpleRootState ) );
+			const state: RootState = getFreshRootState();
 
 			mutations.setProperty( state, { property: expectedProperty, conditionIndex } );
 
@@ -55,7 +56,7 @@ describe( 'mutations', () => {
 
 	it( 'unsetProperty', () => {
 		const preExistingPropertyError = { message: 'some error', type: 'warning' } as const;
-		const state: RootState = JSON.parse( JSON.stringify( simpleRootState ) );
+		const state: RootState = getFreshRootState();
 		state.conditionRows[ 0 ].propertyData.propertyError = preExistingPropertyError;
 
 		mutations.unsetProperty( state, 0 );
@@ -73,7 +74,7 @@ describe( 'mutations', () => {
 
 	it( 'setSubclasses', () => {
 		const expectedValue = true;
-		const state: RootState = JSON.parse( JSON.stringify( simpleRootState ) );
+		const state: RootState = getFreshRootState();
 
 		mutations.setSubclasses( state, { subclasses: expectedValue, conditionIndex: 0 } );
 
@@ -89,7 +90,7 @@ describe( 'mutations', () => {
 			subclasses: false,
 			negate: false,
 		};
-		const state: RootState = JSON.parse( JSON.stringify( simpleRootState ) );
+		const state: RootState = getFreshRootState();
 
 		mutations.addCondition( state );
 
@@ -115,7 +116,7 @@ describe( 'mutations', () => {
 			subclasses: false,
 			negate: false,
 		};
-		const state: RootState = JSON.parse( JSON.stringify( simpleRootState ) );
+		const state: RootState = getFreshRootState();
 		state.conditionRows.push( keptRow );
 
 		mutations.removeCondition( state, 1 );
@@ -126,7 +127,7 @@ describe( 'mutations', () => {
 	} );
 
 	it( 'setOmitLabels', () => {
-		const state: RootState = JSON.parse( JSON.stringify( simpleRootState ) );
+		const state: RootState = getFreshRootState();
 		const omitLabels = false;
 
 		mutations.setOmitLabels( state, omitLabels );
@@ -136,7 +137,7 @@ describe( 'mutations', () => {
 	} );
 
 	it( 'setNegate', () => {
-		const state: RootState = JSON.parse( JSON.stringify( simpleRootState ) );
+		const state: RootState = getFreshRootState();
 		const negate = true;
 
 		mutations.setNegate( state, { conditionIndex: 0, value: negate } );
@@ -147,7 +148,7 @@ describe( 'mutations', () => {
 
 	describe( 'clearFieldErrors', () => {
 		it( 'clears the property error', () => {
-			const state: RootState = JSON.parse( JSON.stringify( simpleRootState ) );
+			const state: RootState = getFreshRootState();
 			state.conditionRows[ 0 ].propertyData.propertyError = { message: 'message-key', type: 'error' };
 			state.conditionRows[ 0 ].valueData.valueError = { message: 'message-key', type: 'error' };
 
@@ -157,7 +158,7 @@ describe( 'mutations', () => {
 		} );
 
 		it( 'clears the value error', () => {
-			const state: RootState = JSON.parse( JSON.stringify( simpleRootState ) );
+			const state: RootState = getFreshRootState();
 			state.conditionRows[ 0 ].propertyData.propertyError = { message: 'message-key', type: 'error' };
 			state.conditionRows[ 0 ].valueData.valueError = { message: 'message-key', type: 'error' };
 
@@ -167,7 +168,7 @@ describe( 'mutations', () => {
 		} );
 
 		it( 'clears the both errors', () => {
-			const state: RootState = JSON.parse( JSON.stringify( simpleRootState ) );
+			const state: RootState = getFreshRootState();
 			state.conditionRows[ 0 ].propertyData.propertyError = { message: 'message-key', type: 'error' };
 			state.conditionRows[ 0 ].valueData.valueError = { message: 'message-key', type: 'error' };
 
