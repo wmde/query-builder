@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import LabelOptout from '@/components/LabelOptout.vue';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import i18n from 'vue-banana-i18n';
 import Vuex from 'vuex';
 
@@ -20,17 +20,14 @@ describe( 'LabelOptout.vue', () => {
 		const omitLabelsGetter = () => () => ( omitLabels );
 		const store = new Vuex.Store( { getters: { omitLabelsGetter } } );
 
-		const wrapper = shallowMount( LabelOptout, {
+		const wrapper = mount( LabelOptout, {
 			store,
 			localVue,
-			propsData: {
-				'condition-index': 0,
-			},
 		} );
 
 		store.dispatch = jest.fn();
 
-		await wrapper.find( '.querybuilder__label-optout-checkbox' ).setChecked();
+		await wrapper.find( 'input[type="checkbox"]' ).setChecked();
 
 		expect( store.dispatch ).toHaveBeenCalledWith( 'setOmitLabels', omitLabels );
 
