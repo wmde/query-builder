@@ -3,11 +3,11 @@
 		<input
 			class="querybuilder__include-subclasses-checkbox"
 			type="checkbox"
-			id="include-subclasses"
+			:id="id"
 			:checked="isChecked"
-			@change="$emit( 'subclass-check', $event )"
+			@change="$emit( 'subclass-check', $event.target.checked )"
 		/>
-		<label for="include-subclasses">
+		<label :for="id">
 			<span
 				v-i18n="{msg: 'query-builder-include-subclasses'}" />
 		</label>
@@ -18,6 +18,11 @@
 import Vue from 'vue';
 export default Vue.extend( {
 	name: 'SubclassCheckbox',
+	data() {
+		return {
+			id: `include-subclasses-${Math.random()}`,
+		};
+	},
 	props: {
 		isChecked: {
 			type: Boolean,
@@ -30,11 +35,11 @@ export default Vue.extend( {
 <style lang="scss">
 .querybuilder__include-subclasses {
 	display: flex;
-	align-items: flex-end;
+	align-items: flex-start;
 	color: $font-color-base;
+	margin-block-start: $dimension-layout-xxsmall;
 	// TODO: change to real ones
 	font-family: $font-family-style-description;
-	margin-block-start: $dimension-layout-medium;
 
 	&-checkbox {
 		// TODO: change to real ones

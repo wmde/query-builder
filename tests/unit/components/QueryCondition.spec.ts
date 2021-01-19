@@ -29,6 +29,7 @@ function newStore( getters = {} ): Store<any> {
 			propertyError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( null ) ),
 			conditionRows: jest.fn().mockReturnValue( jest.fn().mockReturnValue( Array ) ),
 			limitedSupport: jest.fn().mockReturnValue( jest.fn().mockReturnValue( false ) ),
+			subclasses: jest.fn().mockReturnValue( jest.fn().mockReturnValue( false ) ),
 			propertyValueRelation: jest.fn().mockReturnValue(
 				jest.fn().mockReturnValue( PropertyValueRelation.Matching ),
 			),

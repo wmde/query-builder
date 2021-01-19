@@ -31,6 +31,10 @@
 					:error="valueError"
 					:datatype="datatype"
 				/>
+				<SubclassCheckbox
+					v-if="subclassCheckboxVisible"
+					@subclass-check="setSubclasses"
+					:isChecked="subclasses(conditionIndex)" />
 			</div>
 			<div>
 				<Dropdown
@@ -52,6 +56,7 @@ import ValueInput from '@/components/ValueInput.vue';
 import DeleteConditionButton from '@/components/DeleteConditionButton.vue';
 import PropertyLookup from '@/components/PropertyLookup.vue';
 import ValueTypeDropDown from '@/components/ValueTypeDropDown.vue';
+import SubclassCheckbox from '@/components/SubclassCheckbox.vue';
 import SearchResult from '@/data-access/SearchResult';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
@@ -60,6 +65,11 @@ import NegationToggle from '@/components/NegationToggle.vue';
 
 export default Vue.extend( {
 	name: 'QueryCondition',
+	data() {
+		return {
+			subclassCheckboxVisible: false,
+		};
+	},
 	props: {
 		conditionIndex: {
 			type: Number,
@@ -72,6 +82,9 @@ export default Vue.extend( {
 		},
 		removeCondition(): void {
 			this.$store.dispatch( 'removeCondition', this.conditionIndex );
+		},
+		setSubclasses( subclasses: boolean ): void {
+			this.$store.dispatch( 'setSubclasses', { subclasses, conditionIndex: this.conditionIndex } );
 		},
 	},
 	computed: {
@@ -88,8 +101,10 @@ export default Vue.extend( {
 					return;
 				}
 				if ( selectedProperty.datatype === 'wikibase-item' ) {
+					this.subclassCheckboxVisible = true;
 					this.$store.dispatch( 'setSubclasses', { conditionIndex: this.conditionIndex, subclasses: true } );
 				} else {
+					this.subclassCheckboxVisible = false;
 					this.$store.dispatch( 'setSubclasses', { conditionIndex: this.conditionIndex, subclasses: false } );
 				}
 				this.$store.dispatch( 'updateProperty',
@@ -143,6 +158,7 @@ export default Vue.extend( {
 		...mapGetters( [
 			'propertyError',
 			'limitedSupport',
+			'subclasses',
 		] ),
 	},
 	components: {
@@ -152,6 +168,7 @@ export default Vue.extend( {
 		DeleteConditionButton,
 		Dropdown,
 		NegationToggle,
+		SubclassCheckbox,
 	},
 } );
 </script>
