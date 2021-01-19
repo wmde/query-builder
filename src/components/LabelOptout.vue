@@ -1,20 +1,17 @@
 <template>
 	<div class="querybuilder__label-optout">
-		<input
+		<Checkbox
 			class="querybuilder__label-optout-checkbox"
-			type="checkbox"
 			id="label-optout"
-			v-model="checked"
+			:checked.sync="checked"
+			:label="$i18n('query-builder-label-opt-out')"
 		/>
-		<label for="label-optout">
-			<span
-				v-i18n="{msg: 'query-builder-label-opt-out'}" />
-		</label>
 	</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import { Checkbox } from '@wmde/wikit-vue-components';
 export default Vue.extend( {
 	name: 'LabelOptout',
 	computed: {
@@ -27,6 +24,9 @@ export default Vue.extend( {
 			},
 		},
 	},
+	components: {
+		Checkbox,
+	},
 } );
 </script>
 
@@ -34,14 +34,6 @@ export default Vue.extend( {
 .querybuilder__label-optout {
 	display: flex;
 	align-items: flex-end;
-	color: $font-color-base;
-	// TODO: change to real ones
-	font-family: $font-family-style-description;
 	margin-block-start: $dimension-layout-medium;
-
-	&-checkbox {
-		// TODO: change to real ones
-		margin-inline-end: $dimension-layout-xxsmall;
-	}
 }
 </style>

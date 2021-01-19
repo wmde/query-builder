@@ -1,15 +1,11 @@
 <template>
 	<div class="querybuilder__limit">
-		<input
+		<Checkbox
 			class="querybuilder__limit-checkbox"
-			type="checkbox"
 			id="limit"
-			v-model="checked"
+			:checked.sync="checked"
+			:label="$i18n('query-builder-limit-number-results-description')"
 		/>
-		<label for="limit">
-			<span
-				v-i18n="{msg: 'query-builder-limit-number-results-description'}" />
-		</label>
 		<TextInput
 			class="querybuilder__limit-input"
 			v-model="textInputValue"
@@ -22,11 +18,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { TextInput } from '@wmde/wikit-vue-components';
+import { Checkbox, TextInput } from '@wmde/wikit-vue-components';
 
 export default Vue.extend( {
 	name: 'Limit',
 	components: {
+		Checkbox,
 		TextInput,
 	},
 	computed: {
@@ -60,16 +57,13 @@ export default Vue.extend( {
 
 .querybuilder__limit {
 	display: flex;
-	align-items: flex-end;
-	color: $font-color-base;
-	// TODO: change to real ones
-	font-family: $font-family-style-description;
+	align-items: center;
 	margin-block-start: $dimension-layout-medium;
 }
 
 .querybuilder__limit-input {
 	// TODO: change to real ones
-	margin-inline-start: $dimension-layout-xxsmall;
+	margin-inline-start: $dimension-layout-small;
 
 	//hides the label of the TextInput while still allowing to be used by screen readers
 	.wikit-TextInput__label {

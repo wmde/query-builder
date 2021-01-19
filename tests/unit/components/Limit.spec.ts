@@ -4,7 +4,7 @@ import { TextInput } from '@wmde/wikit-vue-components';
 import Vuex, { Store } from 'vuex';
 import createActions from '@/store/actions';
 import services from '@/ServicesFactory';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
 import i18n from 'vue-banana-i18n';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
@@ -44,17 +44,14 @@ describe( 'Limit.vue', () => {
 		const useLimitGetter = () => () => ( useLimit );
 		const store = newStore( useLimitGetter );
 
-		const wrapper = shallowMount( Limit, {
+		const wrapper = mount( Limit, {
 			store,
 			localVue,
-			propsData: {
-				'condition-index': 0,
-			},
 		} );
 
 		store.dispatch = jest.fn();
 
-		await wrapper.find( '.querybuilder__limit-checkbox' ).setChecked();
+		await wrapper.find( 'input[type="checkbox"]' ).setChecked();
 
 		expect( store.dispatch ).toHaveBeenCalledWith( 'setUseLimit', useLimit );
 
@@ -68,9 +65,6 @@ describe( 'Limit.vue', () => {
 		const wrapper = shallowMount( Limit, {
 			store,
 			localVue,
-			propsData: {
-				'condition-index': 0,
-			},
 		} );
 
 		store.dispatch = jest.fn();
