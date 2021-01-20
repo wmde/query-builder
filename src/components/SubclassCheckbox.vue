@@ -4,6 +4,7 @@
 			class="querybuilder__include-subclasses-checkbox"
 			:id="id"
 			:checked.sync="isChecked"
+			:disabled="disabled"
 			@update:checked="$emit( 'subclass-check', $event.target )"
 			:label="$i18n('query-builder-include-subclasses' )"
 		/>
@@ -24,6 +25,10 @@ export default Vue.extend( {
 		isChecked: {
 			type: Boolean,
 			required: true,
+		},
+		disabled: {
+			type: Boolean,
+			default: false,
 		},
 	},
 	components: {

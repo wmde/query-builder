@@ -33,6 +33,7 @@
 				/>
 				<SubclassCheckbox
 					v-if="subclassCheckboxVisible"
+					:disabled="isTextInputDisabled()"
 					@subclass-check="setSubclasses"
 					:isChecked="subclasses(conditionIndex)" />
 			</div>
