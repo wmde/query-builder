@@ -22,6 +22,7 @@ export default Vue.extend( {
 
 <style scoped lang="scss">
 .querybuilder__add-condition {
-	float: inline-end;
+	display: flex;
+	justify-content: flex-end;
 }
 </style>
