@@ -10,6 +10,7 @@ import createActions from '@/store/actions';
 import services from '@/ServicesFactory';
 import QueryCondition from '@/components/QueryCondition.vue';
 import NegationToggle from '@/components/NegationToggle.vue';
+import SubclassCheckbox from '@/components/SubclassCheckbox.vue';
 const messages = {};
 
 Vue.use( i18n, {
@@ -212,5 +213,27 @@ describe( 'QueryCondition.vue', () => {
 		input.vm.$emit( 'input', 'without' );
 
 		expect( store.dispatch ).toHaveBeenCalledWith( 'setNegate', { value: true, conditionIndex } );
+	} );
+
+	it( 'Set regardless of value should disable text input and checkbox', async () => {
+		const store = newStore( {
+			propertyValueRelation: jest.fn().mockReturnValue(
+				jest.fn().mockReturnValue( PropertyValueRelation.Regardless ),
+			),
+		} );
+		store.dispatch = jest.fn();
+		const wrapper = shallowMount( QueryCondition, {
+			store,
+			localVue,
+			propsData: {
+				'condition-index': 0,
+			},
+		} );
+		wrapper.setData( {
+			subclassCheckboxVisible: true,
+		} );
+		await Vue.nextTick();
+		expect( wrapper.findComponent( SubclassCheckbox ).props( 'disabled' ) ).toBeTruthy();
+		expect( wrapper.findComponent( ValueInput ).props( 'disabled' ) ).toBeTruthy();
 	} );
 } );
