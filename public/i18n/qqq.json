@@ -17,6 +17,7 @@
 	"query-builder-property-lookup-limited-support-tag": "Tags on properties that have a limited support in query builder",
 	"query-builder-property-lookup-limited-support-note": "Note in the form explaining some fields are disabled because for the selected property there's limited support",
 	"query-builder-result-placeholder": "Placeholder of query builder result",
+	"query-builder-result-header": "Header of result table of the query",
 	"query-builder-result-error-empty-form": "Error message when the form is empty",
 	"query-builder-result-error-incomplete-form": "Error message when the form is incomplete",
 	"query-builder-result-error-missing-property": "Error when property is missing",

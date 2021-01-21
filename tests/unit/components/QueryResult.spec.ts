@@ -39,7 +39,7 @@ describe( 'QueryResult.vue', () => {
 				errors: [],
 			},
 		} );
-		expect( wrapper.find( 'div' ).text() ).toBe( 'Result placeholder' );
+		expect( wrapper.find( '.querybuilder__result__description' ).text() ).toBe( 'Result placeholder' );
 		expect( wrapper.findAll( 'iframe' ) ).toHaveLength( 0 );
 	} );
 
@@ -62,7 +62,7 @@ describe( 'QueryResult.vue', () => {
 				iframeRenderKey: 0,
 			},
 		} );
-		expect( wrapper.find( 'div div' ).text() ).toBe( 'Something happened' );
+		expect( wrapper.find( '.querybuilder__result__errors' ).text() ).toBe( 'Something happened' );
 		expect( wrapper.findAll( 'iframe' ) ).toHaveLength( 0 );
 	} );
 } );
