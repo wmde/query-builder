@@ -25,8 +25,12 @@
 	"query-builder-value-type-relation-dropdown-without": "不帶",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "不論值內容",
 	"query-builder-delete-condition": "刪除條件",
+	"query-builder-condition-placeholder": "添加條件來開始建置查詢",
 	"query-builder-limit-number-results-description": "將結果數量限制成",
 	"query-builder-limit-number-placeholder": "輸入數量",
 	"query-builder-limit-number-screenreader-label": "結果數量上限",
-	"query-builder-label-opt-out": "顯示 ID 而非標籤（可能會逾時）"
+	"query-builder-label-opt-out": "顯示 ID 而非標籤（可能會逾時）",
+	"query-builder-include-subclasses": "包含來自此值子分類的值",
+	"query-builder-negation-option-label-with": "帶",
+	"query-builder-negation-option-label-without": "不帶"
 }

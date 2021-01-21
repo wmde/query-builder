@@ -30,6 +30,7 @@
 	"query-builder-value-type-relation-dropdown-without": "sans",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "quelle que soit la valeur",
 	"query-builder-delete-condition": "Supprimer la condition",
+	"query-builder-condition-placeholder": "Ajouter une condition pour démarrer la construction d’une requête",
 	"query-builder-limit-number-results-description": "Limiter le nombre de résultats à",
 	"query-builder-limit-number-placeholder": "Saisir un nombre",
 	"query-builder-limit-number-screenreader-label": "Nombre maximal de résultats",

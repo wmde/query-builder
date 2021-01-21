@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Beta16",
-			"Costabile"
+			"Costabile",
+			"EditGio"
 		]
 	},
 	"query-builder-find-all-items": "Trova tutti gli elementi...",
@@ -18,6 +19,7 @@
 	"query-builder-result-error-missing-value": "Inserisci un valore",
 	"query-builder-add-condition": "Aggiungi condizione",
 	"query-builder-delete-condition": "Cancella condizione",
+	"query-builder-limit-number-results-description": "Limita il numero di risultati a",
 	"query-builder-limit-number-placeholder": "Inserisci un numero",
 	"query-builder-limit-number-screenreader-label": "Numero massimo di risultati.",
 	"query-builder-negation-option-label-with": "Con",

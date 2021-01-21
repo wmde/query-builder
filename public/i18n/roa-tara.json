@@ -25,6 +25,7 @@
 	"query-builder-value-type-relation-dropdown-without": "senze",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "'ndipendendemende da 'u valore",
 	"query-builder-delete-condition": "Scangìlle 'a condizione",
+	"query-builder-condition-placeholder": "Aggiunge 'na condizione pe accumenzà a costruì 'n'inderrogazione",
 	"query-builder-limit-number-results-description": "Limite 'u numere de resultate a",
 	"query-builder-limit-number-placeholder": "Mitte 'nu numere",
 	"query-builder-limit-number-screenreader-label": "Numere massime de resultate",

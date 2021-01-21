@@ -26,8 +26,12 @@
 	"query-builder-value-type-relation-dropdown-without": "utan",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "oavsett värdet",
 	"query-builder-delete-condition": "Radera villkor",
+	"query-builder-condition-placeholder": "Lägg till ett villkor för att börja bygga en förfrågan",
 	"query-builder-limit-number-results-description": "Begränsa antalet resultat till",
 	"query-builder-limit-number-placeholder": "Ange en siffra",
 	"query-builder-limit-number-screenreader-label": "Maximalt antal resultat",
-	"query-builder-label-opt-out": "Visa ID:n istället för etiketter (kan förhindra timeout)"
+	"query-builder-label-opt-out": "Visa ID:n istället för etiketter (kan förhindra timeout)",
+	"query-builder-include-subclasses": "Inkludera värden från underklasser till detta värde",
+	"query-builder-negation-option-label-with": "Med",
+	"query-builder-negation-option-label-without": "Utan"
 }

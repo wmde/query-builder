@@ -27,6 +27,7 @@
 	"query-builder-value-type-relation-dropdown-without": "ללא",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "ללא תלות בערך",
 	"query-builder-delete-condition": "מחיקת תנאי",
+	"query-builder-condition-placeholder": "יש להוסיף תנאי כדאי להתחיל לבנות שאילתה",
 	"query-builder-limit-number-results-description": "להגביל את מספר התוצאות ל־",
 	"query-builder-limit-number-placeholder": "נא להזין מספר",
 	"query-builder-limit-number-screenreader-label": "מספר מרבי של תוצאות",

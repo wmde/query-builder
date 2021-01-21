@@ -12,5 +12,7 @@
 	"query-builder-limit-number-results-description": "限制结果数至",
 	"query-builder-limit-number-placeholder": "输入数量",
 	"query-builder-limit-number-screenreader-label": "最大结果数量",
-	"query-builder-label-opt-out": "显示ID而非标签（可能避免超时）"
+	"query-builder-label-opt-out": "显示ID而非标签（可能避免超时）",
+	"query-builder-negation-option-label-with": "有",
+	"query-builder-negation-option-label-without": "无"
 }

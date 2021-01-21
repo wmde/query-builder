@@ -25,6 +25,7 @@
 	"query-builder-value-type-relation-dropdown-without": "без",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "независно од вредноста",
 	"query-builder-delete-condition": "Избриши го условот",
+	"query-builder-condition-placeholder": "Додајте услов за да почнете со составување на барање",
 	"query-builder-limit-number-results-description": "Ограничи бр. на исходни ставки на",
 	"query-builder-limit-number-placeholder": "Внесете број",
 	"query-builder-limit-number-screenreader-label": "Највеќе ставки во исходот",

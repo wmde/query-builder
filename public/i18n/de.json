@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"ManuelFranz",
+			"Pittigrilli"
+		]
+	},
+	"query-builder-input-value-label": "Wert",
+	"query-builder-input-value-placeholder": "Geben sie einen Wert ein",
+	"query-builder-item-value-lookup-no-match-found": "Kein Treffer gefunden",
+	"query-builder-property-lookup-no-match-found": "Kein Treffer gefunden",
+	"query-builder-add-condition": "Füge Bedingung hinzu",
+	"query-builder-limit-number-placeholder": "Geben sie eine Nummer ein",
+	"query-builder-limit-number-screenreader-label": "Maximale Anzahl der Ergebnisse",
+	"query-builder-negation-option-label-with": "Mit",
+	"query-builder-negation-option-label-without": "Ohne"
+}

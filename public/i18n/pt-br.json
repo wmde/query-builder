@@ -25,8 +25,12 @@
 	"query-builder-value-type-relation-dropdown-without": "sem",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "independentemente do valor",
 	"query-builder-delete-condition": "Excluir condição",
+	"query-builder-condition-placeholder": "Adicione uma condição para começar a construir uma consulta",
 	"query-builder-limit-number-results-description": "Limite o número de resultados a",
 	"query-builder-limit-number-placeholder": "Digite um número",
 	"query-builder-limit-number-screenreader-label": "Número máximo de resultados",
-	"query-builder-label-opt-out": "Mostrar IDs em vez de rótulos (pode evitar o tempo limite)"
+	"query-builder-label-opt-out": "Mostrar IDs em vez de rótulos (pode evitar o tempo limite)",
+	"query-builder-include-subclasses": "Inclui valores de subclasses deste valor",
+	"query-builder-negation-option-label-with": "Com",
+	"query-builder-negation-option-label-without": "Sem"
 }

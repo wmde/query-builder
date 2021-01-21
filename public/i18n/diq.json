@@ -9,6 +9,7 @@
 	"query-builder-run-query": "Persayışi akarfiye",
 	"query-builder-input-value-label": "Erc",
 	"query-builder-input-value-placeholder": "Ercê dekere",
+	"query-builder-item-value-lookup-no-match-found": "Theba nêvineya",
 	"query-builder-property-lookup-label": "Xısusiyet",
 	"query-builder-property-lookup-placeholder": "Xısusiyetê dekere",
 	"query-builder-property-lookup-no-match-found": "Theba nêvineya",
@@ -22,5 +23,14 @@
 	"query-builder-add-condition": "Şert dekerê",
 	"query-builder-value-type-relation-dropdown-matching": "hewliye",
 	"query-builder-value-type-relation-dropdown-without": "bê",
-	"query-builder-value-type-relation-dropdown-regardless-of-value": "Erc çend beno se"
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "Erc çend beno se",
+	"query-builder-delete-condition": "Şerti bıesternê",
+	"query-builder-condition-placeholder": "Serkewtena persi rê jew şert dekerê",
+	"query-builder-limit-number-results-description": "Amorê neticeya bıkemeynê",
+	"query-builder-limit-number-placeholder": "Jew amor cıkerê",
+	"query-builder-limit-number-screenreader-label": "Maksimum amarê neticeyan",
+	"query-builder-label-opt-out": "Heruna etiketan kamiya bıasenê (ternayışê demi ver kewno)",
+	"query-builder-include-subclasses": "Bınê rêzanê nê erci ra ercan daxil kerê",
+	"query-builder-negation-option-label-with": "pê",
+	"query-builder-negation-option-label-without": "bê"
 }
