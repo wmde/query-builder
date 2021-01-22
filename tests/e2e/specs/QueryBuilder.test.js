@@ -12,10 +12,11 @@ module.exports = {
 			.init()
 			.waitForElementPresent( 'body' )
 			.assert.visible( '.querybuilder' )
-			.setValue( '.wikit-Lookup input', 'post' ) // FIXME: better class
-			.waitForElementPresent( '.wikit-LookupMenu__item' ) // FIXME: better class
-			.click( '.wikit-LookupMenu__item' ) // FIXME: better class
-			.setValue( '.querybuilder__rule__value input', '123' )
+			.setCookie( { name: 'foo', value: 'bar' } )
+			.setValue( '.query-condition__property-lookup input', 'post' )
+			.waitForElementPresent( '.wikit-LookupMenu__item' )
+			.click( '.wikit-OptionsMenu__item' )
+			.setValue( '.query-condition__value-input input', '123' )
 			.click( '.querybuilder__run-query-button' )
 			.waitForElementPresent( '.querybuilder__result__iframe' )
 			.assert.attributeEquals(

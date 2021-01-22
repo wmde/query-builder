@@ -34,4 +34,4 @@ jobs:
       env:
         SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
         SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-      run: node tests/e2e/fake/index.js & npm run e2e:saucelabs
+      run: npm run e2e:saucelabs
