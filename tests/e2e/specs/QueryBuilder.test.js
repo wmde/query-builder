@@ -12,7 +12,7 @@ module.exports = {
   ?item (p:P281/ps:P281) "123".
 }
 LIMIT 100`;
-		const encodedQuery = encodeURIComponent( sparqlQuery );
+		const queryHash = ( new URL( sparqlQuery, 'https://example.com' ) ).hash;
 
 		client
 			.init()
@@ -28,7 +28,7 @@ LIMIT 100`;
 			.assert.attributeEquals(
 				'.querybuilder__result__iframe',
 				'src',
-				`${process.env.DEPLOY_URL}/.netlify/functions/queryServiceEmbed#${encodedQuery}`,
+				`${process.env.DEPLOY_URL}/.netlify/functions/queryServiceEmbed${queryHash}`,
 			);
 	},
 };
