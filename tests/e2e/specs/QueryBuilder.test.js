@@ -1,4 +1,10 @@
 function encodeSparql( sparqlQuery ) {
+	/**
+	 * TODO: find a better way to do this
+	 * The actual attribute value returned by nightwatch is neither the product
+	 * of encodeURIComponent nor of (new URL()).hash, but something in between.
+	 */
+
 	let encodedQuery = encodeURIComponent( sparqlQuery );
 
 	const revertEncoding = {

@@ -8,7 +8,12 @@ module.exports = {
 	custom_assertions_path: '',
 	globals_path: 'tests/e2e/globals.js',
 
-	webdriver: {},
+	webdriver: {
+		timeout_options: {
+			timeout: 20000,
+			retry_attempts: 2,
+		},
+	},
 
 	test_settings: {
 		default: {
