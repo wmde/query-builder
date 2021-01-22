@@ -1,5 +1,7 @@
+/* eslint-disable */
 exports.handler = async ( event ) => {
-	if ( true ) { // add no-cookie condition
+	const cookieHeader = event.headers.Cookie;
+	if ( false ) { // add no-cookie condition
 		return {
 			statusCode: 301,
 			headers: { Location: 'https://query.wikidata.org/embed.html' },
@@ -9,7 +11,7 @@ exports.handler = async ( event ) => {
 		statusCode: 200,
 		body: `<script>
 document.open();
-document.write('<pre>' + decodeURIComponent(location.hash.substring(1)) + '</pre>');
+document.write('<pre>' + decodeURIComponent(location.hash.substring(1)) + '</pre><pre>${JSON.stringify( cookieHeader )}</pre>');
 document.close();
 </script>`,
 	};
