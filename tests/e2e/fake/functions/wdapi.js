@@ -1,6 +1,6 @@
 /* eslint-disable */
-exports.handler = async () => {
-	if ( true ) { // add no-cookie condition
+exports.handler = async ( event ) => {
+	if ( !event.headers.cookie ) {
 		return {
 			statusCode: 301,
 			headers: { Location: 'https://www.wikidata.org/w/api.php' },

@@ -1,5 +1,5 @@
 exports.handler = async ( event ) => {
-	const cookieHeader = event.headers;
+	const cookieHeader = event.headers.cookie;
 	const subject = event.queryStringParameters.name || 'World';
 	return {
 		statusCode: 200,

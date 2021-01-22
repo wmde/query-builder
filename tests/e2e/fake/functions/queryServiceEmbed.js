@@ -1,6 +1,6 @@
 /* eslint-disable */
 exports.handler = async ( event ) => {
-	const cookieHeader = event.headers;
+	const cookieHeader = event.headers.cookie;
 	if ( false ) { // add no-cookie condition
 		return {
 			statusCode: 301,
