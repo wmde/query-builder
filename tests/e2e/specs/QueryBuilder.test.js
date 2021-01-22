@@ -14,7 +14,7 @@ module.exports = {
 			.assert.visible( '.querybuilder' )
 			.setCookie( { name: 'foo', value: 'bar' } )
 			.setValue( '.query-condition__property-lookup input', 'post' )
-			.waitForElementPresent( '.wikit-LookupMenu__item' )
+			.waitForElementPresent( '.wikit-OptionsMenu__item' )
 			.click( '.wikit-OptionsMenu__item' )
 			.setValue( '.query-condition__value-input input', '123' )
 			.click( '.querybuilder__run-query-button' )
@@ -22,7 +22,7 @@ module.exports = {
 			.assert.attributeEquals(
 				'.querybuilder__result__iframe',
 				'src',
-				'http://localhost:3000/embed.html#SELECT%20?item%20WHERE%20%7B%20?item%20(p:P281/ps:P281)%20%22123%22.%20%7D',
+				'/.netlify/functions/queryServiceEmbed#SELECT%20?item%20WHERE%20%7B%20?item%20(p:P281/ps:P281)%20%22123%22.%20%7D',
 			);
 	},
 };
