@@ -6,6 +6,9 @@
   "author": {
     "name": "The Wikidata team"
   },
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "scripts": {
     "e2e": "vue-cli-service test:e2e",
     "e2e:saucelabs": "env DATE=\"$(date)\" nightwatch --config nightwatch.conf.js --env sauceChrome,sauceFirefox,sauceEdge,sauceSafari",
