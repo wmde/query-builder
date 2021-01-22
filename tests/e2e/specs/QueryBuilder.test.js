@@ -22,7 +22,7 @@ module.exports = {
 			.assert.attributeEquals(
 				'.querybuilder__result__iframe',
 				'src',
-				'/.netlify/functions/queryServiceEmbed#SELECT%20?item%20WHERE%20%7B%20?item%20(p:P281/ps:P281)%20%22123%22.%20%7D',
+				process.env.DEPLOY_URL + '/.netlify/functions/queryServiceEmbed#SELECT%20?item%20WHERE%20%7B%20?item%20(p:P281/ps:P281)%20%22123%22.%20%7D',
 			);
 	},
 };
