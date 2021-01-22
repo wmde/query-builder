@@ -12,7 +12,7 @@ module.exports = {
   ?item (p:P281/ps:P281) "123".
 }
 LIMIT 100`;
-		const queryHash = ( new URL( sparqlQuery, 'https://example.com' ) ).hash;
+		const queryHash = ( new URL( `#${sparqlQuery}`, 'https://example.com' ) ).hash;
 
 		client
 			.init()
