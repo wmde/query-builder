@@ -35,7 +35,7 @@ export default class FetchSearchEntityRepository implements SearchEntityReposito
 			params.continue = `${offset}`;
 		}
 
-		const url = new URL( this.endpoint );
+		const url = new URL( this.endpoint, window.location.origin );
 		for ( const key in params ) {
 			url.searchParams.set( key, params[ key ] );
 		}
