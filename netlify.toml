@@ -1,0 +1,2 @@
+[build]
+  functions = "./tests/e2e/fake/functions"
