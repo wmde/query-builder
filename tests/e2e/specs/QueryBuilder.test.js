@@ -1,3 +1,21 @@
+function encodeSparql( sparqlQuery ) {
+	let encodedQuery = encodeURIComponent( sparqlQuery );
+
+	const revertEncoding = {
+		'%28': '(',
+		'%29': ')',
+		'%2F': '/',
+		'%3A': ':',
+		'%3F': '?',
+	};
+
+	Object.entries( revertEncoding ).forEach( ( [ search, replace ] ) => {
+		encodedQuery = encodedQuery.replace( new RegExp( search, 'g' ), replace );
+	} );
+
+	return encodedQuery;
+}
+
 module.exports = {
 	'QueryBuilder Component is rendered': ( client ) => {
 		client
@@ -12,7 +30,7 @@ module.exports = {
   ?item (p:P281/ps:P281) "123".
 }
 LIMIT 100`;
-		const queryHash = ( new URL( `#${sparqlQuery}`, 'https://example.com' ) ).hash;
+		const encodedQuery = encodeSparql( sparqlQuery );
 
 		client
 			.init()
@@ -28,7 +46,7 @@ LIMIT 100`;
 			.assert.attributeEquals(
 				'.querybuilder__result__iframe',
 				'src',
-				`${process.env.DEPLOY_URL}/.netlify/functions/queryServiceEmbed${queryHash}`,
+				`${process.env.DEPLOY_URL}/.netlify/functions/queryServiceEmbed#${encodedQuery}`,
 			);
 	},
 };
