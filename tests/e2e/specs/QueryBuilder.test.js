@@ -7,7 +7,13 @@ module.exports = {
 			.assert.containsText( '.querybuilder__heading', 'Simple Query Builder' );
 	},
 	'can select property and execute query': ( client ) => {
-		/* eslint-disable max-len */
+		const sparqlQuery = `SELECT ?item ?itemLabel WHERE {
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
+  ?item (p:P281/ps:P281) "123".
+}
+LIMIT 100`;
+		const encodedQuery = encodeURIComponent( sparqlQuery );
+
 		client
 			.init()
 			.waitForElementPresent( 'body' )
@@ -22,7 +28,7 @@ module.exports = {
 			.assert.attributeEquals(
 				'.querybuilder__result__iframe',
 				'src',
-				process.env.DEPLOY_URL + '/.netlify/functions/queryServiceEmbed#SELECT%20?item%20WHERE%20%7B%20?item%20(p:P281/ps:P281)%20%22123%22.%20%7D',
+				`${process.env.DEPLOY_URL}/.netlify/functions/queryServiceEmbed#${encodedQuery}`,
 			);
 	},
 };
