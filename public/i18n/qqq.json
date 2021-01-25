@@ -6,6 +6,7 @@
 		]
 	},
 	"query-builder-heading": "Title of the page",
+	"query-builder-intro-text": "Intro text describing what query builder is.",
 	"query-builder-find-all-items": "header for part of the form finding all items",
 	"query-builder-run-query": "Text on the button that runs the query",
 	"query-builder-input-value-label": "Label of value input field in the form\n{{identical|Value}}",
