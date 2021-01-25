@@ -26,7 +26,7 @@ describe( 'buildQuery', () => {
 				getSimpleCondition( propertyId, value ),
 			],
 			omitLabels: true,
-		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }` );
+		} ) ).toEqual( `SELECT DISTINCT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }` );
 	} );
 
 	it( 'builds a query from a property and a string value with not matching selected', () => {
@@ -36,9 +36,9 @@ describe( 'buildQuery', () => {
 		condition.propertyValueRelation = PropertyValueRelation.NotMatching;
 
 		const expectedQuery =
-			`SELECT ?item WHERE {
+			`SELECT DISTINCT ?item WHERE {
 			?item (p:${propertyId}/ps:${propertyId}) ?instance.
-			FILTER(?instance != "${value}")
+			MINUS { ?item (p:P666/ps:P666) "${value}". }
 			}`;
 
 		const receivedQuery = buildQuery( {
@@ -53,16 +53,21 @@ describe( 'buildQuery', () => {
 		const propertyId = 'P666';
 		const condition = getSimpleCondition( propertyId, '' );
 		condition.propertyValueRelation = PropertyValueRelation.Regardless;
-
-		expect( buildQuery( {
+		const expectedQuery =
+			`SELECT DISTINCT ?item WHERE {
+			?item (p:${propertyId}/ps:${propertyId}) _:anyValue${propertyId}.
+			}`;
+		const actualQuery = buildQuery( {
 			conditions: [ condition ],
 			omitLabels: true,
-		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) _:anyValue${propertyId}. }` );
+		} );
+
+		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
 
 	it( 'builds a query from multiple conditions, one matching and one regardless', () => {
 		const expectedQuery =
-			`SELECT ?item WHERE {
+			`SELECT DISTINCT ?item WHERE {
 			?item (p:P666/ps:P666) "blah".
 			?item (p:P66/ps:P66) _:anyValueP66.
 			}`;
@@ -81,10 +86,10 @@ describe( 'buildQuery', () => {
 
 	it( 'builds a query from multiple conditions, one matching and one non-matching', () => {
 		const expectedQuery =
-			`SELECT ?item WHERE {
+			`SELECT DISTINCT ?item WHERE {
 			?item (p:P666/ps:P666) "blah".
 			?item (p:P66/ps:P66) ?instance.
-			FILTER(?instance != "foo")
+			MINUS { ?item (p:P66/ps:P66) "foo". }
 			}`;
 		const secondCondition = getSimpleCondition( 'P66', 'foo' );
 		secondCondition.propertyValueRelation = PropertyValueRelation.NotMatching;
@@ -101,9 +106,9 @@ describe( 'buildQuery', () => {
 
 	it( 'builds a query from multiple conditions, one non-matching and one matching', () => {
 		const expectedQuery =
-			`SELECT ?item WHERE {
+			`SELECT DISTINCT ?item WHERE {
 			?item (p:P666/ps:P666) ?instance.
-			FILTER(?instance != "blah")
+			MINUS { ?item (p:P666/ps:P666) "blah". }
 			?item (p:P66/ps:P66) "foo".
 			}`;
 		const firstCondition = getSimpleCondition( 'P666', 'blah' );
@@ -127,14 +132,14 @@ describe( 'buildQuery', () => {
 		expect( buildQuery( {
 			conditions: [ condition ],
 			omitLabels: true,
-		} ) ).toEqual( `SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) wd:${value}. }` );
+		} ) ).toEqual( `SELECT DISTINCT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) wd:${value}. }` );
 	} );
 
 	it( 'builds a query from a property and a string value with omitLabels set to false (shows labels)', () => {
 		const propertyId = 'P666';
 		const value = 'blah';
 		const expectedQuery =
-			`SELECT ?item ?itemLabel WHERE {
+			`SELECT DISTINCT ?item ?itemLabel WHERE {
 			SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
 			?item (p:P666/ps:P666) "blah". }`;
 		const actualQuery = buildQuery( {
@@ -149,7 +154,7 @@ describe( 'buildQuery', () => {
 		const value = 'blah';
 		const subclassesId = process.env.VUE_APP_SUBCLASS_PROPERTY;
 		const expectedQuery =
-		`SELECT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}/(wdt:${subclassesId}*)) "${value}". }`;
+		`SELECT DISTINCT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}/(wdt:${subclassesId}*)) "${value}". }`;
 		const condition = getSimpleCondition( propertyId, value );
 		condition.subclasses = true;
 
@@ -165,7 +170,7 @@ describe( 'buildQuery', () => {
 		const propertyId = 'P666';
 		const value = 'blah';
 		const expectedQuery =
-			`SELECT ?item WHERE {
+			`SELECT DISTINCT ?item WHERE {
 			MINUS { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }
 			?item wikibase:sitelinks _:anyValue. }`;
 		const condition = getSimpleCondition( propertyId, value );

@@ -9,6 +9,7 @@ export default class QueryObjectBuilder {
 	public constructor() {
 		this.queryObject = {
 			queryType: 'SELECT',
+			distinct: true,
 			variables: [],
 			where: [],
 			type: 'query',
@@ -214,18 +215,29 @@ export default class QueryObjectBuilder {
 
 		if ( condition.propertyValueRelation === PropertyValueRelation.NotMatching ) {
 			const filterCondition = {
-				type: 'filter',
-				expression: {
-					type: 'operation',
-					operator: '!=',
-					args: [
+				type: 'minus',
+				patterns: [ {
+					type: 'bgp',
+					triples: [
 						{
-							termType: 'Variable',
-							value: 'instance',
+							subject: {
+								termType: 'Variable',
+								value: 'item',
+							},
+							predicate: { type: 'path',
+								pathType: '/',
+								items: [ {
+									termType: 'NamedNode',
+									value: rdfNamespaces.p + condition.propertyId,
+								},
+								{
+									termType: 'NamedNode',
+									value: rdfNamespaces.ps + condition.propertyId,
+								} ] },
+							object: this.buildTripleObjectForExplicitValue( condition.datatype, condition.value ),
 						},
-						this.buildTripleObjectForExplicitValue( condition.datatype, condition.value ),
 					],
-				},
+				} ],
 			};
 
 			this.queryObject.where.push( filterCondition as Pattern );
