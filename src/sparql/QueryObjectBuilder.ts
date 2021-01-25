@@ -26,48 +26,6 @@ export default class QueryObjectBuilder {
 			},
 		];
 
-		if ( !queryRepresentation.omitLabels ) {
-			this.queryObject.variables.push(
-				{
-					termType: 'Variable',
-					value: 'itemLabel',
-				} );
-
-			if ( !this.queryObject.where ) {
-				this.queryObject.where = [];
-			}
-
-			this.queryObject.where.push(
-				{
-					type: 'service',
-					patterns: [
-						{
-							type: 'bgp',
-							triples: [ {
-								subject: {
-									termType: 'NamedNode',
-									value: rdfNamespaces.bd + 'serviceParam',
-								},
-								predicate: {
-									termType: 'NamedNode',
-									value: rdfNamespaces.wikibase + 'language',
-								},
-								object: {
-									termType: 'Literal',
-									value: '[AUTO_LANGUAGE]',
-								},
-							} ],
-						},
-					],
-					name: {
-						termType: 'NamedNode',
-						value: rdfNamespaces.wikibase + 'label',
-					},
-					silent: false,
-				},
-			);
-		}
-
 		for ( let i = 0; i < queryRepresentation.conditions.length; i++ ) {
 			this.buildFromQueryCondition( queryRepresentation.conditions[ i ] );
 		}
@@ -77,7 +35,7 @@ export default class QueryObjectBuilder {
 			let isOnlyNegateQuery = true;
 			for ( let i = 0; i < this.queryObject.where?.length; i++ ) {
 				const type = this.queryObject.where[ i ].type;
-				if ( type !== 'minus' && type !== 'service' ) {
+				if ( type !== 'minus' ) {
 					isOnlyNegateQuery = false;
 					break;
 				}
@@ -110,6 +68,10 @@ export default class QueryObjectBuilder {
 
 		if ( queryRepresentation.limit ) {
 			this.queryObject.limit = queryRepresentation.limit;
+		}
+
+		if ( !queryRepresentation.omitLabels ) {
+			return this.wrapQueryWithLabel();
 		}
 
 		return this.queryObject;
@@ -242,5 +204,64 @@ export default class QueryObjectBuilder {
 
 			this.queryObject.where.push( filterCondition as Pattern );
 		}
+	}
+
+	private wrapQueryWithLabel(): SelectQuery {
+		const wrapperQuery: SelectQuery = {
+			queryType: 'SELECT',
+			distinct: true,
+			variables: [
+				{
+					termType: 'Variable',
+					value: 'item',
+				},
+				{
+					termType: 'Variable',
+					value: 'itemLabel',
+				},
+			],
+			where: [
+				{
+					type: 'service',
+					patterns: [
+						{
+							type: 'bgp',
+							triples: [ {
+								subject: {
+									termType: 'NamedNode',
+									value: rdfNamespaces.bd + 'serviceParam',
+								},
+								predicate: {
+									termType: 'NamedNode',
+									value: rdfNamespaces.wikibase + 'language',
+								},
+								object: {
+									termType: 'Literal',
+									value: '[AUTO_LANGUAGE]',
+								},
+							} ],
+						},
+					],
+					name: {
+						termType: 'NamedNode',
+						value: rdfNamespaces.wikibase + 'label',
+					},
+					silent: false,
+				},
+			],
+			type: 'query',
+			prefixes: rdfNamespaces,
+		};
+
+		if ( !wrapperQuery.where ) {
+			wrapperQuery.where = [];
+		}
+		this.queryObject.prefixes = {};
+		wrapperQuery.where.push( {
+			type: 'group',
+			patterns: [ this.queryObject ],
+		} );
+
+		return wrapperQuery;
 	}
 }

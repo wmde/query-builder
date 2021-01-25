@@ -130,6 +130,46 @@ describe( 'QueryObjectBuilder', () => {
 	it( 'with labels (omitLabels = false)', () => {
 		const prefixes = allNamespaces;
 		const builder = new QueryObjectBuilder();
+		const internalExpectedQuery = {
+			queryType: 'SELECT',
+			distinct: true,
+			variables: [
+				{
+					termType: 'Variable',
+					value: 'item',
+				},
+			],
+			where: [
+				{
+					type: 'bgp',
+					triples: [
+						{
+							subject: {
+								termType: 'Variable',
+								value: 'item',
+							},
+							predicate: { type: 'path',
+								pathType: '/',
+								items: [ {
+									termType: 'NamedNode',
+									value: 'http://www.wikidata.org/prop/P281',
+								},
+								{
+									termType: 'NamedNode',
+									value: 'http://www.wikidata.org/prop/statement/P281',
+								},
+								] },
+							object: {
+								termType: 'Literal',
+								value: 'XXXX',
+							},
+						},
+					],
+				},
+			],
+			type: 'query',
+		};
+
 		const expected = {
 			queryType: 'SELECT',
 			distinct: true,
@@ -172,29 +212,9 @@ describe( 'QueryObjectBuilder', () => {
 					silent: false,
 				},
 				{
-					type: 'bgp',
-					triples: [
-						{
-							subject: {
-								termType: 'Variable',
-								value: 'item',
-							},
-							predicate: { type: 'path',
-								pathType: '/',
-								items: [ {
-									termType: 'NamedNode',
-									value: 'http://www.wikidata.org/prop/P281',
-								},
-								{
-									termType: 'NamedNode',
-									value: 'http://www.wikidata.org/prop/statement/P281',
-								},
-								] },
-							object: {
-								termType: 'Literal',
-								value: 'XXXX',
-							},
-						},
+					type: 'group',
+					patterns: [
+						internalExpectedQuery,
 					],
 				},
 			],
@@ -377,7 +397,7 @@ describe( 'QueryObjectBuilder', () => {
 	it( 'with negate but labels enabled', () => {
 		const prefixes = allNamespaces;
 		const builder = new QueryObjectBuilder();
-		const expected = {
+		const internalExpectedQuery = {
 			queryType: 'SELECT',
 			distinct: true,
 			variables: [
@@ -385,39 +405,8 @@ describe( 'QueryObjectBuilder', () => {
 					termType: 'Variable',
 					value: 'item',
 				},
-				{
-					termType: 'Variable',
-					value: 'itemLabel',
-				},
 			],
 			where: [
-				{
-					type: 'service',
-					patterns: [
-						{
-							type: 'bgp',
-							triples: [ {
-								subject: {
-									termType: 'NamedNode',
-									value: 'http://www.bigdata.com/rdf#serviceParam',
-								},
-								predicate: {
-									termType: 'NamedNode',
-									value: 'http://wikiba.se/ontology#language',
-								},
-								object: {
-									termType: 'Literal',
-									value: '[AUTO_LANGUAGE]',
-								},
-							} ],
-						},
-					],
-					name: {
-						termType: 'NamedNode',
-						value: 'http://wikiba.se/ontology#label',
-					},
-					silent: false,
-				},
 				{
 					type: 'minus',
 					patterns: [
@@ -467,6 +456,55 @@ describe( 'QueryObjectBuilder', () => {
 						},
 					],
 					type: 'bgp',
+				},
+			],
+			type: 'query',
+			prefixes: {},
+		};
+		const expected = {
+			queryType: 'SELECT',
+			distinct: true,
+			variables: [
+				{
+					termType: 'Variable',
+					value: 'item',
+				},
+				{
+					termType: 'Variable',
+					value: 'itemLabel',
+				},
+			],
+			where: [
+				{
+					type: 'service',
+					patterns: [
+						{
+							type: 'bgp',
+							triples: [ {
+								subject: {
+									termType: 'NamedNode',
+									value: 'http://www.bigdata.com/rdf#serviceParam',
+								},
+								predicate: {
+									termType: 'NamedNode',
+									value: 'http://wikiba.se/ontology#language',
+								},
+								object: {
+									termType: 'Literal',
+									value: '[AUTO_LANGUAGE]',
+								},
+							} ],
+						},
+					],
+					name: {
+						termType: 'NamedNode',
+						value: 'http://wikiba.se/ontology#label',
+					},
+					silent: false,
+				},
+				{
+					type: 'group',
+					patterns: [ internalExpectedQuery ],
 				},
 			],
 			type: 'query',
