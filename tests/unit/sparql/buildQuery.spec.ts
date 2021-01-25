@@ -141,7 +141,7 @@ describe( 'buildQuery', () => {
 		const expectedQuery =
 			`SELECT DISTINCT ?item ?itemLabel WHERE {
 			SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
-			?item (p:P666/ps:P666) "blah". }`;
+			{ SELECT DISTINCT ?item WHERE { ?item (p:P666/ps:P666) "blah". } } }`;
 		const actualQuery = buildQuery( {
 			conditions: [ getSimpleCondition( propertyId, value ) ],
 			omitLabels: false,
