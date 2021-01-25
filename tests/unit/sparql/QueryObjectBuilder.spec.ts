@@ -8,6 +8,7 @@ describe( 'QueryObjectBuilder', () => {
 		const builder = new QueryObjectBuilder();
 		const expected = {
 			queryType: 'SELECT',
+			distinct: true,
 			variables: [
 				{
 					termType: 'Variable',
@@ -68,6 +69,7 @@ describe( 'QueryObjectBuilder', () => {
 		const builder = new QueryObjectBuilder();
 		const expected = {
 			queryType: 'SELECT',
+			distinct: true,
 			variables: [
 				{
 					termType: 'Variable',
@@ -130,6 +132,7 @@ describe( 'QueryObjectBuilder', () => {
 		const builder = new QueryObjectBuilder();
 		const expected = {
 			queryType: 'SELECT',
+			distinct: true,
 			variables: [
 				{
 					termType: 'Variable',
@@ -221,6 +224,7 @@ describe( 'QueryObjectBuilder', () => {
 		const builder = new QueryObjectBuilder();
 		const expected = {
 			queryType: 'SELECT',
+			distinct: true,
 			variables: [
 				{
 					termType: 'Variable',
@@ -290,6 +294,7 @@ describe( 'QueryObjectBuilder', () => {
 		const builder = new QueryObjectBuilder();
 		const expected = {
 			queryType: 'SELECT',
+			distinct: true,
 			variables: [
 				{
 					termType: 'Variable',
@@ -374,6 +379,7 @@ describe( 'QueryObjectBuilder', () => {
 		const builder = new QueryObjectBuilder();
 		const expected = {
 			queryType: 'SELECT',
+			distinct: true,
 			variables: [
 				{
 					termType: 'Variable',
