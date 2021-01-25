@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Agaafd",
 			"Hedda",
 			"MuratTheTurkish"
 		]
@@ -17,6 +18,7 @@
 	"query-builder-property-lookup-limited-support-tag": "sınırlı destek",
 	"query-builder-property-lookup-limited-support-note": "Sınırlı desteğe sahip özellikler değere göre filtrelenemez",
 	"query-builder-result-placeholder": "Sonuçlar burada görüntülenecek",
+	"query-builder-result-header": "Sonuçlar",
 	"query-builder-result-error-empty-form": "Görünüşe göre Sorgu Oluşturucu boş, lütfen önce geçerli bir sorgu girin, ardından tekrar çalıştırmayı deneyin.",
 	"query-builder-result-error-incomplete-form": "Bir veya daha fazla alan boş. Lütfen sorguyu tamamlayın veya uygun bir alan türü seçin.",
 	"query-builder-result-error-missing-property": "Lütfen bir özellik seçin",
@@ -26,6 +28,7 @@
 	"query-builder-value-type-relation-dropdown-without": "olmadan",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "değeri ne olursa olsun",
 	"query-builder-delete-condition": "Koşulu sil",
+	"query-builder-condition-placeholder": "Sorgu oluşturmaya başlamak için bir koşul ekleyin",
 	"query-builder-limit-number-results-description": "Sonuçların sayısını sınırla",
 	"query-builder-limit-number-placeholder": "Bir sayı girin",
 	"query-builder-limit-number-screenreader-label": "Maksimum sonuç sayısı",

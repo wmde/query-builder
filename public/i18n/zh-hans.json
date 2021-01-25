@@ -2,12 +2,14 @@
 	"@metadata": {
 		"authors": [
 			")8",
+			"Colathewikian",
 			"Wuqianye",
 			"Yfdyh000"
 		]
 	},
 	"query-builder-input-value-label": "值",
 	"query-builder-item-value-lookup-no-match-found": "找不到匹配项目",
+	"query-builder-result-header": "结果",
 	"query-builder-delete-condition": "删除条件",
 	"query-builder-limit-number-results-description": "限制结果数至",
 	"query-builder-limit-number-placeholder": "输入数量",

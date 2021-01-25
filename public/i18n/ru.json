@@ -18,6 +18,7 @@
 	"query-builder-property-lookup-limited-support-tag": "ограниченная поддержка",
 	"query-builder-property-lookup-limited-support-note": "Свойства с ограниченной поддержкой нельзя фильтровать по значению",
 	"query-builder-result-placeholder": "Результаты будут отображаться здесь",
+	"query-builder-result-header": "Результаты",
 	"query-builder-result-error-empty-form": "Похоже, построитель запросов был пуст. Сначала введите допустимый запрос, а затем попробуйте запустить его снова.",
 	"query-builder-result-error-incomplete-form": "Одно или несколько полей пусты. Пожалуйста, дозаполните запрос или выберите подходящий тип поля.",
 	"query-builder-result-error-missing-property": "Пожалуйста, выберите свойство",
@@ -27,10 +28,12 @@
 	"query-builder-value-type-relation-dropdown-without": "без",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "независимо от значения",
 	"query-builder-delete-condition": "Удалить условие",
+	"query-builder-condition-placeholder": "Добавьте условие, чтобы начать построение запроса",
 	"query-builder-limit-number-results-description": "Ограничьте количество результатов до",
 	"query-builder-limit-number-placeholder": "Введите число",
 	"query-builder-limit-number-screenreader-label": "Максимальное количество результатов",
 	"query-builder-label-opt-out": "Показывать идентификаторы вместо меток (может предотвратить тайм-аут)",
+	"query-builder-include-subclasses": "Включить значения из подклассов этого значения",
 	"query-builder-negation-option-label-with": "С",
 	"query-builder-negation-option-label-without": "Без"
 }

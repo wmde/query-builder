@@ -18,6 +18,7 @@
 	"query-builder-property-lookup-limited-support-tag": "תמיכה מוגבלת",
 	"query-builder-property-lookup-limited-support-note": "לא ניתן לסנן מאפיינים עם תמיכה מוגבלת לפי ערך",
 	"query-builder-result-placeholder": "התוצאות תוצגנה כאן",
+	"query-builder-result-header": "תוצאות",
 	"query-builder-result-error-empty-form": "נראה שבונה השאילתות היה ריק, נא למלא שאילתה תקפה תחילה ואז לנסות להריץ אותו שוב.",
 	"query-builder-result-error-incomplete-form": "שדה אחד או יותר נותרו ריקים. נא להשלים את השאילתה או לבחור סוג שדה תואם.",
 	"query-builder-result-error-missing-property": "נא לבחור מאפיין",

@@ -18,6 +18,7 @@
 	"query-builder-property-lookup-limited-support-tag": "دعم محدود",
 	"query-builder-property-lookup-limited-support-note": "لا يمكن تصفية الخصائص ذات الدعم المحدود حسب القيمة",
 	"query-builder-result-placeholder": "ستُعرض النتائج هنا",
+	"query-builder-result-header": "النتائج",
 	"query-builder-result-error-empty-form": "يبدو أن منشئ الاستعلام كان فارغاً، الرجاء إدخال استعلام صالح أولاً، ثم حاول تشغيله مرة أخرى.",
 	"query-builder-result-error-incomplete-form": "حقل واحد أو أكثر فارغ. الرجاء إكمال الاستعلام أو تحديد نوع حقل مناسب.",
 	"query-builder-result-error-missing-property": "يرجى اختيار خاصية",

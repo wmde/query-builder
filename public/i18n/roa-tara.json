@@ -16,6 +16,7 @@
 	"query-builder-property-lookup-limited-support-tag": "supporte limitate",
 	"query-builder-property-lookup-limited-support-note": "Le porbbietà cu supporte limitate non ge ponne essere filtrate pe valore",
 	"query-builder-result-placeholder": "Le resultate iessene aqquà",
+	"query-builder-result-header": "Resultate",
 	"query-builder-result-error-empty-form": "'Ndruche cumme 'u Costruttore de 'nderrogaziune ere vacande, pe piacere mitte 'na 'nderrogazione valide apprime, e pò pruève arrete.",
 	"query-builder-result-error-incomplete-form": "Une o cchiù cambe so vacande. Pe piacere comblete 'a 'nderrogazione o scacchie 'nu enghiatore d'u tipe de cambe.",
 	"query-builder-result-error-missing-property": "Pe piacere scacchie 'na probbietà",

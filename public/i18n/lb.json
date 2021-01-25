@@ -8,8 +8,10 @@
 	"query-builder-property-lookup-label": "Eegenschaft",
 	"query-builder-property-lookup-no-match-found": "Et gouf näischt fonnt",
 	"query-builder-property-lookup-limited-support-tag": "limitéiert Ënnerstëtzung",
+	"query-builder-result-header": "Resultater",
 	"query-builder-value-type-relation-dropdown-without": "ouni",
 	"query-builder-delete-condition": "Bedingung läschen",
+	"query-builder-limit-number-screenreader-label": "Maximal Zuel vu Resultater",
 	"query-builder-negation-option-label-with": "Mat",
 	"query-builder-negation-option-label-without": "Ouni"
 }

@@ -17,6 +17,7 @@
 	"query-builder-property-lookup-limited-support-tag": "지원 제한됨",
 	"query-builder-property-lookup-limited-support-note": "제한적으로 지원하는 속성의 경우 값으로 필터링할 수 없습니다.",
 	"query-builder-result-placeholder": "결과는 여기에 표시됩니다",
+	"query-builder-result-header": "결과",
 	"query-builder-result-error-empty-form": "쿼리 생성기가 비어있는 것 같습니다. 먼저 유효한 쿼리를 입력한 다음 재실행해보십시오.",
 	"query-builder-result-error-incomplete-form": "하나 이상의 입력란이 비어 있습니다. 쿼리를 완성하거나 올바른 입력란 종류를 선택하십시오.",
 	"query-builder-result-error-missing-property": "속성을 선택해 주십시오",

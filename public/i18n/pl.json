@@ -16,6 +16,7 @@
 	"query-builder-property-lookup-limited-support-tag": "Ograniczone wsparcie",
 	"query-builder-property-lookup-limited-support-note": "Właściwości o ograniczonym wsparciu nie mogą być filtrowane według wartości",
 	"query-builder-result-placeholder": "Tutaj zostaną wyświetlone wyniki",
+	"query-builder-result-header": "Wyniki",
 	"query-builder-result-error-empty-form": "Wygląda na to, że kreator zapytań był pusty. Wprowadź poprawne zapytanie i spróbuj uruchomić go ponownie.",
 	"query-builder-result-error-incomplete-form": "Jedno lub więcej pól jest puste. Dokończ zapytanie lub wybierz odpowiedni rodzaj pola.",
 	"query-builder-result-error-missing-property": "Wybierz właściwość",

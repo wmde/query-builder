@@ -1,0 +1,37 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chinamoonroll"
+		]
+	},
+	"query-builder-heading": "Pengardi kuéri sederhana",
+	"query-builder-find-all-items": "Rereh sinamian item",
+	"query-builder-run-query": "Margiang kuéri",
+	"query-builder-input-value-label": "Ajin",
+	"query-builder-input-value-placeholder": "Dagingin satunggal aji",
+	"query-builder-item-value-lookup-no-match-found": "Nénten wénten sané pateh katemu",
+	"query-builder-property-lookup-label": "Atribut",
+	"query-builder-property-lookup-placeholder": "Dagingin satunggal atribut",
+	"query-builder-property-lookup-no-match-found": "Nénten wénten sané pateh katemu",
+	"query-builder-property-lookup-limited-support-tag": "dukungan kawates",
+	"query-builder-property-lookup-limited-support-note": "Atribut antuk kadukung kawates nénten prasida kasaring mawit ajin",
+	"query-builder-result-placeholder": "Asil pacang kacingakang iriki",
+	"query-builder-result-header": "Asil",
+	"query-builder-result-error-empty-form": "Kacingakin Pangardi Kuéri kantun puyung, durusang dagingin kuéri sané patut sadurungné, selanturné margiang malih.",
+	"query-builder-result-error-incomplete-form": "Satunggal utawi langkung dagingan kantun puyung. Durus lengkapin kuéri utawi pilih tipe dagingan sané patut.",
+	"query-builder-result-error-missing-property": "Durusang pilih satunggal atribut",
+	"query-builder-result-error-missing-value": "Durusang dagingin satunggal ajin",
+	"query-builder-add-condition": "Tambahin paindikan",
+	"query-builder-value-type-relation-dropdown-matching": "pateh sareng",
+	"query-builder-value-type-relation-dropdown-without": "tanpa",
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "nénten nyingakin ajin",
+	"query-builder-delete-condition": "Usap paindikan",
+	"query-builder-condition-placeholder": "Tambahin satunggal paindikan antuk ngawitin pangardi satunggal kuéri",
+	"query-builder-limit-number-results-description": "Watesin akéh asil antuk",
+	"query-builder-limit-number-placeholder": "Dagingin satunggal angka",
+	"query-builder-limit-number-screenreader-label": "Angka maksimum antuk asil",
+	"query-builder-label-opt-out": "Cingakang ID antuk label (kangkat galah puput)",
+	"query-builder-include-subclasses": "Rumasuk ajin saking subkelas saking ajin puniki",
+	"query-builder-negation-option-label-with": "Sareng",
+	"query-builder-negation-option-label-without": "Tanpa"
+}

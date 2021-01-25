@@ -16,6 +16,7 @@
 	"query-builder-property-lookup-limited-support-tag": "suporte limitado",
 	"query-builder-property-lookup-limited-support-note": "Propriedades com suporte limitado não podem ser filtradas por valor",
 	"query-builder-result-placeholder": "Os resultados serão exibidos aqui",
+	"query-builder-result-header": "Resultados",
 	"query-builder-result-error-empty-form": "Parece que o construtor de consultas estava vazio. Insira uma consulta válida primeiro e tente executá-la novamente.",
 	"query-builder-result-error-incomplete-form": "Um ou mais campos estão vazios. Preencha a consulta ou selecione um tipo de campo de ajuste.",
 	"query-builder-result-error-missing-property": "Selecione uma propriedade",
