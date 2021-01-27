@@ -22,8 +22,8 @@
   },
   "main": "index.js",
   "dependencies": {
-    "@wmde/wikit-tokens": "^2.0.0-alpha.4",
-    "@wmde/wikit-vue-components": "^2.0.0-alpha.4",
+    "@wmde/wikit-tokens": "^2.0.0-alpha.5",
+    "@wmde/wikit-vue-components": "^2.0.0-alpha.5",
     "core-js": "^3.6.5",
     "lodash.debounce": "^4.0.8",
     "ress": "^3.0.0",

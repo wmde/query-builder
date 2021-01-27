@@ -1,29 +1,32 @@
 <template>
-	<span class="negationToggle">
-		<Button
-			:type="value==='with' ? 'progressive' : 'neutral'"
-			:variant="value==='with' ? 'primary' : 'normal'"
-			@click.native="$emit('input', 'with')"
-		>{{ $i18n( 'query-builder-negation-option-label-with' ) }}</Button>
-		<Button
-			:type="value==='without' ? 'progressive' : 'neutral'"
-			:variant="value==='without' ? 'primary' : 'normal'"
-			@click.native="$emit('input', 'without')"
-		>{{ $i18n( 'query-builder-negation-option-label-without' ) }}</Button>
-	</span>
+	<ToggleButtonGroup
+		:value="value"
+		class="negationToggle"
+	>
+		<template v-slot:default>
+			<ToggleButton
+				value="with"
+				@click.native="$emit('input', 'with')"
+			>{{ $i18n( 'query-builder-negation-option-label-with' ) }}</ToggleButton>
+			<ToggleButton
+				value="without"
+				@click.native="$emit('input', 'without')"
+			>{{ $i18n( 'query-builder-negation-option-label-without' ) }}</ToggleButton>
+		</template>
+	</ToggleButtonGroup>
 </template>
 
 <script lang="ts">
-import { Button } from '@wmde/wikit-vue-components';
+import { ToggleButton, ToggleButtonGroup } from '@wmde/wikit-vue-components';
 import Vue from 'vue';
 
 export default Vue.extend( {
 	name: 'NegationToggle',
-	components: { Button },
+	components: { ToggleButton, ToggleButtonGroup },
 	props: {
 		value: {
-			required: true,
 			type: String,
+			default: 'with',
 		},
 	},
 } );
