@@ -117,6 +117,12 @@ a {
 
 $tinyViewportWidth: 36em;
 
+/*
+ * This is a rough approximation. by using a screen size emulator,
+ * we can see the width where all items are aligned.
+ */
+$largeViewportWidth: 90em; //~1438px
+
 .querybuilder {
 	padding-block: $dimension-layout-small;
 	padding-inline: $dimension-layout-small;
@@ -124,6 +130,13 @@ $tinyViewportWidth: 36em;
 	@media (max-width: $tinyViewportWidth) {
 		padding-block: $dimension-layout-xsmall;
 		padding-inline: $dimension-layout-xsmall;
+	}
+
+	@media (min-width: $largeViewportWidth) {
+		// set maximum width of the page
+		max-width: $largeViewportWidth;
+		margin-block: auto;
+		margin-inline: auto;
 	}
 }
 
