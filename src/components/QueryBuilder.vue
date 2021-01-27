@@ -12,17 +12,33 @@
 					v-i18n="{msg: 'query-builder-find-all-items'}" />
 				<div v-if="!conditionRows.length"
 					class="querybuilder__condition-placeholder"
-					v-i18n="{msg: 'query-builder-condition-placeholder'}"
-				/>
+					v-i18n="{msg: 'query-builder-condition-placeholder'}"/>
 				<div
-					class="querybuilder__condition-wrapper"
 					v-for="(condition, index) in conditionRows"
 					:key="condition.conditionId"
+					:class="[
+						'querybuilder__condition-group',
+						(isAboveOr(index)) ? 'querybuilder__condition-group-above' : '',
+					]"
 				>
-					<QueryCondition
+					<div
+						:class="[
+							'querybuilder__condition-wrapper',
+							(isBelowOr(index)) ? 'querybuilder__condition-wrapper-below' : '',
+							(isAboveOr(index)) ? 'querybuilder__condition-wrapper-above' : '',
+						]"
+					><QueryCondition
 						:condition-index="index"
-					/>
-				</div>
+					/></div>
+					<ConditionRelationToggle
+						v-if="(index + 1) !== conditionRows.length"
+						:class="[
+							'querybuilder__condition-relation-toggle',
+							(isBelowOr(index + 1)) ? 'querybuilder__condition-relation-toggle-or' : '',
+						]"
+						:value="conditionRows[index + 1].conditionRelation"
+						@set-relation-toggle="setConditionRelation($event, index)"
+					/></div>
 				<AddCondition @add-condition="addCondition" />
 				<Limit />
 				<LabelOptout />
@@ -52,12 +68,14 @@ import Vue from 'vue';
 import { mapState } from 'vuex';
 import { Button } from '@wmde/wikit-vue-components';
 
+import ConditionRelationToggle from '@/components/ConditionRelationToggle.vue';
 import QueryCondition from '@/components/QueryCondition.vue';
 import QueryResult from '@/components/QueryResult.vue';
 import buildQuery from '@/sparql/buildQuery';
 import AddCondition from '@/components/AddCondition.vue';
 import Limit from '@/components/Limit.vue';
 import LabelOptout from '@/components/LabelOptout.vue';
+import ConditionRelation from '@/data-model/ConditionRelation';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -88,6 +106,16 @@ export default Vue.extend( {
 		addCondition(): void {
 			this.$store.dispatch( 'addCondition' );
 		},
+		setConditionRelation( value: ConditionRelation, index: number ): void {
+			this.$store.dispatch( 'setConditionRelation', { value, conditionIndex: index + 1 } );
+		},
+		isAboveOr( index: number ): boolean {
+			return ( index + 1 ) !== this.conditionRows.length &&
+          this.conditionRows[ index + 1 ].conditionRelation === ConditionRelation.Or;
+		},
+		isBelowOr( index: number ): boolean {
+			return index !== 0 && this.conditionRows[ index ].conditionRelation === ConditionRelation.Or;
+		},
 	},
 	computed: {
 		conditionRows(): ConditionRow[] {
@@ -99,6 +127,7 @@ export default Vue.extend( {
 	},
 	components: {
 		Button,
+		ConditionRelationToggle,
 		QueryResult,
 		QueryCondition,
 		AddCondition,
@@ -166,6 +195,30 @@ $largeViewportWidth: 90em; //~1438px
 		padding-block: $dimension-layout-xxsmall;
 		padding-inline: $dimension-layout-xxsmall;
 	}
+}
+
+.querybuilder__condition-wrapper-below {
+	margin-block-start: 0;
+	border-block-start: none;
+}
+
+.querybuilder__condition-wrapper-above {
+	margin-block-end: 0;
+	border-inline: none;
+	border-block-end: none;
+}
+
+.querybuilder__condition-group-above {
+	border-inline: $border-width-thin $border-style-base $border-color-base-default;
+	background-color: $color-base-80;
+}
+
+.querybuilder__condition-relation-toggle-or {
+	padding-inline-start: $dimension-layout-xsmall;
+}
+
+.querybuilder__condition-relation-toggle {
+	padding-block: $dimension-layout-xsmall;
 }
 
 .querybuilder__condition-placeholder {
