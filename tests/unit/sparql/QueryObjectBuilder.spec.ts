@@ -323,6 +323,25 @@ describe( 'QueryObjectBuilder', () => {
 			],
 			where: [
 				{
+					triples: [
+						{
+							object: {
+								termType: 'BlankNode',
+								value: 'anyValue',
+							},
+							predicate: {
+								termType: 'NamedNode',
+								value: 'http://wikiba.se/ontology#sitelinks',
+							},
+							subject: {
+								termType: 'Variable',
+								value: 'item',
+							},
+						},
+					],
+					type: 'bgp',
+				},
+				{
 					type: 'minus',
 					patterns: [
 						{
@@ -352,25 +371,6 @@ describe( 'QueryObjectBuilder', () => {
 							],
 						},
 					],
-				},
-				{
-					triples: [
-						{
-							object: {
-								termType: 'BlankNode',
-								value: 'anyValue',
-							},
-							predicate: {
-								termType: 'NamedNode',
-								value: 'http://wikiba.se/ontology#sitelinks',
-							},
-							subject: {
-								termType: 'Variable',
-								value: 'item',
-							},
-						},
-					],
-					type: 'bgp',
 				},
 			],
 			type: 'query',
@@ -408,6 +408,25 @@ describe( 'QueryObjectBuilder', () => {
 			],
 			where: [
 				{
+					triples: [
+						{
+							object: {
+								termType: 'BlankNode',
+								value: 'anyValue',
+							},
+							predicate: {
+								termType: 'NamedNode',
+								value: 'http://wikiba.se/ontology#sitelinks',
+							},
+							subject: {
+								termType: 'Variable',
+								value: 'item',
+							},
+						},
+					],
+					type: 'bgp',
+				},
+				{
 					type: 'minus',
 					patterns: [
 						{
@@ -437,25 +456,6 @@ describe( 'QueryObjectBuilder', () => {
 							],
 						},
 					],
-				},
-				{
-					triples: [
-						{
-							object: {
-								termType: 'BlankNode',
-								value: 'anyValue',
-							},
-							predicate: {
-								termType: 'NamedNode',
-								value: 'http://wikiba.se/ontology#sitelinks',
-							},
-							subject: {
-								termType: 'Variable',
-								value: 'item',
-							},
-						},
-					],
-					type: 'bgp',
 				},
 			],
 			type: 'query',

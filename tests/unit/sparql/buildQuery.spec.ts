@@ -171,8 +171,9 @@ describe( 'buildQuery', () => {
 		const value = 'blah';
 		const expectedQuery =
 			`SELECT DISTINCT ?item WHERE {
+			?item wikibase:sitelinks _:anyValue.
 			MINUS { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }
-			?item wikibase:sitelinks _:anyValue. }`;
+			}`;
 		const condition = getSimpleCondition( propertyId, value );
 		condition.negate = true;
 		const actualQuery = buildQuery( {
