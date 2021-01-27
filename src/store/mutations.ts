@@ -3,6 +3,7 @@ import Property from '@/data-model/Property';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
 import { getFreshConditionRow } from './index';
+import ConditionRelation from '@/data-model/ConditionRelation';
 
 export default {
 	setValue( state: RootState, payload: { value: string; conditionIndex: number } ): void {
@@ -40,14 +41,20 @@ export default {
 	setSubclasses( state: RootState, payload: { subclasses: boolean; conditionIndex: number } ): void {
 		state.conditionRows[ payload.conditionIndex ].subclasses = payload.subclasses;
 	},
+	setConditionRelation( state: RootState, payload: { value: ConditionRelation; conditionIndex: number } ): void {
+		state.conditionRows[ payload.conditionIndex ].conditionRelation = payload.value;
+	},
 	setErrors( state: RootState, errors: Error[] ): void {
 		state.errors = errors;
 	},
 	addCondition( state: RootState ): void {
-		state.conditionRows.push( getFreshConditionRow() );
+		state.conditionRows.push( getFreshConditionRow( state.conditionRows.length === 0 ) );
 	},
 	removeCondition( state: RootState, conditionIndex: number ): void {
 		state.conditionRows.splice( conditionIndex, 1 );
+		if ( state.conditionRows.length === 1 ) {
+			state.conditionRows[ 0 ].conditionRelation = null;
+		}
 	},
 	setFieldErrors(
 		state: RootState,

@@ -4,6 +4,7 @@ import QueryRepresentation from '@/sparql/QueryRepresentation';
 import Property from '@/data-model/Property';
 import Error from '@/data-model/Error';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
+import ConditionRelation from '@/data-model/ConditionRelation';
 
 function getQueryValueFromStoreValue( datatype: string, storeValue: Value ): string {
 	if ( storeValue === null ) {
@@ -97,6 +98,11 @@ export default {
 	subclasses( rootState: RootState ) {
 		return ( conditionIndex: number ): boolean => {
 			return rootState.conditionRows[ conditionIndex ].subclasses;
+		};
+	},
+	conditionRelation( rootState: RootState ) {
+		return ( conditionIndex: number ): ConditionRelation | null => {
+			return rootState.conditionRows[ conditionIndex ].conditionRelation;
 		};
 	},
 	getErrors( rootState: RootState ): Error[] {

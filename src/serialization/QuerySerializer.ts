@@ -13,6 +13,7 @@ export default class QuerySerializer {
 					value: condition.propertyData.datatype === 'wikibase-item' ?
 						( condition.valueData.value as ItemValue ).id : condition.valueData.value,
 					subclasses: condition.subclasses,
+					conditionRelation: condition.conditionRelation,
 					negate: condition.negate,
 				},
 			);

@@ -8,6 +8,7 @@ import QueryBuilderServices from '@/QueryBuilderServices';
 import RootState, { PropertyData, ConditionRow } from '@/store/RootState';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
+import ConditionRelation from '@/data-model/ConditionRelation';
 
 Vue.use( Vuex );
 
@@ -21,7 +22,7 @@ export function newEmptyPropertyData( propertyError: Error|null = null ): Proper
 	};
 }
 
-export function getFreshConditionRow(): ConditionRow {
+export function getFreshConditionRow( isFirstCondition: boolean ): ConditionRow {
 	return {
 		propertyData: newEmptyPropertyData(),
 		valueData: {
@@ -33,6 +34,7 @@ export function getFreshConditionRow(): ConditionRow {
 		},
 		subclasses: false,
 		negate: false,
+		conditionRelation: isFirstCondition ? null : ConditionRelation.And,
 		conditionId: `condition-id-${Math.random()}`,
 	};
 }
@@ -41,7 +43,7 @@ export function createStore( services: QueryBuilderServices ): Store<RootState> 
 
 	return new Store( {
 		state: {
-			conditionRows: [ getFreshConditionRow() ],
+			conditionRows: [ getFreshConditionRow( true ) ],
 			errors: [],
 			limit: 100,
 			useLimit: true,

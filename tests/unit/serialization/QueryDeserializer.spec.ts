@@ -19,6 +19,7 @@ function getStateConditionRow( propertyId: string, value: string ): ConditionRow
 			propertyValueRelationData: {
 				value: PropertyValueRelation.Matching,
 			},
+			conditionRelation: null,
 			subclasses: false,
 			negate: false,
 			conditionId: '1',
@@ -50,6 +51,7 @@ describe( 'QueryDeserializer', () => {
 				"propertyValueRelation":"matching",
 				"value":"${value}",
 				"subclasses":false,
+				"conditionRelation":null,
 				"negate":false}],
 			"limit":${limit},
 			"useLimit":${useLimit}}
