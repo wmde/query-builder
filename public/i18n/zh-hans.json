@@ -3,10 +3,12 @@
 		"authors": [
 			")8",
 			"Colathewikian",
+			"LeijieWang",
 			"Wuqianye",
 			"Yfdyh000"
 		]
 	},
+	"query-builder-intro-text": "维基数据请求构造器为构造简单的维基数据请求提供可视化界面。对于那些使用$1——强大的请求语言——缺乏经验的用户而言，它是十分理想的。这一请求构造器并不能提供SPARAL的全部功能，但你始终可以打开你在请求服务中的请求，在那里你可以通过在结果上的链接查看、编辑或扩展它。[$2 十分欢迎反馈]。",
 	"query-builder-input-value-label": "值",
 	"query-builder-item-value-lookup-no-match-found": "找不到匹配项目",
 	"query-builder-result-header": "结果",

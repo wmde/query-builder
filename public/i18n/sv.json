@@ -6,6 +6,7 @@
 		]
 	},
 	"query-builder-heading": "Enkel frågebyggare",
+	"query-builder-intro-text": "Wikidata Query Builder tillhandahåller ett visuellt gränssnitt för att bygga en enklare Wikidata-fråga. Den är ideell för användare med lite eller ingen erfarenhet med [$1 SPARQL], det kraftfulla frågespråket. Query Builder erbjuder inte SPARQL:s fullständiga funktionalitet, men du kan alltid öppna din fråga i Query Service där du kan visa, redigera eller utvidga den via länken ovanför resultaten. [$2 Återkoppling välkomnas här].",
 	"query-builder-find-all-items": "Hitta alla objekt...",
 	"query-builder-run-query": "Kör frågesökning",
 	"query-builder-input-value-label": "Värde",
@@ -17,6 +18,7 @@
 	"query-builder-property-lookup-limited-support-tag": "begränsat stöd",
 	"query-builder-property-lookup-limited-support-note": "Egenskaper med begränsat stöd kan inte filtreras efter värde",
 	"query-builder-result-placeholder": "Resultat visas här",
+	"query-builder-result-header": "Resultat",
 	"query-builder-result-error-empty-form": "Verkar som att frågebyggaren var tom, var god skriv in en giltig fråga först och försök igen.",
 	"query-builder-result-error-incomplete-form": "Ett eller flera fält är tomma. Slutför frågesökningen eller välj en passande fälttyp.",
 	"query-builder-result-error-missing-property": "Välj en egenskap",
