@@ -8,6 +8,7 @@
   },
   "scripts": {
     "e2e": "vue-cli-service test:e2e",
+    "cypress": "CYPRESS_BASE_URL=${APP_URL:-http://localhost:8082} cypress run",
     "e2e:saucelabs": "env DATE=\"$(date)\" nightwatch --config nightwatch.conf.js --env sauceChrome,sauceFirefox,sauceEdge,sauceSafari",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production",
