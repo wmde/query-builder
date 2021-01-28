@@ -38,6 +38,20 @@ describe( 'Basic Query', () => {
 
 		cy.get( '.querybuilder__run .wikit-Button' ).click();
 
-		cy.get( '.querybuilder__result__iframe' ).should( 'be.visible' );
+		const iframe = cy.get( '.querybuilder__result__iframe' );
+		iframe.then( element => {
+			const url = element.attr( 'src' );
+			const query = url.split( '#' )[ 1 ];
+
+			const expected = `SELECT DISTINCT ?item ?itemLabel WHERE {
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
+  {
+    SELECT DISTINCT ?item WHERE { ?item (p:P1429/ps:P1429/(wdt:undefined*)) wd:Q146. }
+    LIMIT 100
+  }
+}`;
+
+			expect( query ).to.equal( encodeURI( expected ) );
+		} )
 	} );
 } )
