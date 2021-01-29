@@ -29,8 +29,8 @@ export default Vue.extend( {
 	computed: {
 		textInputValue: {
 			// TODO: change after deciding how to validate numbers for TextInput
-			get(): ( number ) {
-				return this.$store.getters.limit;
+			get(): string {
+				return this.$store.getters.limit.toString();
 			},
 			set( value: string ): void {
 				if ( isNaN( parseInt( value ) ) ) {
