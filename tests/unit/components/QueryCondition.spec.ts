@@ -1,16 +1,15 @@
 import DeleteConditionButton from '@/components/DeleteConditionButton.vue';
 import ValueInput from '@/components/ValueInput.vue';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
-import Vuex, { Store } from 'vuex';
+import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import PropertyLookup from '@/components/PropertyLookup.vue';
 import Vue from 'vue';
 import i18n from 'vue-banana-i18n';
-import createActions from '@/store/actions';
-import services from '@/ServicesFactory';
 import QueryCondition from '@/components/QueryCondition.vue';
 import NegationToggle from '@/components/NegationToggle.vue';
 import SubclassCheckbox from '@/components/SubclassCheckbox.vue';
+import { newStore } from '../../util/store';
 const messages = {};
 
 Vue.use( i18n, {
@@ -18,30 +17,6 @@ Vue.use( i18n, {
 	messages,
 	wikilinks: true,
 } );
-
-function newStore( getters = {} ): Store<any> {
-	return new Vuex.Store( {
-		getters: {
-			property: jest.fn().mockReturnValue( jest.fn() ),
-			datatype: jest.fn().mockReturnValue( jest.fn() ),
-			value: jest.fn().mockReturnValue( jest.fn() ),
-			negate: jest.fn().mockReturnValue( jest.fn() ),
-			valueError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( null ) ),
-			propertyError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( null ) ),
-			conditionRows: jest.fn().mockReturnValue( jest.fn().mockReturnValue( Array ) ),
-			limitedSupport: jest.fn().mockReturnValue( jest.fn().mockReturnValue( false ) ),
-			subclasses: jest.fn().mockReturnValue( jest.fn().mockReturnValue( false ) ),
-			propertyValueRelation: jest.fn().mockReturnValue(
-				jest.fn().mockReturnValue( PropertyValueRelation.Matching ),
-			),
-			...getters,
-		},
-		actions: createActions(
-			services.get( 'searchEntityRepository' ),
-			services.get( 'metricsCollector' ),
-		),
-	} );
-}
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -70,8 +45,7 @@ describe( 'QueryCondition.vue', () => {
 
 	it( 'updates the store property when the user changes it in the lookup', async () => {
 		const property = { label: 'postal code', id: 'P123' };
-		const propertyGetter = () => () => ( property );
-		const store = newStore( propertyGetter );
+		const store = newStore();
 		const conditionIndex = 0;
 		store.dispatch = jest.fn();
 		const wrapper = shallowMount( QueryCondition, {
@@ -108,9 +82,8 @@ describe( 'QueryCondition.vue', () => {
 
 	it( 'set subclasses to true when property type is wikibase-item', async () => {
 
-		const property = { label: 'postal code', id: 'P123', datatype: 'wikibase-item' };
-		const propertyGetter = () => () => ( property );
-		const store = newStore( propertyGetter );
+		const property = { label: 'postal code', id: 'P31', datatype: 'wikibase-item' };
+		const store = newStore();
 		const conditionIndex = 0;
 		store.dispatch = jest.fn();
 		const wrapper = shallowMount( QueryCondition, {
@@ -129,8 +102,7 @@ describe( 'QueryCondition.vue', () => {
 	it( 'set subclasses to false when property type is string', async () => {
 
 		const property = { label: 'postal code', id: 'P123', datatype: 'string' };
-		const propertyGetter = () => () => ( property );
-		const store = newStore( propertyGetter );
+		const store = newStore();
 		const conditionIndex = 0;
 		store.dispatch = jest.fn();
 		const wrapper = shallowMount( QueryCondition, {

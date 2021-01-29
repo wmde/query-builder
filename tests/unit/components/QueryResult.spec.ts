@@ -1,17 +1,9 @@
-import Vuex, { Store } from 'vuex';
+import Vuex from 'vuex';
 import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
 import QueryResult from '@/components/QueryResult.vue';
 import Vue from 'vue';
 import i18n from 'vue-banana-i18n';
-
-function newStore( getters = {} ): Store<any> {
-	return new Vuex.Store( {
-		getters: {
-			getErrors: () => jest.fn().mockReturnValue( [] ),
-			...getters,
-		},
-	} );
-}
+import { newStore } from '../../util/store';
 
 const localVue = createLocalVue();
 const messages = {
