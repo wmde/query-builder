@@ -34,7 +34,7 @@
 <script lang="ts">
 import { Message } from '@wmde/wikit-vue-components';
 import Vue from 'vue';
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default Vue.extend( {
 	name: 'QueryResult',
@@ -58,10 +58,8 @@ export default Vue.extend( {
 		},
 	},
 	computed: {
-		...mapState( {
-			property: 'property',
-			textInputValue: 'value',
-			errors: 'errors',
+		...mapGetters( {
+			errors: 'getErrors',
 		} ),
 	},
 	components: {

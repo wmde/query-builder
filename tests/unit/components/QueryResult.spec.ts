@@ -1,18 +1,9 @@
-import Vuex, { Store } from 'vuex';
+import Vuex from 'vuex';
 import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
 import QueryResult from '@/components/QueryResult.vue';
 import Vue from 'vue';
 import i18n from 'vue-banana-i18n';
-
-function newStore( state = {} ): Store<any> {
-	return new Vuex.Store( {
-		state: {
-			property: 'potato',
-			errors: [],
-			...state,
-		},
-	} );
-}
+import { newStore } from '../../util/store';
 
 const localVue = createLocalVue();
 const messages = {
@@ -37,7 +28,6 @@ describe( 'QueryResult.vue', () => {
 			propsData: {
 				encodedQuery: '',
 				iframeRenderKey: 0,
-				errors: [],
 			},
 		} );
 		expect( wrapper.find( '.querybuilder__result__description' ).text() ).toBe( 'Result placeholder' );
@@ -47,7 +37,7 @@ describe( 'QueryResult.vue', () => {
 	it( 'Show errors', () => {
 		const store = newStore(
 			{
-				errors: [
+				getErrors: () => [
 					{
 						message: 'Something happened',
 						type: 'notice',

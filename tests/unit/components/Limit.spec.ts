@@ -1,12 +1,10 @@
 import Vue from 'vue';
 import Limit from '@/components/Limit.vue';
 import { Checkbox, TextInput } from '@wmde/wikit-vue-components';
-import Vuex, { Store } from 'vuex';
-import createActions from '@/store/actions';
-import services from '@/ServicesFactory';
+import Vuex from 'vuex';
 import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
 import i18n from 'vue-banana-i18n';
-import PropertyValueRelation from '@/data-model/PropertyValueRelation';
+import { newStore } from '../../util/store';
 
 const messages = {};
 Vue.use( i18n, {
@@ -14,26 +12,6 @@ Vue.use( i18n, {
 	messages,
 	wikilinks: true,
 } );
-
-function newStore( getters: Record<string, Function> = {} ): Store<any> {
-	return new Vuex.Store( {
-		getters: {
-			property: jest.fn().mockReturnValue( jest.fn() ),
-			value: jest.fn().mockReturnValue( jest.fn() ),
-			valueError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( null ) ),
-			propertyError: jest.fn().mockReturnValue( jest.fn().mockReturnValue( null ) ),
-			limitedSupport: jest.fn().mockReturnValue( jest.fn().mockReturnValue( false ) ),
-			propertyValueRelation: jest.fn().mockReturnValue(
-				jest.fn().mockReturnValue( PropertyValueRelation.Matching ),
-			),
-			...getters,
-		},
-		actions: createActions(
-			services.get( 'searchEntityRepository' ),
-			services.get( 'metricsCollector' ),
-		),
-	} );
-}
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
