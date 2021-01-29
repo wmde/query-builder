@@ -1,0 +1,24 @@
+{
+	"searchinfo": {
+		"search": "has pet"
+	},
+	"search": [
+		{
+			"id": "P1429",
+			"title": "Property:P1429",
+			"pageid": 18988419,
+			"repository": "wikidata",
+			"url": "//www.wikidata.org/wiki/Property:P1429",
+			"datatype": "wikibase-item",
+			"concepturi": "http://www.wikidata.org/entity/P1429",
+			"label": "has pet",
+			"description": "pet that a person owns",
+			"match": {
+				"type": "label",
+				"language": "en",
+				"text": "has pet"
+			}
+		}
+	],
+	"success": 1
+}

@@ -9,21 +9,26 @@ describe( 'Basic Query', () => {
 	it( 'can create a query with a single condition', () => {
 		cy.visit( '/' );
 
-		cy.get( 'h1' ).should( 'contain', 'Query Builder' );
-
 		cy.intercept(
-			wikibaseApiRequest( { action: 'wbsearchentities', search: 'has pet' } )
+			wikibaseApiRequest( { action: 'wbsearchentities', search: 'has pet' } ),
+			{ fixture: 'wbsearchentities-has-pet.json' },
 		).as( 'hasPetRequest' );
+		cy.intercept(
+			wikibaseApiRequest( { action: 'wbsearchentities', search: 'house cat' } ),
+			{ fixture: 'wbsearchentities-house-cat.json' },
+		).as( 'houseCatRequest' );
+		cy.intercept(
+			wikibaseApiRequest( { action: 'wbsearchentities' } ),
+			{ fixture: 'wbsearchentities-empty.json' },
+		);
+
+		cy.get( 'h1' ).should( 'contain', 'Query Builder' );
 
 		cy.get( '.query-condition__property-lookup .wikit-Input' )
 			.type( 'has pet' )
 			.wait( '@hasPetRequest' );
 
 		cy.get( '.query-condition__property-lookup .wikit-OptionsMenu__item' ).click();
-
-		cy.intercept(
-			wikibaseApiRequest( { action: 'wbsearchentities', search: 'house cat' } )
-		).as( 'houseCatRequest' );
 
 		cy.get( '.query-condition__value-input .wikit-Input' )
 			.type( 'house cat' )
