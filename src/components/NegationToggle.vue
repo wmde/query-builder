@@ -1,17 +1,20 @@
 <template>
 	<ToggleButtonGroup
 		:value="value"
+		@input="$emit('input', $event)"
 		class="negationToggle"
 	>
 		<template v-slot:default>
 			<ToggleButton
 				value="with"
-				@click.native="$emit('input', 'with')"
-			>{{ $i18n( 'query-builder-negation-option-label-with' ) }}</ToggleButton>
+			>
+				{{ $i18n( 'query-builder-negation-option-label-with' ) }}
+			</ToggleButton>
 			<ToggleButton
 				value="without"
-				@click.native="$emit('input', 'without')"
-			>{{ $i18n( 'query-builder-negation-option-label-without' ) }}</ToggleButton>
+			>
+				{{ $i18n( 'query-builder-negation-option-label-without' ) }}
+			</ToggleButton>
 		</template>
 	</ToggleButtonGroup>
 </template>
@@ -31,9 +34,3 @@ export default Vue.extend( {
 	},
 } );
 </script>
-
-<style scoped lang="scss">
-	.negationToggle {
-		white-space: nowrap;
-	}
-</style>
