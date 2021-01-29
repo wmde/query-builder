@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Limit from '@/components/Limit.vue';
-import { TextInput } from '@wmde/wikit-vue-components';
+import { Checkbox, TextInput } from '@wmde/wikit-vue-components';
 import Vuex, { Store } from 'vuex';
 import createActions from '@/store/actions';
 import services from '@/ServicesFactory';
@@ -15,7 +15,7 @@ Vue.use( i18n, {
 	wikilinks: true,
 } );
 
-function newStore( getters = {} ): Store<any> {
+function newStore( getters: Record<string, Function> = {} ): Store<any> {
 	return new Vuex.Store( {
 		getters: {
 			property: jest.fn().mockReturnValue( jest.fn() ),
@@ -41,8 +41,8 @@ localVue.use( Vuex );
 describe( 'Limit.vue', () => {
 	it( 'updates the store when user checks useLimit checkbox', async () => {
 		const useLimit = true;
-		const useLimitGetter = () => () => ( useLimit );
-		const store = newStore( useLimitGetter );
+		const useLimitGetter = (): boolean => false;
+		const store = newStore( { useLimit: useLimitGetter, limit: () => 100 } );
 
 		const wrapper = mount( Limit, {
 			store,
@@ -51,7 +51,7 @@ describe( 'Limit.vue', () => {
 
 		store.dispatch = jest.fn();
 
-		await wrapper.find( 'input[type="checkbox"]' ).setChecked();
+		wrapper.findComponent( Checkbox ).vm.$emit( 'update:checked', useLimit );
 
 		expect( store.dispatch ).toHaveBeenCalledWith( 'setUseLimit', useLimit );
 
@@ -59,8 +59,8 @@ describe( 'Limit.vue', () => {
 
 	it( 'updates the store when user changed value in limit field', async () => {
 		const limit = 20;
-		const limitGetter = () => () => ( limit );
-		const store = newStore( limitGetter );
+		const limitGetter = (): number => 10;
+		const store = newStore( { useLimit: () => true, limit: limitGetter } );
 
 		const wrapper = shallowMount( Limit, {
 			store,
@@ -69,7 +69,7 @@ describe( 'Limit.vue', () => {
 
 		store.dispatch = jest.fn();
 
-		await wrapper.findComponent( TextInput ).vm.$emit( 'input', limit.toString() );
+		wrapper.findComponent( TextInput ).vm.$emit( 'input', limit.toString() );
 		// TODO: update when we have a number component
 
 		expect( store.dispatch ).toHaveBeenCalledWith( 'setLimit', limit );
