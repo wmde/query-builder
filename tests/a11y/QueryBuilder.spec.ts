@@ -49,6 +49,9 @@ describe( 'QueryBuilder.vue', () => {
 					),
 					negate: jest.fn().mockReturnValue( jest.fn().mockReturnValue( condition.negate ) ),
 					datatype: jest.fn().mockReturnValue( jest.fn().mockReturnValue( condition.datatype ) ),
+					limit: jest.fn().mockReturnValue( 100 ),
+					useLimit: jest.fn().mockReturnValue( true ),
+					omitLabels: jest.fn().mockReturnValue( false ),
 				},
 				actions: {
 					incrementMetric: jest.fn(),
