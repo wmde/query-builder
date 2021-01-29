@@ -4,12 +4,11 @@ import QueryResult from '@/components/QueryResult.vue';
 import Vue from 'vue';
 import i18n from 'vue-banana-i18n';
 
-function newStore( state = {} ): Store<any> {
+function newStore( getters = {} ): Store<any> {
 	return new Vuex.Store( {
-		state: {
-			property: 'potato',
-			errors: [],
-			...state,
+		getters: {
+			getErrors: () => jest.fn().mockReturnValue( [] ),
+			...getters,
 		},
 	} );
 }
@@ -36,7 +35,6 @@ describe( 'QueryResult.vue', () => {
 			propsData: {
 				encodedQuery: '',
 				iframeRenderKey: 0,
-				errors: [],
 			},
 		} );
 		expect( wrapper.find( '.querybuilder__result__description' ).text() ).toBe( 'Result placeholder' );
@@ -46,7 +44,7 @@ describe( 'QueryResult.vue', () => {
 	it( 'Show errors', () => {
 		const store = newStore(
 			{
-				errors: [
+				getErrors: () => [
 					{
 						message: 'Something happened',
 						type: 'notice',
