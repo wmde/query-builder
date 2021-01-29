@@ -17,6 +17,7 @@ function newStore( state = {} ): Store<any> {
 const localVue = createLocalVue();
 const messages = {
 	en: {
+		'query-builder-result-link-text': 'Link to query service',
 		'query-builder-result-placeholder': 'Result placeholder',
 	},
 };
@@ -64,5 +65,19 @@ describe( 'QueryResult.vue', () => {
 		} );
 		expect( wrapper.find( '.querybuilder__result__errors' ).text() ).toBe( 'Something happened' );
 		expect( wrapper.findAll( 'iframe' ) ).toHaveLength( 0 );
+	} );
+
+	it( 'Show link to result', () => {
+		const wrapper = shallowMount( QueryResult, {
+			store: newStore(),
+			localVue,
+			propsData: {
+				encodedQuery: 'foo-query-result',
+				iframeRenderKey: 0,
+				errors: [],
+			},
+		} );
+		expect( wrapper.find( '.querybuilder__result__link' ).text() ).toBe( 'Link to query service' );
+		expect( wrapper.find( '.querybuilder__result__link a' ).attributes( 'href' ) ).toContain( 'foo-query-result' );
 	} );
 } );

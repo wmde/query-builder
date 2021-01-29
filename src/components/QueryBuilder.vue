@@ -100,7 +100,7 @@ export default Vue.extend( {
 } );
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 // TODO replace with link component once available
 a {
 	font-family: $font-family-style-link;
@@ -109,6 +109,11 @@ a {
 	font-size: $font-size-style-link;
 	line-height: $font-line-height-style-link;
 	color: $font-color-link-default;
+	transition: $transition-interaction-link-property $transition-interaction-link-duration;
+
+	&:active {
+		color: $font-color-progressive-active;
+	}
 
 	&:visited {
 		color: $font-color-link-visited;

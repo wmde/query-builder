@@ -1,5 +1,10 @@
 <template>
 	<div class="querybuilder__result">
+		<div v-if="encodedQuery.length !== 0" class="querybuilder__result__link">
+			<a :href="queryServiceUrl + '#' + encodedQuery" target="_blank" >
+				{{ $i18n('query-builder-result-link-text')}}
+			</a>
+		</div>
 		<div class="querybuilder__result__header">
 			<h2>{{ $i18n('query-builder-result-header')}}</h2>
 		</div>
@@ -36,6 +41,7 @@ export default Vue.extend( {
 	data() {
 		return {
 			queryServiceEmbedUrl: process.env.VUE_APP_QUERY_SERVICE_EMBED_URL,
+			queryServiceUrl: process.env.VUE_APP_QUERY_SERVICE_URL,
 		};
 	},
 	props: {
@@ -67,6 +73,11 @@ export default Vue.extend( {
 <style lang="scss">
 	.querybuilder__result {
 		margin-block-start: $dimension-layout-small;
+	}
+
+	.querybuilder__result__link {
+		margin-block-end: $dimension-layout-xxsmall;
+		text-align: end;
 	}
 
 	.querybuilder__result__errors {
