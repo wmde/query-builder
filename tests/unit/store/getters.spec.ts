@@ -2,32 +2,9 @@ import RootState from '@/store/RootState';
 import getters from '@/store/getters';
 import QueryRepresentation from '@/sparql/QueryRepresentation';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
+import { getFreshRootState } from '../../util/store';
 
 describe( 'getters', () => {
-	function getFreshRootState(): RootState {
-		const simpleRootState: RootState = {
-			conditionRows: [ {
-				valueData: { value: 'foo', valueError: null },
-				propertyData: {
-					id: 'P123',
-					label: 'abc',
-					datatype: 'string',
-					isPropertySet: true,
-					propertyError: null,
-				},
-				propertyValueRelationData: { value: PropertyValueRelation.Matching },
-				conditionId: '0.123',
-				subclasses: false,
-				negate: false,
-			} ],
-			limit: 0,
-			useLimit: false,
-			omitLabels: true,
-			errors: [],
-		};
-		return simpleRootState;
-	}
-
 	describe( 'limitedSupport', () => {
 		it( 'returns false if the datatype is supported', () => {
 			const state: RootState = getFreshRootState();

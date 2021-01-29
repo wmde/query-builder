@@ -1,31 +1,9 @@
 import mutations from '@/store/mutations';
 import RootState, { ConditionRow } from '@/store/RootState';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
+import { getFreshRootState } from '../../util/store';
 
 describe( 'mutations', () => {
-	function getFreshRootState(): RootState {
-		const simpleRootState = {
-			conditionRows: [ {
-				valueData: { value: 'foo', valueError: null },
-				propertyData: {
-					id: 'P123',
-					label: 'abc',
-					datatype: 'string',
-					isPropertySet: true,
-					propertyError: null,
-				},
-				propertyValueRelationData: { value: PropertyValueRelation.Matching },
-				conditionId: '0.123',
-				subclasses: false,
-				negate: false,
-			} ],
-			limit: 0,
-			useLimit: false,
-			omitLabels: true,
-			errors: [],
-		};
-		return simpleRootState;
-	}
 	it( 'setValue', () => {
 		const expectedValue = 'whatever';
 		const state: RootState = getFreshRootState();
