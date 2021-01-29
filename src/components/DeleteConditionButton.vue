@@ -7,7 +7,7 @@
 		:aria-label="$i18n('query-builder-delete-condition')"
 		@click.native="$emit('click')"
 		:disabled="disabled"
-	> <Icon type="trash" size="large" color="inherit" />
+	> <Icon type="trash" size="large" color="inherit" class="delete-condition-button__icon"/>
 	</Button>
 </template>
 
@@ -28,3 +28,9 @@ export default Vue.extend( {
 	},
 } );
 </script>
+
+<style lang="scss">
+	.delete-condition-button__icon {
+		vertical-align: top;
+	}
+</style>
