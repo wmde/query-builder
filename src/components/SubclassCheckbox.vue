@@ -3,9 +3,9 @@
 		<Checkbox
 			class="querybuilder__include-subclasses-checkbox"
 			:id="id"
-			:checked.sync="isChecked"
+			:checked="isChecked"
 			:disabled="disabled"
-			@update:checked="$emit( 'subclass-check', $event.target )"
+			@update:checked="$emit( 'subclass-check', $event )"
 			:label="$i18n('query-builder-include-subclasses' )"
 		/>
 	</div>

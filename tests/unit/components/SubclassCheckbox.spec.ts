@@ -1,6 +1,7 @@
+import { Checkbox } from '@wmde/wikit-vue-components';
 import Vue from 'vue';
 import SubclassCheckbox from '@/components/SubclassCheckbox.vue';
-import { mount, createLocalVue } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import i18n from 'vue-banana-i18n';
 import Vuex from 'vuex';
 
@@ -20,7 +21,7 @@ describe( 'SubclassCheckbox.vue', () => {
 		const subclassesGetter = () => () => ( subclasses );
 		const store = new Vuex.Store( { getters: { subclassesGetter } } );
 
-		const wrapper = mount( SubclassCheckbox, {
+		const wrapper = shallowMount( SubclassCheckbox, {
 			store,
 			localVue,
 			propsData: {
@@ -31,11 +32,9 @@ describe( 'SubclassCheckbox.vue', () => {
 
 		store.dispatch = jest.fn();
 
-		await wrapper.find( 'input[type="checkbox"]' ).setChecked();
-
-		await Vue.nextTick();
+		wrapper.findComponent( Checkbox ).vm.$emit( 'update:checked', true );
 
 		expect( wrapper.emitted( 'subclass-check' ) ).toBeTruthy();
-
+		expect( wrapper.emitted( 'subclass-check' ) ).toStrictEqual( [ [ true ] ] );
 	} );
 } );
