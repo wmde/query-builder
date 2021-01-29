@@ -1,5 +1,3 @@
-const { createYield } = require( 'typescript' );
-
 function wikibaseApiRequest( query ) {
 	return {
 		url: 'https://www.wikidata.org/w/api.php',
@@ -17,9 +15,9 @@ describe( 'Basic Query', () => {
 			wikibaseApiRequest( { action: 'wbsearchentities', search: 'has pet' } )
 		).as( 'hasPetRequest' );
 
-		// Gets the first input match
 		cy.get( '.query-condition__property-lookup .wikit-Input' )
-			.type( 'has pet' ).wait( '@hasPetRequest' );
+			.type( 'has pet' )
+			.wait( '@hasPetRequest' );
 
 		cy.get( '.query-condition__property-lookup .wikit-OptionsMenu__item' ).click();
 
@@ -28,9 +26,8 @@ describe( 'Basic Query', () => {
 		).as( 'houseCatRequest' );
 
 		cy.get( '.query-condition__value-input .wikit-Input' )
-			.type( 'house cat' );
-
-		cy.wait( '@houseCatRequest' );
+			.type( 'house cat' )
+			.wait( '@houseCatRequest' );
 
 		cy.get( '.query-condition__value-input .wikit-OptionsMenu__item' )
 			.first()
@@ -38,8 +35,7 @@ describe( 'Basic Query', () => {
 
 		cy.get( '.querybuilder__run .wikit-Button' ).click();
 
-		const iframe = cy.get( '.querybuilder__result__iframe' );
-		iframe.then( element => {
+		cy.get( '.querybuilder__result__iframe' ).then( element => {
 			const url = element.attr( 'src' );
 			const query = url.split( '#' )[ 1 ];
 
