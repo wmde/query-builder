@@ -42,7 +42,7 @@ export default class QueryObjectBuilder {
 			}
 
 			if ( isOnlyNegateQuery ) {
-				this.queryObject.where.push(
+				this.queryObject.where.unshift(
 					{
 						type: 'bgp',
 						triples: [
