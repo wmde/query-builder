@@ -10,6 +10,7 @@ import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import MetricsCollector from '@/data-access/MetricsCollector';
 import SearchEntityRepository from '@/data-access/SearchEntityRepository';
 import SearchOptions from '@/data-access/SearchOptions';
+import ConditionRelation from '@/data-model/ConditionRelation';
 
 // eslint-disable-next-line max-len
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/explicit-module-boundary-types
@@ -96,6 +97,11 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 	setSubclasses( context: ActionContext<RootState, RootState>,
 		payload: { subclasses: boolean; conditionIndex: number } ): void {
 		context.commit( 'setSubclasses', payload );
+	},
+	setConditionRelation(
+		context: ActionContext<RootState, RootState>,
+		payload: { value: ConditionRelation | null; conditionIndex: number } ): void {
+		context.commit( 'setConditionRelation', payload );
 	},
 	setErrors( context: ActionContext<RootState, RootState>, errors: Error[] ): void {
 		context.commit( 'setErrors', errors );

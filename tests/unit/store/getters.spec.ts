@@ -5,6 +5,7 @@ import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import { getFreshRootState } from '../../util/store';
 
 describe( 'getters', () => {
+
 	describe( 'limitedSupport', () => {
 		it( 'returns false if the datatype is supported', () => {
 			const state: RootState = getFreshRootState();
@@ -23,6 +24,14 @@ describe( 'getters', () => {
 			state.conditionRows[ 0 ].propertyData.datatype = 'I am not supported';
 
 			expect( getters.limitedSupport( state )( 0 ) ).toBe( true );
+		} );
+	} );
+
+	describe( 'conditionRelation', () => {
+		it( 'returns conditionRelation null if conditionRows.length === 1', () => {
+			const state: RootState = getFreshRootState(); // has one element by default
+
+			expect( getters.conditionRelation( state )( 0 ) ).toBe( null );
 		} );
 	} );
 

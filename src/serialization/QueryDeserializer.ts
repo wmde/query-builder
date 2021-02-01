@@ -24,6 +24,7 @@ export default class QueryDeserializer {
 						value: condition.propertyValueRelation,
 					},
 					subclasses: condition.subclasses,
+					conditionRelation: condition.conditionRelation,
 					negate: condition.negate,
 					conditionId: conditionId.toString(),
 				},

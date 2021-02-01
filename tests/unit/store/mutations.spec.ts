@@ -1,9 +1,33 @@
 import mutations from '@/store/mutations';
 import RootState, { ConditionRow } from '@/store/RootState';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
-import { getFreshRootState } from '../../util/store';
+import ConditionRelation from '@/data-model/ConditionRelation';
 
 describe( 'mutations', () => {
+	function getFreshRootState(): RootState {
+		const simpleRootState = {
+			conditionRows: [ {
+				valueData: { value: 'foo', valueError: null },
+				propertyData: {
+					id: 'P123',
+					label: 'abc',
+					datatype: 'string',
+					isPropertySet: true,
+					propertyError: null,
+				},
+				propertyValueRelationData: { value: PropertyValueRelation.Matching },
+				conditionRelation: null,
+				conditionId: '0.123',
+				subclasses: false,
+				negate: false,
+			} ],
+			limit: 0,
+			useLimit: false,
+			omitLabels: true,
+			errors: [],
+		};
+		return simpleRootState;
+	}
 	it( 'setValue', () => {
 		const expectedValue = 'whatever';
 		const state: RootState = getFreshRootState();
@@ -65,6 +89,7 @@ describe( 'mutations', () => {
 			propertyData: { id: '', label: '', datatype: null, isPropertySet: false, propertyError: null },
 			propertyValueRelationData: { value: PropertyValueRelation.Matching },
 			conditionId: 'TO BE FILLED WITH THE GENERATED RANDOM VALUE',
+			conditionRelation: ConditionRelation.And,
 			subclasses: false,
 			negate: false,
 		};
@@ -91,6 +116,7 @@ describe( 'mutations', () => {
 			},
 			propertyValueRelationData: { value: PropertyValueRelation.Matching },
 			conditionId: '0.123',
+			conditionRelation: null,
 			subclasses: false,
 			negate: false,
 		};
@@ -121,6 +147,16 @@ describe( 'mutations', () => {
 		mutations.setNegate( state, { conditionIndex: 0, value: negate } );
 
 		expect( state.conditionRows[ 0 ].negate ).toBe( negate );
+
+	} );
+
+	it( 'setConditionRelation', () => {
+		const state: RootState = getFreshRootState();
+		const conditionRelation = ConditionRelation.Or;
+
+		mutations.setConditionRelation( state, { conditionIndex: 0, value: conditionRelation } );
+
+		expect( state.conditionRows[ 0 ].conditionRelation ).toBe( conditionRelation );
 
 	} );
 

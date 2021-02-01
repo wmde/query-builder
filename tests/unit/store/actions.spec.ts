@@ -3,6 +3,7 @@ import services from '@/ServicesFactory';
 import SearchOptions from '@/data-access/SearchOptions';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import { ConditionRow } from '@/store/RootState';
+import ConditionRelation from '@/data-model/ConditionRelation';
 
 describe( 'actions', () => {
 
@@ -271,6 +272,21 @@ describe( 'actions', () => {
 		actions.setSubclasses( context as any, { subclasses, conditionIndex } );
 
 		expect( context.commit ).toHaveBeenCalledWith( 'setSubclasses', { subclasses, conditionIndex } );
+	} );
+
+	it( 'setConditionRelation', () => {
+		const context = { commit: jest.fn() };
+		const conditionRelation = ConditionRelation.And;
+		const conditionIndex = 0;
+		const actions = createActions(
+			services.get( 'searchEntityRepository' ),
+			services.get( 'metricsCollector' ),
+		);
+
+		actions.setConditionRelation( context as any, { value: conditionRelation, conditionIndex } );
+
+		expect( context.commit ).toHaveBeenCalledWith( 'setConditionRelation',
+			{ value: conditionRelation, conditionIndex } );
 	} );
 
 	it( 'setNegate', () => {
