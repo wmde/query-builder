@@ -1,10 +1,12 @@
 import rdfNamespaces from '@/sparql/rdfNamespaces';
 import QueryRepresentation, { Condition } from '@/sparql/QueryRepresentation';
-import { IriTerm, Pattern, PropertyPath, SelectQuery, Term } from 'sparqljs';
+import { Pattern, SelectQuery } from 'sparqljs';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
+import TripleBuilder from '@/sparql/TripleBuilder';
 
 export default class QueryObjectBuilder {
 	private queryObject: SelectQuery;
+	private tripleBuilder: TripleBuilder;
 
 	public constructor() {
 		this.queryObject = {
@@ -15,6 +17,7 @@ export default class QueryObjectBuilder {
 			type: 'query',
 			prefixes: rdfNamespaces,
 		};
+		this.tripleBuilder = new TripleBuilder();
 	}
 
 	public buildFromQueryRepresentation( queryRepresentation: QueryRepresentation ): SelectQuery {
@@ -45,22 +48,7 @@ export default class QueryObjectBuilder {
 				this.queryObject.where.unshift(
 					{
 						type: 'bgp',
-						triples: [
-							{
-								subject: {
-									termType: 'Variable',
-									value: 'item',
-								},
-								predicate: {
-									termType: 'NamedNode',
-									value: rdfNamespaces.wikibase + 'sitelinks',
-								},
-								object: {
-									termType: 'BlankNode',
-									value: 'anyValue',
-								},
-							},
-						],
+						triples: [ this.tripleBuilder.buildAnyValueTripe() ],
 					},
 				);
 			}
@@ -77,89 +65,11 @@ export default class QueryObjectBuilder {
 		return this.queryObject;
 	}
 
-	private buildTripleObject( condition: Condition ): Term {
-		// TODO: Consider extracting this into a new class when adding less than / more than
-		switch ( condition.propertyValueRelation ) {
-			case ( PropertyValueRelation.NotMatching ):
-				return {
-					termType: 'Variable',
-					value: 'instance',
-				};
-			case ( PropertyValueRelation.Regardless ):
-				return {
-					termType: 'BlankNode',
-					value: 'anyValue' + condition.propertyId,
-				};
-			case ( PropertyValueRelation.Matching ):
-				return this.buildTripleObjectForExplicitValue( condition.datatype, condition.value );
-			default:
-				throw new Error( `unsupported relation: ${condition.propertyValueRelation}` );
-		}
-	}
-
-	private buildTripleObjectForExplicitValue( datatype: string, value: string ): Term {
-		// TODO: Consider extracting this into a new class when adding unit type
-		switch ( datatype ) {
-			case 'string':
-			case 'external-id':
-				return {
-					termType: 'Literal',
-					value: value,
-				};
-			case 'wikibase-item':
-				return {
-					termType: 'NamedNode', // this.mapDatatypeToTermType( condition.datatype ),
-					value: `${rdfNamespaces.wd}${value}`,
-				};
-			default:
-				throw new Error( `unsupported datatype: ${datatype}` );
-		}
-	}
-
-	private buildTriplePredicateItems( condition: Condition ): ( PropertyPath|IriTerm )[] {
-		const items: ( PropertyPath|IriTerm )[] = [ {
-			termType: 'NamedNode',
-			value: rdfNamespaces.p + condition.propertyId,
-		},
-		{
-			termType: 'NamedNode',
-			value: rdfNamespaces.ps + condition.propertyId,
-		} ];
-
-		if ( condition.subclasses ) {
-			items.push(
-				{
-					type: 'path',
-					pathType: '*',
-					items: [ {
-						termType: 'NamedNode',
-						value: rdfNamespaces.wdt + process.env.VUE_APP_SUBCLASS_PROPERTY,
-					},
-					],
-				},
-			);
-		}
-
-		return items;
-	}
-
 	private buildFromQueryCondition( condition: Condition ): void {
-		const tripleObject: Term = this.buildTripleObject( condition );
 		const negate: boolean = condition.negate || false;
 		const bgp: Pattern = {
 			type: 'bgp',
-			triples: [
-				{
-					subject: {
-						termType: 'Variable',
-						value: 'item',
-					},
-					predicate: { type: 'path',
-						pathType: '/',
-						items: this.buildTriplePredicateItems( condition ) },
-					object: tripleObject,
-				},
-			],
+			triples: [ this.tripleBuilder.buildTripleFromQueryCondition( condition ) ],
 		};
 
 		if ( !this.queryObject.where ) {
@@ -180,25 +90,7 @@ export default class QueryObjectBuilder {
 				type: 'minus',
 				patterns: [ {
 					type: 'bgp',
-					triples: [
-						{
-							subject: {
-								termType: 'Variable',
-								value: 'item',
-							},
-							predicate: { type: 'path',
-								pathType: '/',
-								items: [ {
-									termType: 'NamedNode',
-									value: rdfNamespaces.p + condition.propertyId,
-								},
-								{
-									termType: 'NamedNode',
-									value: rdfNamespaces.ps + condition.propertyId,
-								} ] },
-							object: this.buildTripleObjectForExplicitValue( condition.datatype, condition.value ),
-						},
-					],
+					triples: [ this.tripleBuilder.buildTripleForNotMatchingValue( condition ) ],
 				} ],
 			};
 
@@ -226,20 +118,7 @@ export default class QueryObjectBuilder {
 					patterns: [
 						{
 							type: 'bgp',
-							triples: [ {
-								subject: {
-									termType: 'NamedNode',
-									value: rdfNamespaces.bd + 'serviceParam',
-								},
-								predicate: {
-									termType: 'NamedNode',
-									value: rdfNamespaces.wikibase + 'language',
-								},
-								object: {
-									termType: 'Literal',
-									value: '[AUTO_LANGUAGE]',
-								},
-							} ],
+							triples: [ this.tripleBuilder.buildLabelServiceTriple() ],
 						},
 					],
 					name: {
