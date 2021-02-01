@@ -1,40 +1,44 @@
 <template>
-	<div class="querybuilder" role="main">
-		<h1 class="querybuilder__heading"><bdi id="directionSample"
-			v-i18n="{msg: 'query-builder-heading'}" /></h1>
-		<p class="querybuilder__description"
-			v-html="$i18n('query-builder-intro-text', 'https://w.wiki/FZy', 'https://w.wiki/kG$') "/>
-		<div role="form">
-			<h2 class="querybuilder__find-title"
-				v-i18n="{msg: 'query-builder-find-all-items'}" />
-			<div v-if="!conditionRows.length"
-				class="querybuilder__condition-placeholder"
-				v-i18n="{msg: 'query-builder-condition-placeholder'}"
-			/>
-			<div
-				class="querybuilder__condition-wrapper"
-				v-for="(condition, index) in conditionRows"
-				:key="condition.conditionId"
-			>
-				<QueryCondition
-					:condition-index="index"
+	<div class="querybuilder">
+		<main>
+			<h1 class="querybuilder__heading">
+				<bdi id="directionSample"
+					v-i18n="{msg: 'query-builder-heading'}" />
+			</h1>
+			<p class="querybuilder__description"
+				v-html="$i18n('query-builder-intro-text', 'https://w.wiki/FZy', 'https://w.wiki/kG$') " />
+			<div role="form">
+				<h2 class="querybuilder__find-title"
+					v-i18n="{msg: 'query-builder-find-all-items'}" />
+				<div v-if="!conditionRows.length"
+					class="querybuilder__condition-placeholder"
+					v-i18n="{msg: 'query-builder-condition-placeholder'}"
 				/>
+				<div
+					class="querybuilder__condition-wrapper"
+					v-for="(condition, index) in conditionRows"
+					:key="condition.conditionId"
+				>
+					<QueryCondition
+						:condition-index="index"
+					/>
+				</div>
+				<AddCondition @add-condition="addCondition" />
+				<Limit />
+				<LabelOptout />
+				<div class="querybuilder__run">
+					<Button
+						@click.native="runQuery"
+						type="progressive"
+						variant="primary"
+						v-i18n="{msg: 'query-builder-run-query'}" />
+				</div>
 			</div>
-			<AddCondition @add-condition="addCondition" />
-			<Limit />
-			<LabelOptout />
-			<div class="querybuilder__run">
-				<Button
-					@click.native="runQuery"
-					type="progressive"
-					variant="primary"
-					v-i18n="{msg: 'query-builder-run-query'}" />
-			</div>
-		</div>
-		<QueryResult
-			:encodedQuery="encodedQuery"
-			:iframeRenderKey="iframeRenderKey"
-		/>
+			<QueryResult
+				:encodedQuery="encodedQuery"
+				:iframeRenderKey="iframeRenderKey"
+			/>
+		</main>
 	</div>
 </template>
 
