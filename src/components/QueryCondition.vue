@@ -38,10 +38,9 @@
 					:isChecked="subclasses(conditionIndex)" />
 			</div>
 			<div>
-				<Dropdown
+				<ReferenceRelationDropDown
 					class="query-condition__references"
-					label="References"
-					placeholder="with and without references"
+					v-model="selectedReferenceRelation"
 					:disabled="true"
 				/>
 			</div>
@@ -51,7 +50,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Dropdown } from '@wmde/wikit-vue-components';
 
 import ValueInput from '@/components/ValueInput.vue';
 import DeleteConditionButton from '@/components/DeleteConditionButton.vue';
@@ -60,9 +58,11 @@ import ValueTypeDropDown from '@/components/ValueTypeDropDown.vue';
 import SubclassCheckbox from '@/components/SubclassCheckbox.vue';
 import SearchResult from '@/data-access/SearchResult';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
+import ReferenceRelationDropDown from '@/components/ReferenceRelationDropDown.vue';
 import Error from '@/data-model/Error';
 import { mapGetters } from 'vuex';
 import NegationToggle from '@/components/NegationToggle.vue';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 export default Vue.extend( {
 	name: 'QueryCondition',
@@ -127,6 +127,12 @@ export default Vue.extend( {
 				);
 			},
 		},
+		selectedReferenceRelation: {
+			get(): ReferenceRelation {
+				// TODO: Implement
+				return ReferenceRelation.Regardless;
+			},
+		},
 		textInputValue: {
 			get(): string { return this.$store.getters.value( this.conditionIndex ); },
 			set( value: string ): void {
@@ -165,9 +171,9 @@ export default Vue.extend( {
 	components: {
 		ValueInput,
 		PropertyLookup,
+		ReferenceRelationDropDown,
 		ValueTypeDropDown,
 		DeleteConditionButton,
-		Dropdown,
 		NegationToggle,
 		SubclassCheckbox,
 	},
