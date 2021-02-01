@@ -1,7 +1,7 @@
 <template>
 	<div class="querybuilder__result">
-		<div v-if="encodedQuery.length !== 0" class="querybuilder__result__link">
-			<a :href="queryServiceUrl + '#' + encodedQuery" target="_blank" >
+		<div class="querybuilder__result__link">
+			<a :href="queryServiceUrl + ((encodedQuery.length !== 0) ? '#' + encodedQuery : '')" target="_blank" >
 				{{ $i18n('query-builder-result-link-text')}}
 			</a>
 		</div>
