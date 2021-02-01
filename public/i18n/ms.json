@@ -5,6 +5,7 @@
 		]
 	},
 	"query-builder-heading": "Pembina Pertanyaan Mudah",
+	"query-builder-intro-text": "Pembina Pertanyaan Wikidata menyediakan antara muka visual untuk membina pertanyaan Wikidata yang mudah. Ia paling sesuai untuk pengguna dengan sedikit pengalaman atau tiada langsung dalam [$1 SPARQL], bahasa pertanyaan yang berkuasa. Pembina Pertanyaan tidak menawarkan kefungsian penuh SPARQL, tetapi anada boleh selalu membuka pertanyaan anda di Perkhidmatan Pertanyaan, yang anda boleh lihat, sunting atau kembangkannya melalui pautan di atas hasil. [$2 Maklum balas dialu-alukan di sini].",
 	"query-builder-find-all-items": "Cari semua butir...",
 	"query-builder-run-query": "Jalankan pertanyaan",
 	"query-builder-input-value-label": "Nilai",
@@ -15,6 +16,7 @@
 	"query-builder-property-lookup-no-match-found": "Tiada padanan dijumpai",
 	"query-builder-property-lookup-limited-support-tag": "sokongan terhad",
 	"query-builder-property-lookup-limited-support-note": "Sifat dengan sokongan terhad tidak boleh ditapis dengan nilai",
+	"query-builder-result-link-text": "Tunjukkan pertanyaan dalam Perkhidmatan Pertanyaan",
 	"query-builder-result-placeholder": "Hasil akan dipaparkan di sini",
 	"query-builder-result-header": "Hasil",
 	"query-builder-result-error-empty-form": "Nampaknya Pembina Pertanyaan masih kosong, sila masukkan pertanyaan sah dahulu, kemudian cuba jalankannya lagi.",

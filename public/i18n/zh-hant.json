@@ -5,6 +5,7 @@
 		]
 	},
 	"query-builder-heading": "簡易查詢建置器",
+	"query-builder-intro-text": "維基數據查詢建置器提供了用於建置出簡易維基數據查詢的視覺化介面。對於很少或是沒有使用過 [$1 SPARQL]（一種強大的查詢語言）的使用者來說，會是個理想選擇。查詢建置器雖然不提供 SPARQL 的全部功能，不過您可以隨時在查詢服務中開啟您的查詢，您可以透過在結果上方的連結來查看、編輯、或是擴充。[$2 我們也歡迎您點擊這裡來提供意見回饋]。",
 	"query-builder-find-all-items": "查看所有項目…",
 	"query-builder-run-query": "執行查詢",
 	"query-builder-input-value-label": "值",
@@ -15,6 +16,7 @@
 	"query-builder-property-lookup-no-match-found": "沒有符合的內容",
 	"query-builder-property-lookup-limited-support-tag": "有限支援",
 	"query-builder-property-lookup-limited-support-note": "為有限支援的屬性不能透過值做出篩選",
+	"query-builder-result-link-text": "在查詢服務顯示查詢",
 	"query-builder-result-placeholder": "結果會顯示於此",
 	"query-builder-result-header": "結果",
 	"query-builder-result-error-empty-form": "看起來查詢建置器為空，請先輸入有效的查詢，然後重新執行。",

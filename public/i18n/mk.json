@@ -16,6 +16,7 @@
 	"query-builder-property-lookup-no-match-found": "Нема совпаѓања",
 	"query-builder-property-lookup-limited-support-tag": "ограничена поддршка",
 	"query-builder-property-lookup-limited-support-note": "Својствата со ограничена поддршка не можат да се филтрираат по вредност",
+	"query-builder-result-link-text": "Прикажи го барањето во Службата за барања",
 	"query-builder-result-placeholder": "Тука ќе се прикажува исходот",
 	"query-builder-result-header": "Исход",
 	"query-builder-result-error-empty-form": "Се чини дека Срочувачот на барања е празен. Најпрвин внесете важечко барање, па пуштете го пак.",

@@ -7,6 +7,7 @@
 		]
 	},
 	"query-builder-heading": "בונה שאילתות פשוטות",
+	"query-builder-intro-text": "בונה השאילתות של ויקינתונים מספק ממשק חזותי לבניית שאילתת ויקינתונים פשוטה. הוא מושלם למשתמשים שיש להם ניסיון מועט, או שאין להם ניסיון בכלל ב־[$1 ספארקל] (SPARQL), שפת השאילתות החזקה. בונה השאילתות לא מציע את כל היכולות של ספארקל, אבל תמיד אפשר לפתוח את השאילתה שלך בשירות השאילתות, ושם אפשר להציג, לערוך, או להרחיב אותה דרך הקישור מעל התוצאות. [$2 משוב מתקבל בברכה].",
 	"query-builder-find-all-items": "איתור כל הפריטים…",
 	"query-builder-run-query": "הרצת שאילתה",
 	"query-builder-input-value-label": "ערך",
@@ -17,6 +18,7 @@
 	"query-builder-property-lookup-no-match-found": "לא נמצאו התאמות",
 	"query-builder-property-lookup-limited-support-tag": "תמיכה מוגבלת",
 	"query-builder-property-lookup-limited-support-note": "לא ניתן לסנן מאפיינים עם תמיכה מוגבלת לפי ערך",
+	"query-builder-result-link-text": "הצגת השאילתה בשירות השאילתות",
 	"query-builder-result-placeholder": "התוצאות תוצגנה כאן",
 	"query-builder-result-header": "תוצאות",
 	"query-builder-result-error-empty-form": "נראה שבונה השאילתות היה ריק, נא למלא שאילתה תקפה תחילה ואז לנסות להריץ אותו שוב.",
