@@ -1,15 +1,15 @@
 import QuerySerializer from '@/serialization/QuerySerializer';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
-import RootState, { ConditionRow } from '@/store/RootState';
+import RootState, { ConditionRow, Value } from '@/store/RootState';
 import ReferenceRelation from '@/data-model/ReferenceRelation';
 
-function getStateConditionRow( propertyId: string, value: string ): ConditionRow {
+function getStateConditionRow( propertyId: string, value: Value, datatype = 'string' ): ConditionRow {
 	const simpleCondition =
 		{
 			propertyData: {
 				id: propertyId,
 				label: 'some string',
-				datatype: 'string',
+				datatype,
 				isPropertySet: true,
 				propertyError: null,
 			},
@@ -57,9 +57,70 @@ describe( 'QuerySerializer', () => {
 				"conditionRelation":null,
 				"negate":false}],
 			"limit":${limit},
-			"useLimit":${useLimit}}
+			"useLimit":${useLimit},
+			"omitLabels": false}
 		`;
 		expect( serializer.serialize( givenStore ) ).toEqual( expectedSerialization.replace( /\s+/g, '' ) );
+	} );
+
+	it( 'serializes a condition with datatype wikibase-item', () => {
+		const givenState: RootState = {
+			conditionRows: [ getStateConditionRow( 'P31', { id: 'Q5', label: 'human' }, 'wikibase-item' ) ],
+			limit: 100,
+			useLimit: true,
+			errors: [],
+			omitLabels: false,
+		};
+		const serializer = new QuerySerializer();
+
+		const actualSerialization = serializer.serialize( givenState );
+
+		const expectedSerialization = `
+			{"conditions":[{
+				"propertyId":"P31",
+				"propertyDataType":"wikibase-item",
+				"propertyValueRelation":"matching",
+				"referenceRelation":"regardless",
+				"value":"Q5",
+				"subclasses":false,
+				"conditionRelation":null,
+				"negate":false}],
+			"limit":100,
+			"useLimit":true,
+			"omitLabels": false}
+		`;
+		expect( actualSerialization ).toEqual( expectedSerialization.replace( /\s+/g, '' ) );
+	} );
+
+	it( 'serializes a condition with unset property and without value', () => {
+		const testCondition = getStateConditionRow( 'P31', null, 'string' );
+		testCondition.propertyData.isPropertySet = false;
+		const givenState: RootState = {
+			conditionRows: [ testCondition ],
+			limit: 100,
+			useLimit: true,
+			errors: [],
+			omitLabels: false,
+		};
+		const serializer = new QuerySerializer();
+
+		const actualSerialization = serializer.serialize( givenState );
+
+		const expectedSerialization = `
+			{"conditions":[{
+				"propertyId":"",
+				"propertyDataType":"string",
+				"propertyValueRelation":"matching",
+				"referenceRelation":"regardless",
+				"value":"",
+				"subclasses":false,
+				"conditionRelation":null,
+				"negate":false}],
+			"limit":100,
+			"useLimit":true,
+			"omitLabels": false}
+		`;
+		expect( actualSerialization ).toEqual( expectedSerialization.replace( /\s+/g, '' ) );
 	} );
 
 } );

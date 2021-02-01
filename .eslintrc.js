@@ -30,7 +30,7 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: [ 'tests/util/*.ts', '**/tests/{unit,a11y}/**/*.spec.{j,t}s?(x)' ],
+			files: [ 'tests/util/*.ts', '**/tests/{unit,a11y,integration}/**/*.spec.{j,t}s?(x)' ],
 			env: {
 				jest: true,
 			},

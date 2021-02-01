@@ -9,6 +9,7 @@ import Vue from 'vue';
 import QueryBuilder from '@/components/QueryBuilder.vue';
 import i18n from 'vue-banana-i18n';
 import services from '@/ServicesFactory';
+import QueryDeserializer from '@/serialization/QueryDeserializer';
 
 Vue.config.errorHandler = function () {
 	services.get( 'metricsCollector' ).increment( 'errors' );
@@ -40,6 +41,13 @@ export default Vue.extend( {
 				wikilinks: true,
 			} );
 			this.isi18nLoaded = true;
+
+			const urlParams = new URLSearchParams( window.location.search );
+			if ( !urlParams.has( 'query' ) ) {
+				return;
+			}
+			const deserializer = new QueryDeserializer();
+			this.$store.dispatch( 'setState', deserializer.deserialize( urlParams.get( 'query' ) as string ) );
 		};
 
 		fetchi18n();

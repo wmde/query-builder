@@ -176,4 +176,9 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 			}
 		} );
 	},
+	setState(
+		context: ActionContext<RootState, RootState>,
+		payload: RootState ): void {
+		context.commit( 'setState', payload );
+	},
 } );

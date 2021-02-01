@@ -77,6 +77,11 @@ export default Vue.extend( {
 			this.searchResults = await this.searchEntities( searchOptions );
 		},
 	},
+	mounted() {
+		if ( this.value && this.value.label && !this.search ) {
+			this.search = this.value.label;
+		}
+	},
 	props: {
 		searchForMenuItems: {
 			type: Function as PropType<( searchOptions: SearchOptions ) => Promise<SearchResult[]>>,

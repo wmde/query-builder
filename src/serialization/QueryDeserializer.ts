@@ -1,23 +1,17 @@
-import RootState, { ConditionRow } from '@/store/RootState';
-import SerializedObject from '@/data-model/SerializedObject';
+import RootState, { ConditionRow, PropertyData, Value } from '@/store/RootState';
+import SerializedCondition from '@/data-model/SerializedObject';
 
 export default class QueryDeserializer {
 	public deserialize( queryString: string ): RootState {
 		const queryObject = JSON.parse( queryString );
 		const conditions: ConditionRow[] = [];
 		let conditionId = 1;
-		queryObject.conditions.forEach( ( condition: SerializedObject ) => {
+		queryObject.conditions.forEach( ( condition: SerializedCondition ) => {
 			conditions.push(
 				{
-					propertyData: {
-						id: condition.propertyId,
-						label: condition.propertyId,
-						datatype: condition.propertyDataType,
-						isPropertySet: true,
-						propertyError: null,
-					},
+					propertyData: this.getPropertyData( condition ),
 					valueData: {
-						value: condition.value,
+						value: this.getConditionValue( condition ),
 						valueError: null,
 					},
 					propertyValueRelationData: {
@@ -37,7 +31,30 @@ export default class QueryDeserializer {
 			useLimit: queryObject.useLimit,
 			limit: queryObject.limit,
 			errors: [],
-			omitLabels: false,
+			omitLabels: queryObject.omitLabels,
 		};
+	}
+
+	private getPropertyData( condition: SerializedCondition ): PropertyData {
+		return {
+			id: condition.propertyId,
+			label: condition.propertyId,
+			datatype: condition.propertyDataType,
+			isPropertySet: condition.propertyId !== '',
+			propertyError: null,
+		};
+	}
+
+	private getConditionValue( condition: SerializedCondition ): Value {
+		if ( condition.value === '' || condition.value === null ) {
+			return null;
+		}
+		if ( condition.propertyDataType === 'wikibase-item' ) {
+			return {
+				id: condition.value,
+				label: condition.value,
+			};
+		}
+		return condition.value;
 	}
 }
