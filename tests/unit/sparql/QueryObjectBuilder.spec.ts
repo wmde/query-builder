@@ -1,6 +1,7 @@
 import allNamespaces from '@/sparql/rdfNamespaces';
 import QueryObjectBuilder from '@/sparql/QueryObjectBuilder';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 describe( 'QueryObjectBuilder', () => {
 	it( 'simple', () => {
@@ -54,6 +55,7 @@ describe( 'QueryObjectBuilder', () => {
 					value: 'XXXX',
 					datatype: 'string',
 					propertyValueRelation: PropertyValueRelation.Matching,
+					referenceRelation: ReferenceRelation.Regardless,
 					subclasses: false,
 					negate: false,
 				},
@@ -115,6 +117,7 @@ describe( 'QueryObjectBuilder', () => {
 					propertyId: 'P281',
 					value: 'XXXX',
 					propertyValueRelation: PropertyValueRelation.Matching,
+					referenceRelation: ReferenceRelation.Regardless,
 					datatype: 'string',
 					subclasses: false,
 					negate: false,
@@ -229,6 +232,7 @@ describe( 'QueryObjectBuilder', () => {
 					value: 'XXXX',
 					datatype: 'string',
 					propertyValueRelation: PropertyValueRelation.Matching,
+					referenceRelation: ReferenceRelation.Regardless,
 					subclasses: false,
 					negate: false,
 				},
@@ -299,6 +303,7 @@ describe( 'QueryObjectBuilder', () => {
 					value: 'XXXX',
 					datatype: 'string',
 					propertyValueRelation: PropertyValueRelation.Matching,
+					referenceRelation: ReferenceRelation.Regardless,
 					subclasses: true,
 					negate: false,
 				},
@@ -384,6 +389,7 @@ describe( 'QueryObjectBuilder', () => {
 					value: 'XXXX',
 					datatype: 'string',
 					propertyValueRelation: PropertyValueRelation.Matching,
+					referenceRelation: ReferenceRelation.Regardless,
 					subclasses: false,
 					negate: true,
 				},
@@ -518,6 +524,7 @@ describe( 'QueryObjectBuilder', () => {
 					value: 'XXXX',
 					datatype: 'string',
 					propertyValueRelation: PropertyValueRelation.Matching,
+					referenceRelation: ReferenceRelation.Regardless,
 					subclasses: false,
 					negate: true,
 				},

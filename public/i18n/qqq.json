@@ -31,7 +31,7 @@
 	"query-builder-reference-relation-label": "Label of the drop down selecting different options on references for statements being queried.",
 	"query-builder-reference-relation-dropdown-with": "Text on dropdown option to have the Query Builder select statements that have references only",
 	"query-builder-reference-relation-dropdown-without": "Text on dropdown option to have the Query Builder select statements that don't have references",
-	"query-builder-reference-relation-dropdown-regardless-of-value": "Text on dropdown option to have the Query Builder select statements whether they have reference or not",
+	"query-builder-reference-relation-dropdown-regardless": "Text on dropdown option to have the Query Builder select statements whether they have reference or not",
 	"query-builder-delete-condition": "Text for screen readers for button that deletes the condition",
 	"query-builder-condition-placeholder": "Placeholder text when no condition exists on the page.",
 	"query-builder-limit-number-results-description": "Text between checkbox and textfield for limiting the number of results",

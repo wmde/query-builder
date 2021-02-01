@@ -1,6 +1,7 @@
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import RootState from '@/store/RootState';
 import Vuex, { Store } from 'vuex';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 export function getFreshRootState(): RootState {
 	return {
@@ -14,6 +15,7 @@ export function getFreshRootState(): RootState {
 				propertyError: null,
 			},
 			propertyValueRelationData: { value: PropertyValueRelation.Matching },
+			referenceRelation: ReferenceRelation.Regardless,
 			conditionId: '0.123',
 			conditionRelation: null,
 			subclasses: false,
@@ -40,6 +42,9 @@ export function newStore( getters: Record<string, Function> = {} ): Store<any> {
 			subclasses: jest.fn().mockReturnValue( jest.fn().mockReturnValue( false ) ),
 			propertyValueRelation: jest.fn().mockReturnValue(
 				jest.fn().mockReturnValue( PropertyValueRelation.Matching ),
+			),
+			referenceRelation: jest.fn().mockReturnValue(
+				jest.fn().mockReturnValue( ReferenceRelation.Regardless ),
 			),
 			limit: jest.fn().mockReturnValue( 100 ),
 			useLimit: jest.fn().mockReturnValue( true ),

@@ -2,6 +2,7 @@ import mutations from '@/store/mutations';
 import RootState, { ConditionRow } from '@/store/RootState';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import ConditionRelation from '@/data-model/ConditionRelation';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 describe( 'mutations', () => {
 	function getFreshRootState(): RootState {
@@ -16,6 +17,7 @@ describe( 'mutations', () => {
 					propertyError: null,
 				},
 				propertyValueRelationData: { value: PropertyValueRelation.Matching },
+				referenceRelation: ReferenceRelation.Regardless,
 				conditionRelation: null,
 				conditionId: '0.123',
 				subclasses: false,
@@ -88,6 +90,7 @@ describe( 'mutations', () => {
 			valueData: { value: null, valueError: null },
 			propertyData: { id: '', label: '', datatype: null, isPropertySet: false, propertyError: null },
 			propertyValueRelationData: { value: PropertyValueRelation.Matching },
+			referenceRelation: ReferenceRelation.Regardless,
 			conditionId: 'TO BE FILLED WITH THE GENERATED RANDOM VALUE',
 			conditionRelation: ConditionRelation.And,
 			subclasses: false,
@@ -115,6 +118,7 @@ describe( 'mutations', () => {
 				propertyError: null,
 			},
 			propertyValueRelationData: { value: PropertyValueRelation.Matching },
+			referenceRelation: ReferenceRelation.Regardless,
 			conditionId: '0.123',
 			conditionRelation: null,
 			subclasses: false,
@@ -190,5 +194,14 @@ describe( 'mutations', () => {
 			expect( state.conditionRows[ 0 ].propertyData.propertyError ).toBe( null );
 			expect( state.conditionRows[ 0 ].valueData.valueError ).toBe( null );
 		} );
+	} );
+
+	it( 'referenceRelation', () => {
+		const expectedValue = ReferenceRelation.Without;
+		const state: RootState = getFreshRootState();
+
+		mutations.setReferenceRelation( state, { referenceRelation: expectedValue, conditionIndex: 0 } );
+
+		expect( state.conditionRows[ 0 ].referenceRelation ).toBe( expectedValue );
 	} );
 } );

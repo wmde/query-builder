@@ -3,6 +3,7 @@ import getters from '@/store/getters';
 import QueryRepresentation from '@/sparql/QueryRepresentation';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import { getFreshRootState } from '../../util/store';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 describe( 'getters', () => {
 
@@ -35,6 +36,14 @@ describe( 'getters', () => {
 		} );
 	} );
 
+	describe( 'referenceRelation', () => {
+		it( 'returns referenceRelation "regardless" by default', () => {
+			const state: RootState = getFreshRootState(); // has one element by default
+
+			expect( getters.referenceRelation( state )( 0 ) ).toBe( ReferenceRelation.Regardless );
+		} );
+	} );
+
 	describe( 'query', () => {
 		it( 'returns the QueryRepresentation of the RootState', () => {
 			const state: RootState = getFreshRootState();
@@ -45,6 +54,7 @@ describe( 'getters', () => {
 						propertyId: 'P123',
 						value: 'foo',
 						propertyValueRelation: PropertyValueRelation.Matching,
+						referenceRelation: ReferenceRelation.Regardless,
 						datatype: 'string',
 						subclasses: false,
 						negate: false,
@@ -67,6 +77,7 @@ describe( 'getters', () => {
 						propertyId: 'P123',
 						value: 'foo',
 						propertyValueRelation: PropertyValueRelation.Matching,
+						referenceRelation: ReferenceRelation.Regardless,
 						datatype: 'string',
 						subclasses: false,
 						negate: false,
@@ -89,6 +100,7 @@ describe( 'getters', () => {
 						propertyId: 'P123',
 						value: 'foo',
 						propertyValueRelation: PropertyValueRelation.Matching,
+						referenceRelation: ReferenceRelation.Regardless,
 						datatype: 'string',
 						subclasses: true,
 						negate: false,
@@ -110,6 +122,7 @@ describe( 'getters', () => {
 						propertyId: 'P123',
 						value: 'foo',
 						propertyValueRelation: PropertyValueRelation.Matching,
+						referenceRelation: ReferenceRelation.Regardless,
 						datatype: 'string',
 						subclasses: false,
 						negate: true,

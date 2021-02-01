@@ -4,6 +4,7 @@ import SearchOptions from '@/data-access/SearchOptions';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import { ConditionRow } from '@/store/RootState';
 import ConditionRelation from '@/data-model/ConditionRelation';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 describe( 'actions', () => {
 
@@ -555,6 +556,20 @@ describe( 'actions', () => {
 			expect( context.dispatch ).toHaveBeenCalledWith( 'setConditionAsLimitedSupport', 0 );
 		} );
 
+	} );
+
+	it( 'setReferenceRelation', () => {
+		const context = { commit: jest.fn() };
+		const referenceRelation = ReferenceRelation.Without;
+		const conditionIndex = 0;
+		const actions = createActions(
+			services.get( 'searchEntityRepository' ),
+			services.get( 'metricsCollector' ),
+		);
+
+		actions.setReferenceRelation( context as any, { referenceRelation, conditionIndex } );
+
+		expect( context.commit ).toHaveBeenCalledWith( 'setReferenceRelation', { referenceRelation, conditionIndex } );
 	} );
 
 } );

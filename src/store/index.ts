@@ -5,10 +5,11 @@ import createActions from './actions';
 import mutations from './mutations';
 import getters from './getters';
 import QueryBuilderServices from '@/QueryBuilderServices';
-import RootState, { PropertyData, ConditionRow } from '@/store/RootState';
+import RootState, { ConditionRow, PropertyData } from '@/store/RootState';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
 import ConditionRelation from '@/data-model/ConditionRelation';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 Vue.use( Vuex );
 
@@ -32,6 +33,7 @@ export function getFreshConditionRow( isFirstCondition: boolean ): ConditionRow 
 		propertyValueRelationData: {
 			value: PropertyValueRelation.Matching,
 		},
+		referenceRelation: ReferenceRelation.Regardless,
 		subclasses: false,
 		negate: false,
 		conditionRelation: isFirstCondition ? null : ConditionRelation.And,

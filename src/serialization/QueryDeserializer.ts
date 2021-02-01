@@ -23,6 +23,7 @@ export default class QueryDeserializer {
 					propertyValueRelationData: {
 						value: condition.propertyValueRelation,
 					},
+					referenceRelation: condition.referenceRelation,
 					subclasses: condition.subclasses,
 					conditionRelation: condition.conditionRelation,
 					negate: condition.negate,
