@@ -2,6 +2,7 @@ import buildQuery from '@/sparql/buildQuery';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import { Condition } from '@/sparql/QueryRepresentation';
 import ReferenceRelation from '@/data-model/ReferenceRelation';
+import ConditionRelation from '@/data-model/ConditionRelation';
 
 describe( 'buildQuery', () => {
 
@@ -14,11 +15,78 @@ describe( 'buildQuery', () => {
 			propertyValueRelation,
 			referenceRelation: ReferenceRelation.Regardless,
 			subclasses: false,
+			conditionRelation: null,
 			negate: false,
 		};
 
 		return simpleCondition;
 	}
+
+	it( 'builds a query from conditions connected with OR', () => {
+		const expectedQuery = `SELECT DISTINCT ?item WHERE {
+      ?item (p:P31/ps:P31) wd:Q515.
+      { ?item (p:P17/ps:P17) wd:Q17. } UNION
+      { ?item (p:P17/ps:P17) wd:Q183. }
+    }`;
+
+		const actualQuery = buildQuery( {
+			conditions: [
+				{
+					...getSimpleCondition( 'P31', 'Q515' ),
+					datatype: 'wikibase-item',
+				},
+				{
+					...getSimpleCondition( 'P17', 'Q17' ),
+					datatype: 'wikibase-item',
+				},
+				{
+					...getSimpleCondition( 'P17', 'Q183' ),
+					datatype: 'wikibase-item',
+					conditionRelation: ConditionRelation.Or,
+				},
+			],
+			omitLabels: true,
+		} );
+
+		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
+	} );
+
+	it( 'builds a query from conditions connected with AND and OR', () => {
+		const expectedQuery = `SELECT DISTINCT ?item WHERE {
+      { ?item (p:P31/ps:P31) wd:Q515. } UNION
+      { ?item (p:P17/ps:P17) wd:Q183. }
+	  { ?item (p:P66/ps:P66) wd:Q432. } UNION
+	  { ?item (p:P99/ps:P99) wd:Q5653. }
+    }`;
+
+		const actualQuery = buildQuery( {
+			conditions: [
+				{
+					...getSimpleCondition( 'P31', 'Q515' ),
+					datatype: 'wikibase-item',
+				},
+				{
+					...getSimpleCondition( 'P17', 'Q183' ),
+					datatype: 'wikibase-item',
+					conditionRelation: ConditionRelation.Or,
+				},
+				{
+					...getSimpleCondition( 'P66', 'Q432' ),
+					datatype: 'wikibase-item',
+					// all conditionRelations that are not the first have implicitly
+					// conditionRelation: ConditionRelation.And added to them in the store
+				},
+				{
+					...getSimpleCondition( 'P99', 'Q5653' ),
+					datatype: 'wikibase-item',
+					conditionRelation: ConditionRelation.Or,
+				},
+			],
+			omitLabels: true,
+		} );
+
+		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
+	} );
 
 	it( 'builds a query from a property and a string value', () => {
 		const propertyId = 'P666';

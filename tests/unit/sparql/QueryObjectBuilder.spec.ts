@@ -57,6 +57,7 @@ describe( 'QueryObjectBuilder', () => {
 					propertyValueRelation: PropertyValueRelation.Matching,
 					referenceRelation: ReferenceRelation.Regardless,
 					subclasses: false,
+					conditionRelation: null,
 					negate: false,
 				},
 			],
@@ -120,6 +121,7 @@ describe( 'QueryObjectBuilder', () => {
 					referenceRelation: ReferenceRelation.Regardless,
 					datatype: 'string',
 					subclasses: false,
+					conditionRelation: null,
 					negate: false,
 				},
 			],
@@ -234,6 +236,7 @@ describe( 'QueryObjectBuilder', () => {
 					propertyValueRelation: PropertyValueRelation.Matching,
 					referenceRelation: ReferenceRelation.Regardless,
 					subclasses: false,
+					conditionRelation: null,
 					negate: false,
 				},
 			],
@@ -305,6 +308,7 @@ describe( 'QueryObjectBuilder', () => {
 					propertyValueRelation: PropertyValueRelation.Matching,
 					referenceRelation: ReferenceRelation.Regardless,
 					subclasses: true,
+					conditionRelation: null,
 					negate: false,
 				},
 			],
@@ -391,6 +395,7 @@ describe( 'QueryObjectBuilder', () => {
 					propertyValueRelation: PropertyValueRelation.Matching,
 					referenceRelation: ReferenceRelation.Regardless,
 					subclasses: false,
+					conditionRelation: null,
 					negate: true,
 				},
 			],
@@ -526,6 +531,7 @@ describe( 'QueryObjectBuilder', () => {
 					propertyValueRelation: PropertyValueRelation.Matching,
 					referenceRelation: ReferenceRelation.Regardless,
 					subclasses: false,
+					conditionRelation: null,
 					negate: true,
 				},
 			],
@@ -534,4 +540,5 @@ describe( 'QueryObjectBuilder', () => {
 
 		expect( actual ).toStrictEqual( expected );
 	} );
+
 } );
