@@ -11,6 +11,7 @@ import MetricsCollector from '@/data-access/MetricsCollector';
 import SearchEntityRepository from '@/data-access/SearchEntityRepository';
 import SearchOptions from '@/data-access/SearchOptions';
 import ConditionRelation from '@/data-model/ConditionRelation';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 // eslint-disable-next-line max-len
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/explicit-module-boundary-types
@@ -79,6 +80,10 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 	updatePropertyValueRelation( context: ActionContext<RootState, RootState>,
 		payload: { propertyValueRelation: PropertyValueRelation; conditionIndex: number } ): void {
 		context.commit( 'setPropertyValueRelation', payload );
+	},
+	setReferenceRelation( context: ActionContext<RootState, RootState>,
+		payload: { referenceRelation: ReferenceRelation; conditionIndex: number } ): void {
+		context.commit( 'setReferenceRelation', payload );
 	},
 	setNegate(
 		context: ActionContext<RootState, RootState>,

@@ -25,7 +25,7 @@
   "query-builder-reference-relation-label": "References",
   "query-builder-reference-relation-dropdown-with": "only with references",
   "query-builder-reference-relation-dropdown-without": "only without references",
-  "query-builder-reference-relation-dropdown-regardless-of-value": "with and without references",
+  "query-builder-reference-relation-dropdown-regardless": "with and without references",
   "query-builder-delete-condition": "Delete condition",
   "query-builder-condition-placeholder": "Add a condition to start building a query",
   "query-builder-limit-number-results-description": "Limit the number of results to",

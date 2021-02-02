@@ -129,8 +129,13 @@ export default Vue.extend( {
 		},
 		selectedReferenceRelation: {
 			get(): ReferenceRelation {
-				// TODO: Implement
-				return ReferenceRelation.Regardless;
+				return this.$store.getters.referenceRelation( this.conditionIndex );
+			},
+			set( selectedReferenceRelation: ReferenceRelation ): void {
+				this.$store.dispatch(
+					'setReferenceRelation',
+					{ referenceRelation: selectedReferenceRelation, conditionIndex: this.conditionIndex },
+				);
 			},
 		},
 		textInputValue: {

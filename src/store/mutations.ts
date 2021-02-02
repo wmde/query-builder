@@ -4,6 +4,7 @@ import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Error from '@/data-model/Error';
 import { getFreshConditionRow } from './index';
 import ConditionRelation from '@/data-model/ConditionRelation';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 export default {
 	setValue( state: RootState, payload: { value: string; conditionIndex: number } ): void {
@@ -28,6 +29,10 @@ export default {
 	setPropertyValueRelation( state: RootState,
 		payload: { propertyValueRelation: PropertyValueRelation; conditionIndex: number } ): void {
 		state.conditionRows[ payload.conditionIndex ].propertyValueRelationData.value = payload.propertyValueRelation;
+	},
+	setReferenceRelation( state: RootState,
+		payload: { referenceRelation: ReferenceRelation; conditionIndex: number } ): void {
+		state.conditionRows[ payload.conditionIndex ].referenceRelation = payload.referenceRelation;
 	},
 	setLimit( state: RootState, limit: number ): void {
 		state.limit = limit;

@@ -1,6 +1,7 @@
 import buildQuery from '@/sparql/buildQuery';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import { Condition } from '@/sparql/QueryRepresentation';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 describe( 'buildQuery', () => {
 
@@ -11,6 +12,7 @@ describe( 'buildQuery', () => {
 			value,
 			datatype: 'string',
 			propertyValueRelation,
+			referenceRelation: ReferenceRelation.Regardless,
 			subclasses: false,
 			negate: false,
 		};

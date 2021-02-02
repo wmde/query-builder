@@ -1,6 +1,7 @@
 import QueryDeserializer from '@/serialization/QueryDeserializer';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import RootState, { ConditionRow } from '@/store/RootState';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 function getStateConditionRow( propertyId: string, value: string ): ConditionRow {
 	const simpleCondition =
@@ -19,6 +20,7 @@ function getStateConditionRow( propertyId: string, value: string ): ConditionRow
 			propertyValueRelationData: {
 				value: PropertyValueRelation.Matching,
 			},
+			referenceRelation: ReferenceRelation.Regardless,
 			conditionRelation: null,
 			subclasses: false,
 			negate: false,
@@ -49,6 +51,7 @@ describe( 'QueryDeserializer', () => {
 				"propertyId":"${propertyId}",
 				"propertyDataType":"${propertyDataType}",
 				"propertyValueRelation":"matching",
+				"referenceRelation":"regardless",
 				"value":"${value}",
 				"subclasses":false,
 				"conditionRelation":null,

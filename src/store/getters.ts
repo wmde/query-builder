@@ -5,6 +5,7 @@ import Property from '@/data-model/Property';
 import Error from '@/data-model/Error';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import ConditionRelation from '@/data-model/ConditionRelation';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 function getQueryValueFromStoreValue( datatype: string, storeValue: Value ): string {
 	if ( storeValue === null ) {
@@ -26,6 +27,7 @@ export default {
 				return {
 					propertyId: condition.propertyData.id,
 					value: getQueryValueFromStoreValue( condition.propertyData.datatype, condition.valueData.value ),
+					referenceRelation: condition.referenceRelation,
 					propertyValueRelation: condition.propertyValueRelationData.value,
 					datatype: condition.propertyData.datatype,
 					subclasses: condition.subclasses,
@@ -79,6 +81,11 @@ export default {
 	propertyValueRelation( rootState: RootState ) {
 		return ( conditionIndex: number ): PropertyValueRelation => {
 			return rootState.conditionRows[ conditionIndex ].propertyValueRelationData.value;
+		};
+	},
+	referenceRelation( rootState: RootState ) {
+		return ( conditionIndex: number ): ReferenceRelation => {
+			return rootState.conditionRows[ conditionIndex ].referenceRelation;
 		};
 	},
 	negate( rootState: RootState ) {

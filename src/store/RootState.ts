@@ -1,6 +1,7 @@
 import Error from '@/data-model/Error';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import ConditionRelation from '@/data-model/ConditionRelation';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 export default interface RootState {
 	conditionRows: ConditionRow[];
@@ -28,6 +29,7 @@ export interface ConditionRow {
 	propertyValueRelationData: {
 		value: PropertyValueRelation;
 	};
+	referenceRelation: ReferenceRelation;
 	subclasses: boolean;
 	// conditionRelation between the current condition and the condition above.
 	// If there is only one condition this property = null
