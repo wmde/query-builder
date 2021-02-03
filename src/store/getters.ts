@@ -31,6 +31,7 @@ export default {
 					propertyValueRelation: condition.propertyValueRelationData.value,
 					datatype: condition.propertyData.datatype,
 					subclasses: condition.subclasses,
+					conditionRelation: condition.conditionRelation,
 					negate: condition.negate,
 				};
 			} ),

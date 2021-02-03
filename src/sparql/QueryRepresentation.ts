@@ -1,3 +1,4 @@
+import ConditionRelation from '@/data-model/ConditionRelation';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import ReferenceRelation from '@/data-model/ReferenceRelation';
 
@@ -8,6 +9,7 @@ export type Condition = {
 	propertyValueRelation: PropertyValueRelation;
 	referenceRelation: ReferenceRelation;
 	subclasses: boolean;
+	conditionRelation: ConditionRelation | null;
 	negate: boolean;
 };
 

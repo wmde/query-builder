@@ -3,6 +3,7 @@ import QueryRepresentation, { Condition } from '@/sparql/QueryRepresentation';
 import { Pattern, SelectQuery } from 'sparqljs';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import TripleBuilder from '@/sparql/TripleBuilder';
+import ConditionRelation from '@/data-model/ConditionRelation';
 
 export default class QueryObjectBuilder {
 	private queryObject: SelectQuery;
@@ -29,8 +30,42 @@ export default class QueryObjectBuilder {
 			},
 		];
 
+		// findUnions
+		let currentUnion: Condition[] | null = null;
+		const conditions: ( Condition | Condition[] )[] = [];
 		for ( let i = 0; i < queryRepresentation.conditions.length; i++ ) {
-			this.buildFromQueryCondition( queryRepresentation.conditions[ i ] );
+			if ( queryRepresentation.conditions[ i ].conditionRelation === ConditionRelation.Or ) {
+				if ( currentUnion === null ) {
+					const previousCondition = conditions.pop();
+					if ( !previousCondition ) {
+						throw new Error( 'Logic error: empty conditions array when starting union' );
+					}
+					if ( Array.isArray( previousCondition ) ) {
+						throw new Error( 'Logic error: condition array contains union when starting new union' );
+					}
+					currentUnion = [];
+					currentUnion.push( previousCondition );
+				}
+				currentUnion.push( queryRepresentation.conditions[ i ] );
+			} else {
+				if ( currentUnion !== null ) {
+					conditions.push( currentUnion );
+				}
+				currentUnion = null;
+				conditions.push( queryRepresentation.conditions[ i ] );
+			}
+		}
+		if ( currentUnion !== null ) {
+			conditions.push( currentUnion );
+		}
+
+		for ( let i = 0; i < conditions.length; i++ ) {
+			const conditionOrUnion = conditions[ i ];
+			if ( Array.isArray( conditionOrUnion ) ) {
+				this.buildUnion( conditionOrUnion );
+				continue;
+			}
+			this.buildFromQueryCondition( conditionOrUnion );
 		}
 
 		if ( this.queryObject.where ) {
@@ -65,24 +100,36 @@ export default class QueryObjectBuilder {
 		return this.queryObject;
 	}
 
-	private buildFromQueryCondition( condition: Condition ): void {
+	private buildUnion( conditions: Condition[] ): void {
+		const unionConditions = [];
+		for ( let i = 0; i < conditions.length; i++ ) {
+			unionConditions.push( ...this.buildIndividualCondition( conditions[ i ] ) );
+		}
+		const union: Pattern = {
+			type: 'union',
+			patterns: unionConditions,
+		};
+		if ( !this.queryObject.where ) {
+			this.queryObject.where = [];
+		}
+		this.queryObject.where.push( union );
+	}
+
+	private buildIndividualCondition( condition: Condition ): Pattern[] {
 		const negate: boolean = condition.negate || false;
 		const bgp: Pattern = {
 			type: 'bgp',
 			triples: [ this.tripleBuilder.buildTripleFromQueryCondition( condition ) ],
 		};
-
-		if ( !this.queryObject.where ) {
-			this.queryObject.where = [];
-		}
+		const patterns: Pattern[] = [];
 
 		if ( negate === true ) {
-			this.queryObject.where.push( {
+			patterns.push( {
 				type: 'minus',
 				patterns: [ bgp ],
 			} );
 		} else {
-			this.queryObject.where.push( bgp );
+			patterns.push( bgp );
 		}
 
 		if ( condition.propertyValueRelation === PropertyValueRelation.NotMatching ) {
@@ -94,8 +141,18 @@ export default class QueryObjectBuilder {
 				} ],
 			};
 
-			this.queryObject.where.push( filterCondition as Pattern );
+			patterns.push( filterCondition as Pattern );
 		}
+
+		return patterns;
+	}
+
+	private buildFromQueryCondition( condition: Condition ): void {
+		if ( !this.queryObject.where ) {
+			this.queryObject.where = [];
+		}
+		this.queryObject.where.push( ...this.buildIndividualCondition( condition ) );
+		return;
 	}
 
 	private wrapQueryWithLabel(): SelectQuery {
