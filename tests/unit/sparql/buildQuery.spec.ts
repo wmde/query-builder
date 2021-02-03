@@ -88,6 +88,25 @@ describe( 'buildQuery', () => {
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
 
+	it( 'builds a query only with references', () => {
+		const propertyId = 'P666';
+		const value = 'blah';
+		const actualQuery = buildQuery( {
+			conditions: [
+				{
+					...getSimpleCondition( propertyId, value ),
+					referenceRelation: ReferenceRelation.With,
+				},
+			],
+			omitLabels: true,
+		} );
+		const expectedQuery = `SELECT DISTINCT ?item ?statement0 WHERE { 
+			?statement0 (p:${propertyId}/ps:${propertyId}) "${value}". 
+			FILTER(EXISTS { ?statement0 prov:wasDerivedFrom ?reference. 
+			}) }`;
+		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
+	} );
+
 	it( 'builds a query from a property and a string value', () => {
 		const propertyId = 'P666';
 		const value = 'blah';
