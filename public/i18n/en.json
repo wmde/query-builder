@@ -28,6 +28,8 @@
   "query-builder-reference-relation-dropdown-regardless": "with and without references",
   "query-builder-delete-condition": "Delete condition",
   "query-builder-condition-placeholder": "Add a condition to start building a query",
+  "query-builder-condition-relation-toggle-and": "and",
+  "query-builder-condition-relation-toggle-or": "or",
   "query-builder-limit-number-results-description": "Limit the number of results to",
   "query-builder-limit-number-placeholder": "Enter a number",
   "query-builder-limit-number-screenreader-label": "Maximum number of results",
