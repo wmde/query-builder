@@ -123,11 +123,19 @@ export default class QueryObjectBuilder {
 			triples: [ this.tripleBuilder.buildTripleFromQueryCondition( condition, conditionIndex ) ],
 		};
 
-		const existsReferenceFilter: FilterPattern = {
+		let referenceExistsOrNot = '';
+
+		if ( condition.referenceRelation === ReferenceRelation.With ) {
+			referenceExistsOrNot = 'exists';
+		} else if ( condition.referenceRelation === ReferenceRelation.Without ) {
+			referenceExistsOrNot = 'notexists';
+		}
+
+		const referenceFilter: FilterPattern = {
 			type: 'filter',
 			expression: {
 				type: 'operation',
-				operator: 'exists',
+				operator: referenceExistsOrNot,
 				args: [
 					{
 						type: 'bgp',
@@ -148,8 +156,9 @@ export default class QueryObjectBuilder {
 			} );
 		} else {
 			patterns.push( bgp );
-			if ( condition.referenceRelation === ReferenceRelation.With ) {
-				patterns.push( existsReferenceFilter );
+			if ( condition.referenceRelation === ReferenceRelation.With ||
+					condition.referenceRelation === ReferenceRelation.Without ) {
+				patterns.push( referenceFilter );
 				( this.queryObject.variables as Variable[] ).push(
 					{
 						termType: 'Variable',
