@@ -2,13 +2,15 @@ import { Condition } from '@/sparql/QueryRepresentation';
 import { IriTerm, PropertyPath, Term, Triple } from 'sparqljs';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import rdfNamespaces from '@/sparql/rdfNamespaces';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 export default class TripleBuilder {
-	public buildTripleFromQueryCondition( condition: Condition ): Triple {
+	public buildTripleFromQueryCondition( condition: Condition, conditionIndex: number ): Triple {
 		return {
 			subject: {
 				termType: 'Variable',
-				value: 'item',
+				value: condition.referenceRelation === ReferenceRelation.Regardless ?
+					'item' : 'statement' + conditionIndex,
 			},
 			predicate: { type: 'path',
 				pathType: '/',
@@ -84,6 +86,10 @@ export default class TripleBuilder {
 			value: rdfNamespaces.ps + condition.propertyId,
 		} ];
 
+		if ( condition.referenceRelation !== ReferenceRelation.Regardless ) {
+			items.shift(); // for references we only need rdfNamespaces.ps
+		}
+
 		if ( condition.subclasses ) {
 			items.push(
 				{
@@ -99,6 +105,23 @@ export default class TripleBuilder {
 		}
 
 		return items;
+	}
+
+	public buildReferenceFilterTriple( condition: Condition, conditionIndex: number ): Triple {
+		return {
+			subject: {
+				termType: 'Variable',
+				value: 'statement' + conditionIndex,
+			},
+			predicate: {
+				termType: 'NamedNode',
+				value: rdfNamespaces.prov + 'wasDerivedFrom',
+			},
+			object: {
+				termType: 'Variable',
+				value: 'reference',
+			},
+		};
 	}
 
 	public buildAnyValueTripe(): Triple {

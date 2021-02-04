@@ -1,9 +1,10 @@
 import rdfNamespaces from '@/sparql/rdfNamespaces';
 import QueryRepresentation, { Condition } from '@/sparql/QueryRepresentation';
-import { Pattern, SelectQuery } from 'sparqljs';
+import { FilterPattern, Pattern, SelectQuery, Triple } from 'sparqljs';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import TripleBuilder from '@/sparql/TripleBuilder';
 import ConditionRelation from '@/data-model/ConditionRelation';
+import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 export default class QueryObjectBuilder {
 	private queryObject: SelectQuery;
@@ -65,7 +66,7 @@ export default class QueryObjectBuilder {
 				this.buildUnion( conditionOrUnion );
 				continue;
 			}
-			this.buildFromQueryCondition( conditionOrUnion );
+			this.buildFromQueryCondition( conditionOrUnion, i );
 		}
 
 		if ( this.queryObject.where ) {
@@ -103,7 +104,7 @@ export default class QueryObjectBuilder {
 	private buildUnion( conditions: Condition[] ): void {
 		const unionConditions = [];
 		for ( let i = 0; i < conditions.length; i++ ) {
-			unionConditions.push( ...this.buildIndividualCondition( conditions[ i ] ) );
+			unionConditions.push( ...this.buildIndividualCondition( conditions[ i ], i ) );
 		}
 		const union: Pattern = {
 			type: 'union',
@@ -115,12 +116,58 @@ export default class QueryObjectBuilder {
 		this.queryObject.where.push( union );
 	}
 
-	private buildIndividualCondition( condition: Condition ): Pattern[] {
+	private buildIndividualCondition( condition: Condition, conditionIndex: number ): Pattern[] {
 		const negate: boolean = condition.negate || false;
+
+		const referenceTriple: Triple = {
+			subject: {
+				termType: 'Variable',
+				value: 'item',
+			},
+			predicate: {
+				termType: 'NamedNode',
+				value: rdfNamespaces.p + condition.propertyId,
+			},
+			object: {
+				termType: 'Variable',
+				value: 'statement' + conditionIndex,
+			},
+		};
+
 		const bgp: Pattern = {
 			type: 'bgp',
-			triples: [ this.tripleBuilder.buildTripleFromQueryCondition( condition ) ],
+			triples: [ this.tripleBuilder.buildTripleFromQueryCondition( condition, conditionIndex ) ],
 		};
+
+		const bgpReference: Pattern = {
+			type: 'bgp',
+			triples: [ referenceTriple ],
+		};
+
+		let referenceExistsOrNot = '';
+
+		if ( condition.referenceRelation === ReferenceRelation.With ) {
+			referenceExistsOrNot = 'exists';
+		} else if ( condition.referenceRelation === ReferenceRelation.Without ) {
+			referenceExistsOrNot = 'notexists';
+		}
+
+		const referenceFilter: FilterPattern = {
+			type: 'filter',
+			expression: {
+				type: 'operation',
+				operator: referenceExistsOrNot,
+				args: [
+					{
+						type: 'bgp',
+						triples: [
+							this.tripleBuilder.buildReferenceFilterTriple( condition, conditionIndex ),
+						],
+					},
+				],
+			},
+		};
+
 		const patterns: Pattern[] = [];
 
 		if ( negate === true ) {
@@ -129,7 +176,14 @@ export default class QueryObjectBuilder {
 				patterns: [ bgp ],
 			} );
 		} else {
-			patterns.push( bgp );
+			if ( condition.referenceRelation === ReferenceRelation.With ||
+					condition.referenceRelation === ReferenceRelation.Without ) {
+				patterns.push( bgpReference );
+				patterns.push( bgp );
+				patterns.push( referenceFilter );
+			} else {
+				patterns.push( bgp );
+			}
 		}
 
 		if ( condition.propertyValueRelation === PropertyValueRelation.NotMatching ) {
@@ -147,11 +201,11 @@ export default class QueryObjectBuilder {
 		return patterns;
 	}
 
-	private buildFromQueryCondition( condition: Condition ): void {
+	private buildFromQueryCondition( condition: Condition, conditionIndex: number ): void {
 		if ( !this.queryObject.where ) {
 			this.queryObject.where = [];
 		}
-		this.queryObject.where.push( ...this.buildIndividualCondition( condition ) );
+		this.queryObject.where.push( ...this.buildIndividualCondition( condition, conditionIndex ) );
 		return;
 	}
 
