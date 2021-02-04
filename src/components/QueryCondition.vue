@@ -41,7 +41,6 @@
 				<ReferenceRelationDropDown
 					class="query-condition__references"
 					v-model="selectedReferenceRelation"
-					:disabled="true"
 				/>
 			</div>
 		</div>
