@@ -86,6 +86,10 @@ export default class TripleBuilder {
 			value: rdfNamespaces.ps + condition.propertyId,
 		} ];
 
+		if ( condition.referenceRelation !== ReferenceRelation.Regardless ) {
+			items.shift(); // for references we only need rdfNamespaces.ps
+		}
+
 		if ( condition.subclasses ) {
 			items.push(
 				{
@@ -103,7 +107,7 @@ export default class TripleBuilder {
 		return items;
 	}
 
-	public buildReferenceTriple( condition: Condition, conditionIndex: number ): Triple {
+	public buildReferenceFilterTriple( condition: Condition, conditionIndex: number ): Triple {
 		return {
 			subject: {
 				termType: 'Variable',

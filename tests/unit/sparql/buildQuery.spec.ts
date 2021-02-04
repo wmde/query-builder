@@ -100,8 +100,9 @@ describe( 'buildQuery', () => {
 			],
 			omitLabels: true,
 		} );
-		const expectedQuery = `SELECT DISTINCT ?item ?statement0 WHERE { 
-			?statement0 (p:${propertyId}/ps:${propertyId}) "${value}". 
+		const expectedQuery = `SELECT DISTINCT ?item WHERE {
+			?item p:P666 ?statement0.
+			?statement0 (ps:${propertyId}) "${value}". 
 			FILTER(EXISTS { ?statement0 prov:wasDerivedFrom ?reference. 
 			}) }`;
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
@@ -119,8 +120,9 @@ describe( 'buildQuery', () => {
 			],
 			omitLabels: true,
 		} );
-		const expectedQuery = `SELECT DISTINCT ?item ?statement0 WHERE { 
-			?statement0 (p:${propertyId}/ps:${propertyId}) "${value}". 
+		const expectedQuery = `SELECT DISTINCT ?item WHERE {
+			?item p:P666 ?statement0.
+			?statement0 (ps:${propertyId}) "${value}". 
 			FILTER(NOT EXISTS { ?statement0 prov:wasDerivedFrom ?reference. 
 			}) }`;
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );

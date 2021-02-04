@@ -1,6 +1,6 @@
 import rdfNamespaces from '@/sparql/rdfNamespaces';
 import QueryRepresentation, { Condition } from '@/sparql/QueryRepresentation';
-import { FilterPattern, Pattern, SelectQuery, Variable } from 'sparqljs';
+import { FilterPattern, Pattern, SelectQuery, Triple } from 'sparqljs';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import TripleBuilder from '@/sparql/TripleBuilder';
 import ConditionRelation from '@/data-model/ConditionRelation';
@@ -118,9 +118,30 @@ export default class QueryObjectBuilder {
 
 	private buildIndividualCondition( condition: Condition, conditionIndex: number ): Pattern[] {
 		const negate: boolean = condition.negate || false;
+
+		const referenceTriple: Triple = {
+			subject: {
+				termType: 'Variable',
+				value: 'item',
+			},
+			predicate: {
+				termType: 'NamedNode',
+				value: rdfNamespaces.p + condition.propertyId,
+			},
+			object: {
+				termType: 'Variable',
+				value: 'statement' + conditionIndex,
+			},
+		};
+
 		const bgp: Pattern = {
 			type: 'bgp',
 			triples: [ this.tripleBuilder.buildTripleFromQueryCondition( condition, conditionIndex ) ],
+		};
+
+		const bgpReference: Pattern = {
+			type: 'bgp',
+			triples: [ referenceTriple ],
 		};
 
 		let referenceExistsOrNot = '';
@@ -140,7 +161,7 @@ export default class QueryObjectBuilder {
 					{
 						type: 'bgp',
 						triples: [
-							this.tripleBuilder.buildReferenceTriple( condition, conditionIndex ),
+							this.tripleBuilder.buildReferenceFilterTriple( condition, conditionIndex ),
 						],
 					},
 				],
@@ -155,16 +176,13 @@ export default class QueryObjectBuilder {
 				patterns: [ bgp ],
 			} );
 		} else {
-			patterns.push( bgp );
 			if ( condition.referenceRelation === ReferenceRelation.With ||
 					condition.referenceRelation === ReferenceRelation.Without ) {
+				patterns.push( bgpReference );
+				patterns.push( bgp );
 				patterns.push( referenceFilter );
-				( this.queryObject.variables as Variable[] ).push(
-					{
-						termType: 'Variable',
-						value: 'statement' + conditionIndex,
-					},
-				);
+			} else {
+				patterns.push( bgp );
 			}
 		}
 
