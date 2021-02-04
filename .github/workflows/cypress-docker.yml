@@ -1,0 +1,13 @@
+on: [push]
+
+name: Run cypress and cleanup dangling docker images and containers
+jobs:
+  docker-cleanup:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Run Cypress end-to-end
+      run: docker-compose -f docker-compose.yml -f docker-compose.e2e.yml up e2e
+    #- name: remove dangling containers
+      # run: docker system prune --all --force --volumes

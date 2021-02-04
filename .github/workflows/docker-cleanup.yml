@@ -1,9 +1,0 @@
-on: [push]
-
-name: Cleanup dangling docker images and containers
-jobs:
-  docker-cleanup:
-    runs-on: ubuntu-latest
-    steps:
-    - name: remove dangling containers
-      run: docker system prune --all --force --volumes
