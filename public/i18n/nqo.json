@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aboubacar.banamoridou.toure",
 			"Lancine.kounfantoh.fofana"
 		]
 	},
@@ -9,5 +10,7 @@
 	"query-builder-result-error-missing-value": "ߡߐ߬ߟߐ߲ ߘߏ߫ ߟߊߘߏ߲߬ ߖߊ߰ߣߌ߲߫",
 	"query-builder-add-condition": "ߛߙߊߕߌ ߝߙߊ߬",
 	"query-builder-value-type-relation-dropdown-matching": "ߦߋ߫ ߦߋ߲߬",
-	"query-builder-value-type-relation-dropdown-without": "ߕߍ߫ ߦߋ߲߬"
+	"query-builder-value-type-relation-dropdown-without": "ߕߍ߫ ߦߋ߲߬",
+	"query-builder-condition-relation-toggle-and": "ߣߌ߫",
+	"query-builder-condition-relation-toggle-or": "ߥߟߊ߫"
 }

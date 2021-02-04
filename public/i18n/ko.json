@@ -27,6 +27,7 @@
 	"query-builder-value-type-relation-dropdown-matching": "포함",
 	"query-builder-value-type-relation-dropdown-without": "제외",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "값에 무관하게",
+	"query-builder-reference-relation-label": "각주",
 	"query-builder-delete-condition": "조건 삭제",
 	"query-builder-condition-placeholder": "쿼리 작성을 시작하기 위해 조건 추가",
 	"query-builder-limit-number-results-description": "결과 수를 다음으로 제한",

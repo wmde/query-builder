@@ -29,6 +29,8 @@
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "oavsett värdet",
 	"query-builder-delete-condition": "Radera villkor",
 	"query-builder-condition-placeholder": "Lägg till ett villkor för att börja bygga en förfrågan",
+	"query-builder-condition-relation-toggle-and": "och",
+	"query-builder-condition-relation-toggle-or": "eller",
 	"query-builder-limit-number-results-description": "Begränsa antalet resultat till",
 	"query-builder-limit-number-placeholder": "Ange en siffra",
 	"query-builder-limit-number-screenreader-label": "Maximalt antal resultat",

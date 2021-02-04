@@ -30,7 +30,7 @@
 	"query-builder-reference-relation-label": "Rifereminde",
 	"query-builder-reference-relation-dropdown-with": "sulamende cu refereminde",
 	"query-builder-reference-relation-dropdown-without": "sulamende senze refereminde",
-	"query-builder-reference-relation-dropdown-regardless-of-value": "cu e senze refereminde",
+	"query-builder-reference-relation-dropdown-regardless": "cu e senze refereminde",
 	"query-builder-delete-condition": "Scangìlle 'a condizione",
 	"query-builder-condition-placeholder": "Aggiunge 'na condizione pe accumenzà a costruì 'n'inderrogazione",
 	"query-builder-limit-number-results-description": "Limite 'u numere de resultate a",
