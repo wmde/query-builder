@@ -6,7 +6,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 on: [push]
-  
+
 name: Test and deploy to netlify
 jobs:
   test-and-dev-deploy:
@@ -35,3 +35,7 @@ jobs:
         SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
         SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
       run: npm run e2e:saucelabs
+    - name: Run Cypress end-to-end
+      run: docker-compose -f docker-compose.yml -f docker-compose.e2e.yml up e2e
+      env:
+        NODE_ENV: test
