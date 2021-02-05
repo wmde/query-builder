@@ -10,4 +10,4 @@ services:
             - ./cypress.json:/cypress.json
         command: "--browser chrome --headless"
         environment:
-            - CYPRESS_BASE_URL=${URL}:${PORT}
+            - CYPRESS_BASE_URL=http://dev:${PORT}
