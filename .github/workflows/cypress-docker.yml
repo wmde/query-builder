@@ -13,7 +13,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          record: false
+          record: true
           parallel: true
           group: 'Cypress test Actions'
         env:
