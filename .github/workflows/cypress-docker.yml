@@ -1,15 +1,21 @@
+name: Cypress End-to-end tests
 on: [push, pull_request]
-
-name: Run cypress
 jobs:
-  cypress-docker:
+  cypress-run:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # can be extended depending how large the tests gets
+        machines: [1, 2]
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: node
-      run: docker-compose --env-file .env.example build --build-arg UID=$(id -u) --build-arg GID=$(id -g) node
-    - name: Install npm
-      run: docker-compose --env-file .env.example run --rm node npm ci
-    - name: Run Cypress end-to-end
-      run: docker-compose --env-file .env.example -f docker-compose.yml -f docker-compose.e2e.yml up e2e
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          record: false
+          parallel: true
+          group: 'Cypress test Actions'
+        env:
+          # pass the Dashboard record key as an environment variable
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
