@@ -136,12 +136,33 @@ describe( 'validator', () => {
 		expect( validator.validate() ).toStrictEqual( expectedResult );
 	} );
 
-	it( 'returns notice when the form is empty', () => {
+	it( 'returns notice when the form is empty - one empty condition', () => {
 		const formValues: FormValues[] = [ {
 			property: null,
 			value: null,
 			propertyValueRelation: PropertyValueRelation.Matching,
 		} ];
+
+		const expectedResult: ValidationResult = {
+			formErrors: [
+				{
+					type: 'notice',
+					message: 'query-builder-result-error-empty-form',
+				},
+			],
+			fieldErrors: [ {
+				property: null,
+				value: null,
+			} ],
+		};
+
+		const validator = new Validator( formValues );
+
+		expect( validator.validate() ).toStrictEqual( expectedResult );
+	} );
+
+	it( 'returns notice when the form is empty - does not have any condition', () => {
+		const formValues: FormValues[] = [];
 
 		const expectedResult: ValidationResult = {
 			formErrors: [
