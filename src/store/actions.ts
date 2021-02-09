@@ -1,6 +1,7 @@
 import allowedDatatypes from '@/allowedDataTypes';
 import FormValues from '@/form/FormValues';
 import Validator from '@/form/Validator';
+import QueryDeserializer from '@/serialization/QueryDeserializer';
 import { MenuItem } from '@wmde/wikit-vue-components/dist/components/MenuItem';
 import { ActionContext } from 'vuex';
 import RootState, { ConditionRow } from './RootState';
@@ -176,9 +177,9 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 			}
 		} );
 	},
-	setState(
-		context: ActionContext<RootState, RootState>,
-		payload: RootState ): void {
-		context.commit( 'setState', payload );
+	parseState( context: ActionContext<RootState, RootState>, payload: string ): void {
+		const deserializer = new QueryDeserializer();
+		const rootState = deserializer.deserialize( payload );
+		context.commit( 'setState', rootState );
 	},
 } );
