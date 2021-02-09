@@ -29,34 +29,7 @@ export default class QueryObjectBuilder {
 			},
 		];
 
-		// findUnions
-		let currentUnion: Condition[] | null = null;
-		const conditions: ( Condition | Condition[] )[] = [];
-		for ( let i = 0; i < queryRepresentation.conditions.length; i++ ) {
-			if ( queryRepresentation.conditions[ i ].conditionRelation === ConditionRelation.Or ) {
-				if ( currentUnion === null ) {
-					const previousCondition = conditions.pop();
-					if ( !previousCondition ) {
-						throw new Error( 'Logic error: empty conditions array when starting union' );
-					}
-					if ( Array.isArray( previousCondition ) ) {
-						throw new Error( 'Logic error: condition array contains union when starting new union' );
-					}
-					currentUnion = [];
-					currentUnion.push( previousCondition );
-				}
-				currentUnion.push( queryRepresentation.conditions[ i ] );
-			} else {
-				if ( currentUnion !== null ) {
-					conditions.push( currentUnion );
-				}
-				currentUnion = null;
-				conditions.push( queryRepresentation.conditions[ i ] );
-			}
-		}
-		if ( currentUnion !== null ) {
-			conditions.push( currentUnion );
-		}
+		const conditions = this.transformUnions( queryRepresentation.conditions );
 
 		for ( let i = 0; i < conditions.length; i++ ) {
 			const conditionOrUnion = conditions[ i ];
@@ -92,6 +65,38 @@ export default class QueryObjectBuilder {
 		}
 
 		return this.queryObject;
+	}
+
+	private transformUnions( conditions: Condition[] ): ( Condition | Condition[] )[] {
+		let currentUnion: Condition[] | null = null;
+		const transformedConditions: ( Condition | Condition[] )[] = [];
+		for ( let i = 0; i < conditions.length; i++ ) {
+			if ( conditions[ i ].conditionRelation === ConditionRelation.Or ) {
+				if ( currentUnion === null ) {
+					const previousCondition = transformedConditions.pop();
+					if ( !previousCondition ) {
+						throw new Error( 'Logic error: empty conditions array when starting union' );
+					}
+					if ( Array.isArray( previousCondition ) ) {
+						throw new Error( 'Logic error: condition array contains union when starting new union' );
+					}
+					currentUnion = [];
+					currentUnion.push( previousCondition );
+				}
+				currentUnion.push( conditions[ i ] );
+			} else {
+				if ( currentUnion !== null ) {
+					transformedConditions.push( currentUnion );
+				}
+				currentUnion = null;
+				transformedConditions.push( conditions[ i ] );
+			}
+		}
+		if ( currentUnion !== null ) {
+			transformedConditions.push( currentUnion );
+		}
+
+		return transformedConditions;
 	}
 
 	private buildUnion( conditions: Condition[] ): void {
