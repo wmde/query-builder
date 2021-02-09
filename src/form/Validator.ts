@@ -19,7 +19,7 @@ export default class Validator {
 			fieldErrors: [],
 		};
 
-		if ( this.isASingleEmptyCondition() ) {
+		if ( this.isEmpty() ) {
 			validationResult.formErrors.push( {
 				message: 'query-builder-result-error-empty-form',
 				type: 'notice',
@@ -71,7 +71,11 @@ export default class Validator {
 		return fieldErrors;
 	}
 
-	private isASingleEmptyCondition(): boolean {
+	private isEmpty(): boolean {
+		if ( this.formValues.length === 0 ) {
+			return true;
+		}
+
 		return this.formValues.length === 1 &&
 			!this.formValues[ 0 ].property?.id &&
 			!this.formValues[ 0 ].value;
