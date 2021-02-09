@@ -30,6 +30,7 @@ export function getFreshRootState(): RootState {
 
 export function newStore( getters: Record<string, Function> = {} ): Store<any> {
 	return new Vuex.Store( {
+		state: getFreshRootState(),
 		getters: {
 			conditionRows: jest.fn().mockReturnValue( jest.fn().mockReturnValue( [] ) ),
 			property: jest.fn().mockReturnValue( jest.fn() ),

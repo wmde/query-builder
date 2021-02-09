@@ -8,10 +8,14 @@
 		<p class="querybuilder-footer__build-info" v-if="buildTime && commitLink">
 			Last build at {{ buildTime }} from <span v-html="commitLink" />.
 		</p>
+		<p>
+			<a :href="permaLinkHref">Permalink to current Simple Query Builder</a>
+		</p>
 	</footer>
 </template>
 
 <script lang="ts">
+import QuerySerializer from '@/serialization/QuerySerializer';
 import Vue from 'vue';
 
 export default Vue.extend( {
@@ -31,6 +35,13 @@ export default Vue.extend( {
 				return false;
 			}
 			return `<a href="https://github.com/wmde/query-builder/commit/${commitHash}">${commitHash}</a>`;
+		},
+		permaLinkHref(): string {
+			const querySerializer = new QuerySerializer();
+			const serializedQuery = querySerializer.serialize( this.$store.state );
+			const current = new URL( window.location.href );
+			current.searchParams.set( 'query', serializedQuery );
+			return current.href;
 		},
 	},
 } );
