@@ -6,11 +6,12 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 on: [push]
-  
+
 name: Test and deploy to netlify
 jobs:
   test-and-dev-deploy:
     runs-on: ubuntu-latest
+    # container: cypress/browsers:node12.13.0-chrome78-ff70
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -30,8 +31,9 @@ jobs:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       run: echo "DEPLOY_URL=$(npm run --silent netlify | jq '.deploy_url' --raw-output)" >> $GITHUB_ENV
       id: "deploy"
-    - name: Run e2e cross browser tests
-      env:
-        SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
-        SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-      run: npm run e2e:saucelabs
+    - name: Cypress End-to-end tests
+      uses: cypress-io/github-action@v2
+      with:
+        browser: chrome
+        headless: true
+        config: pageLoadTimeout=60000,baseUrl=${{ env.DEPLOY_URL }}

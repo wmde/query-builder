@@ -1,0 +1,104 @@
+{
+	"searchinfo": {
+		"search": "house cat"
+	},
+	"search": [
+		{
+			"id": "Q146",
+			"title": "Q146",
+			"pageid": 282,
+			"repository": "wikidata",
+			"url": "//www.wikidata.org/wiki/Q146",
+			"concepturi": "http://www.wikidata.org/entity/Q146",
+			"label": "house cat",
+			"description": "domesticated feline",
+			"match": {
+				"type": "label",
+				"language": "en",
+				"text": "house cat"
+			}
+		},
+		{
+			"id": "Q12648",
+			"title": "Q12648",
+			"pageid": 14243,
+			"repository": "wikidata",
+			"url": "//www.wikidata.org/wiki/Q12648",
+			"concepturi": "http://www.wikidata.org/entity/Q12648",
+			"label": "domestic short-haired cat",
+			"description": "cat of mixed ancestry",
+			"match": {
+				"type": "alias",
+				"language": "en",
+				"text": "house cat, shorthair"
+			},
+			"aliases": [
+				"house cat, shorthair"
+			]
+		},
+		{
+			"id": "Q102966212",
+			"title": "Q102966212",
+			"pageid": 99256649,
+			"repository": "wikidata",
+			"url": "//www.wikidata.org/wiki/Q102966212",
+			"concepturi": "http://www.wikidata.org/entity/Q102966212",
+			"label": "House Cat",
+			"description": "print by Karel Appel",
+			"match": {
+				"type": "label",
+				"language": "en",
+				"text": "House Cat"
+			}
+		},
+		{
+			"id": "Q42549",
+			"title": "Q42549",
+			"pageid": 44790,
+			"repository": "wikidata",
+			"url": "//www.wikidata.org/wiki/Q42549",
+			"concepturi": "http://www.wikidata.org/entity/Q42549",
+			"label": "domestic long-haired cat",
+			"description": "long-haired (or semi-long-haired) domestic cat of mixed ancestry",
+			"match": {
+				"type": "alias",
+				"language": "en",
+				"text": "house cat, longhair"
+			},
+			"aliases": [
+				"house cat, longhair"
+			]
+		},
+		{
+			"id": "Q44138920",
+			"title": "Q44138920",
+			"pageid": 45338402,
+			"repository": "wikidata",
+			"url": "//www.wikidata.org/wiki/Q44138920",
+			"concepturi": "http://www.wikidata.org/entity/Q44138920",
+			"label": "House catches of adult Anopheles gambiae species B in two areas of Zambia.",
+			"description": "scientific article published in November 1979",
+			"match": {
+				"type": "label",
+				"language": "en",
+				"text": "House catches of adult Anopheles gambiae species B in two areas of Zambia."
+			}
+		},
+		{
+			"id": "Q82810647",
+			"title": "Q82810647",
+			"pageid": 82148022,
+			"repository": "wikidata",
+			"url": "//www.wikidata.org/wiki/Q82810647",
+			"concepturi": "http://www.wikidata.org/entity/Q82810647",
+			"label": "House cat scratch-induced linear vitiligo as Köbner phenomena",
+			"description": "scientific article published on 05 December 2011",
+			"match": {
+				"type": "label",
+				"language": "en",
+				"text": "House cat scratch-induced linear vitiligo as Köbner phenomena"
+			}
+		}
+	],
+	"success": 1
+}
