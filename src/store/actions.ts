@@ -179,7 +179,11 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 	},
 	parseState( context: ActionContext<RootState, RootState>, payload: string ): void {
 		const deserializer = new QueryDeserializer();
-		const rootState = deserializer.deserialize( payload );
-		context.commit( 'setState', rootState );
+		try {
+			const rootState = deserializer.deserialize( payload );
+			context.commit( 'setState', rootState );
+		} catch ( e ) {
+			// do nothing if parameter is invalid
+		}
 	},
 } );

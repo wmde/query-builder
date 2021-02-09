@@ -94,4 +94,14 @@ describe( 'QueryDeserializer', () => {
 		expect( deserializedState ).toStrictEqual( expectedState );
 	} );
 
+	it( 'throws an exception for an invalid query string', () => {
+		const deserializer = new QueryDeserializer();
+		expect( () => deserializer.deserialize( '{"foo":"bar"}' ) ).toThrow();
+	} );
+
+	it( 'throws an exception for a query string that is not valid JSON', () => {
+		const deserializer = new QueryDeserializer();
+		expect( () => deserializer.deserialize( 'foo=bar' ) ).toThrow();
+	} );
+
 } );

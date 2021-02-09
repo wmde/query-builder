@@ -1,38 +1,48 @@
+import DeserializationError from '@/serialization/DeserializationError';
 import RootState, { ConditionRow, PropertyData, Value } from '@/store/RootState';
 import SerializedCondition from '@/data-model/SerializedObject';
 
 export default class QueryDeserializer {
 	public deserialize( queryString: string ): RootState {
-		const queryObject = JSON.parse( queryString );
+		let queryObject;
+		try {
+			queryObject = JSON.parse( queryString );
+		} catch ( e ) {
+			throw new DeserializationError( 'query URL parameter is not valid JSON' );
+		}
 		const conditions: ConditionRow[] = [];
 		let conditionId = 1;
-		queryObject.conditions.forEach( ( condition: SerializedCondition ) => {
-			conditions.push(
-				{
-					propertyData: this.getPropertyData( condition ),
-					valueData: {
-						value: this.getConditionValue( condition ),
-						valueError: null,
+		try {
+			queryObject.conditions.forEach( ( condition: SerializedCondition ) => {
+				conditions.push(
+					{
+						propertyData: this.getPropertyData( condition ),
+						valueData: {
+							value: this.getConditionValue( condition ),
+							valueError: null,
+						},
+						propertyValueRelationData: {
+							value: condition.propertyValueRelation,
+						},
+						referenceRelation: condition.referenceRelation,
+						subclasses: condition.subclasses,
+						conditionRelation: condition.conditionRelation,
+						negate: condition.negate,
+						conditionId: conditionId.toString(),
 					},
-					propertyValueRelationData: {
-						value: condition.propertyValueRelation,
-					},
-					referenceRelation: condition.referenceRelation,
-					subclasses: condition.subclasses,
-					conditionRelation: condition.conditionRelation,
-					negate: condition.negate,
-					conditionId: conditionId.toString(),
-				},
-			);
-			conditionId++;
-		} );
-		return {
-			conditionRows: conditions,
-			useLimit: queryObject.useLimit,
-			limit: queryObject.limit,
-			errors: [],
-			omitLabels: queryObject.omitLabels,
-		};
+				);
+				conditionId++;
+			} );
+			return {
+				conditionRows: conditions,
+				useLimit: queryObject.useLimit,
+				limit: queryObject.limit,
+				errors: [],
+				omitLabels: queryObject.omitLabels,
+			};
+		} catch ( e ) {
+			throw new DeserializationError( 'invalid query URL parameter' );
+		}
 	}
 
 	private getPropertyData( condition: SerializedCondition ): PropertyData {
