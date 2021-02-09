@@ -47,7 +47,7 @@ describe( 'Basic Query', () => {
 			const expected = `SELECT DISTINCT ?item ?itemLabel WHERE {
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
   {
-    SELECT DISTINCT ?item WHERE { ?item (p:P1429/ps:P1429/(wdt:undefined*)) wd:Q146. }
+    SELECT DISTINCT ?item WHERE { ?item (p:P1429/ps:P1429/(wdt:P279*)) wd:Q146. }
     LIMIT 100
   }
 }`;
