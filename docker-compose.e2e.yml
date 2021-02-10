@@ -11,3 +11,4 @@ services:
         command: "--browser chrome --headless"
         environment:
             - CYPRESS_BASE_URL=http://dev:${PORT}
+            - CYPRESS_API_URL=${VUE_APP_WIKIBASE_API_URL}

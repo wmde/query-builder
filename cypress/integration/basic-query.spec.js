@@ -1,6 +1,9 @@
+const API_URL = Cypress.env( 'API_URL' )
+	.replace( /(^')|('$)/g, '' ); // for some reason Cypress keeps quotes around env vars coming from docker through `.env`
+
 function wikibaseApiRequest( query ) {
 	return {
-		url: 'https://www.wikidata.org/w/api.php',
+		url: API_URL,
 		query,
 	};
 }
