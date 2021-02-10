@@ -13,7 +13,7 @@ import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 Vue.use( Vuex );
 
-export function newEmptyPropertyData( propertyError: Error|null = null ): PropertyData {
+export function newEmptyPropertyData( propertyError: Error | null = null ): PropertyData {
 	return {
 		label: '',
 		id: '',
@@ -41,16 +41,20 @@ export function getFreshConditionRow( isFirstCondition: boolean ): ConditionRow 
 	};
 }
 
+export function getInitialState(): RootState {
+	return {
+		conditionRows: [ getFreshConditionRow( true ) ],
+		errors: [],
+		limit: 100,
+		useLimit: true,
+		omitLabels: false,
+	};
+}
+
 export function createStore( services: QueryBuilderServices ): Store<RootState> {
 
 	return new Store( {
-		state: {
-			conditionRows: [ getFreshConditionRow( true ) ],
-			errors: [],
-			limit: 100,
-			useLimit: true,
-			omitLabels: false,
-		},
+		state: getInitialState(),
 		actions: createActions(
 			services.get( 'searchEntityRepository' ),
 			services.get( 'metricsCollector' ),

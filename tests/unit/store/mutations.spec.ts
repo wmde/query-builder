@@ -204,4 +204,21 @@ describe( 'mutations', () => {
 
 		expect( state.conditionRows[ 0 ].referenceRelation ).toBe( expectedValue );
 	} );
+
+	it( 'setState', () => {
+		const initialState = getFreshRootState();
+		const newState = getFreshRootState();
+		newState.conditionRows = [];
+		newState.omitLabels = true;
+		newState.errors = [
+			{
+				message: 'just-proving-a-point-error',
+				type: 'error',
+			},
+		];
+
+		mutations.setState( initialState, newState );
+
+		expect( initialState ).toStrictEqual( newState );
+	} );
 } );

@@ -13,6 +13,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production",
     "test:unit": "vue-cli-service test:unit",
+    "test:integration": "vue-cli-service test:unit -c jest.config.integration.js",
     "test:lint": "vue-cli-service lint --no-fix --max-warning 0",
     "test": "npm-run-all test:* && vue-cli-service build",
     "test:lintcss": "stylelint '**/*.vue'",

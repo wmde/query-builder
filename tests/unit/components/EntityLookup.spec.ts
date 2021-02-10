@@ -40,10 +40,12 @@ describe( 'EntityLookup.vue', () => {
 			description: 'some description',
 		};
 
+		const searchForMenuItems = jest.fn().mockResolvedValue( [] );
 		const wrapper = shallowMount( EntityLookup, {
 			propsData: {
 				...defaultProps,
 				value: property,
+				searchForMenuItems,
 			},
 		} );
 

@@ -1,6 +1,7 @@
 import allowedDatatypes from '@/allowedDataTypes';
 import FormValues from '@/form/FormValues';
 import Validator from '@/form/Validator';
+import QueryDeserializer from '@/serialization/QueryDeserializer';
 import { MenuItem } from '@wmde/wikit-vue-components/dist/components/MenuItem';
 import { ActionContext } from 'vuex';
 import RootState, { ConditionRow } from './RootState';
@@ -175,5 +176,14 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 				context.dispatch( 'setConditionAsLimitedSupport', index );
 			}
 		} );
+	},
+	parseState( context: ActionContext<RootState, RootState>, payload: string ): void {
+		const deserializer = new QueryDeserializer();
+		try {
+			const rootState = deserializer.deserialize( payload );
+			context.commit( 'setState', rootState );
+		} catch ( e ) {
+			// do nothing if parameter is invalid
+		}
 	},
 } );

@@ -7,12 +7,11 @@ export default class QuerySerializer {
 		state.conditionRows.forEach( ( condition: ConditionRow ) => {
 			conditions.push(
 				{
-					propertyId: condition.propertyData.id,
+					propertyId: condition.propertyData.isPropertySet ? condition.propertyData.id : '',
 					propertyDataType: condition.propertyData.datatype,
 					propertyValueRelation: condition.propertyValueRelationData.value,
 					referenceRelation: condition.referenceRelation,
-					value: condition.propertyData.datatype === 'wikibase-item' ?
-						( condition.valueData.value as ItemValue ).id : condition.valueData.value,
+					value: this.getValueFromCondition( condition ),
 					subclasses: condition.subclasses,
 					conditionRelation: condition.conditionRelation,
 					negate: condition.negate,
@@ -23,6 +22,17 @@ export default class QuerySerializer {
 			conditions,
 			limit: state.limit,
 			useLimit: state.useLimit,
+			omitLabels: state.omitLabels,
 		} );
+	}
+
+	private getValueFromCondition( condition: ConditionRow ): string {
+		if ( !condition.valueData.value ) {
+			return ''; // maybe better return null?
+		}
+		if ( condition.propertyData.datatype === 'wikibase-item' ) {
+			return ( condition.valueData.value as ItemValue ).id;
+		}
+		return condition.valueData.value as string;
 	}
 }

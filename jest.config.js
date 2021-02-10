@@ -5,4 +5,5 @@ module.exports = {
 	],
 	testEnvironment: '<rootDir>/tests/config/JestCustomEnvironment.js',
 	setupFiles: [ '<rootDir>/.jest/setEnvVars.js' ],
+	collectCoverageFrom: [ 'src/**/*.{ts,vue}' ],
 };

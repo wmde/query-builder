@@ -1,15 +1,15 @@
 import QueryDeserializer from '@/serialization/QueryDeserializer';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
-import RootState, { ConditionRow } from '@/store/RootState';
+import RootState, { ConditionRow, Value } from '@/store/RootState';
 import ReferenceRelation from '@/data-model/ReferenceRelation';
 
-function getStateConditionRow( propertyId: string, value: string ): ConditionRow {
+function getStateConditionRow( propertyId: string, value: Value, datatype = 'string' ): ConditionRow {
 	const simpleCondition =
 		{
 			propertyData: {
 				id: propertyId,
 				label: propertyId,
-				datatype: 'string',
+				datatype,
 				isPropertySet: true,
 				propertyError: null,
 			},
@@ -57,9 +57,51 @@ describe( 'QueryDeserializer', () => {
 				"conditionRelation":null,
 				"negate":false}],
 			"limit":${limit},
-			"useLimit":${useLimit}}
+			"useLimit":${useLimit},
+			"omitLabels":false}
 		`;
 		expect( deserializer.deserialize( givenSerializedString ) ).toEqual( expectedRootState );
+	} );
+
+	it( 'deserializes a condition with wikibase-item property datatype and value', () => {
+		const givenSerialization = `
+			{"conditions":[{
+				"propertyId":"P31",
+				"propertyDataType":"wikibase-item",
+				"propertyValueRelation":"matching",
+				"referenceRelation":"regardless",
+				"value":"Q5",
+				"subclasses":false,
+				"conditionRelation":null,
+				"negate":false}],
+			"limit":100,
+			"useLimit":true,
+			"omitLabels": false}
+		`;
+		const deserializer = new QueryDeserializer();
+
+		const deserializedState = deserializer.deserialize( givenSerialization );
+
+		const expectedState: RootState = {
+			conditionRows: [
+				getStateConditionRow( 'P31', { label: 'Q5', id: 'Q5' }, 'wikibase-item' ),
+			],
+			limit: 100,
+			useLimit: true,
+			omitLabels: false,
+			errors: [],
+		};
+		expect( deserializedState ).toStrictEqual( expectedState );
+	} );
+
+	it( 'throws an exception for an invalid query string', () => {
+		const deserializer = new QueryDeserializer();
+		expect( () => deserializer.deserialize( '{"foo":"bar"}' ) ).toThrow();
+	} );
+
+	it( 'throws an exception for a query string that is not valid JSON', () => {
+		const deserializer = new QueryDeserializer();
+		expect( () => deserializer.deserialize( 'foo=bar' ) ).toThrow();
 	} );
 
 } );

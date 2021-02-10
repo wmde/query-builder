@@ -92,4 +92,7 @@ export default {
 			state.conditionRows[ payload.conditionIndex ].valueData.valueError = null;
 		}
 	},
+	setState( state: RootState, payload: RootState ): void {
+		Object.assign( state, payload );
+	},
 };
