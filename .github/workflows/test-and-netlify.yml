@@ -37,3 +37,5 @@ jobs:
         browser: chrome
         headless: true
         config: pageLoadTimeout=60000,baseUrl=${{ env.DEPLOY_URL }}
+      env:
+        CYPRESS_API_URL: 'https://www.wikidata.org/w/api.php'
