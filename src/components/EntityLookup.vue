@@ -19,6 +19,7 @@
 <script lang="ts">
 import { MenuItem } from '@wmde/wikit-vue-components/dist/components/MenuItem';
 import Vue, { PropType } from 'vue';
+import debounce from 'lodash/debounce';
 
 import { Lookup } from '@wmde/wikit-vue-components';
 import SearchResult from '@/data-access/SearchResult';
@@ -36,6 +37,7 @@ export default Vue.extend( {
 			search: '',
 			searchResults: [] as MenuItem[],
 			topItemIndex: 1,
+			debouncedUpdateMenuItems: null as Function | null,
 		};
 	},
 	methods: {
@@ -63,18 +65,30 @@ export default Vue.extend( {
 				},
 			);
 		},
+		updateMenuItems( searchOptions: SearchOptions ): void {
+			if ( this.debouncedUpdateMenuItems === null ) {
+				this.debouncedUpdateMenuItems = debounce(
+					async ( debouncedSearchOptions: SearchOptions ) => {
+						this.searchResults = await this.searchForMenuItems( debouncedSearchOptions );
+					},
+					150,
+				);
+			}
+			this.debouncedUpdateMenuItems( searchOptions );
+		},
 	},
 	watch: {
-		async search( newSearchString: string ): Promise<void> {
+		search( newSearchString: string ): void {
 			this.topItemIndex = 0;
 			if ( !newSearchString ) {
+				this.searchResults = [];
 				return;
 			}
 			const searchOptions: SearchOptions = {
 				search: newSearchString,
 				limit: NUMBER_OF_SEARCH_RESULTS,
 			};
-			this.searchResults = await this.searchEntities( searchOptions );
+			this.updateMenuItems( searchOptions );
 		},
 	},
 	mounted() {

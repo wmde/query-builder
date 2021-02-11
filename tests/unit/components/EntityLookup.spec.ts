@@ -5,6 +5,8 @@ import Vue from 'vue';
 import i18n from 'vue-banana-i18n';
 import SearchOptions from '@/data-access/SearchOptions';
 
+jest.mock( 'lodash/debounce', () => jest.fn( ( fn ) => fn ) );
+
 const localVue = createLocalVue();
 const messages = { en: {
 	'some-error-message-key': 'some-error-copy',
@@ -75,6 +77,34 @@ describe( 'EntityLookup.vue', () => {
 		await localVue.nextTick();
 		await localVue.nextTick();
 		expect( wrapper.findComponent( Lookup ).props( 'menuItems' ) ).toStrictEqual( searchResults );
+	} );
+
+	it( 'clears the search results on the search string being emptied', async () => {
+		const searchForMenuItems = jest.fn();
+		const wrapper = shallowMount( EntityLookup, {
+			localVue,
+			propsData: {
+				...defaultProps,
+				searchForMenuItems,
+			},
+			data() {
+				return {
+					searchResults: [
+						{ label: 'abc', description: 'def', id: 'P123' },
+						{ label: 'ghi', description: 'def', id: 'P1234' },
+						{ label: 'jkl', description: 'def', id: 'P12345' },
+					],
+					search: 'def',
+				};
+			},
+		} );
+
+		wrapper.findComponent( Lookup ).vm.$emit( 'update:search-input', '' );
+		await localVue.nextTick();
+
+		expect( searchForMenuItems ).not.toHaveBeenCalled();
+		expect( wrapper.findComponent( Lookup ).props( 'searchInput' ) ).toBe( '' );
+		expect( wrapper.findComponent( Lookup ).props( 'menuItems' ) ).toStrictEqual( [] );
 	} );
 
 	it( 'passes error prop down to Lookup', () => {
