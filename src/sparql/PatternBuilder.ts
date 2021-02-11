@@ -74,9 +74,10 @@ export default class PatternBuilder {
 		} else {
 			if ( condition.referenceRelation === ReferenceRelation.With ||
                 condition.referenceRelation === ReferenceRelation.Without ) {
-				patterns.push( bgpReference );
-				patterns.push( bgp );
-				patterns.push( referenceFilter );
+				patterns.push( {
+					type: 'group',
+					patterns: [ bgpReference, bgp, referenceFilter ],
+				} );
 			} else {
 				patterns.push( bgp );
 			}
