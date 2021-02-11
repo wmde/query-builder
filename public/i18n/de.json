@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"ManuelFranz",
-			"Pittigrilli"
+			"Pittigrilli",
+			"Wolfdietmann"
 		]
 	},
 	"query-builder-input-value-label": "Wert",
@@ -10,6 +11,8 @@
 	"query-builder-item-value-lookup-no-match-found": "Kein Treffer gefunden",
 	"query-builder-property-lookup-no-match-found": "Kein Treffer gefunden",
 	"query-builder-add-condition": "Füge Bedingung hinzu",
+	"query-builder-condition-relation-toggle-and": "und",
+	"query-builder-condition-relation-toggle-or": "oder",
 	"query-builder-limit-number-placeholder": "Geben sie eine Nummer ein",
 	"query-builder-limit-number-screenreader-label": "Maximale Anzahl der Ergebnisse",
 	"query-builder-negation-option-label-with": "Mit",

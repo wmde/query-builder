@@ -5,7 +5,8 @@
 			"그냥기여자"
 		]
 	},
-	"query-builder-heading": "단순 쿼리 빌더",
+	"query-builder-heading": "단순 쿼리 생성기",
+	"query-builder-intro-text": "Wikidata 쿼리 생성기는 간단한 Wikidata 쿼리를 생성하는 시각적 인터페이스를 제공합니다. 강력한 쿼리 작성 언어인 [$1 SPARQL]을 써 본 경험이 거의 전무한 사용자에게 유용합니다. 쿼리 생성기에서 SPARQL의 모든 기능을 쓸 수는 없지만, 결과 위에 있는 링크를 이용해 쿼리 서비스에서 언제든지 생성한 쿼리를 열어보고, 이를 편집하거나 확장할 수 있습니다. [$2 피드백은 언제든 환영하니 여기로 제출하세요].",
 	"query-builder-find-all-items": "모든 항목 찾기...",
 	"query-builder-run-query": "쿼리 실행",
 	"query-builder-input-value-label": "값",
@@ -28,8 +29,13 @@
 	"query-builder-value-type-relation-dropdown-without": "제외",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "값에 무관하게",
 	"query-builder-reference-relation-label": "각주",
+	"query-builder-reference-relation-dropdown-with": "참고 문헌이 있는 것만",
+	"query-builder-reference-relation-dropdown-without": "참고 문헌이 없는 것만",
+	"query-builder-reference-relation-dropdown-regardless": "참고 문헌 유무 무관하게",
 	"query-builder-delete-condition": "조건 삭제",
 	"query-builder-condition-placeholder": "쿼리 작성을 시작하기 위해 조건 추가",
+	"query-builder-condition-relation-toggle-and": "그리고",
+	"query-builder-condition-relation-toggle-or": "또는",
 	"query-builder-limit-number-results-description": "결과 수를 다음으로 제한",
 	"query-builder-limit-number-placeholder": "숫자를 입력하십시오",
 	"query-builder-limit-number-screenreader-label": "최대 결과 수",

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Eduardo Addad de Oliveira"
+			"Eduardo Addad de Oliveira",
+			"Eduardoaddad"
 		]
 	},
 	"query-builder-heading": "Construtor de consulta simples",
@@ -27,6 +28,8 @@
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "independentemente do valor",
 	"query-builder-delete-condition": "Excluir condição",
 	"query-builder-condition-placeholder": "Adicione uma condição para começar a construir uma consulta",
+	"query-builder-condition-relation-toggle-and": "e",
+	"query-builder-condition-relation-toggle-or": "ou",
 	"query-builder-limit-number-results-description": "Limite o número de resultados a",
 	"query-builder-limit-number-placeholder": "Digite um número",
 	"query-builder-limit-number-screenreader-label": "Número máximo de resultados",

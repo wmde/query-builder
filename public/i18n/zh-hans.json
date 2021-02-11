@@ -5,7 +5,8 @@
 			"Colathewikian",
 			"LeijieWang",
 			"Wuqianye",
-			"Yfdyh000"
+			"Yfdyh000",
+			"ZhuofanWu"
 		]
 	},
 	"query-builder-intro-text": "维基数据请求构造器为构造简单的维基数据请求提供可视化界面。对于那些使用$1——强大的请求语言——缺乏经验的用户而言，它是十分理想的。这一请求构造器并不能提供SPARAL的全部功能，但你始终可以打开你在请求服务中的请求，在那里你可以通过在结果上的链接查看、编辑或扩展它。[$2 十分欢迎反馈]。",
@@ -13,6 +14,8 @@
 	"query-builder-item-value-lookup-no-match-found": "找不到匹配项目",
 	"query-builder-result-header": "结果",
 	"query-builder-delete-condition": "删除条件",
+	"query-builder-condition-relation-toggle-and": "和",
+	"query-builder-condition-relation-toggle-or": "或",
 	"query-builder-limit-number-results-description": "限制结果数至",
 	"query-builder-limit-number-placeholder": "输入数量",
 	"query-builder-limit-number-screenreader-label": "最大结果数量",

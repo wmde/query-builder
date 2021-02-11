@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Fitoschido",
-			"MarcoAurelio"
+			"MarcoAurelio",
+			"Rodney Araujo"
 		]
 	},
 	"query-builder-run-query": "Ejecutar consulta",
@@ -10,6 +11,8 @@
 	"query-builder-add-condition": "Añadir condición",
 	"query-builder-value-type-relation-dropdown-without": "sin",
 	"query-builder-delete-condition": "Eliminar condición",
+	"query-builder-condition-relation-toggle-and": "y",
+	"query-builder-condition-relation-toggle-or": "o",
 	"query-builder-limit-number-placeholder": "Introduce un número",
 	"query-builder-negation-option-label-with": "Con",
 	"query-builder-negation-option-label-without": "Sin"

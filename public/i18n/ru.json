@@ -17,6 +17,7 @@
 	"query-builder-property-lookup-no-match-found": "Совпадений не найдено",
 	"query-builder-property-lookup-limited-support-tag": "ограниченная поддержка",
 	"query-builder-property-lookup-limited-support-note": "Свойства с ограниченной поддержкой нельзя фильтровать по значению",
+	"query-builder-result-link-text": "Показать запрос в Службе запросов",
 	"query-builder-result-placeholder": "Результаты будут отображаться здесь",
 	"query-builder-result-header": "Результаты",
 	"query-builder-result-error-empty-form": "Похоже, построитель запросов был пуст. Сначала введите допустимый запрос, а затем попробуйте запустить его снова.",

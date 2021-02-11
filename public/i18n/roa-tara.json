@@ -33,6 +33,8 @@
 	"query-builder-reference-relation-dropdown-regardless": "cu e senze refereminde",
 	"query-builder-delete-condition": "Scangìlle 'a condizione",
 	"query-builder-condition-placeholder": "Aggiunge 'na condizione pe accumenzà a costruì 'n'inderrogazione",
+	"query-builder-condition-relation-toggle-and": "e",
+	"query-builder-condition-relation-toggle-or": "o",
 	"query-builder-limit-number-results-description": "Limite 'u numere de resultate a",
 	"query-builder-limit-number-placeholder": "Mitte 'nu numere",
 	"query-builder-limit-number-screenreader-label": "Numere massime de resultate",

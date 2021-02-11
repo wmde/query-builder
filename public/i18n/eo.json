@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Javiero"
+			"Javiero",
+			"Wierzbowski"
 		]
 	},
 	"query-builder-input-value-label": "Valoro",
@@ -13,5 +14,8 @@
 	"query-builder-result-error-missing-value": "Bonvolu eniru valoron",
 	"query-builder-add-condition": "Aldoni kondiĉon",
 	"query-builder-value-type-relation-dropdown-matching": "Komparado",
-	"query-builder-value-type-relation-dropdown-without": "Sen"
+	"query-builder-value-type-relation-dropdown-without": "Sen",
+	"query-builder-reference-relation-label": "Referencoj",
+	"query-builder-condition-relation-toggle-and": "kaj",
+	"query-builder-condition-relation-toggle-or": "aŭ"
 }

@@ -35,6 +35,8 @@
 	"query-builder-reference-relation-dropdown-regardless": "עם מקורות ובלעדיהם",
 	"query-builder-delete-condition": "מחיקת תנאי",
 	"query-builder-condition-placeholder": "יש להוסיף תנאי כדאי להתחיל לבנות שאילתה",
+	"query-builder-condition-relation-toggle-and": "וגם",
+	"query-builder-condition-relation-toggle-or": "או",
 	"query-builder-limit-number-results-description": "להגביל את מספר התוצאות ל־",
 	"query-builder-limit-number-placeholder": "נא להזין מספר",
 	"query-builder-limit-number-screenreader-label": "מספר מרבי של תוצאות",

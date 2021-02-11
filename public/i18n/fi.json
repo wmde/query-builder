@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Maantietäjä"
+			"Maantietäjä",
+			"Nike"
 		]
 	},
 	"query-builder-heading": "Yksinkertainen kyselyrakentaja",
@@ -22,5 +23,7 @@
 	"query-builder-add-condition": "Lisää ehto",
 	"query-builder-value-type-relation-dropdown-matching": "vastaavuus",
 	"query-builder-value-type-relation-dropdown-without": "ilman",
-	"query-builder-value-type-relation-dropdown-regardless-of-value": "arvosta riippumatta"
+	"query-builder-value-type-relation-dropdown-regardless-of-value": "arvosta riippumatta",
+	"query-builder-condition-relation-toggle-and": "ja",
+	"query-builder-condition-relation-toggle-or": "tai"
 }

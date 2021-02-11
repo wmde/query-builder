@@ -36,6 +36,8 @@
 	"query-builder-reference-relation-dropdown-regardless": "kaynaklı ve kaynaksız",
 	"query-builder-delete-condition": "Koşulu sil",
 	"query-builder-condition-placeholder": "Sorgu oluşturmaya başlamak için bir koşul ekleyin",
+	"query-builder-condition-relation-toggle-and": "ve",
+	"query-builder-condition-relation-toggle-or": "veya",
 	"query-builder-limit-number-results-description": "Sonuçların sayısını sınırla",
 	"query-builder-limit-number-placeholder": "Bir sayı girin",
 	"query-builder-limit-number-screenreader-label": "Maksimum sonuç sayısı",
