@@ -2,13 +2,6 @@
 node_modules
 /dist
 
-# browser tests
-/tests/e2e/reports
-/tests_output
-/coverage
-geckodriver.log
-chromedriver.log
-
 # local env files
 .env
 .env.local

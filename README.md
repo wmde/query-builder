@@ -36,10 +36,7 @@ docker-compose up dev
 
 ### Running browser tests
 
-#### To run browser tests locally:
-
-Run: `QB_URL=localhost:8080 npm run e2e`
 
 #### To run Cypress browser tests locally:
 
-Run: `docker-compose --env-file .env.example -f docker-compose.yml -f docker-compose.e2e.yml up e2e`
+Run: `docker-compose -f docker-compose.yml -f docker-compose.e2e.yml up e2e`
