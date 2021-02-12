@@ -11,9 +11,10 @@ function wikibaseApiRequest( query ) {
 describe( 'Test error handling of the Query Building', () => {
 	it( 'Tests whether the Query builder handles user input error correctly.', () => {
 		cy.visit( '/' );
+		const runQueryButtonSelector = '.querybuilder__run .wikit-Button--progressive';
 
 		// Run query without any input and assert if any error message is displayed
-		cy.get( '.querybuilder__run .wikit-Button' ).click();
+		cy.get( runQueryButtonSelector ).click();
 		cy.get( '.querybuilder__result__errors' ).should( 'be.visible' );
 
 		cy.intercept(
@@ -38,7 +39,7 @@ describe( 'Test error handling of the Query Building', () => {
 		 * Run the query only with a property and no value. And assert wheather
 		 * an error message is displayed on the value input.
 		 */
-		cy.get( '.querybuilder__run .wikit-Button' ).click();
+		cy.get( runQueryButtonSelector ).click();
 		cy.get( '.wikit.wikit-ValidationMessage.wikit-ValidationMessage--error' ).should( 'be.visible' );
 
 		// Add some value to the value input component
@@ -52,7 +53,7 @@ describe( 'Test error handling of the Query Building', () => {
 
 		// Expand the query by clicking 'add condition' and run the query as is.
 		cy.get( '.querybuilder__add-condition button' ).click();
-		cy.get( '.querybuilder__run .wikit-Button' ).click();
+		cy.get( runQueryButtonSelector ).click();
 
 		/**
 		 * there shouldn't be an error on the first block.
@@ -69,7 +70,7 @@ describe( 'Test error handling of the Query Building', () => {
 		cy.get( '.query-condition:nth(1) .delete-condition-button' ).click();
 
 		// Run query
-		cy.get( '.querybuilder__run .wikit-Button' ).click();
+		cy.get( runQueryButtonSelector ).click();
 
 		// Assert the resulting sparql query and make sure there are no errors generated.
 		cy.get( '.querybuilder__result__iframe' ).then( ( element ) => {
