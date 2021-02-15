@@ -78,6 +78,11 @@ export default Vue.extend( {
 		},
 	},
 	watch: {
+		disabled( isDisabled: boolean ): void {
+			if ( isDisabled ) {
+				this.search = '';
+			}
+		},
 		search( newSearchString: string ): void {
 			this.topItemIndex = 0;
 			if ( !newSearchString ) {
