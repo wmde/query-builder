@@ -1,5 +1,6 @@
 import DeleteConditionButton from '@/components/DeleteConditionButton.vue';
 import ValueInput from '@/components/ValueInput.vue';
+import ValueTypeDropDown from '@/components/ValueTypeDropDown.vue';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
@@ -207,5 +208,25 @@ describe( 'QueryCondition.vue', () => {
 		await Vue.nextTick();
 		expect( wrapper.findComponent( SubclassCheckbox ).props( 'disabled' ) ).toBeTruthy();
 		expect( wrapper.findComponent( ValueInput ).props( 'disabled' ) ).toBeTruthy();
+	} );
+
+	it( 'sets the value to null if the user switches the relation to "Regardless of value', () => {
+		const store = newStore();
+		store.dispatch = jest.fn();
+		const wrapper = shallowMount( QueryCondition, {
+			store,
+			localVue,
+			propsData: {
+				'condition-index': 0,
+			},
+		} );
+
+		wrapper.findComponent( ValueTypeDropDown ).vm.$emit( 'input', PropertyValueRelation.Regardless );
+
+		expect( store.dispatch ).toHaveBeenCalledWith( 'updateValue', { value: null, conditionIndex: 0 } );
+		expect( store.dispatch ).toHaveBeenCalledWith(
+			'updatePropertyValueRelation',
+			{ propertyValueRelation: PropertyValueRelation.Regardless, conditionIndex: 0 },
+		);
 	} );
 } );
