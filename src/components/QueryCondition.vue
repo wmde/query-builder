@@ -190,7 +190,7 @@ $tinyViewportWidth: 38em; // Set so that inputs show all below each other in the
 .query-condition {
 	padding-block: $dimension-layout-xsmall;
 	padding-inline: $dimension-layout-xsmall;
-	border: $border-width-thin $border-style-base $border-color-base-default;
+	border: $border-width-thin $border-style-base $border-color-base-subtle;
 	border-radius: $border-radius-base;
 	background-color: $background-color-base-default;
 

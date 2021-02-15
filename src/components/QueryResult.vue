@@ -70,7 +70,7 @@ export default Vue.extend( {
 
 <style lang="scss">
 	.querybuilder__result {
-		margin-block-start: $dimension-layout-small;
+		margin-block-start: $dimension-layout-medium;
 	}
 
 	.querybuilder__result__link {
@@ -113,8 +113,8 @@ export default Vue.extend( {
 		& h2 {
 			font-family: $font-family-style-heading-sans;
 			font-style: normal;
-			font-weight: $font-weight-style-h5;
-			font-size: $font-size-style-h5;
+			font-weight: $font-weight-style-h4;
+			font-size: $font-size-style-h4;
 			color: $font-color-base;
 		}
 	}
