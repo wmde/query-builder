@@ -26,14 +26,14 @@
 			<div>
 				<ValueInput
 					class="query-condition__value-input"
-					:disabled="isTextInputDisabled()"
-					v-model="textInputValue"
+					:disabled="isValueInputDisabled()"
+					v-model="conditionValue"
 					:error="valueError"
 					:datatype="datatype"
 				/>
 				<SubclassCheckbox
 					v-if="subclassCheckboxVisible"
-					:disabled="isTextInputDisabled()"
+					:disabled="isValueInputDisabled()"
 					@subclass-check="setSubclasses"
 					:isChecked="subclasses(conditionIndex)" />
 			</div>
@@ -48,6 +48,7 @@
 </template>
 
 <script lang="ts">
+import { Value } from '@/store/RootState';
 import Vue from 'vue';
 
 import ValueInput from '@/components/ValueInput.vue';
@@ -77,7 +78,7 @@ export default Vue.extend( {
 		},
 	},
 	methods: {
-		isTextInputDisabled(): boolean {
+		isValueInputDisabled(): boolean {
 			return this.selectedPropertyValueRelation === PropertyValueRelation.Regardless;
 		},
 		removeCondition(): void {
@@ -118,7 +119,7 @@ export default Vue.extend( {
 			},
 			set( selectedPropertyValueRelation: PropertyValueRelation ): void {
 				if ( selectedPropertyValueRelation === PropertyValueRelation.Regardless ) {
-					this.textInputValue = '';
+					this.conditionValue = null;
 				}
 				this.$store.dispatch(
 					'updatePropertyValueRelation',
@@ -137,9 +138,11 @@ export default Vue.extend( {
 				);
 			},
 		},
-		textInputValue: {
-			get(): string { return this.$store.getters.value( this.conditionIndex ); },
-			set( value: string ): void {
+		conditionValue: {
+			get(): Value {
+				return this.$store.getters.value( this.conditionIndex );
+			},
+			set( value: Value ): void {
 				this.$store.dispatch( 'updateValue', { value, conditionIndex: this.conditionIndex } );
 			},
 		},
