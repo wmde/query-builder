@@ -29,6 +29,8 @@
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "tanpa mengira nilai",
 	"query-builder-delete-condition": "Hapuskan syarat",
 	"query-builder-condition-placeholder": "Tambahkan syarat untuk mulakan membina pertanyaan",
+	"query-builder-condition-relation-toggle-and": "dan",
+	"query-builder-condition-relation-toggle-or": "atau",
 	"query-builder-limit-number-results-description": "Hadkan bilangan hasil kepada",
 	"query-builder-limit-number-placeholder": "Masukkan nombor",
 	"query-builder-limit-number-screenreader-label": "Bilangan maksimum hasil",
