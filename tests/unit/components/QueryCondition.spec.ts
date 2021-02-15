@@ -193,6 +193,9 @@ describe( 'QueryCondition.vue', () => {
 			propertyValueRelation: jest.fn().mockReturnValue(
 				jest.fn().mockReturnValue( PropertyValueRelation.Regardless ),
 			),
+			datatype: jest.fn().mockReturnValue(
+				jest.fn().mockReturnValue( 'wikibase-item' ),
+			),
 		} );
 		store.dispatch = jest.fn();
 		const wrapper = shallowMount( QueryCondition, {
@@ -201,9 +204,6 @@ describe( 'QueryCondition.vue', () => {
 			propsData: {
 				'condition-index': 0,
 			},
-		} );
-		wrapper.setData( {
-			subclassCheckboxVisible: true,
 		} );
 		await Vue.nextTick();
 		expect( wrapper.findComponent( SubclassCheckbox ).props( 'disabled' ) ).toBeTruthy();

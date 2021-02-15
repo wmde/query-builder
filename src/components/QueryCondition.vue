@@ -32,7 +32,7 @@
 					:datatype="datatype"
 				/>
 				<SubclassCheckbox
-					v-if="subclassCheckboxVisible"
+					v-if="isSubclassCheckboxVisible"
 					:disabled="isValueInputDisabled()"
 					@subclass-check="setSubclasses"
 					:isChecked="subclasses(conditionIndex)" />
@@ -66,11 +66,6 @@ import ReferenceRelation from '@/data-model/ReferenceRelation';
 
 export default Vue.extend( {
 	name: 'QueryCondition',
-	data() {
-		return {
-			subclassCheckboxVisible: false,
-		};
-	},
 	props: {
 		conditionIndex: {
 			type: Number,
@@ -102,16 +97,17 @@ export default Vue.extend( {
 					return;
 				}
 				if ( selectedProperty.datatype === 'wikibase-item' ) {
-					this.subclassCheckboxVisible = true;
 					this.$store.dispatch( 'setSubclasses', { conditionIndex: this.conditionIndex, subclasses: true } );
 				} else {
-					this.subclassCheckboxVisible = false;
 					this.$store.dispatch( 'setSubclasses', { conditionIndex: this.conditionIndex, subclasses: false } );
 				}
 				this.$store.dispatch( 'updateProperty',
 					{ property: selectedProperty, conditionIndex: this.conditionIndex },
 				);
 			},
+		},
+		isSubclassCheckboxVisible(): boolean {
+			return this.$store.getters.datatype( this.conditionIndex ) === 'wikibase-item';
 		},
 		selectedPropertyValueRelation: {
 			get(): PropertyValueRelation {
