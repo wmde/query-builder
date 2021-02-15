@@ -117,6 +117,7 @@ export default Vue.extend( {
 				if ( selectedPropertyValueRelation === PropertyValueRelation.Regardless ) {
 					this.conditionValue = null;
 				}
+
 				this.$store.dispatch(
 					'updatePropertyValueRelation',
 					{ propertyValueRelation: selectedPropertyValueRelation, conditionIndex: this.conditionIndex },
