@@ -21,8 +21,16 @@ export default Vue.extend( {
 </script>
 
 <style scoped lang="scss">
+$tinyViewportWidth: 36em;
+
 .querybuilder__add-condition {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: flex-start;
+
+	& button {
+		@media (max-width: $tinyViewportWidth) {
+			width: 100%;
+		}
+	}
 }
 </style>

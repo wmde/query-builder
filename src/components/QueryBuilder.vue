@@ -8,7 +8,9 @@
 			<p class="querybuilder__description"
 				v-html="$i18n('query-builder-intro-text', 'https://w.wiki/FZy', 'https://w.wiki/kG$') " />
 			<div role="form">
-				<h2 class="querybuilder__find-title"
+				<h2 class="querybuilder__query-title"
+					v-html="$i18n('query-builder-query-heading')" />
+				<p class="querybuilder__query-subtitle"
 					v-i18n="{msg: 'query-builder-find-all-items'}" />
 				<div v-if="!conditionRows.length"
 					class="querybuilder__condition-placeholder"
@@ -24,6 +26,7 @@
 					<div
 						:class="[
 							'querybuilder__condition-wrapper',
+							(index == 0) ? 'querybuilder__condition-wrapper-first' : '',
 							(isBelowOr(index)) ? 'querybuilder__condition-wrapper-below' : '',
 							(isAboveOr(index)) ? 'querybuilder__condition-wrapper-above' : '',
 						]"
@@ -40,8 +43,12 @@
 						@set-relation-toggle="setConditionRelation($event, index)"
 					/></div>
 				<AddCondition @add-condition="addCondition" />
-				<Limit />
-				<LabelOptout />
+				<h2 class="querybuilder__setting-header"
+					v-html="$i18n('query-builder-settings-heading')" />
+				<div class="querybuilder__settings">
+					<Limit />
+					<LabelOptout />
+				</div>
 				<div class="querybuilder__run">
 					<Button
 						@click.native="runQuery"
@@ -187,13 +194,17 @@ $largeViewportWidth: 90em; //~1438px
 	margin-block: $dimension-layout-xsmall;
 	padding-block: $dimension-layout-xsmall;
 	padding-inline: $dimension-layout-xsmall;
-	background-color: $color-base-80; // maybe replace with an alias token?
-	border: $border-width-thin $border-style-base $border-color-base-default;
+	background-color: $background-color-neutral-default;
+	border: $border-width-thin $border-style-base $border-color-base-subtle;
 	border-radius: $border-radius-base;
 
 	@media (max-width: $tinyViewportWidth) {
 		padding-block: $dimension-layout-xxsmall;
 		padding-inline: $dimension-layout-xxsmall;
+	}
+
+	&.querybuilder__condition-wrapper-first {
+		margin-block-start: 0;
 	}
 }
 
@@ -209,8 +220,8 @@ $largeViewportWidth: 90em; //~1438px
 }
 
 .querybuilder__condition-group-above {
-	border-inline: $border-width-thin $border-style-base $border-color-base-default;
-	background-color: $color-base-80;
+	border-inline: $border-width-thin $border-style-base $border-color-base-subtle;
+	background-color: $background-color-neutral-default;
 }
 
 .querybuilder__condition-relation-toggle-or {
@@ -255,7 +266,7 @@ $largeViewportWidth: 90em; //~1438px
 	}
 }
 
-.querybuilder__find-title {
+.querybuilder__query-title {
 	font-family: $font-family-style-heading-sans;
 	font-weight: $font-weight-style-h4;
 	font-size: $font-size-style-h4;
@@ -264,8 +275,46 @@ $largeViewportWidth: 90em; //~1438px
 	margin-block-start: $dimension-layout-large;
 }
 
-.querybuilder__run {
+.querybuilder__query-subtitle {
+	font-family: $font-family-style-description;
+	font-weight: $font-weight-style-description;
+	font-size: $font-size-style-description;
+	line-height: $font-line-height-style-description;
+	color: $font-color-base;
+	margin-block-start: $dimension-layout-xsmall;
+	margin-block-end: $dimension-layout-xxsmall;
+}
+
+.querybuilder__setting-header {
+	font-family: $font-family-style-heading-sans;
+	font-weight: $font-weight-style-h4;
+	font-size: $font-size-style-h4;
+	line-height: $font-line-height-style-heading;
+	color: $font-color-base;
 	margin-block-start: $dimension-layout-medium;
+}
+
+.querybuilder__settings {
+	background-color: $background-color-neutral-default;
+	border-radius: $border-radius-base;
+	border-color: $border-color-base-transparent;
+	padding-block: $dimension-layout-medium;
+	margin-block-start: $dimension-layout-xxsmall;
+}
+
+.querybuilder__run {
+	font-family: $font-family-style-heading-sans;
+	font-weight: $font-weight-style-h4;
+	font-size: $font-size-style-h4;
+	line-height: $font-line-height-style-heading;
+	color: $font-color-base;
+	margin-block-start: $dimension-layout-medium;
+
+	& button {
+		@media (max-width: $tinyViewportWidth) {
+			width: 100%;
+		}
+	}
 }
 
 .query-builder__footer {

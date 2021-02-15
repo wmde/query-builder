@@ -58,7 +58,6 @@ export default Vue.extend( {
 .querybuilder__limit {
 	display: flex;
 	align-items: center;
-	margin-block-start: $dimension-layout-medium;
 }
 
 .querybuilder__limit-input {
