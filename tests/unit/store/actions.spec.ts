@@ -20,6 +20,10 @@ describe( 'actions', () => {
 		actions.updateValue( context as any, { value, conditionIndex } );
 
 		expect( context.commit ).toHaveBeenCalledWith( 'setValue', { value, conditionIndex } );
+		expect( context.commit ).toHaveBeenCalledWith( 'clearFieldErrors', {
+			conditionIndex,
+			errorsToClear: 'value',
+		} );
 	} );
 
 	it( 'setConditionAsLimitedSupport', () => {

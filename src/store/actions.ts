@@ -46,6 +46,13 @@ export default ( searchEntityRepository: SearchEntityRepository, metricsCollecto
 		context: ActionContext<RootState, RootState>,
 		payload: { value: string; conditionIndex: number } ): void {
 		context.commit( 'setValue', payload );
+		context.commit(
+			'clearFieldErrors',
+			{
+				conditionIndex: payload.conditionIndex,
+				errorsToClear: 'value',
+			},
+		);
 	},
 	unsetProperty( context: ActionContext<RootState, RootState>, conditionIndex: number ): void {
 		context.commit( 'unsetProperty', conditionIndex );
