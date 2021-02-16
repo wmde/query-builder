@@ -34,6 +34,6 @@ export default Vue.extend( {
 .querybuilder__label-optout {
 	display: flex;
 	align-items: flex-end;
-	margin-block-start: $dimension-layout-medium;
+	margin-block-start: $dimension-layout-xsmall;
 }
 </style>
