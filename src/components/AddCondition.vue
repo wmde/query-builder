@@ -21,7 +21,7 @@ export default Vue.extend( {
 </script>
 
 <style scoped lang="scss">
-$tinyViewportWidth: 36em;
+$tinyViewportWidth: 38em;
 
 .querybuilder__add-condition {
 	display: flex;

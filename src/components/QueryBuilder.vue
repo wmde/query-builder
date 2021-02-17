@@ -171,7 +171,7 @@ a {
 	}
 }
 
-$tinyViewportWidth: 36em;
+$tinyViewportWidth: 38em;
 
 /*
  * This is a rough approximation. by using a screen size emulator,
@@ -304,8 +304,9 @@ $largeViewportWidth: 90em; //~1438px
 	background-color: $background-color-neutral-default;
 	border-radius: $border-radius-base;
 	border-color: $border-color-base-transparent;
-	padding-block: $dimension-layout-medium;
 	margin-block-start: $dimension-layout-xxsmall;
+	padding-block: $dimension-layout-xsmall;
+	padding-inline: $dimension-layout-xsmall;
 }
 
 .querybuilder__run {
