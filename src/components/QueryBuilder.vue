@@ -27,6 +27,7 @@
 						:class="[
 							'querybuilder__condition-wrapper',
 							(index == 0) ? 'querybuilder__condition-wrapper-first' : '',
+							((index + 1) == conditionRows.length) ? 'querybuilder__condition-wrapper-last' : '',
 							(isBelowOr(index)) ? 'querybuilder__condition-wrapper-below' : '',
 							(isAboveOr(index)) ? 'querybuilder__condition-wrapper-above' : '',
 						]"
@@ -110,8 +111,13 @@ export default Vue.extend( {
 			// force the iframe to rerender https://stackoverflow.com/a/48755228
 			this.iframeRenderKey = Math.random();
 		},
-		addCondition(): void {
-			this.$store.dispatch( 'addCondition' );
+		async addCondition(): Promise<void> {
+			await this.$store.dispatch( 'addCondition' );
+			setTimeout( () => {
+				document
+					.getElementsByClassName( 'querybuilder__condition-wrapper-last' )[ 0 ]
+					.scrollIntoView( { behavior: 'smooth' } );
+			} );
 		},
 		setConditionRelation( value: ConditionRelation, index: number ): void {
 			this.$store.dispatch( 'setConditionRelation', { value, conditionIndex: index + 1 } );
