@@ -1,0 +1,24 @@
+{
+    "searchinfo": {
+      "search": "IMDb ID"
+    },
+    "search": [
+      {
+        "id": "P345",
+        "title": "Property:P345",
+        "pageid": 8107058,
+        "repository": "wikidata",
+        "url": "//www.wikidata.org/wiki/Property:P345",
+        "datatype": "external-id",
+        "concepturi": "http://www.wikidata.org/entity/P345",
+        "label": "IMDb ID",
+        "description": "identifier for the IMDb [with prefix 'tt', 'nm', 'co', 'ev', 'ch' or 'ni']",
+        "match": {
+          "type": "label",
+          "language": "en",
+          "text": "IMDb ID"
+        }
+      }
+    ],
+    "success": 1
+  }

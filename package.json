@@ -8,6 +8,7 @@
   },
   "scripts": {
     "cypress": "CYPRESS_BASE_URL=${CYPRESS_BASE_URL:-http://localhost:8080} cypress run",
+    "test:lint-cypress": "vue-cli-service lint --no-fix --max-warnings 0 cypress/integration/**",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production",
     "test:unit": "vue-cli-service test:unit",
@@ -51,6 +52,8 @@
     "cypress": "^6.3.0",
     "eslint": "^7.20.0",
     "eslint-config-wikimedia": "^0.17.0",
+    "eslint-plugin-chai-friendly": "^0.6.0",
+    "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-vue": "^6.2.2",
     "geckodriver": "^1.22.1",
     "jest-axe": "^4.1.0",
