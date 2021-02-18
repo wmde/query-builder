@@ -3,7 +3,7 @@ declare module '*.vue' {
 
 	declare module 'vue/types/vue' {
 		interface Vue {
-			$i18n: ( msg: string ) => string;
+			$i18n: ( msg: string, ...args: unknown[] ) => string;
 		}
 	}
 
