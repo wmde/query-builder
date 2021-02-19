@@ -1,7 +1,6 @@
 import rdfNamespaces from '@/sparql/rdfNamespaces';
 import QueryRepresentation, { Condition } from '@/sparql/QueryRepresentation';
 import { Pattern, SelectQuery } from 'sparqljs';
-import ConditionRelation from '@/data-model/ConditionRelation';
 import PatternBuilder from '@/sparql/PatternBuilder';
 
 export default class QueryObjectBuilder {
@@ -29,7 +28,7 @@ export default class QueryObjectBuilder {
 			},
 		];
 
-		const conditions = this.transformUnions( queryRepresentation.conditions );
+		const conditions = this.buildConditionTree( queryRepresentation.conditions );
 
 		for ( let i = 0; i < conditions.length; i++ ) {
 			const conditionOrUnion = conditions[ i ];
@@ -67,36 +66,41 @@ export default class QueryObjectBuilder {
 		return this.queryObject;
 	}
 
-	private transformUnions( conditions: Condition[] ): ( Condition | Condition[] )[] {
-		let currentUnion: Condition[] | null = null;
-		const transformedConditions: ( Condition | Condition[] )[] = [];
-		for ( let i = 0; i < conditions.length; i++ ) {
-			if ( conditions[ i ].conditionRelation === ConditionRelation.Or ) {
-				if ( currentUnion === null ) {
-					const previousCondition = transformedConditions.pop();
-					if ( !previousCondition ) {
-						throw new Error( 'Logic error: empty conditions array when starting union' );
-					}
-					if ( Array.isArray( previousCondition ) ) {
-						throw new Error( 'Logic error: condition array contains union when starting new union' );
-					}
-					currentUnion = [];
-					currentUnion.push( previousCondition );
-				}
-				currentUnion.push( conditions[ i ] );
-			} else {
-				if ( currentUnion !== null ) {
-					transformedConditions.push( currentUnion );
-				}
-				currentUnion = null;
-				transformedConditions.push( conditions[ i ] );
+	private buildConditionTree( conditions: Condition[] ): ( Condition | Condition[] )[] {
+		const rootNode: ( Condition | Condition[] )[] = [];
+		conditions.forEach( ( condition ) => {
+			if ( condition.conditionRelation === 'and' || condition.conditionRelation === null ) {
+				this.attachToRootWithAnd( rootNode, condition );
+				return;
 			}
-		}
-		if ( currentUnion !== null ) {
-			transformedConditions.push( currentUnion );
+			this.attachToPreviousConditionWithOr( rootNode, condition );
+		} );
+
+		return rootNode;
+	}
+
+	private attachToPreviousConditionWithOr( rootNode: ( Condition | Condition[] )[], condition: Condition ): void {
+		if ( this.lastElementIsSingleCondition( rootNode ) ) {
+			this.makeLastElementIntoConditionGroup( rootNode );
 		}
 
-		return transformedConditions;
+		this.attachToExistingConditionGroup( rootNode, condition );
+	}
+
+	private attachToExistingConditionGroup( rootNode: ( Condition | Condition[] )[], condition: Condition ): void {
+		( rootNode[ rootNode.length - 1 ] as Condition[] ).push( condition );
+	}
+
+	private lastElementIsSingleCondition( rootNode: ( Condition | Condition[] )[] ): boolean {
+		return !Array.isArray( rootNode[ rootNode.length - 1 ] );
+	}
+
+	private makeLastElementIntoConditionGroup( rootNode: ( Condition | Condition[] )[] ): void {
+		rootNode.push( [ rootNode.pop() as Condition ] );
+	}
+
+	private attachToRootWithAnd( rootNode: ( Condition | Condition[] )[], condition: Condition ): void {
+		rootNode.push( condition );
 	}
 
 	private buildUnion( conditions: Condition[] ): void {
