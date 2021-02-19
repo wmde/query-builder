@@ -250,8 +250,10 @@ $largeViewportWidth: 90em; //~1438px
 	line-height: $font-line-height-style-description;
 }
 
+@import url(//fonts.googleapis.com/css?family=Allerta+Stencil);
+
 .querybuilder__heading {
-	font-family: $font-family-style-heading-serif;
+	font-family: 'Allerta Stencil', $font-family-style-heading-serif, sans-serif;
 	font-weight: $font-weight-style-h1;
 	font-size: $font-size-style-h1;
 	line-height: $font-line-height-style-heading;
