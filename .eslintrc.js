@@ -5,8 +5,6 @@ module.exports = {
 	},
 	extends: [
 		'plugin:vue/essential',
-		'plugin:cypress/recommended',
-		'plugin:chai-friendly/recommended',
 		'eslint:recommended',
 		'@vue/typescript/recommended',
 		'wikimedia',

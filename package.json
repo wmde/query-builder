@@ -8,7 +8,7 @@
   },
   "scripts": {
     "cypress": "CYPRESS_BASE_URL=${CYPRESS_BASE_URL:-http://localhost:8080} cypress run",
-    "test:lint-cypress": "vue-cli-service lint --no-fix --max-warnings 0 cypress/integration/**",
+    "test:lint-cypress": "vue-cli-service lint --no-fix --max-warnings 0 cypress",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production",
     "test:unit": "vue-cli-service test:unit",
@@ -19,6 +19,7 @@
     "test:a11y": "jest --testMatch=\"**/tests/a11y/**\"",
     "fix:css": "stylelint '**/*.vue' --fix",
     "fix:ts": "vue-cli-service lint",
+    "fix:cypress": "vue-cli-service lint cypress",
     "netlify": "npx netlify deploy --dir=dist --json"
   },
   "main": "index.js",
