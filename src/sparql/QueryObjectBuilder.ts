@@ -1,7 +1,9 @@
-import rdfNamespaces from '@/sparql/rdfNamespaces';
-import QueryRepresentation, { Condition } from '@/sparql/QueryRepresentation';
-import { Pattern, SelectQuery } from 'sparqljs';
 import PatternBuilder from '@/sparql/PatternBuilder';
+import QueryRepresentation, { Condition } from '@/sparql/QueryRepresentation';
+import rdfNamespaces from '@/sparql/rdfNamespaces';
+import { Pattern, SelectQuery } from 'sparqljs';
+
+type RootNode = ( Condition | Condition[] )[];
 
 export default class QueryObjectBuilder {
 	private queryObject: SelectQuery;
@@ -66,8 +68,8 @@ export default class QueryObjectBuilder {
 		return this.queryObject;
 	}
 
-	private buildConditionTree( conditions: Condition[] ): ( Condition | Condition[] )[] {
-		const rootNode: ( Condition | Condition[] )[] = [];
+	private buildConditionTree( conditions: Condition[] ): RootNode {
+		const rootNode: RootNode = [];
 		conditions.forEach( ( condition ) => {
 			if ( condition.conditionRelation === 'and' || condition.conditionRelation === null ) {
 				this.attachToRootWithAnd( rootNode, condition );
@@ -79,7 +81,7 @@ export default class QueryObjectBuilder {
 		return rootNode;
 	}
 
-	private attachToPreviousConditionWithOr( rootNode: ( Condition | Condition[] )[], condition: Condition ): void {
+	private attachToPreviousConditionWithOr( rootNode: RootNode, condition: Condition ): void {
 		if ( this.lastElementIsSingleCondition( rootNode ) ) {
 			this.makeLastElementIntoConditionGroup( rootNode );
 		}
@@ -87,19 +89,19 @@ export default class QueryObjectBuilder {
 		this.attachToExistingConditionGroup( rootNode, condition );
 	}
 
-	private attachToExistingConditionGroup( rootNode: ( Condition | Condition[] )[], condition: Condition ): void {
+	private attachToExistingConditionGroup( rootNode: RootNode, condition: Condition ): void {
 		( rootNode[ rootNode.length - 1 ] as Condition[] ).push( condition );
 	}
 
-	private lastElementIsSingleCondition( rootNode: ( Condition | Condition[] )[] ): boolean {
+	private lastElementIsSingleCondition( rootNode: RootNode ): boolean {
 		return !Array.isArray( rootNode[ rootNode.length - 1 ] );
 	}
 
-	private makeLastElementIntoConditionGroup( rootNode: ( Condition | Condition[] )[] ): void {
+	private makeLastElementIntoConditionGroup( rootNode: RootNode ): void {
 		rootNode.push( [ rootNode.pop() as Condition ] );
 	}
 
-	private attachToRootWithAnd( rootNode: ( Condition | Condition[] )[], condition: Condition ): void {
+	private attachToRootWithAnd( rootNode: RootNode, condition: Condition ): void {
 		rootNode.push( condition );
 	}
 
