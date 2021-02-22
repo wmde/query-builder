@@ -9,8 +9,10 @@
 			"Wladek92"
 		]
 	},
-	"query-builder-heading": "Constructeur simple de requêtes",
+	"query-builder-heading": "Assistant de requêtes",
 	"query-builder-intro-text": "Le Constructeur de requêtes de Wikidata fournit une interface visuelle pour construire une requête Wikidata simple. Il est idéal pour les utilisateurs avec peu ou pas d’expérience en [$1 SPARQL], le puissant langage de requêtage. Le Constructeur de requêtes n’offre pas toutes les fonctionnalités de SPARQL, mais vous pouvez toujours ouvrir votre requête dans le Service de requête, où vous pouvez l’afficher, la modifier ou l’étendre via le lien au-dessus des résultats. [$2 Les avis sont bienvenus ici].",
+	"query-builder-query-heading": "Requête",
+	"query-builder-settings-heading": "Paramètres",
 	"query-builder-find-all-items": "Trouver tous les éléments...",
 	"query-builder-run-query": "Exécuter la requête",
 	"query-builder-input-value-label": "Valeur",
@@ -43,7 +45,7 @@
 	"query-builder-limit-number-results-description": "Limiter le nombre de résultats à",
 	"query-builder-limit-number-placeholder": "Saisir un nombre",
 	"query-builder-limit-number-screenreader-label": "Nombre maximal de résultats",
-	"query-builder-label-opt-out": "Montrer les identifiants plutôt que les libellés (pour éviter le ''timeout'').",
+	"query-builder-label-opt-out": "Montrer les identifiants plutôt que les libellés (peut éviter une erreur d’exécution hors délai).",
 	"query-builder-include-subclasses": "Inclure les valeurs à partir des sous-classes de cette valeur",
 	"query-builder-negation-option-label-with": "Avec",
 	"query-builder-negation-option-label-without": "Sans"

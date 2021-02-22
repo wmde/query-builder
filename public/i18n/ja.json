@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"A2y4",
 			"Omotecho"
 		]
 	},
+	"query-builder-query-heading": "クエリ",
+	"query-builder-settings-heading": "設定",
 	"query-builder-find-all-items": "すべての項目を検索……",
 	"query-builder-run-query": "クエリを実行",
 	"query-builder-input-value-label": "値",

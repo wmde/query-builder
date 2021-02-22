@@ -6,6 +6,8 @@
 			"EditGio"
 		]
 	},
+	"query-builder-query-heading": "Interrogazione",
+	"query-builder-settings-heading": "Impostazioni",
 	"query-builder-find-all-items": "Trova tutti gli elementi...",
 	"query-builder-run-query": "Esegui query",
 	"query-builder-input-value-label": "Valore",

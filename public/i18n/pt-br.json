@@ -2,10 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Eduardo Addad de Oliveira",
-			"Eduardoaddad"
+			"Eduardoaddad",
+			"Mariagarbin"
 		]
 	},
 	"query-builder-heading": "Construtor de consulta simples",
+	"query-builder-query-heading": "Consulta",
+	"query-builder-settings-heading": "Configurações",
 	"query-builder-find-all-items": "Encontre todos os itens...",
 	"query-builder-run-query": "Executar consulta",
 	"query-builder-input-value-label": "Valor",
@@ -26,6 +29,9 @@
 	"query-builder-value-type-relation-dropdown-matching": "correspondente",
 	"query-builder-value-type-relation-dropdown-without": "sem",
 	"query-builder-value-type-relation-dropdown-regardless-of-value": "independentemente do valor",
+	"query-builder-reference-relation-label": "Referências",
+	"query-builder-reference-relation-dropdown-with": "Apenas com referências",
+	"query-builder-reference-relation-dropdown-without": "Apenas sem referências",
 	"query-builder-delete-condition": "Excluir condição",
 	"query-builder-condition-placeholder": "Adicione uma condição para começar a construir uma consulta",
 	"query-builder-condition-relation-toggle-and": "e",
