@@ -5,6 +5,8 @@
 		]
 	},
 	"query-builder-heading": "Generador de consultes simple",
+	"query-builder-query-heading": "Consulta",
+	"query-builder-settings-heading": "Paràmetres",
 	"query-builder-find-all-items": "Trobar tots els  elements...",
 	"query-builder-run-query": "Executa la consulta",
 	"query-builder-input-value-label": "Valor",
