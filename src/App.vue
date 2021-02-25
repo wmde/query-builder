@@ -73,4 +73,6 @@ export default Vue.extend( {
 <style lang="scss">
 @import '~ress';
 @import '~@wmde/wikit-vue-components/dist/wikit-vue-components.css';
+@import './styles/mixins/DescriptionText.scss';
+@import './styles/mixins/HeaderText.scss';
 </style>

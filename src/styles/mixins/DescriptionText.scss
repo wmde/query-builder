@@ -1,0 +1,12 @@
+@mixin DescriptionText( $color: base) {
+  font-size: $font-size-style-description;
+  font-family: $font-family-style-description;
+  font-weight: $font-weight-style-description;
+  line-height: $font-line-height-style-description;
+  @if $color == base {
+    color: $font-color-base;
+  }
+  @if $color == subtle {
+    color: $font-color-subtle;
+  }
+}

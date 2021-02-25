@@ -239,15 +239,13 @@ $largeViewportWidth: 90em; //~1438px
 }
 
 .querybuilder__condition-placeholder {
+	@include DescriptionText();
+
 	background-color: $background-color-neutral-default;
 	margin-block: $dimension-layout-xsmall;
 	padding-block: $dimension-layout-xsmall;
 	text-align: center;
 	border-radius: $border-radius-base;
-	font-family: $font-family-style-description;
-	font-weight: $font-weight-style-description;
-	font-size: $font-size-style-description;
-	line-height: $font-line-height-style-description;
 }
 
 .querybuilder__heading {
@@ -260,11 +258,8 @@ $largeViewportWidth: 90em; //~1438px
 }
 
 .querybuilder__description {
-	font-family: $font-family-style-description;
-	font-weight: $font-weight-style-description;
-	font-size: $font-size-style-description;
-	line-height: $font-line-height-style-description;
-	color: $font-color-base;
+	@include DescriptionText();
+
 	max-width: 672px; // TODO: replace with token
 
 	@media (max-width: 671px) {
@@ -273,30 +268,21 @@ $largeViewportWidth: 90em; //~1438px
 }
 
 .querybuilder__query-title {
-	font-family: $font-family-style-heading-sans;
-	font-weight: $font-weight-style-h4;
-	font-size: $font-size-style-h4;
-	line-height: $font-line-height-style-heading;
-	color: $font-color-base;
+	@include HeaderText();
+
 	margin-block-start: $dimension-layout-large;
 }
 
 .querybuilder__query-subtitle {
-	font-family: $font-family-style-description;
-	font-weight: $font-weight-style-description;
-	font-size: $font-size-style-description;
-	line-height: $font-line-height-style-description;
-	color: $font-color-base;
+	@include DescriptionText();
+
 	margin-block-start: $dimension-layout-xsmall;
 	margin-block-end: $dimension-layout-xxsmall;
 }
 
 .querybuilder__setting-header {
-	font-family: $font-family-style-heading-sans;
-	font-weight: $font-weight-style-h4;
-	font-size: $font-size-style-h4;
-	line-height: $font-line-height-style-heading;
-	color: $font-color-base;
+	@include HeaderText();
+
 	margin-block-start: $dimension-layout-medium;
 }
 
@@ -310,11 +296,8 @@ $largeViewportWidth: 90em; //~1438px
 }
 
 .querybuilder__run {
-	font-family: $font-family-style-heading-sans;
-	font-weight: $font-weight-style-h4;
-	font-size: $font-size-style-h4;
-	line-height: $font-line-height-style-heading;
-	color: $font-color-base;
+	@include HeaderText();
+
 	margin-block-start: $dimension-layout-medium;
 
 	& button {

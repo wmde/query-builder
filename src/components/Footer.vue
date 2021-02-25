@@ -49,10 +49,6 @@ export default Vue.extend( {
 
 <style lang="scss">
 .querybuilder-footer {
-	font-family: $font-family-style-description;
-	font-weight: $font-weight-style-description;
-	font-size: $font-size-style-description;
-	line-height: $font-line-height-style-description;
-	color: $font-color-base;
+	@include DescriptionText();
 }
 </style>
