@@ -2,7 +2,7 @@
   "name": "@wmde/query-builder",
   "version": "1.0.0",
   "private": true,
-  "description": "A simple query builder for Wikidata SPARQL queries",
+  "description": "A query builder for Wikidata SPARQL queries",
   "author": {
     "name": "The Wikidata team"
   },

@@ -9,7 +9,7 @@
 			Last build at {{ buildTime }} from <span v-html="commitLink" />.
 		</p>
 		<p>
-			<a :href="permaLinkHref">Permalink to current Simple Query Builder</a>
+			<a :href="permaLinkHref">Permalink to current Wikidata Query Builder</a>
 		</p>
 	</footer>
 </template>
