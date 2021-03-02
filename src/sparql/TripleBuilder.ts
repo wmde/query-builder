@@ -105,7 +105,7 @@ export default class TripleBuilder {
 					pathType: '*',
 					items: [ {
 						termType: 'NamedNode',
-						value: rdfNamespaces.wdt + process.env.VUE_APP_SUBCLASS_PROPERTY,
+						value: rdfNamespaces.wdt + this.getSubclassPropertyId( condition.propertyId ),
 					},
 					],
 				},
@@ -113,6 +113,18 @@ export default class TripleBuilder {
 		}
 
 		return items;
+	}
+
+	private getSubclassPropertyId( propertyId: string ): string {
+		if ( !process.env.VUE_APP_SUBCLASS_PROPERTY_MAP ) {
+			return 'P279';
+		}
+		const propertyMap = JSON.parse( process.env.VUE_APP_SUBCLASS_PROPERTY_MAP );
+		if ( !propertyMap[ propertyId ] ) {
+			return propertyMap.default;
+		}
+		return propertyMap[ propertyId ];
+
 	}
 
 	public buildReferenceFilterTriple( condition: Condition, conditionIndex: number ): Triple {
