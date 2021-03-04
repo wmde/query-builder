@@ -67,8 +67,7 @@ describe( 'EntityLookup.vue', () => {
 
 		const searchOptions: SearchOptions = { search: 'postal', limit: 12 };
 
-		wrapper.findComponent( Lookup ).vm.$emit( 'update:search-input', searchOptions.search );
-		await localVue.nextTick();
+		await wrapper.findComponent( Lookup ).vm.$emit( 'update:search-input', searchOptions.search );
 
 		expect( searchForMenuItems ).toHaveBeenCalledWith( searchOptions );
 		expect( wrapper.findComponent( Lookup ).props( 'searchInput' ) ).toBe( searchOptions.search );
@@ -99,9 +98,7 @@ describe( 'EntityLookup.vue', () => {
 			},
 		} );
 
-		wrapper.findComponent( Lookup ).vm.$emit( 'update:search-input', '' );
-		await localVue.nextTick();
-
+		await wrapper.findComponent( Lookup ).vm.$emit( 'update:search-input', '' );
 		expect( searchForMenuItems ).not.toHaveBeenCalled();
 		expect( wrapper.findComponent( Lookup ).props( 'searchInput' ) ).toBe( '' );
 		expect( wrapper.findComponent( Lookup ).props( 'menuItems' ) ).toStrictEqual( [] );

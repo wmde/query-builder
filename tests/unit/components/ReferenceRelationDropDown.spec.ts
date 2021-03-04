@@ -22,8 +22,7 @@ describe( 'ReferenceRelationDropDown.vue', () => {
 			},
 		} );
 
-		wrapper.findComponent( Dropdown ).vm.$emit( 'input', { value: optionItems.Without } );
-		await Vue.nextTick();
+		await wrapper.findComponent( Dropdown ).vm.$emit( 'input', { value: optionItems.Without } );
 
 		expect( wrapper.emitted( 'input' )![ 0 ][ 0 ] ).toEqual( optionItems.Without );
 	} );
