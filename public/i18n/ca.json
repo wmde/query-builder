@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Jordiventura96",
 			"Mguix"
 		]
 	},
-	"query-builder-heading": "Generador de consultes simple",
+	"query-builder-heading": "Generador de consultes de Wikidata",
 	"query-builder-query-heading": "Consulta",
 	"query-builder-settings-heading": "Paràmetres",
 	"query-builder-find-all-items": "Trobar tots els  elements...",

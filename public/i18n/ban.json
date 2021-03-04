@@ -4,8 +4,10 @@
 			"Chinamoonroll"
 		]
 	},
-	"query-builder-heading": "Pengardi kuéri sederhana",
+	"query-builder-heading": "Pengardi kuéri Wikidata",
 	"query-builder-intro-text": "Pawangun Kuéri Wikidata nyadiayang cingakan antuk ngardi kuéri Wikidata saderhana. Puniki becik antuk sang anganggé antuk kirang utawi tanpa kawikanan ring [$1 SPARQL], basa kuéri sané kuat. Pawangun Kuéri nénten nawahin kawigunaan penuh SPARQL, menawi Ida stata prasida ngabuka kuéri Ida ring Layanan Kuéri, genah Ida prasida nyingakin, nguahin, utawi ngajimbarang saking pralana asil ipun. [$2 Umpan walik katampi iriki].",
+	"query-builder-query-heading": "Kuéri",
+	"query-builder-settings-heading": "Setélan",
 	"query-builder-find-all-items": "Rereh sinamian item",
 	"query-builder-run-query": "Margiang kuéri",
 	"query-builder-input-value-label": "Ajin",
