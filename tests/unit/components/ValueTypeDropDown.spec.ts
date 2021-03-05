@@ -22,8 +22,7 @@ describe( 'ValueTypeDropDown.vue', () => {
 			},
 		} );
 
-		wrapper.findComponent( Dropdown ).vm.$emit( 'input', { value: optionItems.Regardless } );
-		await Vue.nextTick();
+		await wrapper.findComponent( Dropdown ).vm.$emit( 'input', { value: optionItems.Regardless } );
 
 		expect( wrapper.emitted( 'input' )![ 0 ][ 0 ] ).toEqual( optionItems.Regardless );
 	} );

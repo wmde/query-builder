@@ -134,9 +134,7 @@ describe( 'QueryCondition.vue', () => {
 			},
 		} );
 
-		wrapper.findComponent( DeleteConditionButton ).vm.$emit( 'click' );
-
-		await Vue.nextTick();
+		await wrapper.findComponent( DeleteConditionButton ).vm.$emit( 'click' );
 
 		expect( store.dispatch ).toHaveBeenCalledWith( 'removeCondition', conditionIndex );
 	} );
@@ -205,7 +203,6 @@ describe( 'QueryCondition.vue', () => {
 				'condition-index': 0,
 			},
 		} );
-		await Vue.nextTick();
 		expect( wrapper.findComponent( SubclassCheckbox ).props( 'disabled' ) ).toBeTruthy();
 		expect( wrapper.findComponent( ValueInput ).props( 'disabled' ) ).toBeTruthy();
 	} );
