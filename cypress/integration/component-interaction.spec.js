@@ -118,7 +118,7 @@ describe( 'Component interaction test', () => {
 		cy.get( '.query-condition__value-input:nth(1) .wikit-Input' ).should( 'be.disabled' );
 
 		// run query
-		cy.get( '.querybuilder__run .wikit-Button' ).click();
+		cy.get( '.querybuilder__run .wikit-Button--progressive' ).click();
 
 		// assert the reslulting sparql query
 		cy.get( '.querybuilder__result__iframe' ).then( ( element ) => {

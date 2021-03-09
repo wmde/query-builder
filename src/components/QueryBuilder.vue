@@ -56,6 +56,7 @@
 						type="progressive"
 						variant="primary"
 						v-i18n="{msg: 'query-builder-run-query'}" />
+					<SharableLink />
 				</div>
 			</div>
 			<QueryResult
@@ -84,6 +85,7 @@ import AddCondition from '@/components/AddCondition.vue';
 import Limit from '@/components/Limit.vue';
 import LabelOptout from '@/components/LabelOptout.vue';
 import ConditionRelation from '@/data-model/ConditionRelation';
+import SharableLink from '@/components/SharableLink.vue';
 
 export default Vue.extend( {
 	name: 'QueryBuilder',
@@ -147,6 +149,7 @@ export default Vue.extend( {
 		Limit,
 		LabelOptout,
 		Footer,
+		SharableLink,
 	},
 } );
 </script>
@@ -154,12 +157,11 @@ export default Vue.extend( {
 <style lang="scss">
 // TODO replace with link component once available
 a {
-	font-family: $font-family-style-link;
-	font-style: $font-size-style-link;
-	font-weight: $font-weight-style-link;
-	font-size: $font-size-style-link;
-	line-height: $font-line-height-style-link;
-	color: $font-color-link-default;
+	font-family: $wikit-Link-font-family;
+	font-weight: $wikit-Link-font-weight;
+	font-size: $wikit-Link-font-size;
+	line-height: $wikit-Link-line-height;
+	color: $wikit-Link-font-color;
 	transition: $transition-interaction-link-property $transition-interaction-link-duration;
 
 	&:active {
@@ -167,7 +169,7 @@ a {
 	}
 
 	&:visited {
-		color: $font-color-link-visited;
+		color: $wikit-Link-visited-font-color;
 	}
 }
 

@@ -38,5 +38,7 @@
   "query-builder-label-opt-out": "Show IDs instead of labels (may prevent timeout)",
   "query-builder-include-subclasses": "Include values from subclasses of this value",
   "query-builder-negation-option-label-with": "With",
-  "query-builder-negation-option-label-without": "Without"
+  "query-builder-negation-option-label-without": "Without",
+  "query-builder-sharable-link-text": "Get a sharable link",
+  "query-builder-sharable-link-message": "URL copied to clipboard!"
 }
