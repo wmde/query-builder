@@ -12,7 +12,10 @@
 					iconOnly
 					@click.native="copyTextToClipboard"
 					aria-label="Sharable link">
-					<Icon type="link" size="medium" />
+					<Icon
+						type="link"
+						size="large"
+					/>
 				</Button>
 			</template>
 			<template v-slot:default>
@@ -66,6 +69,10 @@ $tinyViewportWidth: 36em;
 	font-size: $font-size-style-description;
 	line-height: $font-line-height-style-description;
 	margin-inline-start: $dimension-layout-xsmall;
+
+	& .wikit-Icon {
+		vertical-align: top;
+	}
 
 	@media (max-width: $tinyViewportWidth) {
 		margin-inline-start: 0;
