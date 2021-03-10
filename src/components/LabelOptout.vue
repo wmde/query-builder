@@ -12,6 +12,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Checkbox } from '@wmde/wikit-vue-components';
+
 export default Vue.extend( {
 	name: 'LabelOptout',
 	computed: {

@@ -13,6 +13,11 @@
 		<template
 			v-slot:no-results
 		>{{ noMatchFoundMessage }}</template>
+		<template v-if="tooltip" v-slot:suffix>
+			<InfoTooltip
+				position="top-end"
+				:message="tooltip"
+			/></template>
 	</Lookup>
 </template>
 
@@ -24,12 +29,14 @@ import debounce from 'lodash/debounce';
 import { Lookup } from '@wmde/wikit-vue-components';
 import SearchResult from '@/data-access/SearchResult';
 import SearchOptions from '@/data-access/SearchOptions';
+import InfoTooltip from '@/components/InfoTooltip.vue';
 
 const NUMBER_OF_SEARCH_RESULTS = 12;
 
 export default Vue.extend( {
 	name: 'EntityLookup',
 	components: {
+		InfoTooltip,
 		Lookup,
 	},
 	data() {
@@ -127,6 +134,10 @@ export default Vue.extend( {
 			required: true,
 		},
 		placeholder: {
+			type: String,
+			default: '',
+		},
+		tooltip: {
 			type: String,
 			default: '',
 		},

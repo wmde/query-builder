@@ -7,7 +7,13 @@
 			:label="$i18n('query-builder-reference-relation-label')"
 			:menuItems="optionItems"
 			:disabled="disabled"
-		/>
+		>
+			<template v-slot:suffix>
+				<InfoTooltip
+					position="top"
+					:message="$i18n('query-builder-reference-relation-tooltip')"
+				/></template>
+		</Dropdown>
 	</div>
 
 </template>
@@ -17,6 +23,7 @@ import Vue, { PropType } from 'vue';
 import ReferenceRelation from '@/data-model/ReferenceRelation';
 import { MenuItem } from '@wmde/wikit-vue-components/dist/components/MenuItem';
 import { Dropdown } from '@wmde/wikit-vue-components';
+import InfoTooltip from '@/components/InfoTooltip.vue';
 
 interface ReferenceRelationMenuItem extends MenuItem {
 	value: ReferenceRelation;
@@ -63,6 +70,7 @@ export default Vue.extend( {
 	},
 	components: {
 		Dropdown,
+		InfoTooltip,
 	},
 } );
 </script>
