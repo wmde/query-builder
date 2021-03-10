@@ -259,6 +259,12 @@ $largeViewportWidth: 90em; //~1438px
 	line-height: $font-line-height-style-heading;
 	color: $font-color-base;
 	margin-block-end: $dimension-layout-xxsmall;
+
+	// Arabic scripts should use sans fonts (T270111).
+	[lang=fa] &,
+	[lang=ar] & {
+		font-family: $font-family-style-heading-sans;
+	}
 }
 
 .querybuilder__description {
