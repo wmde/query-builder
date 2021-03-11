@@ -31,11 +31,3 @@ jobs:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
       run: echo "DEPLOY_URL=$(npm run --silent netlify | jq '.deploy_url' --raw-output)" >> $GITHUB_ENV
       id: "deploy"
-    - name: Cypress End-to-end tests
-      uses: cypress-io/github-action@v2
-      with:
-        browser: chrome
-        headless: true
-        config: pageLoadTimeout=60000,baseUrl=${{ env.DEPLOY_URL }}
-      env:
-        CYPRESS_API_URL: 'https://www.wikidata.org/w/api.php'
