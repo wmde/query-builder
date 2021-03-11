@@ -3,6 +3,7 @@ import { IriTerm, PropertyPath, Term, Triple } from 'sparqljs';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import rdfNamespaces from '@/sparql/rdfNamespaces';
 import ReferenceRelation from '@/data-model/ReferenceRelation';
+import UnitValue from '@/data-model/UnitValue';
 
 export default class TripleBuilder {
 	public buildTripleFromQueryCondition( condition: Condition, conditionIndex: number ): Triple {
@@ -19,6 +20,17 @@ export default class TripleBuilder {
 		};
 	}
 
+	private checkValueType( value: string | UnitValue ): string | number {
+		if ( typeof value === 'string' ) {
+			return value;
+		}
+		try {
+			return value.value;
+		} catch ( e ) {
+			throw new Error( 'Unit Values not yet supported!!' );
+		}
+	}
+
 	private buildTripleForObjectItems( condition: Condition ): Term {
 		switch ( condition.propertyValueRelation ) {
 			case ( PropertyValueRelation.NotMatching ):
@@ -32,19 +44,19 @@ export default class TripleBuilder {
 					value: 'anyValue' + condition.propertyId,
 				};
 			case ( PropertyValueRelation.Matching ):
-				return this.buildTripleForExplicitValue( condition.datatype, condition.value );
+				return this.buildTripleForExplicitValue( condition.datatype, this.checkValueType( condition.value ) );
 			default:
 				throw new Error( `unsupported relation: ${condition.propertyValueRelation}` );
 		}
 	}
 
-	private buildTripleForExplicitValue( datatype: string, value: string ): Term {
+	private buildTripleForExplicitValue( datatype: string, value: string | number ): Term {
 		switch ( datatype ) {
 			case 'string':
 			case 'external-id':
 				return {
 					termType: 'Literal',
-					value: value,
+					value: String( value ),
 				};
 			case 'wikibase-item':
 				return {
@@ -72,7 +84,7 @@ export default class TripleBuilder {
 					termType: 'NamedNode',
 					value: rdfNamespaces.ps + condition.propertyId,
 				} ] },
-			object: this.buildTripleForExplicitValue( condition.datatype, condition.value ),
+			object: this.buildTripleForExplicitValue( condition.datatype, this.checkValueType( condition.value ) ),
 		};
 	}
 

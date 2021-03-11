@@ -67,6 +67,32 @@ describe( 'QueryObjectBuilder', () => {
 		expect( actual ).toStrictEqual( expected );
 	} );
 
+	it( 'with quantity value', () => {
+		// TODO: replace this test when correct implementation is done
+		// in https://phabricator.wikimedia.org/T276938
+		const builder = new QueryObjectBuilder();
+
+		const quantityQueryRepresentation = {
+			conditions: [
+				{
+					propertyId: 'P281',
+					value: { value: 12345, unit: 'mts' },
+					datatype: 'quantity',
+					propertyValueRelation: PropertyValueRelation.Matching,
+					referenceRelation: ReferenceRelation.Regardless,
+					subclasses: false,
+					conditionRelation: null,
+					negate: false,
+				},
+			],
+			omitLabels: true,
+		};
+
+		expect( () => {
+			builder.buildFromQueryRepresentation( quantityQueryRepresentation );
+		} ).toThrow();
+	} );
+
 	it( 'with limit', () => {
 		const prefixes = allNamespaces;
 		const builder = new QueryObjectBuilder();
