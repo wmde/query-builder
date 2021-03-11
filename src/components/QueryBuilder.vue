@@ -119,6 +119,10 @@ export default Vue.extend( {
 				document
 					.getElementsByClassName( 'querybuilder__condition-wrapper-last' )[ 0 ]
 					.scrollIntoView( { behavior: 'smooth' } );
+
+				const toggle = document.getElementsByClassName( 'querybuilder__condition-relation-toggle' );
+				( toggle[ toggle.length - 1 ] as HTMLElement ).setAttribute( 'tabindex', '0' );
+				( toggle[ toggle.length - 1 ] as HTMLElement ).focus();
 			} );
 		},
 		setConditionRelation( value: ConditionRelation, index: number ): void {
