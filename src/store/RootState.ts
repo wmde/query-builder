@@ -18,7 +18,13 @@ export interface ItemValue {
 
 export type StringValue = string;
 
-export type Value = ItemValue | StringValue | null;
+export interface QuantityValue {
+	value: number;
+	precision?: number;
+	unit: ItemValue | null;
+}
+
+export type Value = ItemValue | StringValue | QuantityValue | null;
 
 export interface ConditionRow {
 	propertyData: PropertyData;
