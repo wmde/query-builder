@@ -1,18 +1,25 @@
 import allowedDatatypes from '@/allowedDataTypes';
-import RootState, { ConditionRow, ItemValue, StringValue, Value } from './RootState';
+import RootState, { ConditionRow, ItemValue, QuantityValue, StringValue, Value } from './RootState';
 import QueryRepresentation from '@/sparql/QueryRepresentation';
 import Property from '@/data-model/Property';
 import Error from '@/data-model/Error';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import ConditionRelation from '@/data-model/ConditionRelation';
 import ReferenceRelation from '@/data-model/ReferenceRelation';
+import UnitValue from '@/data-model/UnitValue';
 
-function getQueryValueFromStoreValue( datatype: string, storeValue: Value ): string {
+function getQueryValueFromStoreValue( datatype: string, storeValue: Value ): string | UnitValue {
 	if ( storeValue === null ) {
 		return '';
 	}
 	if ( datatype === 'wikibase-item' ) {
 		return ( storeValue as ItemValue ).id;
+	}
+	if ( datatype === 'quantity' ) {
+		return {
+			value: ( storeValue as QuantityValue ).value,
+			unit: ( storeValue as QuantityValue ).unit?.id || null,
+		};
 	}
 	return storeValue as StringValue;
 }

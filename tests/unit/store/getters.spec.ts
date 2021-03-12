@@ -67,6 +67,30 @@ describe( 'getters', () => {
 			expect( getters.query( state ) ).toStrictEqual( expectedValue );
 		} );
 
+		it( 'returns the QueryRepresentation of the RootState with a unit value', () => {
+			const state: RootState = getFreshRootState();
+			state.conditionRows[ 0 ].propertyData.datatype = 'quantity';
+			state.conditionRows[ 0 ].valueData.value = { value: 10, unit: { id: 'mts', label: 'Meters ' } };
+
+			const expectedValue: QueryRepresentation = {
+				conditions: [
+					{
+						propertyId: 'P123',
+						value: { value: 10, unit: 'mts' },
+						propertyValueRelation: PropertyValueRelation.Matching,
+						referenceRelation: ReferenceRelation.Regardless,
+						datatype: 'quantity',
+						subclasses: false,
+						conditionRelation: null,
+						negate: false,
+					},
+				],
+				omitLabels: true,
+			};
+
+			expect( getters.query( state ) ).toStrictEqual( expectedValue );
+		} );
+
 		it( 'returns the QueryRepresentation of the RootState with a limit', () => {
 			const state: RootState = getFreshRootState();
 			state.limit = 20;
