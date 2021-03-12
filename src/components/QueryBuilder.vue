@@ -120,9 +120,12 @@ export default Vue.extend( {
 					.getElementsByClassName( 'querybuilder__condition-wrapper-last' )[ 0 ]
 					.scrollIntoView( { behavior: 'smooth' } );
 
-				const toggle = document.getElementsByClassName( 'querybuilder__condition-relation-toggle' );
-				( toggle[ toggle.length - 1 ] as HTMLElement ).setAttribute( 'tabindex', '0' );
-				( toggle[ toggle.length - 1 ] as HTMLElement ).focus();
+				const toggle = document
+					.querySelectorAll( '.querybuilder__condition-relation-toggle .wikit-ToggleButton' );
+				const toggleElement = toggle[ toggle.length - 1 ] as HTMLElement;
+
+				toggleElement.setAttribute( 'tabindex', '0' );
+				toggleElement.focus();
 			} );
 		},
 		setConditionRelation( value: ConditionRelation, index: number ): void {
