@@ -259,13 +259,15 @@ describe( 'buildQuery', () => {
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
 
-	it( 'builds a query from a property and a string value with subclasses', async () => {
+	it( 'builds a query from a property and a wikibase-item value with subclasses', async () => {
 		const propertyId = 'P666';
-		const value = 'blah';
+		const value = 'Q456';
 		const subclassesId = process.env.VUE_APP_SUBCLASS_PROPERTY;
 		const expectedQuery =
-		`SELECT DISTINCT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}/(wdt:${subclassesId}*)) "${value}". }`;
+			`SELECT DISTINCT ?item
+			 WHERE { ?item (p:${propertyId}/ps:${propertyId}/(wdt:${subclassesId}*)) wd:${value}. }`;
 		const condition = getSimpleCondition( propertyId, value );
+		condition.datatype = 'wikibase-item';
 		condition.subclasses = true;
 
 		const actualQuery = buildQuery( {
