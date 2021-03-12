@@ -314,8 +314,8 @@ describe( 'QueryObjectBuilder', () => {
 								},
 								] },
 							object: {
-								termType: 'Literal',
-								value: 'XXXX',
+								termType: 'NamedNode',
+								value: 'http://www.wikidata.org/entity/Q456',
 							},
 						},
 					],
@@ -329,8 +329,8 @@ describe( 'QueryObjectBuilder', () => {
 			conditions: [
 				{
 					propertyId: 'P281',
-					value: 'XXXX',
-					datatype: 'string',
+					value: 'Q456',
+					datatype: 'wikibase-item',
 					propertyValueRelation: PropertyValueRelation.Matching,
 					referenceRelation: ReferenceRelation.Regardless,
 					subclasses: true,
