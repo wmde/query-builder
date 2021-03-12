@@ -4,7 +4,7 @@
 			"Kly"
 		]
 	},
-	"query-builder-heading": "簡易查詢建置器",
+	"query-builder-heading": "維基數據查詢建置器",
 	"query-builder-intro-text": "維基數據查詢建置器提供了用於建置出簡易維基數據查詢的視覺化介面。對於很少或是沒有使用過 [$1 SPARQL]（一種強大的查詢語言）的使用者來說，會是個理想選擇。查詢建置器雖然不提供 SPARQL 的全部功能，不過您可以隨時在查詢服務中開啟您的查詢，您可以透過在結果上方的連結來查看、編輯、或是擴充。[$2 我們也歡迎您點擊這裡來提供意見回饋]。",
 	"query-builder-query-heading": "查詢",
 	"query-builder-settings-heading": "設定",
@@ -43,5 +43,7 @@
 	"query-builder-label-opt-out": "顯示 ID 而非標籤（可能會逾時）",
 	"query-builder-include-subclasses": "包含來自此值子分類的值",
 	"query-builder-negation-option-label-with": "帶",
-	"query-builder-negation-option-label-without": "不帶"
+	"query-builder-negation-option-label-without": "不帶",
+	"query-builder-sharable-link-text": "取得可分享的連結",
+	"query-builder-sharable-link-message": "URL 已複製到剪貼簿！"
 }

@@ -43,5 +43,7 @@
 	"query-builder-label-opt-out": "'Ndruche le ID invece de le etichette (pe prevenì 'u timeout)",
 	"query-builder-include-subclasses": "'Nglude le valore da le sotteclasse de stu valore",
 	"query-builder-negation-option-label-with": "Cu",
-	"query-builder-negation-option-label-without": "Senze"
+	"query-builder-negation-option-label-without": "Senze",
+	"query-builder-sharable-link-text": "Pigghie 'nu collegamende condivisibbele",
+	"query-builder-sharable-link-message": "URL copiate jndr'à le appunde!"
 }

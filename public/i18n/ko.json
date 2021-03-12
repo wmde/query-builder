@@ -44,5 +44,7 @@
 	"query-builder-label-opt-out": "이름 대신 ID 표시 (시간 초과 문제가 햐결될 수 있음)",
 	"query-builder-include-subclasses": "이 값의 하위 클래스의 값 포함",
 	"query-builder-negation-option-label-with": "포함",
-	"query-builder-negation-option-label-without": "제외"
+	"query-builder-negation-option-label-without": "제외",
+	"query-builder-sharable-link-text": "공유 링크 가져오기",
+	"query-builder-sharable-link-message": "URL이 클립보드에 복사되었습니다!"
 }

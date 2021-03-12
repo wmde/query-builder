@@ -3,7 +3,8 @@
 		"authors": [
 			"Fitoschido",
 			"MarcoAurelio",
-			"Rodney Araujo"
+			"Rodney Araujo",
+			"ZealousBlaze"
 		]
 	},
 	"query-builder-run-query": "Ejecutar consulta",
@@ -15,5 +16,6 @@
 	"query-builder-condition-relation-toggle-or": "o",
 	"query-builder-limit-number-placeholder": "Introduce un número",
 	"query-builder-negation-option-label-with": "Con",
-	"query-builder-negation-option-label-without": "Sin"
+	"query-builder-negation-option-label-without": "Sin",
+	"query-builder-sharable-link-text": "Obtén un enlace para compartir"
 }

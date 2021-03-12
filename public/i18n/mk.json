@@ -4,7 +4,7 @@
 			"Bjankuloski06"
 		]
 	},
-	"query-builder-heading": "Прост срочувач на барања",
+	"query-builder-heading": "Срочувач на барања од Википодатоците",
 	"query-builder-intro-text": "Срочувачот на барања од Википодатоците овозможува нагледен посредник за срочување на прости барања од Википодатоците. Идеален е за корисници без искуство со моќниот побарувачки јазик [$1 SPARQL]. Срочувачот не ги нуди сите можности на SPARQL, но секогаш можете да го отворите барањето во Службањта за барања, каде можете да го прегледувате, менувате и проширувате преку врската над исходот. [$2 Овде дајте свое мислење].",
 	"query-builder-query-heading": "Барање",
 	"query-builder-settings-heading": "Нагодувања",
@@ -43,5 +43,7 @@
 	"query-builder-label-opt-out": "Прикажи назнаки место натписи (може да го спречи истекот)",
 	"query-builder-include-subclasses": "Вклучи и вредности од поткласите на оваа вредност",
 	"query-builder-negation-option-label-with": "Со",
-	"query-builder-negation-option-label-without": "Без"
+	"query-builder-negation-option-label-without": "Без",
+	"query-builder-sharable-link-text": "Дај споделива врска",
+	"query-builder-sharable-link-message": "URL-то е ископирано во меѓускладот!"
 }

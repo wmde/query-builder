@@ -45,5 +45,7 @@
 	"query-builder-label-opt-out": "להציג מזהים במקום תוויות (יכול למנוע ניתוק בשל זמן עיבוד ארוך)",
 	"query-builder-include-subclasses": "לכלול ערכים מתוך תת־מחלקות של הערך הזה",
 	"query-builder-negation-option-label-with": "עם",
-	"query-builder-negation-option-label-without": "בלי"
+	"query-builder-negation-option-label-without": "בלי",
+	"query-builder-sharable-link-text": "קבלת קישור לשיתוף",
+	"query-builder-sharable-link-message": "ה־URL הועתק ללוח!"
 }
