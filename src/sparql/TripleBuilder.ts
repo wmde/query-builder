@@ -24,11 +24,7 @@ export default class TripleBuilder {
 		if ( typeof value === 'string' ) {
 			return value;
 		}
-		try {
-			return value.value;
-		} catch ( e ) {
-			throw new Error( 'Unit Values not yet supported!!' );
-		}
+		throw new Error( 'Unit Values not yet supported!!' );
 	}
 
 	private buildTripleForObjectItems( condition: Condition ): Term {
