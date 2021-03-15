@@ -127,7 +127,7 @@ export default class TripleBuilder {
 
 	}
 
-	public buildReferenceFilterTriple( condition: Condition, conditionIndex: number ): Triple {
+	public buildReferenceFilterTriple( conditionIndex: number ): Triple {
 		return {
 			subject: {
 				termType: 'Variable',
