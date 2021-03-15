@@ -122,10 +122,8 @@ export default Vue.extend( {
 
 				const toggle = document
 					.querySelectorAll( '.querybuilder__condition-relation-toggle .wikit-ToggleButton' );
-				const toggleElement = toggle[ toggle.length - 1 ] as HTMLElement;
 
-				toggleElement.setAttribute( 'tabindex', '0' );
-				toggleElement.focus();
+				( toggle[ toggle.length - 1 ] as HTMLElement ).focus();
 			} );
 		},
 		setConditionRelation( value: ConditionRelation, index: number ): void {
