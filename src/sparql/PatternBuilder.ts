@@ -57,7 +57,7 @@ export default class PatternBuilder {
 					{
 						type: 'bgp',
 						triples: [
-							this.tripleBuilder.buildReferenceFilterTriple( condition, conditionIndex ),
+							this.tripleBuilder.buildReferenceFilterTriple( conditionIndex ),
 						],
 					},
 				],
