@@ -311,4 +311,28 @@ describe( 'buildQuery', () => {
 		} );
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
+
+	it( 'builds a query with a negated condition that checks references', () => {
+		const instanceCondition = getSimpleCondition( 'P31', 'Qtaxon' );
+		const negatedCondition = getSimpleCondition( 'PTaxonName', 'whatever' );
+		negatedCondition.negate = true;
+		negatedCondition.referenceRelation = ReferenceRelation.With;
+		negatedCondition.propertyValueRelation = PropertyValueRelation.Regardless;
+		const expectedQuery =
+		`SELECT DISTINCT ?item WHERE { 
+			?item (p:P31/ps:P31) "Qtaxon".
+			MINUS { {
+				?item p:PTaxonName ?statement1.
+				?statement1 (ps:PTaxonName) _:anyValuePTaxonName.
+				FILTER(EXISTS { ?statement1 prov:wasDerivedFrom ?reference. })
+			} }
+		}`;
+
+		const actualQuery = buildQuery( {
+			conditions: [ instanceCondition, negatedCondition ],
+			omitLabels: true,
+		} );
+
+		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
+	} );
 } );

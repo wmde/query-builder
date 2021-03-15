@@ -15,25 +15,27 @@ export default class PatternBuilder {
 	public buildValuePatternFromCondition( condition: Condition, conditionIndex: number ): Pattern[] {
 		const negate: boolean = condition.negate || false;
 
-		const bgp: Pattern = {
-			type: 'bgp',
-			triples: [ this.tripleBuilder.buildTripleFromQueryCondition( condition, conditionIndex ) ],
-		};
-
 		const patterns: Pattern[] = [];
 
-		if ( negate === true ) {
-			patterns.push( {
-				type: 'minus',
-				patterns: [ bgp ],
-			} );
+		let pattern: Pattern;
+
+		if ( condition.referenceRelation !== ReferenceRelation.Regardless ) {
+			pattern = this.buildReferencesGroupPattern( condition, conditionIndex );
 		} else {
-			if ( condition.referenceRelation !== ReferenceRelation.Regardless ) {
-				patterns.push( this.buildReferencesGroupPattern( condition, conditionIndex ) );
-			} else {
-				patterns.push( bgp );
-			}
+			pattern = {
+				type: 'bgp',
+				triples: [ this.tripleBuilder.buildTripleFromQueryCondition( condition, conditionIndex ) ],
+			};
 		}
+
+		if ( negate ) {
+			pattern = {
+				type: 'minus',
+				patterns: [ pattern ],
+			};
+		}
+
+		patterns.push( pattern );
 
 		if ( condition.propertyValueRelation === PropertyValueRelation.NotMatching ) {
 			const filterCondition = {
