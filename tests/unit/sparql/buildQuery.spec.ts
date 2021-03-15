@@ -262,10 +262,27 @@ describe( 'buildQuery', () => {
 	it( 'builds a query from a property and a wikibase-item value with subclasses', async () => {
 		const propertyId = 'P666';
 		const value = 'Q456';
-		const subclassesId = process.env.VUE_APP_SUBCLASS_PROPERTY;
+		process.env.VUE_APP_SUBCLASS_PROPERTY_MAP = '{"P666":"P66"}';
 		const expectedQuery =
-			`SELECT DISTINCT ?item
-			 WHERE { ?item (p:${propertyId}/ps:${propertyId}/(wdt:${subclassesId}*)) wd:${value}. }`;
+			`SELECT DISTINCT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}/(wdt:P66*)) wd:${value}. }`;
+		const condition = getSimpleCondition( propertyId, value );
+		condition.datatype = 'wikibase-item';
+		condition.subclasses = true;
+
+		const actualQuery = buildQuery( {
+			conditions: [ condition ],
+			omitLabels: true,
+		} );
+
+		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
+	} );
+
+	it( 'builds a query from a property and a string value with subclasses falling back to default', async () => {
+		const propertyId = 'P666';
+		const value = 'Q456';
+		process.env.VUE_APP_SUBCLASS_PROPERTY_MAP = '{"P66":"P66","default":"P279"}';
+		const expectedQuery =
+			`SELECT DISTINCT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}/(wdt:P279*)) wd:${value}. }`;
 		const condition = getSimpleCondition( propertyId, value );
 		condition.datatype = 'wikibase-item';
 		condition.subclasses = true;

@@ -4,6 +4,5 @@ module.exports = {
 		'<rootDir>/node_modules/(?!(@wmde/wikit-vue-components)/)',
 	],
 	testEnvironment: '<rootDir>/tests/config/JestCustomEnvironment.js',
-	setupFiles: [ '<rootDir>/.jest/setEnvVars.js' ],
 	collectCoverageFrom: [ 'src/**/*.{ts,vue}' ],
 };

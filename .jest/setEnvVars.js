@@ -1,1 +1,0 @@
-process.env.VUE_APP_SUBCLASS_PROPERTY = 'P279';
