@@ -1,7 +1,7 @@
 import TripleBuilder from '@/sparql/TripleBuilder';
 import rdfNamespaces from '@/sparql/rdfNamespaces';
 import { Condition } from '@/sparql/QueryRepresentation';
-import { FilterPattern, Pattern, Triple } from 'sparqljs';
+import { FilterPattern, GroupPattern, Pattern, Triple } from 'sparqljs';
 import ReferenceRelation from '@/data-model/ReferenceRelation';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 
@@ -15,53 +15,9 @@ export default class PatternBuilder {
 	public buildValuePatternFromCondition( condition: Condition, conditionIndex: number ): Pattern[] {
 		const negate: boolean = condition.negate || false;
 
-		const referenceTriple: Triple = {
-			subject: {
-				termType: 'Variable',
-				value: 'item',
-			},
-			predicate: {
-				termType: 'NamedNode',
-				value: rdfNamespaces.p + condition.propertyId,
-			},
-			object: {
-				termType: 'Variable',
-				value: 'statement' + conditionIndex,
-			},
-		};
-
 		const bgp: Pattern = {
 			type: 'bgp',
 			triples: [ this.tripleBuilder.buildTripleFromQueryCondition( condition, conditionIndex ) ],
-		};
-
-		const bgpReference: Pattern = {
-			type: 'bgp',
-			triples: [ referenceTriple ],
-		};
-
-		let referenceExistsOrNot = '';
-
-		if ( condition.referenceRelation === ReferenceRelation.With ) {
-			referenceExistsOrNot = 'exists';
-		} else if ( condition.referenceRelation === ReferenceRelation.Without ) {
-			referenceExistsOrNot = 'notexists';
-		}
-
-		const referenceFilter: FilterPattern = {
-			type: 'filter',
-			expression: {
-				type: 'operation',
-				operator: referenceExistsOrNot,
-				args: [
-					{
-						type: 'bgp',
-						triples: [
-							this.tripleBuilder.buildReferenceFilterTriple( conditionIndex ),
-						],
-					},
-				],
-			},
 		};
 
 		const patterns: Pattern[] = [];
@@ -72,12 +28,8 @@ export default class PatternBuilder {
 				patterns: [ bgp ],
 			} );
 		} else {
-			if ( condition.referenceRelation === ReferenceRelation.With ||
-                condition.referenceRelation === ReferenceRelation.Without ) {
-				patterns.push( {
-					type: 'group',
-					patterns: [ bgpReference, bgp, referenceFilter ],
-				} );
+			if ( condition.referenceRelation !== ReferenceRelation.Regardless ) {
+				patterns.push( this.buildReferencesGroupPattern( condition, conditionIndex ) );
 			} else {
 				patterns.push( bgp );
 			}
@@ -109,6 +61,62 @@ export default class PatternBuilder {
 		return {
 			type: 'bgp',
 			triples: [ this.tripleBuilder.buildAnyValueTripe() ],
+		};
+	}
+
+	private buildReferencesGroupPattern( condition: Condition, conditionIndex: number ): GroupPattern {
+		const referenceTriple: Triple = {
+			subject: {
+				termType: 'Variable',
+				value: 'item',
+			},
+			predicate: {
+				termType: 'NamedNode',
+				value: rdfNamespaces.p + condition.propertyId,
+			},
+			object: {
+				termType: 'Variable',
+				value: 'statement' + conditionIndex,
+			},
+		};
+
+		const bgpReference: Pattern = {
+			type: 'bgp',
+			triples: [ referenceTriple ],
+		};
+
+		const bgp: Pattern = {
+			type: 'bgp',
+			triples: [ this.tripleBuilder.buildTripleFromQueryCondition( condition, conditionIndex ) ],
+		};
+
+		let referenceExistsOrNot = '';
+
+		if ( condition.referenceRelation === ReferenceRelation.With ) {
+			referenceExistsOrNot = 'exists';
+		} else if ( condition.referenceRelation === ReferenceRelation.Without ) {
+			referenceExistsOrNot = 'notexists';
+		}
+
+		const referenceFilter: FilterPattern = {
+			type: 'filter',
+			expression: {
+				type: 'operation',
+				operator: referenceExistsOrNot,
+				args: [
+					{
+						type: 'bgp',
+						triples: [
+							this.tripleBuilder.buildReferenceFilterTriple( conditionIndex ),
+						],
+					},
+				],
+			},
+		};
+
+		return {
+			type: 'group',
+			patterns: [ bgpReference, bgp, referenceFilter ],
 		};
 	}
 }
