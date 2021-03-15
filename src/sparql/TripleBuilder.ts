@@ -84,7 +84,7 @@ export default class TripleBuilder {
 		};
 	}
 
-	public buildTriplePredicateItems( condition: Condition ): ( PropertyPath|IriTerm )[] {
+	private buildTriplePredicateItems( condition: Condition ): ( PropertyPath | IriTerm )[] {
 		const items: ( PropertyPath|IriTerm )[] = [ {
 			termType: 'NamedNode',
 			value: rdfNamespaces.p + condition.propertyId,
