@@ -16,5 +16,6 @@
 	"query-builder-condition-relation-toggle-or": "oder",
 	"query-builder-limit-number-screenreader-label": "Maximal Zuel vu Resultater",
 	"query-builder-negation-option-label-with": "Mat",
-	"query-builder-negation-option-label-without": "Ouni"
+	"query-builder-negation-option-label-without": "Ouni",
+	"query-builder-sharable-link-text": "E Link kréien, deen een deele kann"
 }
