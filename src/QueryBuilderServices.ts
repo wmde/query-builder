@@ -1,9 +1,11 @@
 import LanguageService from '@/data-access/LanguageService';
 import SearchEntityRepository from '@/data-access/SearchEntityRepository';
+import ParseValueRepository from '@/data-access/ParseValueRepository';
 import MetricsCollector from '@/data-access/MetricsCollector';
 
 export interface Services {
 	searchEntityRepository: SearchEntityRepository;
+	parseValueRepository: ParseValueRepository;
 	metricsCollector: MetricsCollector;
 	languageService: LanguageService;
 }
