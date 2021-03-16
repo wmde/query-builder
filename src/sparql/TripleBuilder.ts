@@ -12,13 +12,12 @@ export default class TripleBuilder {
 		value: string | UnitValue,
 		subclasses: boolean,
 		referenceRelation: ReferenceRelation,
-		conditionIndex: number,
+		statementSubjectName = 'item',
 	): Triple {
 		return {
 			subject: {
 				termType: 'Variable',
-				value: referenceRelation === ReferenceRelation.Regardless ?
-					'item' : 'statement' + conditionIndex,
+				value: statementSubjectName,
 			},
 			predicate: {
 				type: 'path',
@@ -151,11 +150,11 @@ export default class TripleBuilder {
 
 	}
 
-	public buildReferenceFilterTriple( conditionIndex: number ): Triple {
+	public buildReferenceFilterTriple( statementSubjectName: string ): Triple {
 		return {
 			subject: {
 				termType: 'Variable',
-				value: 'statement' + conditionIndex,
+				value: statementSubjectName,
 			},
 			predicate: {
 				termType: 'NamedNode',

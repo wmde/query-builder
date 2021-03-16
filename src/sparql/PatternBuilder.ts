@@ -48,7 +48,6 @@ export default class PatternBuilder {
 					value,
 					subclasses,
 					referenceRelation,
-					conditionIndex,
 				) ],
 			};
 		}
@@ -100,6 +99,7 @@ export default class PatternBuilder {
 		referenceRelation: ReferenceRelation,
 		conditionIndex: number,
 	): GroupPattern {
+		const statementSubjectName = 'statement' + conditionIndex;
 		const referenceTriple: Triple = {
 			subject: {
 				termType: 'Variable',
@@ -111,7 +111,7 @@ export default class PatternBuilder {
 			},
 			object: {
 				termType: 'Variable',
-				value: 'statement' + conditionIndex,
+				value: statementSubjectName,
 			},
 		};
 
@@ -129,7 +129,7 @@ export default class PatternBuilder {
 				value,
 				subclasses,
 				referenceRelation,
-				conditionIndex,
+				statementSubjectName,
 			) ],
 		};
 
@@ -150,7 +150,7 @@ export default class PatternBuilder {
 					{
 						type: 'bgp',
 						triples: [
-							this.tripleBuilder.buildReferenceFilterTriple( conditionIndex ),
+							this.tripleBuilder.buildReferenceFilterTriple( statementSubjectName ),
 						],
 					},
 				],
