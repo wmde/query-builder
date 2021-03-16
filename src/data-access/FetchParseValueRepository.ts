@@ -49,7 +49,7 @@ export default class FetchParseValueRepository implements ParseValueRepository {
 		const data = await response.json();
 
 		if ( data.error ) {
-			throw new TechnicalProblem( `${data.code}: ${data.info}` );
+			throw new TechnicalProblem( `${data.error.code}: ${data.error.info}` );
 		}
 
 		if ( data.value.precision < 9 ) {
