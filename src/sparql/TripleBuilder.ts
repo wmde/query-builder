@@ -22,9 +22,9 @@ export default class TripleBuilder {
 			predicate: {
 				type: 'path',
 				pathType: '/',
-				items: this.buildTriplePredicateItems( propertyId, referenceRelation, subclasses ),
+				items: this.buildPredicateItems( propertyId, referenceRelation, subclasses ),
 			},
-			object: this.buildTripleForObjectItems( propertyId, datatype, propertyValueRelation, value ),
+			object: this.buildObjectItems( propertyId, datatype, propertyValueRelation, value ),
 		};
 	}
 
@@ -35,7 +35,7 @@ export default class TripleBuilder {
 		throw new Error( 'Unit Values not yet supported!!' );
 	}
 
-	private buildTripleForObjectItems(
+	private buildObjectItems(
 		propertyId: string,
 		datatype: string,
 		propertyValueRelation: PropertyValueRelation,
@@ -53,13 +53,13 @@ export default class TripleBuilder {
 					value: 'anyValue' + propertyId,
 				};
 			case ( PropertyValueRelation.Matching ):
-				return this.buildTripleForExplicitValue( datatype, this.checkValueType( value ) );
+				return this.buildExplicitValueObjectItems( datatype, this.checkValueType( value ) );
 			default:
 				throw new Error( `unsupported relation: ${propertyValueRelation}` );
 		}
 	}
 
-	private buildTripleForExplicitValue( datatype: string, value: string | number ): Term {
+	private buildExplicitValueObjectItems( datatype: string, value: string | number ): Term {
 		switch ( datatype ) {
 			case 'string':
 			case 'external-id':
@@ -97,11 +97,11 @@ export default class TripleBuilder {
 					},
 				],
 			},
-			object: this.buildTripleForExplicitValue( datatype, this.checkValueType( value ) ),
+			object: this.buildExplicitValueObjectItems( datatype, this.checkValueType( value ) ),
 		};
 	}
 
-	private buildTriplePredicateItems(
+	private buildPredicateItems(
 		propertyId: string,
 		referenceRelation: ReferenceRelation,
 		subclasses: boolean,
