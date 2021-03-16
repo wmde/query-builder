@@ -1,3 +1,4 @@
+import UnitValue from '@/data-model/UnitValue';
 import TripleBuilder from '@/sparql/TripleBuilder';
 import rdfNamespaces from '@/sparql/rdfNamespaces';
 import { Condition } from '@/sparql/QueryRepresentation';
@@ -13,18 +14,42 @@ export default class PatternBuilder {
 	}
 
 	public buildValuePatternFromCondition( condition: Condition, conditionIndex: number ): Pattern[] {
-		const negate: boolean = condition.negate || false;
+		const {
+			propertyId,
+			referenceRelation,
+			propertyValueRelation,
+			datatype,
+			subclasses,
+			value,
+			negate,
+		} = condition;
 
 		const patterns: Pattern[] = [];
 
 		let pattern: Pattern;
 
-		if ( condition.referenceRelation !== ReferenceRelation.Regardless ) {
-			pattern = this.buildReferencesGroupPattern( condition, conditionIndex );
+		if ( referenceRelation !== ReferenceRelation.Regardless ) {
+			pattern = this.buildReferencesGroupPattern(
+				propertyId,
+				datatype,
+				propertyValueRelation,
+				value,
+				subclasses,
+				referenceRelation,
+				conditionIndex,
+			);
 		} else {
 			pattern = {
 				type: 'bgp',
-				triples: [ this.tripleBuilder.buildTripleFromQueryCondition( condition, conditionIndex ) ],
+				triples: [ this.tripleBuilder.buildTripleFromQueryCondition(
+					propertyId,
+					datatype,
+					propertyValueRelation,
+					value,
+					subclasses,
+					referenceRelation,
+					conditionIndex,
+				) ],
 			};
 		}
 
@@ -37,12 +62,12 @@ export default class PatternBuilder {
 
 		patterns.push( pattern );
 
-		if ( condition.propertyValueRelation === PropertyValueRelation.NotMatching ) {
+		if ( propertyValueRelation === PropertyValueRelation.NotMatching ) {
 			const filterCondition = {
 				type: 'minus',
 				patterns: [ {
 					type: 'bgp',
-					triples: [ this.tripleBuilder.buildTripleForNotMatchingValue( condition ) ],
+					triples: [ this.tripleBuilder.buildTripleForNotMatchingValue( propertyId, datatype, value ) ],
 				} ],
 			};
 
@@ -66,7 +91,15 @@ export default class PatternBuilder {
 		};
 	}
 
-	private buildReferencesGroupPattern( condition: Condition, conditionIndex: number ): GroupPattern {
+	private buildReferencesGroupPattern(
+		propertyId: string,
+		datatype: string,
+		propertyValueRelation: PropertyValueRelation,
+		value: string | UnitValue,
+		subclasses: boolean,
+		referenceRelation: ReferenceRelation,
+		conditionIndex: number,
+	): GroupPattern {
 		const referenceTriple: Triple = {
 			subject: {
 				termType: 'Variable',
@@ -74,7 +107,7 @@ export default class PatternBuilder {
 			},
 			predicate: {
 				termType: 'NamedNode',
-				value: rdfNamespaces.p + condition.propertyId,
+				value: rdfNamespaces.p + propertyId,
 			},
 			object: {
 				termType: 'Variable',
@@ -89,14 +122,22 @@ export default class PatternBuilder {
 
 		const bgp: Pattern = {
 			type: 'bgp',
-			triples: [ this.tripleBuilder.buildTripleFromQueryCondition( condition, conditionIndex ) ],
+			triples: [ this.tripleBuilder.buildTripleFromQueryCondition(
+				propertyId,
+				datatype,
+				propertyValueRelation,
+				value,
+				subclasses,
+				referenceRelation,
+				conditionIndex,
+			) ],
 		};
 
 		let referenceExistsOrNot = '';
 
-		if ( condition.referenceRelation === ReferenceRelation.With ) {
+		if ( referenceRelation === ReferenceRelation.With ) {
 			referenceExistsOrNot = 'exists';
-		} else if ( condition.referenceRelation === ReferenceRelation.Without ) {
+		} else if ( referenceRelation === ReferenceRelation.Without ) {
 			referenceExistsOrNot = 'notexists';
 		}
 

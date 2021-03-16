@@ -1,4 +1,3 @@
-import { Condition } from '@/sparql/QueryRepresentation';
 import { IriTerm, PropertyPath, Term, Triple } from 'sparqljs';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import rdfNamespaces from '@/sparql/rdfNamespaces';
@@ -6,17 +5,27 @@ import ReferenceRelation from '@/data-model/ReferenceRelation';
 import UnitValue from '@/data-model/UnitValue';
 
 export default class TripleBuilder {
-	public buildTripleFromQueryCondition( condition: Condition, conditionIndex: number ): Triple {
+	public buildTripleFromQueryCondition(
+		propertyId: string,
+		datatype: string,
+		propertyValueRelation: PropertyValueRelation,
+		value: string | UnitValue,
+		subclasses: boolean,
+		referenceRelation: ReferenceRelation,
+		conditionIndex: number,
+	): Triple {
 		return {
 			subject: {
 				termType: 'Variable',
-				value: condition.referenceRelation === ReferenceRelation.Regardless ?
+				value: referenceRelation === ReferenceRelation.Regardless ?
 					'item' : 'statement' + conditionIndex,
 			},
-			predicate: { type: 'path',
+			predicate: {
+				type: 'path',
 				pathType: '/',
-				items: this.buildTriplePredicateItems( condition ) },
-			object: this.buildTripleForObjectItems( condition ),
+				items: this.buildTriplePredicateItems( propertyId, referenceRelation, subclasses ),
+			},
+			object: this.buildTripleForObjectItems( propertyId, datatype, propertyValueRelation, value ),
 		};
 	}
 
@@ -27,8 +36,13 @@ export default class TripleBuilder {
 		throw new Error( 'Unit Values not yet supported!!' );
 	}
 
-	private buildTripleForObjectItems( condition: Condition ): Term {
-		switch ( condition.propertyValueRelation ) {
+	private buildTripleForObjectItems(
+		propertyId: string,
+		datatype: string,
+		propertyValueRelation: PropertyValueRelation,
+		value: string | UnitValue,
+	): Term {
+		switch ( propertyValueRelation ) {
 			case ( PropertyValueRelation.NotMatching ):
 				return {
 					termType: 'Variable',
@@ -37,12 +51,12 @@ export default class TripleBuilder {
 			case ( PropertyValueRelation.Regardless ):
 				return {
 					termType: 'BlankNode',
-					value: 'anyValue' + condition.propertyId,
+					value: 'anyValue' + propertyId,
 				};
 			case ( PropertyValueRelation.Matching ):
-				return this.buildTripleForExplicitValue( condition.datatype, this.checkValueType( condition.value ) );
+				return this.buildTripleForExplicitValue( datatype, this.checkValueType( value ) );
 			default:
-				throw new Error( `unsupported relation: ${condition.propertyValueRelation}` );
+				throw new Error( `unsupported relation: ${propertyValueRelation}` );
 		}
 	}
 
@@ -64,48 +78,58 @@ export default class TripleBuilder {
 		}
 	}
 
-	public buildTripleForNotMatchingValue( condition: Condition ): Triple {
+	public buildTripleForNotMatchingValue( propertyId: string, datatype: string, value: string | UnitValue ): Triple {
 		return {
 			subject: {
 				termType: 'Variable',
 				value: 'item',
 			},
-			predicate: { type: 'path',
+			predicate: {
+				type: 'path',
 				pathType: '/',
-				items: [ {
-					termType: 'NamedNode',
-					value: rdfNamespaces.p + condition.propertyId,
-				},
-				{
-					termType: 'NamedNode',
-					value: rdfNamespaces.ps + condition.propertyId,
-				} ] },
-			object: this.buildTripleForExplicitValue( condition.datatype, this.checkValueType( condition.value ) ),
+				items: [
+					{
+						termType: 'NamedNode',
+						value: rdfNamespaces.p + propertyId,
+					},
+					{
+						termType: 'NamedNode',
+						value: rdfNamespaces.ps + propertyId,
+					},
+				],
+			},
+			object: this.buildTripleForExplicitValue( datatype, this.checkValueType( value ) ),
 		};
 	}
 
-	private buildTriplePredicateItems( condition: Condition ): ( PropertyPath | IriTerm )[] {
-		const items: ( PropertyPath|IriTerm )[] = [ {
-			termType: 'NamedNode',
-			value: rdfNamespaces.p + condition.propertyId,
-		},
-		{
-			termType: 'NamedNode',
-			value: rdfNamespaces.ps + condition.propertyId,
-		} ];
+	private buildTriplePredicateItems(
+		propertyId: string,
+		referenceRelation: ReferenceRelation,
+		subclasses: boolean,
+	): ( PropertyPath | IriTerm )[] {
+		const items: ( PropertyPath | IriTerm )[] = [
+			{
+				termType: 'NamedNode',
+				value: rdfNamespaces.p + propertyId,
+			},
+			{
+				termType: 'NamedNode',
+				value: rdfNamespaces.ps + propertyId,
+			},
+		];
 
-		if ( condition.referenceRelation !== ReferenceRelation.Regardless ) {
+		if ( referenceRelation !== ReferenceRelation.Regardless ) {
 			items.shift(); // for references we only need rdfNamespaces.ps
 		}
 
-		if ( condition.subclasses ) {
+		if ( subclasses ) {
 			items.push(
 				{
 					type: 'path',
 					pathType: '*',
 					items: [ {
 						termType: 'NamedNode',
-						value: rdfNamespaces.wdt + this.getSubclassPropertyId( condition.propertyId ),
+						value: rdfNamespaces.wdt + this.getSubclassPropertyId( propertyId ),
 					},
 					],
 				},
