@@ -1,7 +1,8 @@
-import allNamespaces from '@/sparql/rdfNamespaces';
-import QueryObjectBuilder from '@/sparql/QueryObjectBuilder';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import ReferenceRelation from '@/data-model/ReferenceRelation';
+import QueryObjectBuilder from '@/sparql/QueryObjectBuilder';
+import allNamespaces from '@/sparql/rdfNamespaces';
+import expectedQuantityQueryJSON from './ObjectBuilderQuantityQueryJSON.json';
 
 describe( 'QueryObjectBuilder', () => {
 	it( 'simple', () => {
@@ -81,8 +82,6 @@ describe( 'QueryObjectBuilder', () => {
 	} );
 
 	it( 'with quantity value', () => {
-		// TODO: replace this test when correct implementation is done
-		// in https://phabricator.wikimedia.org/T276938
 		const builder = new QueryObjectBuilder();
 
 		const quantityQueryRepresentation = {
@@ -101,9 +100,11 @@ describe( 'QueryObjectBuilder', () => {
 			omitLabels: true,
 		};
 
-		expect( () => {
-			builder.buildFromQueryRepresentation( quantityQueryRepresentation );
-		} ).toThrow();
+		const actual = builder.buildFromQueryRepresentation( quantityQueryRepresentation );
+
+		expect(
+			actual,
+		).toStrictEqual( expectedQuantityQueryJSON );
 	} );
 
 	it( 'with limit', () => {

@@ -70,6 +70,14 @@ describe( 'buildQuery', () => {
 			datatype: 'wikibase-item',
 			subclasses: true,
 		},
+		{
+			value: { value: 3.2, unit: null },
+			datatype: 'quantity',
+		},
+		{
+			value: { value: 3.2, unit: 'Q9000' },
+			datatype: 'quantity',
+		},
 	];
 
 	it.each(

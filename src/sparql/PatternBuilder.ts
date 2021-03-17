@@ -1,5 +1,6 @@
 import ItemValueBuilder from '@/sparql/ItemValueBuilder';
 import LimitedSupportPatternBuilder from '@/sparql/LimitedSupportPatternBuilder';
+import QuantityValuePatternBuilder from '@/sparql/QuantityValuePatternBuilder';
 import { Condition } from '@/sparql/QueryRepresentation';
 import StringValuePatternBuilder from '@/sparql/StringValuePatternBuilder';
 import TripleBuilder from '@/sparql/TripleBuilder';
@@ -25,6 +26,8 @@ export default class PatternBuilder implements ValuePatternBuilder {
 				return new StringValuePatternBuilder();
 			case 'wikibase-item':
 				return new ItemValueBuilder();
+			case 'quantity':
+				return new QuantityValuePatternBuilder();
 			default:
 				return new LimitedSupportPatternBuilder();
 		}
