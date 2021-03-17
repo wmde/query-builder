@@ -1,24 +1,24 @@
 {
-    "searchinfo": {
-      "search": "installed capacity"
-    },
-    "search": [
-      {
-        "id": "P2109",
-        "title": "Property:P2109",
-        "pageid": 23065851,
-        "repository": "wikidata",
-        "url": "//www.wikidata.org/wiki/Property:P2109",
-        "datatype": "quantity",
-        "concepturi": "http://www.wikidata.org/entity/P2109",
-        "label": "installed capacity",
-        "description": "power produced by the engine or plant (use with unit of power)",
-        "match": {
-          "type": "label",
-          "language": "en",
-          "text": "installed capacity"
-        }
+  "searchinfo": {
+    "search": "LilyPond notation"
+  },
+  "search": [
+    {
+      "id": "P6883",
+      "title": "Property:P6883",
+      "pageid": 64462541,
+      "repository": "wikidata",
+      "url": "//www.wikidata.org/wiki/Property:P6883",
+      "datatype": "musical-notation",
+      "concepturi": "http://www.wikidata.org/entity/P6883",
+      "label": "LilyPond notation",
+      "description": "musical notation in LilyPond syntax",
+      "match": {
+        "type": "label",
+        "language": "en",
+        "text": "LilyPond notation"
       }
-    ],
-    "success": 1
-  }
+    }
+  ],
+  "success": 1
+}
