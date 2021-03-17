@@ -8,6 +8,7 @@ type RootNode = ( Condition | Condition[] )[];
 export default class QueryObjectBuilder {
 	private queryObject: SelectQuery;
 	private patternBuilder: PatternBuilder;
+	private conditionIndex = 0;
 
 	public constructor() {
 		this.queryObject = {
@@ -38,7 +39,7 @@ export default class QueryObjectBuilder {
 				this.buildUnion( conditionOrUnion );
 				continue;
 			}
-			this.buildFromQueryCondition( conditionOrUnion, i );
+			this.buildFromQueryCondition( conditionOrUnion, this.conditionIndex++ );
 		}
 
 		if ( this.queryObject.where ) {
@@ -108,7 +109,9 @@ export default class QueryObjectBuilder {
 	private buildUnion( conditions: Condition[] ): void {
 		const unionConditions = [];
 		for ( let i = 0; i < conditions.length; i++ ) {
-			unionConditions.push( ...this.patternBuilder.buildValuePatternFromCondition( conditions[ i ], i ) );
+			unionConditions.push(
+				...this.patternBuilder.buildValuePatternFromCondition( conditions[ i ], this.conditionIndex++ )
+			);
 		}
 		const union: Pattern = {
 			type: 'union',
