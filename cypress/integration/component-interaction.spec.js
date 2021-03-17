@@ -129,11 +129,19 @@ describe( 'Component interaction test', () => {
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
   {
     SELECT DISTINCT ?item WHERE {
-      { MINUS { ?item (p:P31/ps:P31/(wdt:P279*)) ?instance. } }
+      {
+        MINUS {
+          ?item p:P31 ?statement0.
+          ?statement0 (ps:P31/(wdt:P279*)) ?instance.
+        }
+      }
       UNION
       { MINUS { ?item (p:P31/ps:P31) wd:Q146. } }
       UNION
-      { ?item (p:P2109/ps:P2109) _:anyValueP2109. }
+      {
+        ?item p:P2109 ?statement1.
+        ?statement1 (ps:P2109) _:anyValueP2109.
+      }
     }
     LIMIT 100
   }

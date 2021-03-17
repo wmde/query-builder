@@ -25,17 +25,30 @@ describe( 'QueryObjectBuilder', () => {
 								termType: 'Variable',
 								value: 'item',
 							},
-							predicate: { type: 'path',
+							predicate: {
+								termType: 'NamedNode',
+								value: 'http://www.wikidata.org/prop/P281',
+							},
+							object: {
+								termType: 'Variable',
+								value: 'statement0',
+							},
+						},
+						{
+							subject: {
+								termType: 'Variable',
+								value: 'statement0',
+							},
+							predicate: {
+								type: 'path',
 								pathType: '/',
-								items: [ {
-									termType: 'NamedNode',
-									value: 'http://www.wikidata.org/prop/P281',
-								},
-								{
-									termType: 'NamedNode',
-									value: 'http://www.wikidata.org/prop/statement/P281',
-								},
-								] },
+								items: [
+									{
+										termType: 'NamedNode',
+										value: 'http://www.wikidata.org/prop/statement/P281',
+									},
+								],
+							},
 							object: {
 								termType: 'Literal',
 								value: 'XXXX',
@@ -114,17 +127,30 @@ describe( 'QueryObjectBuilder', () => {
 								termType: 'Variable',
 								value: 'item',
 							},
-							predicate: { type: 'path',
+							predicate: {
+								termType: 'NamedNode',
+								value: 'http://www.wikidata.org/prop/P281',
+							},
+							object: {
+								termType: 'Variable',
+								value: 'statement0',
+							},
+						},
+						{
+							subject: {
+								termType: 'Variable',
+								value: 'statement0',
+							},
+							predicate: {
+								type: 'path',
 								pathType: '/',
-								items: [ {
-									termType: 'NamedNode',
-									value: 'http://www.wikidata.org/prop/P281',
-								},
-								{
-									termType: 'NamedNode',
-									value: 'http://www.wikidata.org/prop/statement/P281',
-								},
-								] },
+								items: [
+									{
+										termType: 'NamedNode',
+										value: 'http://www.wikidata.org/prop/statement/P281',
+									},
+								],
+							},
 							object: {
 								termType: 'Literal',
 								value: 'XXXX',
@@ -179,17 +205,30 @@ describe( 'QueryObjectBuilder', () => {
 								termType: 'Variable',
 								value: 'item',
 							},
-							predicate: { type: 'path',
+							predicate: {
+								termType: 'NamedNode',
+								value: 'http://www.wikidata.org/prop/P281',
+							},
+							object: {
+								termType: 'Variable',
+								value: 'statement0',
+							},
+						},
+						{
+							subject: {
+								termType: 'Variable',
+								value: 'statement0',
+							},
+							predicate: {
+								type: 'path',
 								pathType: '/',
-								items: [ {
-									termType: 'NamedNode',
-									value: 'http://www.wikidata.org/prop/P281',
-								},
-								{
-									termType: 'NamedNode',
-									value: 'http://www.wikidata.org/prop/statement/P281',
-								},
-								] },
+								items: [
+									{
+										termType: 'NamedNode',
+										value: 'http://www.wikidata.org/prop/statement/P281',
+									},
+								],
+							},
 							object: {
 								termType: 'Literal',
 								value: 'XXXX',
@@ -293,26 +332,38 @@ describe( 'QueryObjectBuilder', () => {
 								termType: 'Variable',
 								value: 'item',
 							},
-							predicate: { type: 'path',
+							predicate: {
+								termType: 'NamedNode',
+								value: 'http://www.wikidata.org/prop/P281',
+							},
+							object: {
+								termType: 'Variable',
+								value: 'statement0',
+							},
+						},
+						{
+							subject: {
+								termType: 'Variable',
+								value: 'statement0',
+							},
+							predicate: {
+								type: 'path',
 								pathType: '/',
-								items: [ {
-									termType: 'NamedNode',
-									value: 'http://www.wikidata.org/prop/P281',
-								},
-								{
-									termType: 'NamedNode',
-									value: 'http://www.wikidata.org/prop/statement/P281',
-								},
-								{
-									type: 'path',
-									pathType: '*',
-									items: [ {
+								items: [
+									{
 										termType: 'NamedNode',
-										value: 'http://www.wikidata.org/prop/direct/P279',
+										value: 'http://www.wikidata.org/prop/statement/P281',
 									},
-									],
-								},
-								] },
+									{
+										type: 'path',
+										pathType: '*',
+										items: [ {
+											termType: 'NamedNode',
+											value: 'http://www.wikidata.org/prop/direct/P279',
+										} ],
+									},
+								],
+							},
 							object: {
 								termType: 'NamedNode',
 								value: 'http://www.wikidata.org/entity/Q456',
@@ -387,17 +438,30 @@ describe( 'QueryObjectBuilder', () => {
 										termType: 'Variable',
 										value: 'item',
 									},
-									predicate: { type: 'path',
+									predicate: {
+										termType: 'NamedNode',
+										value: 'http://www.wikidata.org/prop/P281',
+									},
+									object: {
+										termType: 'Variable',
+										value: 'statement0',
+									},
+								},
+								{
+									subject: {
+										termType: 'Variable',
+										value: 'statement0',
+									},
+									predicate: {
+										type: 'path',
 										pathType: '/',
-										items: [ {
-											termType: 'NamedNode',
-											value: 'http://www.wikidata.org/prop/P281',
-										},
-										{
-											termType: 'NamedNode',
-											value: 'http://www.wikidata.org/prop/statement/P281',
-										},
-										] },
+										items: [
+											{
+												termType: 'NamedNode',
+												value: 'http://www.wikidata.org/prop/statement/P281',
+											},
+										],
+									},
 									object: {
 										termType: 'Literal',
 										value: 'XXXX',
@@ -474,17 +538,31 @@ describe( 'QueryObjectBuilder', () => {
 										termType: 'Variable',
 										value: 'item',
 									},
-									predicate: { type: 'path',
+									predicate: {
+										termType: 'NamedNode',
+										value: 'http://www.wikidata.org/prop/P281',
+									},
+									object: {
+										termType: 'Variable',
+										value: 'statement0',
+									},
+								},
+								{
+									subject: {
+										termType: 'Variable',
+										value: 'statement0',
+									},
+									predicate: {
+										type: 'path',
 										pathType: '/',
-										items: [ {
-											termType: 'NamedNode',
-											value: 'http://www.wikidata.org/prop/P281',
-										},
-										{
-											termType: 'NamedNode',
-											value: 'http://www.wikidata.org/prop/statement/P281',
-										},
-										] },
+										items: [
+
+											{
+												termType: 'NamedNode',
+												value: 'http://www.wikidata.org/prop/statement/P281',
+											},
+										],
+									},
 									object: {
 										termType: 'Literal',
 										value: 'XXXX',

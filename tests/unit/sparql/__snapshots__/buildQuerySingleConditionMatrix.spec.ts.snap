@@ -1,6 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "string", "negate": false, "propertyId": "P123", "propertyValueRelation": "matching", "referenceRelation": "regardless", "subclasses": false, "value": "a string value"} 1`] = `"SELECT DISTINCT ?item WHERE { ?item (p:P123/ps:P123) \\"a string value\\". }"`;
+exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "string", "negate": false, "propertyId": "P123", "propertyValueRelation": "matching", "referenceRelation": "regardless", "subclasses": false, "value": "a string value"} 1`] = `
+"SELECT DISTINCT ?item WHERE {
+  ?item p:P123 ?statement0.
+  ?statement0 (ps:P123) \\"a string value\\".
+}"
+`;
 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "string", "negate": false, "propertyId": "P123", "propertyValueRelation": "matching", "referenceRelation": "with", "subclasses": false, "value": "a string value"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
@@ -22,7 +27,12 @@ exports[`buildQuery builds a query from a single condition QueryRepresentation: 
 }"
 `;
 
-exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "string", "negate": false, "propertyId": "P123", "propertyValueRelation": "regardless-of-value", "referenceRelation": "regardless", "subclasses": false, "value": "a string value"} 1`] = `"SELECT DISTINCT ?item WHERE { ?item (p:P123/ps:P123) _:anyValueP123. }"`;
+exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "string", "negate": false, "propertyId": "P123", "propertyValueRelation": "regardless-of-value", "referenceRelation": "regardless", "subclasses": false, "value": "a string value"} 1`] = `
+"SELECT DISTINCT ?item WHERE {
+  ?item p:P123 ?statement0.
+  ?statement0 (ps:P123) _:anyValueP123.
+}"
+`;
 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "string", "negate": false, "propertyId": "P123", "propertyValueRelation": "regardless-of-value", "referenceRelation": "with", "subclasses": false, "value": "a string value"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
@@ -46,7 +56,8 @@ exports[`buildQuery builds a query from a single condition QueryRepresentation: 
 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "string", "negate": false, "propertyId": "P123", "propertyValueRelation": "without", "referenceRelation": "regardless", "subclasses": false, "value": "a string value"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
-  ?item (p:P123/ps:P123) ?instance.
+  ?item p:P123 ?statement0.
+  ?statement0 (ps:P123) ?instance.
   MINUS { ?item (p:P123/ps:P123) \\"a string value\\". }
 }"
 `;
@@ -76,7 +87,10 @@ exports[`buildQuery builds a query from a single condition QueryRepresentation: 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "string", "negate": true, "propertyId": "P123", "propertyValueRelation": "matching", "referenceRelation": "regardless", "subclasses": false, "value": "a string value"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
   ?item wikibase:sitelinks _:anyValue.
-  MINUS { ?item (p:P123/ps:P123) \\"a string value\\". }
+  MINUS {
+    ?item p:P123 ?statement0.
+    ?statement0 (ps:P123) \\"a string value\\".
+  }
 }"
 `;
 
@@ -109,7 +123,10 @@ exports[`buildQuery builds a query from a single condition QueryRepresentation: 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "string", "negate": true, "propertyId": "P123", "propertyValueRelation": "regardless-of-value", "referenceRelation": "regardless", "subclasses": false, "value": "a string value"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
   ?item wikibase:sitelinks _:anyValue.
-  MINUS { ?item (p:P123/ps:P123) _:anyValueP123. }
+  MINUS {
+    ?item p:P123 ?statement0.
+    ?statement0 (ps:P123) _:anyValueP123.
+  }
 }"
 `;
 
@@ -142,7 +159,10 @@ exports[`buildQuery builds a query from a single condition QueryRepresentation: 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "string", "negate": true, "propertyId": "P123", "propertyValueRelation": "without", "referenceRelation": "regardless", "subclasses": false, "value": "a string value"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
   ?item wikibase:sitelinks _:anyValue.
-  MINUS { ?item (p:P123/ps:P123) ?instance. }
+  MINUS {
+    ?item p:P123 ?statement0.
+    ?statement0 (ps:P123) ?instance.
+  }
   MINUS { ?item (p:P123/ps:P123) \\"a string value\\". }
 }"
 `;
@@ -175,9 +195,19 @@ exports[`buildQuery builds a query from a single condition QueryRepresentation: 
 }"
 `;
 
-exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": false, "propertyId": "P123", "propertyValueRelation": "matching", "referenceRelation": "regardless", "subclasses": false, "value": "Q123"} 1`] = `"SELECT DISTINCT ?item WHERE { ?item (p:P123/ps:P123) wd:Q123. }"`;
+exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": false, "propertyId": "P123", "propertyValueRelation": "matching", "referenceRelation": "regardless", "subclasses": false, "value": "Q123"} 1`] = `
+"SELECT DISTINCT ?item WHERE {
+  ?item p:P123 ?statement0.
+  ?statement0 (ps:P123) wd:Q123.
+}"
+`;
 
-exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": false, "propertyId": "P123", "propertyValueRelation": "matching", "referenceRelation": "regardless", "subclasses": true, "value": "Q123"} 1`] = `"SELECT DISTINCT ?item WHERE { ?item (p:P123/ps:P123/(wdt:P279*)) wd:Q123. }"`;
+exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": false, "propertyId": "P123", "propertyValueRelation": "matching", "referenceRelation": "regardless", "subclasses": true, "value": "Q123"} 1`] = `
+"SELECT DISTINCT ?item WHERE {
+  ?item p:P123 ?statement0.
+  ?statement0 (ps:P123/(wdt:P279*)) wd:Q123.
+}"
+`;
 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": false, "propertyId": "P123", "propertyValueRelation": "matching", "referenceRelation": "with", "subclasses": false, "value": "Q123"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
@@ -219,9 +249,19 @@ exports[`buildQuery builds a query from a single condition QueryRepresentation: 
 }"
 `;
 
-exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": false, "propertyId": "P123", "propertyValueRelation": "regardless-of-value", "referenceRelation": "regardless", "subclasses": false, "value": "Q123"} 1`] = `"SELECT DISTINCT ?item WHERE { ?item (p:P123/ps:P123) _:anyValueP123. }"`;
+exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": false, "propertyId": "P123", "propertyValueRelation": "regardless-of-value", "referenceRelation": "regardless", "subclasses": false, "value": "Q123"} 1`] = `
+"SELECT DISTINCT ?item WHERE {
+  ?item p:P123 ?statement0.
+  ?statement0 (ps:P123) _:anyValueP123.
+}"
+`;
 
-exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": false, "propertyId": "P123", "propertyValueRelation": "regardless-of-value", "referenceRelation": "regardless", "subclasses": true, "value": "Q123"} 1`] = `"SELECT DISTINCT ?item WHERE { ?item (p:P123/ps:P123/(wdt:P279*)) _:anyValueP123. }"`;
+exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": false, "propertyId": "P123", "propertyValueRelation": "regardless-of-value", "referenceRelation": "regardless", "subclasses": true, "value": "Q123"} 1`] = `
+"SELECT DISTINCT ?item WHERE {
+  ?item p:P123 ?statement0.
+  ?statement0 (ps:P123/(wdt:P279*)) _:anyValueP123.
+}"
+`;
 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": false, "propertyId": "P123", "propertyValueRelation": "regardless-of-value", "referenceRelation": "with", "subclasses": false, "value": "Q123"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
@@ -265,14 +305,16 @@ exports[`buildQuery builds a query from a single condition QueryRepresentation: 
 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": false, "propertyId": "P123", "propertyValueRelation": "without", "referenceRelation": "regardless", "subclasses": false, "value": "Q123"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
-  ?item (p:P123/ps:P123) ?instance.
+  ?item p:P123 ?statement0.
+  ?statement0 (ps:P123) ?instance.
   MINUS { ?item (p:P123/ps:P123) wd:Q123. }
 }"
 `;
 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": false, "propertyId": "P123", "propertyValueRelation": "without", "referenceRelation": "regardless", "subclasses": true, "value": "Q123"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
-  ?item (p:P123/ps:P123/(wdt:P279*)) ?instance.
+  ?item p:P123 ?statement0.
+  ?statement0 (ps:P123/(wdt:P279*)) ?instance.
   MINUS { ?item (p:P123/ps:P123) wd:Q123. }
 }"
 `;
@@ -324,14 +366,20 @@ exports[`buildQuery builds a query from a single condition QueryRepresentation: 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": true, "propertyId": "P123", "propertyValueRelation": "matching", "referenceRelation": "regardless", "subclasses": false, "value": "Q123"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
   ?item wikibase:sitelinks _:anyValue.
-  MINUS { ?item (p:P123/ps:P123) wd:Q123. }
+  MINUS {
+    ?item p:P123 ?statement0.
+    ?statement0 (ps:P123) wd:Q123.
+  }
 }"
 `;
 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": true, "propertyId": "P123", "propertyValueRelation": "matching", "referenceRelation": "regardless", "subclasses": true, "value": "Q123"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
   ?item wikibase:sitelinks _:anyValue.
-  MINUS { ?item (p:P123/ps:P123/(wdt:P279*)) wd:Q123. }
+  MINUS {
+    ?item p:P123 ?statement0.
+    ?statement0 (ps:P123/(wdt:P279*)) wd:Q123.
+  }
 }"
 `;
 
@@ -390,14 +438,20 @@ exports[`buildQuery builds a query from a single condition QueryRepresentation: 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": true, "propertyId": "P123", "propertyValueRelation": "regardless-of-value", "referenceRelation": "regardless", "subclasses": false, "value": "Q123"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
   ?item wikibase:sitelinks _:anyValue.
-  MINUS { ?item (p:P123/ps:P123) _:anyValueP123. }
+  MINUS {
+    ?item p:P123 ?statement0.
+    ?statement0 (ps:P123) _:anyValueP123.
+  }
 }"
 `;
 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": true, "propertyId": "P123", "propertyValueRelation": "regardless-of-value", "referenceRelation": "regardless", "subclasses": true, "value": "Q123"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
   ?item wikibase:sitelinks _:anyValue.
-  MINUS { ?item (p:P123/ps:P123/(wdt:P279*)) _:anyValueP123. }
+  MINUS {
+    ?item p:P123 ?statement0.
+    ?statement0 (ps:P123/(wdt:P279*)) _:anyValueP123.
+  }
 }"
 `;
 
@@ -456,7 +510,10 @@ exports[`buildQuery builds a query from a single condition QueryRepresentation: 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": true, "propertyId": "P123", "propertyValueRelation": "without", "referenceRelation": "regardless", "subclasses": false, "value": "Q123"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
   ?item wikibase:sitelinks _:anyValue.
-  MINUS { ?item (p:P123/ps:P123) ?instance. }
+  MINUS {
+    ?item p:P123 ?statement0.
+    ?statement0 (ps:P123) ?instance.
+  }
   MINUS { ?item (p:P123/ps:P123) wd:Q123. }
 }"
 `;
@@ -464,7 +521,10 @@ exports[`buildQuery builds a query from a single condition QueryRepresentation: 
 exports[`buildQuery builds a query from a single condition QueryRepresentation: {"conditionRelation": null, "datatype": "wikibase-item", "negate": true, "propertyId": "P123", "propertyValueRelation": "without", "referenceRelation": "regardless", "subclasses": true, "value": "Q123"} 1`] = `
 "SELECT DISTINCT ?item WHERE {
   ?item wikibase:sitelinks _:anyValue.
-  MINUS { ?item (p:P123/ps:P123/(wdt:P279*)) ?instance. }
+  MINUS {
+    ?item p:P123 ?statement0.
+    ?statement0 (ps:P123/(wdt:P279*)) ?instance.
+  }
   MINUS { ?item (p:P123/ps:P123) wd:Q123. }
 }"
 `;

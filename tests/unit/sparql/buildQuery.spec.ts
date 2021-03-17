@@ -24,9 +24,9 @@ describe( 'buildQuery', () => {
 
 	it( 'builds a query from conditions connected with OR', () => {
 		const expectedQuery = `SELECT DISTINCT ?item WHERE {
-      ?item (p:P31/ps:P31) wd:Q515.
-      { ?item (p:P17/ps:P17) wd:Q17. } UNION
-      { ?item (p:P17/ps:P17) wd:Q183. }
+      ?item p:P31 ?statement0. ?statement0 (ps:P31) wd:Q515.
+      { ?item p:P17 ?statement1. ?statement1 (ps:P17) wd:Q17. } UNION
+      { ?item p:P17 ?statement2. ?statement2 (ps:P17) wd:Q183. }
     }`;
 
 		const actualQuery = buildQuery( {
@@ -53,10 +53,10 @@ describe( 'buildQuery', () => {
 
 	it( 'builds a query from conditions connected with AND and OR', () => {
 		const expectedQuery = `SELECT DISTINCT ?item WHERE {
-      { ?item (p:P31/ps:P31) wd:Q515. } UNION
-      { ?item (p:P17/ps:P17) wd:Q183. }
-	  { ?item (p:P66/ps:P66) wd:Q432. } UNION
-	  { ?item (p:P99/ps:P99) wd:Q5653. }
+      { ?item p:P31 ?statement0. ?statement0 (ps:P31) wd:Q515. } UNION
+      { ?item p:P17 ?statement1. ?statement1 (ps:P17) wd:Q183. }
+	  { ?item p:P66 ?statement2. ?statement2 (ps:P66) wd:Q432. } UNION
+	  { ?item p:P99 ?statement3. ?statement3 (ps:P99) wd:Q5653. }
     }`;
 
 		const actualQuery = buildQuery( {
@@ -102,8 +102,8 @@ describe( 'buildQuery', () => {
 		} );
 		const expectedQuery = `SELECT DISTINCT ?item WHERE {
 			{ ?item p:P666 ?statement0.
-			?statement0 (ps:${propertyId}) "${value}". 
-			FILTER(EXISTS { ?statement0 prov:wasDerivedFrom ?reference. 
+			?statement0 (ps:${propertyId}) "${value}".
+			FILTER(EXISTS { ?statement0 prov:wasDerivedFrom ?reference.
 			}) } }`;
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
@@ -122,8 +122,8 @@ describe( 'buildQuery', () => {
 		} );
 		const expectedQuery = `SELECT DISTINCT ?item WHERE {
 			{ ?item p:P666 ?statement0.
-			?statement0 (ps:${propertyId}) "${value}". 
-			FILTER(NOT EXISTS { ?statement0 prov:wasDerivedFrom ?reference. 
+			?statement0 (ps:${propertyId}) "${value}".
+			FILTER(NOT EXISTS { ?statement0 prov:wasDerivedFrom ?reference.
 			}) } }`;
 		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
@@ -131,12 +131,17 @@ describe( 'buildQuery', () => {
 	it( 'builds a query from a property and a string value', () => {
 		const propertyId = 'P666';
 		const value = 'blah';
-		expect( buildQuery( {
+		const expectedQuery = `SELECT DISTINCT ?item WHERE {
+		 ?item p:${propertyId} ?statement0.
+		 ?statement0 (ps:${propertyId}) "${value}".
+		 }`;
+		const actualQuery = buildQuery( {
 			conditions: [
 				getSimpleCondition( propertyId, value ),
 			],
 			omitLabels: true,
-		} ) ).toEqual( `SELECT DISTINCT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }` );
+		} );
+		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
 
 	it( 'builds a query from a property and a string value with not matching selected', () => {
@@ -147,7 +152,8 @@ describe( 'buildQuery', () => {
 
 		const expectedQuery =
 			`SELECT DISTINCT ?item WHERE {
-			?item (p:${propertyId}/ps:${propertyId}) ?instance.
+			?item p:${propertyId} ?statement0.
+			?statement0 (ps:${propertyId}) ?instance.
 			MINUS { ?item (p:P666/ps:P666) "${value}". }
 			}`;
 
@@ -165,7 +171,8 @@ describe( 'buildQuery', () => {
 		condition.propertyValueRelation = PropertyValueRelation.Regardless;
 		const expectedQuery =
 			`SELECT DISTINCT ?item WHERE {
-			?item (p:${propertyId}/ps:${propertyId}) _:anyValue${propertyId}.
+				?item p:${propertyId} ?statement0.
+				?statement0 (ps:${propertyId}) _:anyValue${propertyId}.
 			}`;
 		const actualQuery = buildQuery( {
 			conditions: [ condition ],
@@ -178,8 +185,10 @@ describe( 'buildQuery', () => {
 	it( 'builds a query from multiple conditions, one matching and one regardless', () => {
 		const expectedQuery =
 			`SELECT DISTINCT ?item WHERE {
-			?item (p:P666/ps:P666) "blah".
-			?item (p:P66/ps:P66) _:anyValueP66.
+			?item p:P666 ?statement0.
+			?statement0 (ps:P666) "blah".
+			?item p:P66 ?statement1.
+			?statement1 (ps:P66) _:anyValueP66.
 			}`;
 		const secondCondition = getSimpleCondition( 'P66', '' );
 		secondCondition.propertyValueRelation = PropertyValueRelation.Regardless;
@@ -197,8 +206,10 @@ describe( 'buildQuery', () => {
 	it( 'builds a query from multiple conditions, one matching and one non-matching', () => {
 		const expectedQuery =
 			`SELECT DISTINCT ?item WHERE {
-			?item (p:P666/ps:P666) "blah".
-			?item (p:P66/ps:P66) ?instance.
+			?item p:P666 ?statement0.
+			?statement0 (ps:P666) "blah".
+			?item p:P66 ?statement1.
+			?statement1 (ps:P66) ?instance.
 			MINUS { ?item (p:P66/ps:P66) "foo". }
 			}`;
 		const secondCondition = getSimpleCondition( 'P66', 'foo' );
@@ -217,9 +228,11 @@ describe( 'buildQuery', () => {
 	it( 'builds a query from multiple conditions, one non-matching and one matching', () => {
 		const expectedQuery =
 			`SELECT DISTINCT ?item WHERE {
-			?item (p:P666/ps:P666) ?instance.
+			?item p:P666 ?statement0.
+			?statement0 (ps:P666) ?instance.
 			MINUS { ?item (p:P666/ps:P666) "blah". }
-			?item (p:P66/ps:P66) "foo".
+			?item p:P66 ?statement1.
+			?statement1 (ps:P66) "foo".
 			}`;
 		const firstCondition = getSimpleCondition( 'P666', 'blah' );
 		firstCondition.propertyValueRelation = PropertyValueRelation.NotMatching;
@@ -239,10 +252,14 @@ describe( 'buildQuery', () => {
 		const value = 'Q146';
 		const condition = getSimpleCondition( propertyId, value );
 		condition.datatype = 'wikibase-item';
-		expect( buildQuery( {
+		const actualQuery = buildQuery( {
 			conditions: [ condition ],
 			omitLabels: true,
-		} ) ).toEqual( `SELECT DISTINCT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}) wd:${value}. }` );
+		} );
+		const expectedQuery = `SELECT DISTINCT ?item WHERE {
+		?item p:${propertyId} ?statement0.
+			?statement0 (ps:${propertyId}) wd:${value}. }`;
+		expect( actualQuery.replace( /\s+/g, ' ' ) ).toEqual( expectedQuery.replace( /\s+/g, ' ' ) );
 	} );
 
 	it( 'builds a query from a property and a string value with omitLabels set to false (shows labels)', () => {
@@ -251,7 +268,10 @@ describe( 'buildQuery', () => {
 		const expectedQuery =
 			`SELECT DISTINCT ?item ?itemLabel WHERE {
 			SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
-			{ SELECT DISTINCT ?item WHERE { ?item (p:P666/ps:P666) "blah". } } }`;
+			{ SELECT DISTINCT ?item WHERE {
+			?item p:P666 ?statement0.
+			?statement0 (ps:P666) "blah".
+			 } } }`;
 		const actualQuery = buildQuery( {
 			conditions: [ getSimpleCondition( propertyId, value ) ],
 			omitLabels: false,
@@ -264,7 +284,10 @@ describe( 'buildQuery', () => {
 		const value = 'Q456';
 		process.env.VUE_APP_SUBCLASS_PROPERTY_MAP = '{"P666":"P66"}';
 		const expectedQuery =
-			`SELECT DISTINCT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}/(wdt:P66*)) wd:${value}. }`;
+			`SELECT DISTINCT ?item WHERE {
+				?item p:${propertyId} ?statement0.
+				?statement0 (ps:${propertyId}/(wdt:P66*)) wd:${value}.
+			}`;
 		const condition = getSimpleCondition( propertyId, value );
 		condition.datatype = 'wikibase-item';
 		condition.subclasses = true;
@@ -282,7 +305,10 @@ describe( 'buildQuery', () => {
 		const value = 'Q456';
 		process.env.VUE_APP_SUBCLASS_PROPERTY_MAP = '{"P66":"P66","default":"P279"}';
 		const expectedQuery =
-			`SELECT DISTINCT ?item WHERE { ?item (p:${propertyId}/ps:${propertyId}/(wdt:P279*)) wd:${value}. }`;
+			`SELECT DISTINCT ?item WHERE {
+				?item p:${propertyId} ?statement0.
+				?statement0 (ps:${propertyId}/(wdt:P279*)) wd:${value}.
+			}`;
 		const condition = getSimpleCondition( propertyId, value );
 		condition.datatype = 'wikibase-item';
 		condition.subclasses = true;
@@ -301,7 +327,10 @@ describe( 'buildQuery', () => {
 		const expectedQuery =
 			`SELECT DISTINCT ?item WHERE {
 			?item wikibase:sitelinks _:anyValue.
-			MINUS { ?item (p:${propertyId}/ps:${propertyId}) "${value}". }
+			MINUS {
+				?item p:${propertyId} ?statement0.
+				?statement0 (ps:${propertyId}) "${value}".
+			}
 			}`;
 		const condition = getSimpleCondition( propertyId, value );
 		condition.negate = true;
@@ -319,8 +348,9 @@ describe( 'buildQuery', () => {
 		negatedCondition.referenceRelation = ReferenceRelation.With;
 		negatedCondition.propertyValueRelation = PropertyValueRelation.Regardless;
 		const expectedQuery =
-		`SELECT DISTINCT ?item WHERE { 
-			?item (p:P31/ps:P31) "Qtaxon".
+		`SELECT DISTINCT ?item WHERE {
+			?item p:P31 ?statement0.
+			?statement0 (ps:P31) "Qtaxon".
 			MINUS { {
 				?item p:PTaxonName ?statement1.
 				?statement1 (ps:PTaxonName) _:anyValuePTaxonName.

@@ -1,7 +1,6 @@
 import { IriTerm, PropertyPath, Term, Triple } from 'sparqljs';
 import PropertyValueRelation from '@/data-model/PropertyValueRelation';
 import rdfNamespaces from '@/sparql/rdfNamespaces';
-import ReferenceRelation from '@/data-model/ReferenceRelation';
 import UnitValue from '@/data-model/UnitValue';
 
 export default class TripleBuilder {
@@ -11,8 +10,7 @@ export default class TripleBuilder {
 		propertyValueRelation: PropertyValueRelation,
 		value: string | UnitValue,
 		subclasses: boolean,
-		referenceRelation: ReferenceRelation,
-		statementSubjectName = 'item',
+		statementSubjectName: string,
 	): Triple {
 		return {
 			subject: {
@@ -22,7 +20,7 @@ export default class TripleBuilder {
 			predicate: {
 				type: 'path',
 				pathType: '/',
-				items: this.buildPredicateItems( propertyId, referenceRelation, subclasses ),
+				items: this.buildPredicateItems( propertyId, subclasses ),
 			},
 			object: this.buildObjectItems( propertyId, datatype, propertyValueRelation, value ),
 		};
@@ -103,23 +101,14 @@ export default class TripleBuilder {
 
 	private buildPredicateItems(
 		propertyId: string,
-		referenceRelation: ReferenceRelation,
 		subclasses: boolean,
 	): ( PropertyPath | IriTerm )[] {
 		const items: ( PropertyPath | IriTerm )[] = [
 			{
 				termType: 'NamedNode',
-				value: rdfNamespaces.p + propertyId,
-			},
-			{
-				termType: 'NamedNode',
 				value: rdfNamespaces.ps + propertyId,
 			},
 		];
-
-		if ( referenceRelation !== ReferenceRelation.Regardless ) {
-			items.shift(); // for references we only need rdfNamespaces.ps
-		}
 
 		if ( subclasses ) {
 			items.push(
