@@ -2,6 +2,7 @@ import FetchLanguageService from '@/data-access/FetchLanguageService';
 import QueryBuilderServices from '@/QueryBuilderServices';
 import FetchSearchEntityRepository from '@/data-access/FetchSearchEntityRepository';
 import FetchParseValueRepository from '@/data-access/FetchParseValueRepository';
+import FetchFormatValueRepository from '@/data-access/FetchFormatValueRepository';
 import StatsvMetricsCollector from '@/data-access/StatsvMetricsCollector';
 
 const services = new QueryBuilderServices();
@@ -12,6 +13,10 @@ services.set( 'searchEntityRepository', new FetchSearchEntityRepository(
 	process.env.VUE_APP_WIKIBASE_API_URL || '',
 ) );
 services.set( 'parseValueRepository', new FetchParseValueRepository(
+	process.env.VUE_APP_WIKIBASE_API_URL || '',
+) );
+services.set( 'formatValueRepository', new FetchFormatValueRepository(
+	languageService.getAppLanguageCode(),
 	process.env.VUE_APP_WIKIBASE_API_URL || '',
 ) );
 
