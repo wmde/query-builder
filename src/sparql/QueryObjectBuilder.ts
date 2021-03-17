@@ -33,14 +33,13 @@ export default class QueryObjectBuilder {
 
 		const conditions = this.buildConditionTree( queryRepresentation.conditions );
 
-		for ( let i = 0; i < conditions.length; i++ ) {
-			const conditionOrUnion = conditions[ i ];
-			if ( Array.isArray( conditionOrUnion ) ) {
-				this.buildUnion( conditionOrUnion );
-				continue;
+		conditions.forEach( ( condition ) => {
+			if ( Array.isArray( condition ) ) {
+				this.buildUnion( condition );
+				return;
 			}
-			this.buildFromQueryCondition( conditionOrUnion, this.conditionIndex++ );
-		}
+			this.buildFromQueryCondition( condition );
+		} );
 
 		if ( this.queryObject.where ) {
 			// If it's a negate query only, we need to add "any item" to it otherwise it returns empty result.
@@ -110,7 +109,7 @@ export default class QueryObjectBuilder {
 		const unionConditions = [];
 		for ( let i = 0; i < conditions.length; i++ ) {
 			unionConditions.push(
-				...this.patternBuilder.buildValuePatternFromCondition( conditions[ i ], this.conditionIndex++ )
+				...this.patternBuilder.buildValuePatternFromCondition( conditions[ i ], this.conditionIndex++ ),
 			);
 		}
 		const union: Pattern = {
@@ -123,12 +122,12 @@ export default class QueryObjectBuilder {
 		this.queryObject.where.push( union );
 	}
 
-	private buildFromQueryCondition( condition: Condition, conditionIndex: number ): void {
+	private buildFromQueryCondition( condition: Condition ): void {
 		if ( !this.queryObject.where ) {
 			this.queryObject.where = [];
 		}
 		this.queryObject.where.push(
-			...this.patternBuilder.buildValuePatternFromCondition( condition, conditionIndex ),
+			...this.patternBuilder.buildValuePatternFromCondition( condition, this.conditionIndex++ ),
 		);
 		return;
 	}
