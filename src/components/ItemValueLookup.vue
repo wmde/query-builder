@@ -5,6 +5,7 @@
 		:error="error"
 		:searchForMenuItems="searchForItems"
 		:label="$i18n('query-builder-input-value-label')"
+		:tooltip="$i18n('query-builder-input-value-tooltip')"
 		:placeholder="$i18n('query-builder-input-value-placeholder')"
 		:no-match-found-message="$i18n('query-builder-item-value-lookup-no-match-found')"
 		:disabled="disabled"

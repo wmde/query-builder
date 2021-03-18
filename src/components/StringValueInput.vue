@@ -6,13 +6,20 @@
 		:error="error ? {message: $i18n(error.message), type: error.type} : null"
 		:placeholder="$i18n('query-builder-input-value-placeholder')"
 		:disabled="disabled"
-	/>
+	>
+		<template v-slot:suffix>
+			<InfoTooltip
+				position="end"
+				:message="$i18n('query-builder-input-value-tooltip')"
+			/></template>
+	</TextInput>
 </template>
 
 <script lang="ts">
 
 import { TextInput } from '@wmde/wikit-vue-components';
 import Vue from 'vue';
+import InfoTooltip from '@/components/InfoTooltip.vue';
 
 export default Vue.extend( {
 	name: 'StringValueInput',
@@ -32,6 +39,7 @@ export default Vue.extend( {
 	},
 	components: {
 		TextInput,
+		InfoTooltip,
 	},
 } );
 </script>

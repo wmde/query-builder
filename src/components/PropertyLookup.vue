@@ -4,6 +4,7 @@
 		@input="$emit( 'input', $event )"
 		:error="error"
 		:searchForMenuItems="searchForProperties"
+		:tooltip="$i18n('query-builder-property-lookup-tooltip')"
 		:label="$i18n('query-builder-property-lookup-label')"
 		:placeholder="$i18n('query-builder-property-lookup-placeholder')"
 		:no-match-found-message="$i18n('query-builder-property-lookup-no-match-found')"
