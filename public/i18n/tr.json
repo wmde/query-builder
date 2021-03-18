@@ -45,7 +45,7 @@
 	"query-builder-limit-number-placeholder": "Bir sayı girin",
 	"query-builder-limit-number-screenreader-label": "Maksimum sonuç sayısı",
 	"query-builder-label-opt-out": "Etiketler yerine kimlikleri göster (zaman aşımını önleyebilir)",
-	"query-builder-include-subclasses": "Bu değerin alt sınıflarındaki değerleri dahil et",
+	"query-builder-include-subclasses": "Ayrıca özelliğin alt kategorilerindeki değerleri de dahil edin",
 	"query-builder-negation-option-label-with": "Şununla:",
 	"query-builder-negation-option-label-without": "Şu olmadan:",
 	"query-builder-sharable-link-text": "Paylaşılabilir bir bağlantı al",

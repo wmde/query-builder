@@ -43,7 +43,7 @@
 	"query-builder-limit-number-placeholder": "נא להזין מספר",
 	"query-builder-limit-number-screenreader-label": "מספר מרבי של תוצאות",
 	"query-builder-label-opt-out": "להציג מזהים במקום תוויות (יכול למנוע ניתוק בשל זמן עיבוד ארוך)",
-	"query-builder-include-subclasses": "לכלול ערכים מתוך תת־מחלקות של הערך הזה",
+	"query-builder-include-subclasses": "לכלול גם ערכים מתוך קטגוריות־משנה של מאפיין",
 	"query-builder-negation-option-label-with": "עם",
 	"query-builder-negation-option-label-without": "בלי",
 	"query-builder-sharable-link-text": "קבלת קישור לשיתוף",

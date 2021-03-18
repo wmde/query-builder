@@ -40,7 +40,7 @@
 	"query-builder-limit-number-placeholder": "Digite um número",
 	"query-builder-limit-number-screenreader-label": "Número máximo de resultados",
 	"query-builder-label-opt-out": "Mostrar IDs em vez de rótulos (pode evitar o tempo limite)",
-	"query-builder-include-subclasses": "Inclui valores de subclasses deste valor",
+	"query-builder-include-subclasses": "Também inclui valores de subcategorias da propriedade",
 	"query-builder-negation-option-label-with": "Com",
 	"query-builder-negation-option-label-without": "Sem",
 	"query-builder-sharable-link-text": "Obtenha um link compartilhável",

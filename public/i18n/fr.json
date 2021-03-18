@@ -46,7 +46,7 @@
 	"query-builder-limit-number-placeholder": "Saisir un nombre",
 	"query-builder-limit-number-screenreader-label": "Nombre maximal de résultats",
 	"query-builder-label-opt-out": "Montrer les identifiants plutôt que les libellés (peut éviter une erreur d’exécution hors délai).",
-	"query-builder-include-subclasses": "Inclure les valeurs à partir des sous-classes de cette valeur",
+	"query-builder-include-subclasses": "Inclure également les valeurs venant des sous-classes de la propriété",
 	"query-builder-negation-option-label-with": "Avec",
 	"query-builder-negation-option-label-without": "Sans",
 	"query-builder-sharable-link-text": "Obtenir un lien partageable",

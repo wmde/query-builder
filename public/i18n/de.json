@@ -44,7 +44,7 @@
 	"query-builder-limit-number-placeholder": "Geben sie eine Nummer ein",
 	"query-builder-limit-number-screenreader-label": "Maximale Anzahl der Ergebnisse",
 	"query-builder-label-opt-out": "IDs anstelle von Bezeichnungen anzeigen (kann einen Timeout verhindern)",
-	"query-builder-include-subclasses": "Werte aus Unterklassen dieses Wertes einbeziehen",
+	"query-builder-include-subclasses": "Auch Werte aus Unterkategorien der Eigenschaft einbeziehen",
 	"query-builder-negation-option-label-with": "Mit",
 	"query-builder-negation-option-label-without": "Ohne",
 	"query-builder-sharable-link-text": "Einen teilbaren Link erhalten",
