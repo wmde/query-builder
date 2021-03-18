@@ -39,16 +39,35 @@ export default class PatternBuilder {
 				conditionIndex,
 			);
 		} else {
+			const statementSubjectName = 'statement' + conditionIndex;
+			const entityToStatementTriple: Triple = {
+				subject: {
+					termType: 'Variable',
+					value: 'item',
+				},
+				predicate: {
+					termType: 'NamedNode',
+					value: rdfNamespaces.p + propertyId,
+				},
+				object: {
+					termType: 'Variable',
+					value: statementSubjectName,
+				},
+			};
+			const statementToValueTriple = this.tripleBuilder.buildTripleFromQueryCondition(
+				propertyId,
+				datatype,
+				propertyValueRelation,
+				value,
+				subclasses,
+				statementSubjectName,
+			);
 			pattern = {
 				type: 'bgp',
-				triples: [ this.tripleBuilder.buildTripleFromQueryCondition(
-					propertyId,
-					datatype,
-					propertyValueRelation,
-					value,
-					subclasses,
-					referenceRelation,
-				) ],
+				triples: [
+					entityToStatementTriple,
+					statementToValueTriple,
+				],
 			};
 		}
 
@@ -128,7 +147,6 @@ export default class PatternBuilder {
 				propertyValueRelation,
 				value,
 				subclasses,
-				referenceRelation,
 				statementSubjectName,
 			) ],
 		};
