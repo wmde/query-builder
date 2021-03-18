@@ -36,7 +36,7 @@ describe( 'Component interaction test', () => {
 		).as( 'hasImdbRequest' );
 
 		cy.intercept(
-			wikibaseApiRequest( { action: 'wbsearchentities', search: 'installed capacity' } ),
+			wikibaseApiRequest( { action: 'wbsearchentities', search: 'LilyPond notation' } ),
 			{ fixture: 'wbsearchentities-limited-support.json' },
 		).as( 'hasLimitedSupportedRequest' );
 
@@ -110,7 +110,7 @@ describe( 'Component interaction test', () => {
 
 		cy.get( '.query-condition__property-lookup .wikit-Input' )
 			.eq( 1 )
-			.type( 'installed capacity' )
+			.type( 'LilyPond notation' )
 			.wait( '@hasLimitedSupportedRequest' );
 		cy.get( '.query-condition__property-lookup:nth(1) .wikit-OptionsMenu__item' ).click();
 
@@ -139,8 +139,8 @@ describe( 'Component interaction test', () => {
       { MINUS { ?item (p:P31/ps:P31) wd:Q146. } }
       UNION
       {
-        ?item p:P2109 ?statement1.
-        ?statement1 (ps:P2109) _:anyValueP2109.
+        ?item p:P6883 ?statement1.
+        ?statement1 (ps:P6883) _:anyValueP6883.
       }
     }
     LIMIT 100
