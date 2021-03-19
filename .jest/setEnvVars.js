@@ -1,0 +1,1 @@
+process.env.VUE_APP_SI_CONVERSION_PROPERTY = 'P2370';

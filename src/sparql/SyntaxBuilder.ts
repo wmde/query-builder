@@ -1,7 +1,10 @@
 import {
 	BgpPattern,
 	BlankTerm,
+	FilterPattern,
 	IriTerm,
+	LiteralTerm,
+	OperationExpression,
 	PropertyPath,
 	QuadTerm,
 	Term,
@@ -71,5 +74,41 @@ export default class SyntaxBuilder {
 			type: 'bgp',
 			triples,
 		};
+	}
+
+	public buildOperatorFilterPattern(
+		leftSideTerm: Term, operator: string, rightSideTerm: Term,
+	): FilterPattern {
+		return {
+			type: 'filter',
+			expression: this.buildOperationsExpression(
+				leftSideTerm,
+				operator,
+				rightSideTerm,
+			),
+		};
+	}
+
+	public buildOperationsExpression( leftSide: Term, operator: string, rightSide: Term ): OperationExpression {
+		return {
+			type: 'operation',
+			operator,
+			args: [
+				leftSide,
+				rightSide,
+			],
+		};
+	}
+
+	public buildLiteralTermForDecimalNumber( numericValue: number ): LiteralTerm {
+		return {
+			termType: 'Literal',
+			value: String( numericValue ),
+			datatype: {
+				termType: 'NamedNode',
+				value: 'http://www.w3.org/2001/XMLSchema#decimal',
+				// Todo: should we add equals method?
+			},
+		} as LiteralTerm;
 	}
 }
