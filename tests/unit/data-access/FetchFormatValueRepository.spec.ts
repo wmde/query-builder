@@ -21,10 +21,10 @@ describe( 'FetchFormatValueRepository', () => {
 
 	it( 'format date from valueData returned from ParseValueRepository', async () => {
 		const repo = new FetchFormatValueRepository(
-			testEndpoint,
 			testLang,
+			testEndpoint,
 		);
-		const expectedResult = 'February 1920';
+		const expectedResult = { result: 'foo' };
 
 		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
 			ok: true,
@@ -56,8 +56,8 @@ describe( 'FetchFormatValueRepository', () => {
 
 	it( 'throws an error if there is a server side problem parsing a value', () => {
 		const repo = new FetchFormatValueRepository(
-			'https://example.com/w/api.php',
-			'en',
+			testLang,
+			testEndpoint,
 		);
 		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
 			ok: false,

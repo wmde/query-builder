@@ -6,12 +6,12 @@ export default class FetchFormatValueRepository implements FormatValueRepository
 	private readonly forLanguageCode: string;
 	private readonly endpoint: string;
 
-	public constructor( endpoint: string, languageCode: string ) {
+	public constructor( languageCode: string, endpoint: string ) {
 		this.forLanguageCode = languageCode;
 		this.endpoint = endpoint;
 	}
 
-	private async format( dataValue: ParseResult, propertyId: string ):
+	public async formatValue( dataValue: ParseResult, propertyId: string ):
 	Promise<string> {
 		const params: { [key: string]: string } = {
 			action: 'wbformatvalue',
@@ -48,9 +48,5 @@ export default class FetchFormatValueRepository implements FormatValueRepository
 		}
 
 		return data;
-	}
-
-	public formatValue( dataValue: ParseResult, propertyId: string ): Promise<string> {
-		return this.format( dataValue, propertyId );
 	}
 }
