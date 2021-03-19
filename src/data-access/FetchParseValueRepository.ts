@@ -10,19 +10,26 @@ export default class FetchParseValueRepository implements ParseValueRepository {
 		this.endpoint = endpoint;
 	}
 
-	private async parseValue( values: string, datatype: string ):
-	Promise<ParseResult> {
+	public async parseValues( values: string[], datatype: string ):
+	Promise<ParseResult[]> {
 		if ( !values ) {
 			throw new Error( 'The parameter values must not be empty!' );
+		}
+
+		// NOTE: remove this line if/when we decide to supported with multiple values.
+		if ( values.length > 1 ) {
+			throw new Error( 'only one value is supported.' );
 		}
 
 		if ( !datatype ) {
 			throw new Error( 'The parameter datatype must not be empty!' );
 		}
 
+		const concatinateValues = values.join( '|' );
+
 		const params: { [key: string]: string } = {
 			action: 'wbparsevalue',
-			values: values,
+			values: concatinateValues,
 			datatype: datatype,
 			validate: 'true',
 			format: 'json',
@@ -52,19 +59,12 @@ export default class FetchParseValueRepository implements ParseValueRepository {
 			throw new TechnicalProblem( `${data.error.code}: ${data.error.info}` );
 		}
 
-		if ( data.value.precision < 9 ) {
+		const results = data.results;
+
+		if ( results[ 0 ].precision < 9 ) {
 			throw new PrecisionError();
 		}
 
-		const parsedResult: ParseResult = {
-			value: data.value,
-			type: data.type,
-		};
-
-		return parsedResult;
-	}
-
-	public parseValues( values: string, datatype: string ): Promise<ParseResult> {
-		return this.parseValue( values, datatype );
+		return results;
 	}
 }

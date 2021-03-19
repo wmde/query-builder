@@ -9,30 +9,20 @@ describe( 'FetchParseValueRepository', () => {
 		const repo = new FetchParseValueRepository(
 			testEndpoint,
 		);
-		const value = '1994-02-08';
+		const values = [ '1994-02-08' ];
 		const datatype = 'time';
-		const expectedResult = {
-			value: {
-				time: '+1994-02-08T00:00:00Z',
-				timezone: 0,
-				before: 0,
-				after: 0,
-				precision: 11,
-				calendarmodel: 'http://www.wikidata.org/entity/Q1985727',
-			},
-			type: 'time',
-		};
+		const expectedResult = [ { foo: 'bar' } ];
 
 		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
 			ok: true,
-			json: async () => ( expectedResult ),
+			json: async () => ( { results: expectedResult } ),
 		} ) );
 
-		const actualResult = await repo.parseValues( value, datatype );
+		const actualResult = await repo.parseValues( values, datatype );
 
 		const expectedParams = {
 			action: 'wbparsevalue',
-			values: value,
+			values: values,
 			datatype: datatype,
 			validate: 'true',
 			format: 'json',
@@ -61,7 +51,27 @@ describe( 'FetchParseValueRepository', () => {
 
 		const expectedError = new TechnicalProblem( '500: Server Error' );
 
-		expect( repo.parseValues( 'foo', 'time' ) ).rejects.toThrow( expectedError );
+		expect( repo.parseValues( [ '1994-02-08' ], 'time' ) ).rejects.toThrow( expectedError );
+	} );
+
+	// NOTE: remove this test if/when we decide to supported with multiple values.
+	it( 'throws a error if multiple values are given', async () => {
+		const testEndpoint = 'https://example.com/w/api.php';
+		const repo = new FetchParseValueRepository(
+			testEndpoint,
+		);
+		const values = [ '1994-02-08', '1994-01-09' ];
+		const datatype = 'time';
+		const expectedResult = [ { foo: 'bar' } ];
+
+		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
+			ok: true,
+			json: async () => ( { results: expectedResult } ),
+		} ) );
+
+		expect( repo.parseValues( values, datatype ) ).rejects.toThrow(
+			new Error( 'only one value is supported.' ),
+		);
 	} );
 
 	it( 'throws a PrecisionError if response precision is less that 9', async () => {
@@ -69,26 +79,16 @@ describe( 'FetchParseValueRepository', () => {
 		const repo = new FetchParseValueRepository(
 			testEndpoint,
 		);
-		const value = '1920s';
+		const values = [ '1920s' ];
 		const datatype = 'time';
-		const expectedResult = {
-			value: {
-				time: '+1920-00-00T00:00:00Z',
-				timezone: 0,
-				before: 0,
-				after: 0,
-				precision: 8,
-				calendarmodel: 'http://www.wikidata.org/entity/Q1985727',
-			},
-			type: 'time',
-		};
+		const expectedResult = [ { foo: 'bar', precision: 8 } ];
 
 		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
 			ok: true,
-			json: async () => ( expectedResult ),
+			json: async () => ( { results: expectedResult } ),
 		} ) );
 
-		expect( repo.parseValues( value, datatype ) ).rejects.toThrow( new PrecisionError() );
+		expect( repo.parseValues( values, datatype ) ).rejects.toThrow( new PrecisionError() );
 	} );
 
 	it( 'throws an error if the datatype parameter is malformatted', async () => {
@@ -96,14 +96,13 @@ describe( 'FetchParseValueRepository', () => {
 		const repo = new FetchParseValueRepository(
 			testEndpoint,
 		);
-		const value = '1994-02-08';
+		const values = [ '1994-02-08' ];
 		const datatype = 'wrongdatatype';
 		const expectedResult = {
 			error: {
 				code: 'badvalue',
 				info: 'Unrecognized value for parameter "datatype": tet.',
 			},
-			servedby: 'mw1388',
 		};
 
 		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
@@ -111,7 +110,7 @@ describe( 'FetchParseValueRepository', () => {
 			json: async () => ( expectedResult ),
 		} ) );
 
-		expect( repo.parseValues( value, datatype ) ).rejects.toThrow(
+		expect( repo.parseValues( values, datatype ) ).rejects.toThrow(
 			new TechnicalProblem( 'badvalue: Unrecognized value for parameter "datatype": tet.' ),
 		);
 	} );
