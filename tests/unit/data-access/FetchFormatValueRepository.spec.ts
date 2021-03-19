@@ -24,11 +24,11 @@ describe( 'FetchFormatValueRepository', () => {
 			testLang,
 			testEndpoint,
 		);
-		const expectedResult = { result: 'foo' };
+		const expectedResult = 'foo';
 
 		window.fetch = jest.fn().mockImplementation( () => Promise.resolve( {
 			ok: true,
-			json: async () => ( expectedResult ),
+			json: async () => ( { result: expectedResult } ),
 		} ) );
 
 		const actualResult = await repo.formatValue( valueData, propertyId );

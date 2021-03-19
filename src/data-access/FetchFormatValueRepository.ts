@@ -47,6 +47,6 @@ export default class FetchFormatValueRepository implements FormatValueRepository
 			throw new TechnicalProblem( `${data.error.code}: ${data.error.info}` );
 		}
 
-		return data;
+		return data.result;
 	}
 }
